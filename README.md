@@ -13,3 +13,6 @@
 - Task4: Sư Hứu Vũ Quang
 
 ## Revisions
+- Sư Hữu Vũ Quang reviews Task 1
+  + 
+  +
