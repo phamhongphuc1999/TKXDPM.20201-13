@@ -8,11 +8,12 @@
 
 ## Contributions
 - Task1: Ngô Minh Quang, Trần Minh Quang
-- Task2: NGô Minh Quang, Trần Minh Quang
+- Task2: Ngô Minh Quang, Trần Minh Quang
 - Task3: Phạm Hồng Phúc
-- Task4: Sư Hứu Vũ Quang
+- Task4: Sư Hữu Vũ Quang
 
 ## Revisions
 - Sư Hữu Vũ Quang reviews Task 1
   + 
   +
+- Phạm Hồng Phúc reviews Task 4
