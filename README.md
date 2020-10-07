@@ -15,5 +15,5 @@
 ## Revisions
 - Sư Hữu Vũ Quang reviews Task 1
   + 
-  +
+- Ngô Minh Quang reviews Task 3
 - Phạm Hồng Phúc reviews Task 4
