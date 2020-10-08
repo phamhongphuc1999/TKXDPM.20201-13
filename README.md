@@ -15,5 +15,5 @@
 ## Revisions
 - Sư Hữu Vũ Quang reviews Task 1: Usecase tổng quan đã mô tả được các chức năng nêu trong bài toán, chỉ ra được tác nhân của hệ thống.
 - Ngô Minh Quang reviews Task 3
-- Phạm Hồng Phúc reviews Task 4
+- Phạm Hồng Phúc reviews Task 4: đặc tả use case trả xe đầy đử, đã nêu được luồng sự kiện chính, luồng sự kiện thay thế cũng như mô tả được dữ liệu đầu vào, đầu ra trong use case
 - Trần Minh Quang reviews Task 2
