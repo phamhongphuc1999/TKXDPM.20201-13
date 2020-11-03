@@ -1,5 +1,7 @@
+
 ---
-# LAB 0 - ArchitectureDesign
+
+# ArchitectureDesign
 ## Tasks
 - Task1: Vẽ biểu đồ trình tự và biểu đồ lớp phân tích cho use case "hiển thị xe trong bãi và thông tin của xe"
 - Task2: Vẽ biểu đồ trình tự và biểu đồ lớp phân tích cho use case "thuê xe"
@@ -13,4 +15,4 @@
 ## Revisions
 - Ngô Minh Quang review Task3: 
 - Phạm Hồng Phúc review Task1:
-- Sư Hữu Vũ Quang review Task2: 
+- Sư Hữu Vũ Quang review Task2:
