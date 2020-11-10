@@ -27,73 +27,11 @@ namespace TestAPI.Entity
             return result.Substring(0, length - 1);
         }
 
-        private static byte[] ObjectToByteArray(Object objectToSerialize)
-        {
-            MemoryStream fs = new MemoryStream();
-            BinaryFormatter formatter = new BinaryFormatter();
-            try
-            {
-                formatter.Serialize(fs, objectToSerialize);
-                return fs.ToArray();
-            }
-            catch (SerializationException se)
-            {
-                Console.WriteLine("Error occurred during serialization. Message: " +
-                se.Message);
-                return null;
-            }
-            finally
-            {
-                fs.Close();
-            }
-        }
-
-        private static string ComputeHash(byte[] objectAsBytes)
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            try
-            {
-                byte[] result = md5.ComputeHash(objectAsBytes);
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < result.Length; i++)
-                {
-                    sb.Append(result[i].ToString("X2"));
-                }
-                return sb.ToString();
-            }
-            catch { 
-                Console.WriteLine("Hash has not been generated.");
-                return null;
-            }
-        }
-
-        public static String GenerateKey(Object sourceObject)
-        {
-            String hashString;
-
-            if (sourceObject == null)
-            {
-                throw new ArgumentNullException("Null as parameter is not allowed");
-            }
-            else
-            {
-                try
-                {
-                    hashString = ComputeHash(ObjectToByteArray(sourceObject));
-                    return hashString;
-                }
-                catch (AmbiguousMatchException ame)
-                {
-                    throw new ApplicationException("Could not definitely decide if object is serializable.Message:" + ame.Message);
-                }
-            }
-        }
-
-        public static string MD5Hash(object obj)
+        public static string MD5Hash(string input)
         {
             StringBuilder hash = new StringBuilder();
             MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
-            byte[] bytes = md5provider.ComputeHash(ObjectToByteArray(obj));
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
 
             for (int i = 0; i < bytes.Length; i++)
             {
