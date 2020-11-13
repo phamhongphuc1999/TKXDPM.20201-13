@@ -21,6 +21,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         [Required(ErrorMessage = "NumberOfBike is required")]
         public int NumberOfBike { get; set; }
 
-        public string Button { get; set; }
+        public string Note { get; set; }
     }
 }

@@ -14,5 +14,15 @@ namespace RentalBikeApp.Data
             option.UseSqlServer(Config.SQL.SQL_CONNECT_STRING);
             sqlData = new SQLData(option.Options);
         }
+
+        public SQLData SqlData
+        {
+            get { return sqlData; }
+        }
+
+        public DbContextOptionsBuilder<SQLData> Option
+        {
+            get { return option; }
+        }
     }
 }

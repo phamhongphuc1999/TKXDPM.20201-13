@@ -23,6 +23,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         [Required(ErrorMessage = "PrivateToken is required")]
         public string PrivateToken { get; set; }
 
-        public string Button { get; set; }
+        public string Note { get; set; }
     }
 }

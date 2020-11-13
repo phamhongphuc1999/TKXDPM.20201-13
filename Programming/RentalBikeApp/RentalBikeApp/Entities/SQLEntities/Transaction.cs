@@ -31,6 +31,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime DateTransaction { get; set; }
 
-        public string Button { get; set; }
+        public string Note { get; set; }
     }
 }

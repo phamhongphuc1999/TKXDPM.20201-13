@@ -10,8 +10,12 @@ namespace RentalBikeApp
             private const string NAME_DATABASE = "RentalBike";
             private const string USERNAME = "sa";
             private const string PASSWORD = "phamhongphuc";
+            private static string _SQL_CONNECT_STRING = String.Format("data source={0};initial catalog={1};user id={2};password={3};MultipleActiveResultSets=True;", SOURCE, NAME_DATABASE, USERNAME, PASSWORD);
 
-            public static string SQL_CONNECT_STRING = String.Format("data source={0};initial catalog={1};user id={2};password={3};MultipleActiveResultSets=True;", SOURCE, NAME_DATABASE, USERNAME, PASSWORD);
+            public static string SQL_CONNECT_STRING
+            {
+                get { return _SQL_CONNECT_STRING; }
+            }
         }
 
         public static class API_INFO
