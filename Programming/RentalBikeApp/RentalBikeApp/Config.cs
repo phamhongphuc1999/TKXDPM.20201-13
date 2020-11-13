@@ -6,10 +6,39 @@ namespace RentalBikeApp
     {
         public static class SQL
         {
+            private const string SOURCE = "DESKTOP-TM16V8B\\SQLEXPRESS";
+            private const string NAME_DATABASE = "RentalBike";
             private const string USERNAME = "sa";
             private const string PASSWORD = "phamhongphuc";
 
-            public static string SQL_CONNECT_STRING = String.Format("data source=DESKTOP-TM16V8B\\SQLEXPRESS;initial catalog=VegeFood;user id={0};password={1};MultipleActiveResultSets=True;", USERNAME, PASSWORD);
+            public static string SQL_CONNECT_STRING = String.Format("data source={0};initial catalog={1};user id={2};password={3};MultipleActiveResultSets=True;", SOURCE, NAME_DATABASE, USERNAME, PASSWORD);
+        }
+
+        public static class API_INFO
+        {
+            public const string BASE_URL = " https://ecopark-system-api.herokuapp.com";
+            public const string PROCESS_URL = "/api/card/processTransaction";
+            public const string RESET_URL = "/api/card/reset-balance";
+
+            public static class CARD_INFO
+            {
+                public const string CARD_CODE = "118609_group13_2020";
+                public const string OWER = "Group 13";
+                public const string CVV = "474";
+                public const string DATE_EXPIRED = "1125";
+            }
+
+            public static class COMMAND
+            {
+                public const string PAY = "pay";
+                public const string REFUND = "refund";
+            }
+
+            public static class KEY
+            {
+                public const string APP_CODE = "Bi3TiyT5q00=";
+                public const string SECRET_KEY = "B92s318KCwI=";
+            }
         }
     }
 }

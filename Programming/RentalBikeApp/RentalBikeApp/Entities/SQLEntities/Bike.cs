@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RentalBikeApp.Entities
+namespace RentalBikeApp.Entities.SQLEntities
 {
     [Table("Bikes")]
     public class Bike
@@ -10,6 +10,7 @@ namespace RentalBikeApp.Entities
         public int BikeId { get; set; }
 
         [Required(ErrorMessage = "StationId is required")]
+        [ForeignKey("Station")]
         public int StationId { get; set; }
 
         [Required(ErrorMessage = "QRCode is required")]

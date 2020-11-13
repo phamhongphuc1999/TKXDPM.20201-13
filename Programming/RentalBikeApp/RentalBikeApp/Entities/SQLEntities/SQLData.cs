@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace RentalBikeApp.Entities
+namespace RentalBikeApp.Entities.SQLEntities
 {
     public class SQLData: DbContext
     {

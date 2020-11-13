@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RentalBikeApp.Entities
+namespace RentalBikeApp.Entities.SQLEntities
 {
     [Table("Cards")]
     public class Card

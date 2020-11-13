@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RentalBikeApp.Entities;
+using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Data
 {

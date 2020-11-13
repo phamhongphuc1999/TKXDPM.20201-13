@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RentalBikeApp.Entities
+namespace RentalBikeApp.Entities.SQLEntities
 {
     [Table("Transactions")]
     public class Transaction
@@ -11,9 +11,11 @@ namespace RentalBikeApp.Entities
         public int TransactionId { get; set; }
 
         [Required(ErrorMessage = "UserId is required")]
+        [ForeignKey("User")]
         public int UserId { get; set; }
 
         [Required(ErrorMessage = "BikeId is required")]
+        [ForeignKey("Bike")]
         public int BikeId { get; set; }
 
         [Required(ErrorMessage = "Deposit is required")]

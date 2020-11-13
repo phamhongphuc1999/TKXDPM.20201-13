@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RentalBikeApp.Entities
+namespace RentalBikeApp.Entities.SQLEntities
 {
     [Table("users")]
     public class User
@@ -11,6 +11,7 @@ namespace RentalBikeApp.Entities
         public int UserId { get; set; }
 
         [Required(ErrorMessage = "CardId is required")]
+        [ForeignKey("Card")]
         public int CardId { get; set; }
 
         [Required(ErrorMessage = "UserName is required")]
