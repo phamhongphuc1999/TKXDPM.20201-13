@@ -1,32 +1,21 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace TestAPI.Entity
+﻿namespace TestAPI.Entity
 {
-    public class Transaction
+    public class TransactionResponse
     {
-        [Required]
         public string command { get; set; }
-
-        [Required]
         public string cardCode { get; set; }
-
-        [Required]
         public string owner { get; set; }
-
-        [Required]
         public string cvvCode { get; set; }
-
-        [Required]
         public string dateExpired { get; set; }
-
-        [Required]
         public string transactionContent { get; set; }
-
-        [Required]
         public int amount { get; set; }
-
-        [Required]
         public string createdAt { get; set; }
+        //public string transactionId { get; set; }
+    }
+
+    public class ProcessTransactionResponse
+    {
+        public string errorCode { get; set; }
+        public Transaction transaction { get; set; }
     }
 }

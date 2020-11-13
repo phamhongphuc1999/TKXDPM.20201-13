@@ -2,7 +2,7 @@
 
 namespace RentalBikeApp.Entities.APIEntities
 {
-    public class ProcessTransaction
+    public class ProcessTransactionRequest
     {
         [Required]
         public string version { get; set; }

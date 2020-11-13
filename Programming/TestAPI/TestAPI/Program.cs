@@ -64,7 +64,9 @@ namespace TestAPI
             Task<string> result = Utility.GetWebContent(Config.BASE_URL + "/api/card/processTransaction", HttpMethod.Patch, JsonConvert.SerializeObject(body));
             result.Wait();
             Console.WriteLine(result.Result);
+            ProcessTransactionResponse ttt = JsonConvert.DeserializeObject<ProcessTransactionResponse>(result.Result);
             Console.WriteLine("==================");
+            Console.WriteLine(ttt.errorCode);
         }
     }
 }

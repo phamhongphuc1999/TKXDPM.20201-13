@@ -40,10 +40,9 @@ namespace RentalBikeApp
                 public const string DATE_EXPIRED = "1125";
             }
 
-            public static class COMMAND
+            public enum COMMAND
             {
-                public const string PAY = "pay";
-                public const string REFUND = "refund";
+                PAY, REFUND
             }
 
             public static class KEY

@@ -5,15 +5,20 @@ using System.Linq;
 
 namespace RentalBikeApp.Business.SQLServices
 {
-    public class StationService: SQLConnecter
+    public class StationService
     {
-        public StationService(): base() { }
+        private SQLConnecter connecter;
+
+        public StationService()
+        {
+            connecter = new SQLConnecter();
+        }
 
         /// <summary>get list stations</summary>
         /// <returns>the list of station</returns>
         public List<Station> GetListStations()
         {
-            return SqlData.Stations.ToList();
+            return connecter.SqlData.Stations.ToList();
         }
 
         /// <summary>Get station base on it's id</summary>
@@ -21,7 +26,7 @@ namespace RentalBikeApp.Business.SQLServices
         /// <returns>the specified station</returns>
         public Station GetStationById(int stationId)
         {
-            return SqlData.Stations.Find(stationId);
+            return connecter.SqlData.Stations.Find(stationId);
         }
 
         /// <summary></summary>
@@ -29,7 +34,7 @@ namespace RentalBikeApp.Business.SQLServices
         /// <returns></returns>
         public Station GetStationByName(string nameStation)
         {
-            return SqlData.Stations.SingleOrDefault(x => x.NameStation == nameStation);
+            return connecter.SqlData.Stations.SingleOrDefault(x => x.NameStation == nameStation);
         }
     }
 }
