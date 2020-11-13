@@ -16,6 +16,14 @@ namespace RentalBikeApp
             {
                 get { return _SQL_CONNECT_STRING; }
             }
+
+            public enum BikeCategory
+            {
+                ELECTRIC,
+                TANDEM,
+                BIKE,
+                ALL
+            }
         }
 
         public static class API_INFO

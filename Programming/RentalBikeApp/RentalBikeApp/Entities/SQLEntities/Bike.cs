@@ -25,6 +25,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         public string Manufacturer { get; set; }
 
         [Required(ErrorMessage = "BikeStatus is required")]
-        public string BikeStatus { get; set; }
+        public bool BikeStatus { get; set; }
     }
 }

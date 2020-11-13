@@ -1,10 +1,36 @@
-﻿using System;
+﻿using RentalBikeApp.Data;
+using RentalBikeApp.Entities.SQLEntities;
+using System.Linq;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RentalBikeApp.Business.SQLServices
 {
-    class BikeService
+    public class BikeService: SQLConnecter
     {
+        public BikeService(): base() { }
+
+        /// <summary>Get bike by QR code</summary>
+        /// <param name="QRCode">QR Code you want to find</param>
+        /// <returns>The bike with specified QR Code or null if not found</returns>
+        public Bike GetBikeByQRCode(string QRCode)
+        {
+            Bike bike = SqlData.Bikes.SingleOrDefault(x => x.QRCode == QRCode);
+            return bike;
+        }
+
+        /// <summary>Filters a list bike in the station base on bike category</summary>
+        /// <param name="stationId">The station you want to filter list of bike</param>
+        /// <param name="bikeCategory">the bike category you want to filter</param>
+        /// <returns></returns>
+        public List<Bike> GetListBikesInStation(int stationId, Config.SQL.BikeCategory bikeCategory = Config.SQL.BikeCategory.ALL)
+        {
+            List<Bike> bikesList = SqlData.Bikes.Where(x => x.StationId == stationId).ToList();
+            if (bikeCategory == Config.SQL.BikeCategory.ALL) return bikesList;
+            else if (bikeCategory == Config.SQL.BikeCategory.BIKE)
+                return bikesList.Where(x => x.Category == "bike").ToList();
+            else if (bikeCategory == Config.SQL.BikeCategory.ELECTRIC)
+                return bikesList.Where(x => x.Category == "electric").ToList();
+            else return bikesList.Where(x => x.Category == "tandem").ToList();
+        }
     }
 }
