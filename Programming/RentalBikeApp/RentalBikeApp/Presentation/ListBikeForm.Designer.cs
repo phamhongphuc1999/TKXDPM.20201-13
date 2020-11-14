@@ -39,8 +39,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl = new Panel()
             {
                 Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 255),
-                Location = new Point(0, 115),
-                BackColor = Color.Red
+                Location = new Point(0, 115)
             };
             listBikePnl.HorizontalScroll.Maximum = 0;
             listBikePnl.AutoScroll = false;

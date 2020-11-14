@@ -4,6 +4,9 @@
     <Compile Update="Presentation\BaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Presentation\CardInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Presentation\HomePageForm.cs">
       <SubType>Form</SubType>
     </Compile>
