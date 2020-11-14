@@ -8,7 +8,7 @@ namespace RentalBikeApp.Presentation
         private Panel infoPnl;
         private Label nameLbl, addressLbl, areaLbl, numberLbl, distanceLbl, timeLbl;
         private TextBox nameTxt, addressTxt, areaTxt, numberTxt, distanceTxt, timeTxt;
-        private Button bikeBut, tandemBut, electricBut, returnHomePageBut;
+        public Button bikeBut, tandemBut, electricBut, returnHomePageBut;
 
         public void DrawStationDetail()
         {

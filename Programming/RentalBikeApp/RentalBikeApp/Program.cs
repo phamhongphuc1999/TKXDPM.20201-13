@@ -16,7 +16,7 @@ namespace RentalBikeApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             HomePageForm homePage = new HomePageForm();
-            StationDetailForm stationDetail = new StationDetailForm();
+            ListBikeForm listBikeForm = new ListBikeForm();
             Application.Run(homePage);
         }
     }
