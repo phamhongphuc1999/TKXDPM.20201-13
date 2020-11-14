@@ -3,16 +3,15 @@ using System.Windows.Forms;
 
 namespace RentalBikeApp.Presentation
 {
-    partial class HomePage
+    partial class BaseForm
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
-        private Button homePageBut, rentBikeBut;
-        private Label lineLbl, lineSearchLbl;
-        private Panel stationPnl;
-
+        protected System.ComponentModel.IContainer components = null;
+        protected Button homePageBut, rentBikeBut;
+        protected Label lineLbl;
+        
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -26,23 +25,8 @@ namespace RentalBikeApp.Presentation
             base.Dispose(disposing);
         }
 
-        private void DrawBaseForm()
+        protected void DrawBaseForm()
         {
-            stationPnl = new Panel()
-            {
-                BackColor = Color.Red,
-                Size = new Size(this.Width, 370),
-                Location = new Point(0, 50),
-                AutoScroll = true
-            };
-            lineSearchLbl = new Label()
-            {
-                AutoSize = false,
-                BackColor = Color.Black,
-                BorderStyle = BorderStyle.Fixed3D,
-                Size = new Size(this.Width, 4),
-                Location = new Point(0, 50)
-            };
             lineLbl = new Label()
             {
                 AutoSize = false,
@@ -69,8 +53,6 @@ namespace RentalBikeApp.Presentation
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
-            this.Controls.Add(stationPnl);
-            this.Controls.Add(lineSearchLbl);
             this.Controls.Add(lineLbl);
             this.Controls.Add(homePageBut);
             this.Controls.Add(rentBikeBut);
@@ -82,15 +64,13 @@ namespace RentalBikeApp.Presentation
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        protected void InitializeComponent(string textForm = "BaseForm")
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScaleDimensions = new SizeF(9F, 20F);
             this.ClientSize = new System.Drawing.Size(800, 500);
-            this.Text = "HomePage";
+            this.Text = textForm;
         }
-
         #endregion
     }
 }

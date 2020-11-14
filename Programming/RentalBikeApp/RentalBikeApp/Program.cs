@@ -15,7 +15,8 @@ namespace RentalBikeApp
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            HomePage homePage = new HomePage();
+            HomePageForm homePage = new HomePageForm();
+            StationDetailForm stationDetail = new StationDetailForm();
             Application.Run(homePage);
         }
     }
