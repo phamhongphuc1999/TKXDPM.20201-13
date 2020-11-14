@@ -19,6 +19,10 @@ namespace RentalBikeApp.Presentation
             numberTxt.Text = station.NumberOfBike.ToString();
             distanceTxt.Text = "100 m";
             timeTxt.Text = "10";
+
+            bikeBut.Tag = station.StationId;
+            electricBut.Tag = station.StationId;
+            tandemBut.Tag = station.StationId;
         }
     }
 }

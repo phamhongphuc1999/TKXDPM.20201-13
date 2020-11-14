@@ -23,6 +23,15 @@ namespace RentalBikeApp.Business.SQLServices
             return bike;
         }
 
+        /// <summary>Get bike by bike's id</summary>
+        /// <param name="id">the bike's id you want to find</param>
+        /// <returns>Return the bike with specified ID or null if not found</returns>
+        public Bike GetBikeById(int id)
+        {
+            Bike bike = connecter.SqlData.Bikes.Find(id);
+            return bike;
+        }
+
         /// <summary>Filters a list bike in the station base on bike category</summary>
         /// <param name="stationId">The station you want to filter list of bike</param>
         /// <param name="bikeCategory">the bike category you want to filter</param>
