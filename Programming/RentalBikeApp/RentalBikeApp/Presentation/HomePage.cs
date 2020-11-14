@@ -1,24 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
-using RentalBikeApp.Data;
+﻿using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class HomePage : Form
     {
+        private StationService stationService;
+
         public HomePage()
         {
+            stationService = new StationService();
+
             InitializeComponent();
-            SQLConnecter sss = new SQLConnecter();
-            User u = sss.SqlData.Users.ToList()[0];
-            MessageBox.Show(u.UserName);
+            DrawBaseForm();
+            RenderStationList(this.stationPnl);
+        }
+
+        public void RenderStationList(Panel pnl)
+        {
+            List<Station> stationList = stationService.GetListStations();
+
         }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace RentalBikeApp.Presentation
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace RentalBikeApp.Presentation
 {
     partial class HomePage
     {
@@ -6,6 +9,9 @@
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private Button homePageBut, rentBikeBut;
+        private Label lineLbl, lineSearchLbl;
+        private Panel stationPnl;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -20,6 +26,56 @@
             base.Dispose(disposing);
         }
 
+        private void DrawBaseForm()
+        {
+            stationPnl = new Panel()
+            {
+                BackColor = Color.Red,
+                Size = new Size(this.Width, 370),
+                Location = new Point(0, 50),
+                AutoScroll = true
+            };
+            lineSearchLbl = new Label()
+            {
+                AutoSize = false,
+                BackColor = Color.Black,
+                BorderStyle = BorderStyle.Fixed3D,
+                Size = new Size(this.Width, 4),
+                Location = new Point(0, 50)
+            };
+            lineLbl = new Label()
+            {
+                AutoSize = false,
+                BackColor = Color.Black,
+                BorderStyle = BorderStyle.Fixed3D,
+                Size = new Size(this.Width, 4),
+                Location = new Point(0, 420)
+            };
+            homePageBut = new Button()
+            {
+                Text = "Trang chủ",
+                Size = new Size(220, 50),
+                Location = new Point(20, 435),
+                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
+                FlatStyle = FlatStyle.Flat
+            };
+            rentBikeBut = new Button()
+            {
+                Text = "Thuê xe",
+                Size = new Size(220, 50),
+                Location = new Point(560, 435),
+                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
+                FlatStyle = FlatStyle.Flat
+            };
+            this.Controls.Add(stationPnl);
+            this.Controls.Add(lineSearchLbl);
+            this.Controls.Add(lineLbl);
+            this.Controls.Add(homePageBut);
+            this.Controls.Add(rentBikeBut);
+        }
+
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -30,7 +86,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScaleDimensions = new SizeF(9F, 20F);
+            this.ClientSize = new System.Drawing.Size(800, 500);
             this.Text = "HomePage";
         }
 

@@ -10,9 +10,11 @@ namespace RentalBikeApp.Entities.SQLEntities
         public int StationId { get; set; }
 
         [Required(ErrorMessage = "NameStation is required")]
+        [StringLength(200)]
         public string NameStation { get; set; }
 
         [Required(ErrorMessage = "AddressStation is required")]
+        [StringLength(200)]
         public string AddressStation { get; set; }
 
         [Required(ErrorMessage = "AreaStaion is required")]
@@ -21,6 +23,7 @@ namespace RentalBikeApp.Entities.SQLEntities
         [Required(ErrorMessage = "NumberOfBike is required")]
         public int NumberOfBike { get; set; }
 
+        [StringLength(100)]
         public string Note { get; set; }
     }
 }
