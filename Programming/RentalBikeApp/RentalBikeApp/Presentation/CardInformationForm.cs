@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace RentalBikeApp.Presentation
+﻿namespace RentalBikeApp.Presentation
 {
     public partial class CardInformationForm : BaseForm
     {
@@ -8,6 +6,7 @@ namespace RentalBikeApp.Presentation
         {
             InitializeComponent("CardInformationForm", "Card Information");
             DrawBaseForm();
+            DrawCardInformation();
         }
     }
 }

@@ -4,8 +4,12 @@ namespace RentalBikeApp.Presentation
 {
     public partial class BikeDetailForm : BaseForm
     {
+        private CardInformationForm cardInformationForm;
+
         public BikeDetailForm()
         {
+            cardInformationForm = new CardInformationForm();
+
             InitializeComponent("BikeDetailForm", "Bike Detail");
             DrawBaseForm();
             DrawBikeDetail();
@@ -25,16 +29,6 @@ namespace RentalBikeApp.Presentation
                 categoryBikeTxt.Text = "Xe đạp điện";
                 powerTxt.Text = "100%";
             }
-        }
-
-        private void RentThisBikeBut_Click(object sender, System.EventArgs e)
-        {
-            
-        }
-
-        private void ReturnListBikeBut_Click(object sender, System.EventArgs e)
-        {
-            
         }
     }
 }

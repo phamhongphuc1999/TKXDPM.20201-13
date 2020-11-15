@@ -13,9 +13,17 @@ namespace RentalBikeApp.Presentation
         public void Show(string nameForm)
         {
             this.Show();
-            int LocationMainX = Application.OpenForms[nameForm].Location.X;
+            int locationMainX = Application.OpenForms[nameForm].Location.X;
             int locationMainY = Application.OpenForms[nameForm].Location.Y;
-            this.Location = new Point(LocationMainX, locationMainY);
+            this.Location = new Point(locationMainX, locationMainY);
+        }
+
+        public void Show(Form form)
+        {
+            this.Show();
+            int locationMainX = form.Location.X;
+            int locationMainY = form.Location.Y;
+            this.Location = new Point(locationMainX, locationMainY);
         }
     }
 }

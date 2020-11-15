@@ -59,8 +59,6 @@ namespace RentalBikeApp.Presentation
                 Font = new Font("Helvetica", 12, FontStyle.Regular)
             };
 
-            returnStationBut.Click += ReturnStationBut_Click;
-
             this.Controls.Add(searchTxt);
             this.Controls.Add(categoryBikeRtb);
             this.Controls.Add(stationRtb);

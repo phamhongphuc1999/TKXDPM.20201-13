@@ -15,7 +15,6 @@ namespace RentalBikeApp
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            BikeDetailForm bikeDetailForm = new BikeDetailForm();
             HomePageForm homePage = new HomePageForm();
             Application.Run(homePage);
         }

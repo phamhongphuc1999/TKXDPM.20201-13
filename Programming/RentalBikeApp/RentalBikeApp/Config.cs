@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RentalBikeApp.Entities.SQLEntities;
+using System;
 
 namespace RentalBikeApp
 {
@@ -51,5 +52,7 @@ namespace RentalBikeApp
                 public const string SECRET_KEY = "B92s318KCwI=";
             }
         }
+
+        public static Station CURRENT_STATION;
     }
 }

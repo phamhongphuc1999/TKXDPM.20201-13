@@ -10,15 +10,24 @@ namespace RentalBikeApp.Presentation
     public partial class HomePageForm : BaseForm
     {
         private StationService stationService;
+        private BikeService bikeService;
 
         private StationDetailForm stationDetailForm;
+        private ListBikeForm listBikeForm;
+        private BikeDetailForm bikeDetailForm;
+        private RentBikeForm rentBikeForm;
         private CardInformationForm cardInformationForm;
 
         public HomePageForm()
         {
             stationService = new StationService();
-            cardInformationForm = new CardInformationForm();
-            stationDetailForm = new StationDetailForm();
+            bikeService = new BikeService();
+
+            CreateStationDetailForm();
+            CreateListBikeForm();
+            CreateBikeDetailForm();
+            CreateRentBikeForm();
+            CreateCardInformationForm();
 
             InitializeComponent("HomePageForm", "Home Page");
             DrawBaseForm();
@@ -27,6 +36,49 @@ namespace RentalBikeApp.Presentation
             this.StartPosition = FormStartPosition.CenterScreen;
 
             homePageBut.Click += HomePageBut_Click;
+        }
+
+        private void CreateStationDetailForm()
+        {
+            stationDetailForm = new StationDetailForm();
+            stationDetailForm.homePageBut.Click += HomePageBut_Click;
+            stationDetailForm.rentBikeBut.Click += RentBikeBut_Click;
+            stationDetailForm.returnHomePageBut.Click += StationDetail_ReturnHomePageBut_Click;
+            stationDetailForm.tandemBut.Click += StationDetail_TandemBut_Click;
+            stationDetailForm.electricBut.Click += StationDetail_ElectricBut_Click;
+            stationDetailForm.bikeBut.Click += StationDetail_BikeBut_Click;
+        }
+
+        private void CreateListBikeForm()
+        {
+            listBikeForm = new ListBikeForm();
+            listBikeForm.But_Click += ListBike_But_Click;
+            listBikeForm.homePageBut.Click += HomePageBut_Click;
+            listBikeForm.rentBikeBut.Click += RentBikeBut_Click;
+            listBikeForm.returnStationBut.Click += ListBike_ReturnStationBut_Click;
+        }
+
+        private void CreateBikeDetailForm()
+        {
+            bikeDetailForm = new BikeDetailForm();
+            bikeDetailForm.homePageBut.Click += HomePageBut_Click;
+            bikeDetailForm.rentBikeBut.Click += RentBikeBut_Click;
+            bikeDetailForm.rentThisBikeBut.Click += BikeDetail_RentThisBikeBut_Click;
+            bikeDetailForm.returnListBikeBut.Click += BikeDetail_ReturnListBikeBut_Click;
+        }
+
+        private void CreateRentBikeForm()
+        {
+            rentBikeForm = new RentBikeForm();
+            rentBikeForm.homePageBut.Click += HomePageBut_Click;
+            rentBikeForm.rentBikeBut.Click += RentBikeBut_Click;
+        }
+
+        private void CreateCardInformationForm()
+        {
+            cardInformationForm = new CardInformationForm();
+            cardInformationForm.homePageBut.Click += HomePageBut_Click;
+            cardInformationForm.rentBikeBut.Click += RentBikeBut_Click;
         }
 
         public void RenderStationList(Panel pnl)
@@ -51,18 +103,105 @@ namespace RentalBikeApp.Presentation
             }
         }
 
+        #region Base Form Event
+        private void HomePageBut_Click(object sender, EventArgs e)
+        {
+            Button but = sender as Button;
+            Form form = but.Parent as Form;
+            this.RenderStationList(this.stationPnl);
+            this.Show(form);
+            bool check = form is HomePageForm;
+            if (!check) form.Hide();
+        }
+
+        private void RentBikeBut_Click(object sender, EventArgs e)
+        {
+            Button but = sender as Button;
+            Form form = but.Parent as Form;
+            this.RenderStationList(this.stationPnl);
+            rentBikeForm.Show(form);
+            bool check = form is RentBikeForm;
+            if (!check) form.Hide();
+        }
+        #endregion
+
+        #region Home Page Form Event
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
             Station station = stationService.GetStationById((int)but.Tag);
             this.Hide();
             stationDetailForm.FillStationDetail(station);
-            stationDetailForm.Show("HomePageForm");
+            Config.CURRENT_STATION = station;
+            stationDetailForm.Show(this);
+        }
+        #endregion
+
+        #region Station Detail Form Event
+        private void StationDetail_ReturnHomePageBut_Click(object sender, EventArgs e)
+        {
+            this.Show(stationDetailForm);
+            stationDetailForm.Hide();
         }
 
-        private void HomePageBut_Click(object sender, EventArgs e)
+        private void StationDetail_TandemBut_Click(object sender, EventArgs e)
         {
-            this.RenderStationList(stationPnl);
+            Button tandemBut = sender as Button;
+            Station station = stationService.GetStationById((int)tandemBut.Tag);
+            listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.TANDEM);
+            listBikeForm.Show(stationDetailForm);
+            stationDetailForm.Hide();
         }
+
+        private void StationDetail_BikeBut_Click(object sender, EventArgs e)
+        {
+            Button bikeBut = sender as Button;
+            Station station = stationService.GetStationById((int)bikeBut.Tag);
+            listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.BIKE);
+            listBikeForm.Show(stationDetailForm);
+            stationDetailForm.Hide();
+        }
+
+        private void StationDetail_ElectricBut_Click(object sender, EventArgs e)
+        {
+            Button electricBut = sender as Button;
+            Station station = stationService.GetStationById((int)electricBut.Tag);
+            listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.ELECTRIC);
+            listBikeForm.Show(stationDetailForm);
+            stationDetailForm.Hide();
+        }
+        #endregion
+
+        #region List Bike Form Event
+        private void ListBike_But_Click(object sender, EventArgs e)
+        {
+            Button but = sender as Button;
+            Bike bike = bikeService.GetBikeById((int)but.Tag);
+            bikeDetailForm.FillBikeInformation(Config.CURRENT_STATION, bike);
+            bikeDetailForm.Show(listBikeForm);
+            listBikeForm.Hide();
+            bikeDetailForm.Show();
+        }
+
+        private void ListBike_ReturnStationBut_Click(object sender, EventArgs e)
+        {
+            stationDetailForm.Show();
+            listBikeForm.Hide();
+        }
+        #endregion
+
+        #region Bike Detail Form Event
+        private void BikeDetail_ReturnListBikeBut_Click(object sender, EventArgs e)
+        {
+            listBikeForm.Show(bikeDetailForm);
+            bikeDetailForm.Hide();
+        }
+
+        private void BikeDetail_RentThisBikeBut_Click(object sender, EventArgs e)
+        {
+            cardInformationForm.Show(bikeDetailForm);
+            bikeDetailForm.Hide();
+        }
+        #endregion
     }
 }

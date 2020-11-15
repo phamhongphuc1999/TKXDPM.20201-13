@@ -9,7 +9,7 @@ namespace RentalBikeApp.Presentation
         /// Required designer variable.
         /// </summary>
         protected System.ComponentModel.IContainer components = null;
-        protected Button homePageBut, rentBikeBut;
+        public Button homePageBut, rentBikeBut;
         protected Label lineLbl;
         
         /// <summary>
