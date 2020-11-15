@@ -1,39 +1,140 @@
-﻿namespace RentalBikeApp.Presentation
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace RentalBikeApp.Presentation
 {
     partial class BikeDetailForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        public Panel bikeDetailPnl;
+        public RichTextBox stationRtb;
+        public Label qrCodeLbl, categoryBikeLbl, licenceLbl, manufactureLbl, powerLbl;
+        public TextBox qrCodeTxt, categoryBikeTxt, licenceTxt, manufactureTxt, powerTxt;
+        public Button returnListBikeBut, rentThisBikeBut;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        public void DrawBikeDetail()
         {
-            if (disposing && (components != null))
+            bikeDetailPnl = new Panel()
             {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
+                Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 80),
+                Location = new Point(0, 0)
+            };
+            stationRtb = new RichTextBox()
+            {
+                Size = new Size(bikeDetailPnl.Width - 40, 80),
+                Location = new Point(20, 5),
+                SelectionAlignment = HorizontalAlignment.Center
+            };
+            qrCodeLbl = new Label()
+            {
+                Text = "Mã xe",
+                Size = new Size(120, 40),
+                Location = new Point(20, 90),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            qrCodeTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(620, 40),
+                Location = new Point(160, 90),
+                ReadOnly = true
+            };
+            categoryBikeLbl = new Label()
+            {
+                Text = "Loại xe",
+                Size = new Size(120, 40),
+                Location = new Point(20, 138),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            categoryBikeTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(620, 40),
+                Location = new Point(160, 138),
+                ReadOnly = true
+            };
+            licenceLbl = new Label()
+            {
+                Text = "Biển số xe",
+                Size = new Size(120, 40),
+                Location = new Point(20, 186),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            licenceTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(620, 40),
+                Location = new Point(160, 186),
+                ReadOnly = true
+            };
+            manufactureLbl = new Label()
+            {
+                Text = "Hãng sản xuất",
+                Size = new Size(120, 40),
+                Location = new Point(20, 234),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            manufactureTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(620, 40),
+                Location = new Point(160, 234),
+                ReadOnly = true
+            };
+            powerLbl = new Label()
+            {
+                Text = "Lượng pin",
+                Size = new Size(120, 40),
+                Location = new Point(20, 282),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            powerTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(620, 40),
+                Location = new Point(160, 282),
+                ReadOnly = true
+            };
+            returnListBikeBut = new Button()
+            {
+                Text = "Quay lại danh sách xe",
+                Size = new Size(300, 50),
+                Location = new Point(180, 362),
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc")
+            };
+            rentThisBikeBut = new Button()
+            {
+                Text = "Thuê xe này",
+                Size = new Size(250, 50),
+                Location = new Point(530, 362),
+                FlatStyle = FlatStyle.Flat,
+                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc")
+            };
+
+            returnListBikeBut.Click += ReturnListBikeBut_Click;
+            rentThisBikeBut.Click += RentThisBikeBut_Click;
+
+            bikeDetailPnl.Controls.Add(stationRtb);
+            bikeDetailPnl.Controls.Add(qrCodeLbl);
+            bikeDetailPnl.Controls.Add(qrCodeTxt);
+            bikeDetailPnl.Controls.Add(categoryBikeLbl);
+            bikeDetailPnl.Controls.Add(categoryBikeTxt);
+            bikeDetailPnl.Controls.Add(licenceLbl);
+            bikeDetailPnl.Controls.Add(licenceTxt);
+            bikeDetailPnl.Controls.Add(manufactureLbl);
+            bikeDetailPnl.Controls.Add(manufactureTxt);
+            bikeDetailPnl.Controls.Add(powerLbl);
+            bikeDetailPnl.Controls.Add(powerTxt);
+            bikeDetailPnl.Controls.Add(returnListBikeBut);
+            bikeDetailPnl.Controls.Add(rentThisBikeBut);
+            this.Controls.Add(bikeDetailPnl);
         }
-
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
-        {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "BikeDetailForm";
-        }
-
-        #endregion
     }
 }

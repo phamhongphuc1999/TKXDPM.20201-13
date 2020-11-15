@@ -9,19 +9,25 @@ namespace RentalBikeApp.Presentation
 {
     public partial class ListBikeForm : BaseForm
     {
+        private Station station;
         private BikeService bikeService;
+        private BikeDetailForm bikeDetailForm;
 
         public ListBikeForm()
         {
             bikeService = new BikeService();
+            bikeDetailForm = new BikeDetailForm();
 
             InitializeComponent("ListBikesForm", "List Bikes");
             DrawBaseForm();
             DrawListBikes();
+
+            homePageBut.Click += HomePageBut_Click;
         }
 
         public void FillListBikes(Station station, Config.SQL.BikeCategory category)
         {
+            this.station = station;
             listBikePnl.Controls.Clear();
             List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId, category);
             int count = bikesList.Count(x => x.BikeStatus);
@@ -52,7 +58,24 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             Bike bike = bikeService.GetBikeById((int)but.Tag);
-            MessageBox.Show(bike.Category);
+            bikeDetailForm.FillBikeInformation(station, bike);
+            bikeDetailForm.Show("ListBikesForm");
+            this.Hide();
+            bikeDetailForm.Show();
+        }
+
+        private void ReturnStationBut_Click(object sender, System.EventArgs e)
+        {
+            this.Hide();
+            Application.OpenForms["StationDetailForm"].Show();
+        }
+
+        private void HomePageBut_Click(object sender, System.EventArgs e)
+        {
+            HomePageForm homePageForm = Application.OpenForms["HomePageForm"] as HomePageForm;
+            homePageForm.RenderStationList(homePageForm.stationPnl);
+            homePageForm.Show();
+            this.Hide();
         }
     }
 }
