@@ -2,5 +2,6 @@
 {
     partial class CardInformationForm
     {
+
     }
 }

@@ -4,8 +4,9 @@ using System.Windows.Forms;
 namespace RentalBikeApp.Presentation
 {
     partial class ListBikeForm
-    { 
-        public TextBox categoryBikeTxt, numberTxt, stationTxt, searchTxt;
+    {
+        public RichTextBox categoryBikeRtb, numberRtb, stationRtb;
+        public TextBox searchTxt;
         public Panel listBikePnl;
         public Button returnStationBut;
 
@@ -16,25 +17,28 @@ namespace RentalBikeApp.Presentation
                 Width = 570,
                 Location = new Point(20, 5)
             };
-            categoryBikeTxt = new TextBox()
+            categoryBikeRtb = new RichTextBox()
             {
-                Width = 190,
+                Size = new Size(190, 30),
                 Location = new Point(590, 5),
-                TextAlign = HorizontalAlignment.Center
+                SelectionAlignment = HorizontalAlignment.Center,
+                ReadOnly = true
             };
-            stationTxt = new TextBox()
+            stationRtb = new RichTextBox()
             {
                 Multiline = true,
                 Size = new Size(570, 80),
                 Location = new Point(20, 35),
-                TextAlign = HorizontalAlignment.Center
+                SelectionAlignment = HorizontalAlignment.Center,
+                ReadOnly = true
             };
-            numberTxt = new TextBox()
+            numberRtb = new RichTextBox()
             {
                 Multiline = true,
                 Size = new Size(190, 80),
                 Location = new Point(590, 35),
-                TextAlign = HorizontalAlignment.Center
+                SelectionAlignment = HorizontalAlignment.Center,
+                ReadOnly = true
             };
             listBikePnl = new Panel()
             {
@@ -55,9 +59,9 @@ namespace RentalBikeApp.Presentation
                 Font = new Font("Helvetica", 12, FontStyle.Regular)
             };
             this.Controls.Add(searchTxt);
-            this.Controls.Add(categoryBikeTxt);
-            this.Controls.Add(stationTxt);
-            this.Controls.Add(numberTxt);
+            this.Controls.Add(categoryBikeRtb);
+            this.Controls.Add(stationRtb);
+            this.Controls.Add(numberRtb);
             this.Controls.Add(listBikePnl);
             this.Controls.Add(returnStationBut);
         }

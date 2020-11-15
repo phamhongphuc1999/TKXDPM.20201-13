@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace RentalBikeApp.Presentation
@@ -12,7 +7,15 @@ namespace RentalBikeApp.Presentation
     {
         public BaseForm()
         {
-            InitializeComponent();
+            InitializeComponent("BaseForm");
+        }
+
+        public void Show(string nameForm)
+        {
+            this.Show();
+            int LocationMainX = Application.OpenForms[nameForm].Location.X;
+            int locationMainY = Application.OpenForms[nameForm].Location.Y;
+            this.Location = new Point(LocationMainX, locationMainY);
         }
     }
 }

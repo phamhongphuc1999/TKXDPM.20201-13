@@ -64,12 +64,13 @@ namespace RentalBikeApp.Presentation
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        protected void InitializeComponent(string textForm = "BaseForm")
+        protected void InitializeComponent(string formName, string textForm = "BaseForm")
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 500);
             this.Text = textForm;
+            this.Name = formName;
         }
         #endregion
     }

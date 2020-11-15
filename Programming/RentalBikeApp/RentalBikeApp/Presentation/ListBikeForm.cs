@@ -15,7 +15,7 @@ namespace RentalBikeApp.Presentation
         {
             bikeService = new BikeService();
 
-            InitializeComponent();
+            InitializeComponent("ListBikesForm", "List Bikes");
             DrawBaseForm();
             DrawListBikes();
         }
@@ -25,11 +25,11 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId, category);
             int count = bikesList.Count(x => x.BikeStatus);
-            if (category == Config.SQL.BikeCategory.BIKE) categoryBikeTxt.Text = "Xe đạp thường";
-            else if (category == Config.SQL.BikeCategory.ELECTRIC) categoryBikeTxt.Text = "Xe đạp điện";
-            else categoryBikeTxt.Text = "Xe đạp đôi";
-            numberTxt.Text = string.Format("Còn lại {0} xe", count.ToString());
-            stationTxt.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
+            if (category == Config.SQL.BikeCategory.BIKE) categoryBikeRtb.Text = "Xe đạp thường";
+            else if (category == Config.SQL.BikeCategory.ELECTRIC) categoryBikeRtb.Text = "Xe đạp điện";
+            else categoryBikeRtb.Text = "Xe đạp đôi";
+            numberRtb.Text = string.Format("Còn lại {0} xe", count.ToString());
+            stationRtb.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
             int X = 20, Y = 5;
             int count1 = 1;
             foreach (Bike bike in bikesList)

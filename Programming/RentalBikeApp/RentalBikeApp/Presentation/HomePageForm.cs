@@ -25,7 +25,7 @@ namespace RentalBikeApp.Presentation
 
             listBikeForm = new ListBikeForm();
 
-            InitializeComponent("HomePage");
+            InitializeComponent("HomePageForm", "Home Page");
             DrawBaseForm();
             DrawHomePage();
             RenderStationList(this.stationPnl);
@@ -38,7 +38,7 @@ namespace RentalBikeApp.Presentation
             List<Station> stationList = stationService.GetListStations();
             int X = 20, Y = 5;
             int count = 0;
-            foreach(Station station in stationList)
+            foreach (Station station in stationList)
             {
                 Button but = new Button()
                 {
@@ -60,7 +60,7 @@ namespace RentalBikeApp.Presentation
             Station station = stationService.GetStationById((int)but.Tag);
             this.Hide();
             stationDetailForm.FillStationDetail(station);
-            stationDetailForm.Show();
+            stationDetailForm.Show("HomePageForm");
         }
 
         #region event StationDetailForm
@@ -76,7 +76,7 @@ namespace RentalBikeApp.Presentation
             Station station = stationService.GetStationById((int)tandemBut.Tag);
             stationDetailForm.Hide();
             listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.TANDEM);
-            listBikeForm.Show();
+            listBikeForm.Show("StationDetailForm");
         }
 
         private void ElectricBut_Click(object sender, EventArgs e)
@@ -85,7 +85,7 @@ namespace RentalBikeApp.Presentation
             Station station = stationService.GetStationById((int)electricBut.Tag);
             stationDetailForm.Hide();
             listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.ELECTRIC);
-            listBikeForm.Show();
+            listBikeForm.Show("StationDetailForm");
         }
 
         private void BikeBut_Click(object sender, EventArgs e)
@@ -94,7 +94,7 @@ namespace RentalBikeApp.Presentation
             Station station = stationService.GetStationById((int)bikeBut.Tag);
             stationDetailForm.Hide();
             listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.BIKE);
-            listBikeForm.Show();
+            listBikeForm.Show("StationDetailForm");
         }
         #endregion
     }
