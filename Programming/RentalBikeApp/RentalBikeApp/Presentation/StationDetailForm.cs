@@ -6,7 +6,7 @@ namespace RentalBikeApp.Presentation
     {
         public StationDetailForm()
         {
-            InitializeComponent("Station Detail");
+            InitializeComponent("StationDetailForm", "Station Detail");
             DrawBaseForm();
             DrawStationDetail();
         }

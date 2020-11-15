@@ -1,5 +1,6 @@
 ﻿using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,11 +12,18 @@ namespace RentalBikeApp.Presentation
     {
         private BikeService bikeService;
 
+        private event EventHandler but_Click;
+        public event EventHandler But_Click
+        {
+            add { but_Click += value; }
+            remove { but_Click -= value; }
+        }
+
         public ListBikeForm()
         {
             bikeService = new BikeService();
 
-            InitializeComponent();
+            InitializeComponent("ListBikesForm", "List Bikes");
             DrawBaseForm();
             DrawListBikes();
         }
@@ -25,11 +33,11 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId, category);
             int count = bikesList.Count(x => x.BikeStatus);
-            if (category == Config.SQL.BikeCategory.BIKE) categoryBikeTxt.Text = "Xe đạp thường";
-            else if (category == Config.SQL.BikeCategory.ELECTRIC) categoryBikeTxt.Text = "Xe đạp điện";
-            else categoryBikeTxt.Text = "Xe đạp đôi";
-            numberTxt.Text = string.Format("Còn lại {0} xe", count.ToString());
-            stationTxt.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
+            if (category == Config.SQL.BikeCategory.BIKE) categoryBikeRtb.Text = "Xe đạp thường";
+            else if (category == Config.SQL.BikeCategory.ELECTRIC) categoryBikeRtb.Text = "Xe đạp điện";
+            else categoryBikeRtb.Text = "Xe đạp đôi";
+            numberRtb.Text = string.Format("Còn lại {0} xe", count.ToString());
+            stationRtb.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
             int X = 20, Y = 5;
             int count1 = 1;
             foreach (Bike bike in bikesList)
@@ -43,16 +51,19 @@ namespace RentalBikeApp.Presentation
                     Tag = bike.BikeId
                 };
                 Y += 55; count1++;
-                but.Click += But_Click;
+                but.Click += but_Click;
                 listBikePnl.Controls.Add(but);
             }
         }
 
-        private void But_Click(object sender, System.EventArgs e)
-        {
-            Button but = sender as Button;
-            Bike bike = bikeService.GetBikeById((int)but.Tag);
-            MessageBox.Show(bike.Category);
-        }
+        //private void But_Click(object sender, System.EventArgs e)
+        //{
+        //    Button but = sender as Button;
+        //    Bike bike = bikeService.GetBikeById((int)but.Tag);
+        //    bikeDetailForm.FillBikeInformation(station, bike);
+        //    bikeDetailForm.Show("ListBikesForm");
+        //    this.Hide();
+        //    bikeDetailForm.Show();
+        //}
     }
 }

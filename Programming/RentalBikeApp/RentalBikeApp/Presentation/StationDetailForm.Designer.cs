@@ -143,6 +143,7 @@ namespace RentalBikeApp.Presentation
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
+
             infoPnl.Controls.Add(nameLbl);
             infoPnl.Controls.Add(nameTxt);
             infoPnl.Controls.Add(addressLbl);

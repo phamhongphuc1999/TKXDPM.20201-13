@@ -4,8 +4,9 @@
     {
         public CardInformationForm()
         {
-            InitializeComponent();
+            InitializeComponent("CardInformationForm", "Card Information");
             DrawBaseForm();
+            DrawCardInformation();
         }
     }
 }

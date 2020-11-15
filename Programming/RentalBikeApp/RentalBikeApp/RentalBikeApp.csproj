@@ -7,11 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Business\SQLServices\BikeService.cs~RF2accc49.TMP" />
-	  <None Remove="Presentation\ListBikeForm.cs~RF2b50f57.TMP" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 	</ItemGroup>
