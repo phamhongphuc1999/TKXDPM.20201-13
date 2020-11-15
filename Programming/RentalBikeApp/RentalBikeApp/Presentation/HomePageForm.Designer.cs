@@ -8,6 +8,9 @@ namespace RentalBikeApp.Presentation
         public Panel stationPnl;
         public Label lineSearchLbl;
 
+        /// <summary>
+        /// Initialized control in HomePageForm
+        /// </summary>
         public void DrawHomePage()
         {
             stationPnl = new Panel()

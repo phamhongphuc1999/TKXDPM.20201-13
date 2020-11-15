@@ -10,6 +10,9 @@ namespace RentalBikeApp.Presentation
         public Button cancelBut, submitBut;
         public Panel cardInformationPnl;
 
+        /// <summary>
+        /// Initialized control in CardInformation
+        /// </summary>
         public void DrawCardInformation()
         {
             cardInformationPnl = new Panel()

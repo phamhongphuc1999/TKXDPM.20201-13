@@ -28,6 +28,11 @@ namespace RentalBikeApp.Presentation
             DrawListBikes();
         }
 
+        /// <summary>
+        /// Fill ListBikeForm with bike's information in specified category
+        /// </summary>
+        /// <param name="station">The station contain list bike is displayed</param>
+        /// <param name="category">The specified bike's category</param>
         public void FillListBikes(Station station, Config.SQL.BikeCategory category)
         {
             listBikePnl.Controls.Clear();
@@ -55,15 +60,5 @@ namespace RentalBikeApp.Presentation
                 listBikePnl.Controls.Add(but);
             }
         }
-
-        //private void But_Click(object sender, System.EventArgs e)
-        //{
-        //    Button but = sender as Button;
-        //    Bike bike = bikeService.GetBikeById((int)but.Tag);
-        //    bikeDetailForm.FillBikeInformation(station, bike);
-        //    bikeDetailForm.Show("ListBikesForm");
-        //    this.Hide();
-        //    bikeDetailForm.Show();
-        //}
     }
 }

@@ -4,17 +4,18 @@ namespace RentalBikeApp.Presentation
 {
     public partial class BikeDetailForm : BaseForm
     {
-        private CardInformationForm cardInformationForm;
-
         public BikeDetailForm()
         {
-            cardInformationForm = new CardInformationForm();
-
             InitializeComponent("BikeDetailForm", "Bike Detail");
             DrawBaseForm();
             DrawBikeDetail();
         }
 
+        /// <summary>
+        /// Fill bike form with bike's information and station's information
+        /// </summary>
+        /// <param name="station">The station contain the specified bike</param>
+        /// <param name="bike">The specified bike</param>
         public void FillBikeInformation(Station station, Bike bike)
         {
             stationRtb.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);

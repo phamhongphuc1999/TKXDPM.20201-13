@@ -11,6 +11,9 @@ namespace RentalBikeApp.Presentation
         public TextBox qrCodeTxt, categoryBikeTxt, licenceTxt, manufactureTxt, powerTxt;
         public Button returnListBikeBut, rentThisBikeBut;
 
+        /// <summary>
+        /// Initialized control in BikeDetailForm
+        /// </summary>
         public void DrawBikeDetail()
         {
             bikeDetailPnl = new Panel()

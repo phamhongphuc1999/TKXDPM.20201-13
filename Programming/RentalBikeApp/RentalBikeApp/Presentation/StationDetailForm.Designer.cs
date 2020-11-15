@@ -10,6 +10,9 @@ namespace RentalBikeApp.Presentation
         private TextBox nameTxt, addressTxt, areaTxt, numberTxt, distanceTxt, timeTxt;
         public Button bikeBut, tandemBut, electricBut, returnHomePageBut;
 
+        /// <summary>
+        /// Initialized control in StationDetailForm
+        /// </summary>
         public void DrawStationDetail()
         {
             infoPnl = new Panel()

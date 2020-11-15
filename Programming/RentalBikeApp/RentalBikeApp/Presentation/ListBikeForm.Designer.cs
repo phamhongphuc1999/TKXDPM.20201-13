@@ -10,6 +10,9 @@ namespace RentalBikeApp.Presentation
         public Panel listBikePnl;
         public Button returnStationBut;
 
+        /// <summary>
+        /// Initalized control in ListBikeForm
+        /// </summary>
         public void DrawListBikes()
         {
             searchTxt = new TextBox()

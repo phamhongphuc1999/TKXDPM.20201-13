@@ -10,6 +10,10 @@ namespace RentalBikeApp.Presentation
             InitializeComponent("BaseForm");
         }
 
+        /// <summary>
+        /// Show form in the location base on specified form's location
+        /// </summary>
+        /// <param name="nameForm">The name of specified form</param>
         public void Show(string nameForm)
         {
             this.Show();
@@ -18,6 +22,8 @@ namespace RentalBikeApp.Presentation
             this.Location = new Point(locationMainX, locationMainY);
         }
 
+        /// <summary>Show form in the location base on specified form's location</summary>
+        /// <param name="form">The specified form</param>
         public void Show(Form form)
         {
             this.Show();

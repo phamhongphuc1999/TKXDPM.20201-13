@@ -38,6 +38,9 @@ namespace RentalBikeApp.Presentation
             homePageBut.Click += HomePageBut_Click;
         }
 
+        /// <summary>
+        /// Initialized control in DetailForm as HomaPageForm's property
+        /// </summary>
         private void CreateStationDetailForm()
         {
             stationDetailForm = new StationDetailForm();
@@ -49,6 +52,9 @@ namespace RentalBikeApp.Presentation
             stationDetailForm.bikeBut.Click += StationDetail_BikeBut_Click;
         }
 
+        /// <summary>
+        /// Initialized control in ListBikeForm as HomaPageForm's property
+        /// </summary>
         private void CreateListBikeForm()
         {
             listBikeForm = new ListBikeForm();
@@ -58,6 +64,9 @@ namespace RentalBikeApp.Presentation
             listBikeForm.returnStationBut.Click += ListBike_ReturnStationBut_Click;
         }
 
+        /// <summary>
+        /// Initialized control in BikeDetailForm as HomaPageForm's property
+        /// </summary>
         private void CreateBikeDetailForm()
         {
             bikeDetailForm = new BikeDetailForm();
@@ -67,6 +76,9 @@ namespace RentalBikeApp.Presentation
             bikeDetailForm.returnListBikeBut.Click += BikeDetail_ReturnListBikeBut_Click;
         }
 
+        /// <summary>
+        /// Initialized control in RentBikeForm as HomaPageForm's property
+        /// </summary>
         private void CreateRentBikeForm()
         {
             rentBikeForm = new RentBikeForm();
@@ -74,6 +86,9 @@ namespace RentalBikeApp.Presentation
             rentBikeForm.rentBikeBut.Click += RentBikeBut_Click;
         }
 
+        /// <summary>
+        /// Initialized control in CardInformation as HomaPageForm's property
+        /// </summary>
         private void CreateCardInformationForm()
         {
             cardInformationForm = new CardInformationForm();
@@ -81,6 +96,10 @@ namespace RentalBikeApp.Presentation
             cardInformationForm.rentBikeBut.Click += RentBikeBut_Click;
         }
 
+        /// <summary>
+        /// Get station in the database and display in specified panel
+        /// </summary>
+        /// <param name="pnl">The specified panel</param>
         public void RenderStationList(Panel pnl)
         {
             pnl.Controls.Clear();
