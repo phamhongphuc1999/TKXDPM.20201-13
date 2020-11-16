@@ -43,7 +43,7 @@ namespace RentalBikeApp.Presentation
                 Text = "Trang chủ",
                 Size = new Size(220, 50),
                 Location = new Point(20, 435),
-                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
@@ -52,7 +52,7 @@ namespace RentalBikeApp.Presentation
                 Text = "Thuê xe",
                 Size = new Size(220, 50),
                 Location = new Point(560, 435),
-                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
@@ -72,6 +72,7 @@ namespace RentalBikeApp.Presentation
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 500);
+            this.Icon = new Icon("../../../icon/rental-bike.ico");
             this.Text = textForm;
             this.Name = formName;
         }

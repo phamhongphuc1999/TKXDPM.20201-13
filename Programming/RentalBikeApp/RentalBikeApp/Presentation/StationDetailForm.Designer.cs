@@ -26,7 +26,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(120, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 15),
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             nameTxt = new TextBox()
             {
@@ -41,7 +43,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(120, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 68),
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             addressTxt = new TextBox()
             {
@@ -56,7 +60,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(120, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 121),
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             areaTxt = new TextBox()
             {
@@ -71,7 +77,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(120, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 174),
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             numberTxt = new TextBox()
             {
@@ -86,7 +94,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(120, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 227),
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             distanceTxt = new TextBox()
             {
@@ -101,7 +111,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(120, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 280),
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             timeTxt = new TextBox()
             {
@@ -115,7 +127,7 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(150, 50),
                 Location = new Point(20, 345),
                 Text = "Xe đạp đơn",
-                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };

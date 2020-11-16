@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,6 +80,20 @@ namespace RentalBikeApp
             {
                 return e.Message;
             }
+        }
+
+        [DllImport("user32.dll")]
+        static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, Int32 wParam, Int32 lParam);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="comboBoxHandle"></param>
+        /// <param name="comboBoxDesiredHeight"></param>
+        public static void SetComboBoxHeight(IntPtr comboBoxHandle, Int32 comboBoxDesiredHeight)
+        {
+            const Int32 CB_SETITEMHEIGHT = 0x153;
+            SendMessage(comboBoxHandle, CB_SETITEMHEIGHT, -1, comboBoxDesiredHeight);
         }
     }
 }

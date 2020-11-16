@@ -25,7 +25,7 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(190, 30),
                 Location = new Point(590, 5),
                 SelectionAlignment = HorizontalAlignment.Center,
-                ReadOnly = true
+                ReadOnly = true,
             };
             stationRtb = new RichTextBox()
             {
@@ -33,7 +33,8 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(570, 80),
                 Location = new Point(20, 35),
                 SelectionAlignment = HorizontalAlignment.Center,
-                ReadOnly = true
+                ReadOnly = true,
+                Font = new Font("Arial", 12, FontStyle.Bold)
             };
             numberRtb = new RichTextBox()
             {
@@ -59,7 +60,7 @@ namespace RentalBikeApp.Presentation
                 Location = new Point(430, 365),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat,
-                Font = new Font("Helvetica", 12, FontStyle.Regular)
+                Font = new Font("Arial", 12, FontStyle.Regular)
             };
 
             returnStationBut.Click += ReturnStationBut_Click;

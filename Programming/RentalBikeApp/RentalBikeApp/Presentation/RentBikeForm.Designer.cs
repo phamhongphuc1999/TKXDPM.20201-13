@@ -88,7 +88,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(150, 40),
                 Location = new Point(20, 70),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentingCategoryTxt = new TextBox()
             {
@@ -103,7 +105,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(150, 40),
                 Location = new Point(20, 125),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentingLicenseTxt = new TextBox()
             {
@@ -118,7 +122,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(150, 40),
                 Location = new Point(20, 180),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentingManufactureTxt = new TextBox()
             {
@@ -141,7 +147,9 @@ namespace RentalBikeApp.Presentation
                 Location = new Point(585, 15),
                 Text = "Thời gian đã thuê",
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentingTimedRentValueLbl = new Label()
             {
@@ -156,7 +164,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(195, 40),
                 Location = new Point(585, 125),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentingRemainPowerValueLbl = new Label()
             {
@@ -213,7 +223,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(150, 40),
                 Location = new Point(20, 15),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentBikeInfoQrCodeTxt = new TextBox()
             {
@@ -228,7 +240,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(150, 40),
                 Location = new Point(20, 70),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentBikeInfoCategoryTxt = new TextBox()
             {
@@ -243,7 +257,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(150, 40),
                 Location = new Point(20, 125),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentBikeInfoLicenseTxt = new TextBox()
             {
@@ -258,7 +274,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(150, 40),
                 Location = new Point(20, 180),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentBikeInfoDepositTxt = new TextBox()
             {

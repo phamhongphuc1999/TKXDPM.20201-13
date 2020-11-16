@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RentalBikeApp.Entities.SQLEntities
 {
     [Table("Cards")]
-    public class Card: BaseErrorEntity
+    public class Card
     {
         [Key]
         public int CardId { get; set; }

@@ -16,8 +16,7 @@ namespace RentalBikeApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             HomePageForm homePage = new HomePageForm();
-            RentBikeForm rentBikeForm = new RentBikeForm();
-            Application.Run(rentBikeForm);
+            Application.Run(homePage);
         }
     }
 }

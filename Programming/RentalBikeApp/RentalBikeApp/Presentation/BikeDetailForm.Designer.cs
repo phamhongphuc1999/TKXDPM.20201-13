@@ -25,81 +25,92 @@ namespace RentalBikeApp.Presentation
             {
                 Size = new Size(bikeDetailPnl.Width - 40, 80),
                 Location = new Point(20, 5),
-                SelectionAlignment = HorizontalAlignment.Center
+                SelectionAlignment = HorizontalAlignment.Center,
+                Font = new Font("Arial", 12, FontStyle.Bold)
             };
             qrCodeLbl = new Label()
             {
                 Text = "Mã xe",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 90),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             qrCodeTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(620, 40),
-                Location = new Point(160, 90),
+                Size = new Size(600, 40),
+                Location = new Point(180, 90),
                 ReadOnly = true
             };
             categoryBikeLbl = new Label()
             {
                 Text = "Loại xe",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 138),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             categoryBikeTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(620, 40),
-                Location = new Point(160, 138),
+                Size = new Size(600, 40),
+                Location = new Point(180, 138),
                 ReadOnly = true
             };
             licenceLbl = new Label()
             {
                 Text = "Biển số xe",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 186),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             licenceTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(620, 40),
-                Location = new Point(160, 186),
+                Size = new Size(600, 40),
+                Location = new Point(180, 186),
                 ReadOnly = true
             };
             manufactureLbl = new Label()
             {
                 Text = "Hãng sản xuất",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 234),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             manufactureTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(620, 40),
-                Location = new Point(160, 234),
+                Size = new Size(600, 40),
+                Location = new Point(180, 234),
                 ReadOnly = true
             };
             powerLbl = new Label()
             {
                 Text = "Lượng pin",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 282),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             powerTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(620, 40),
-                Location = new Point(160, 282),
+                Size = new Size(600, 40),
+                Location = new Point(180, 282),
                 ReadOnly = true
             };
             returnListBikeBut = new Button()
@@ -108,7 +119,7 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(300, 50),
                 Location = new Point(180, 362),
                 FlatStyle = FlatStyle.Flat,
-                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")
             };
             rentThisBikeBut = new Button()
@@ -117,7 +128,7 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(250, 50),
                 Location = new Point(530, 362),
                 FlatStyle = FlatStyle.Flat,
-                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")
             };
 

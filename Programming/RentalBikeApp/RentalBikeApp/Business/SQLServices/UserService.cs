@@ -13,6 +13,11 @@ namespace RentalBikeApp.Business.SQLServices
             connecter = new SQLConnecter();
         }
 
+        /// <summary>
+        /// Insert new user in database
+        /// </summary>
+        /// <param name="newUser">user information to create new user</param>
+        /// <returns>The User represent for new user</returns>
         public User InsertNewUser(User newUser)
         {
             User checkUser = connecter.SqlData.Users.SingleOrDefault(x => x.AccountName == newUser.AccountName);

@@ -24,5 +24,8 @@ namespace RentalBikeApp.Data
         {
             get { return option; }
         }
+
+        public SQLData SqlData1 { get => sqlData; set => sqlData = value; }
+        public DbContextOptionsBuilder<SQLData> Option1 { get => option; set => option = value; }
     }
 }
