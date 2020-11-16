@@ -121,6 +121,9 @@ namespace RentalBikeApp.Presentation
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")
             };
 
+            returnListBikeBut.Click += ReturnListBikeBut_Click;
+            rentThisBikeBut.Click += RentThisBikeBut_Click;
+
             bikeDetailPnl.Controls.Add(stationRtb);
             bikeDetailPnl.Controls.Add(qrCodeLbl);
             bikeDetailPnl.Controls.Add(qrCodeTxt);
