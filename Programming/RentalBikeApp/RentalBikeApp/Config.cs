@@ -54,5 +54,14 @@ namespace RentalBikeApp
         }
 
         public static Station CURRENT_STATION;
+
+        public enum RENT_BIKE
+        {
+            RENT_BIKE,
+            RENTING_BIKE,
+            RENT_BIKE_INFO
+        }
+
+        public static RENT_BIKE RENT_BIKE_STATUS;
     }
 }

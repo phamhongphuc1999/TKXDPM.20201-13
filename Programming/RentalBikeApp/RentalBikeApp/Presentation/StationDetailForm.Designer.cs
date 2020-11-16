@@ -10,6 +10,9 @@ namespace RentalBikeApp.Presentation
         private TextBox nameTxt, addressTxt, areaTxt, numberTxt, distanceTxt, timeTxt;
         public Button bikeBut, tandemBut, electricBut, returnHomePageBut;
 
+        /// <summary>
+        /// Initialized control in StationDetailForm
+        /// </summary>
         public void DrawStationDetail()
         {
             infoPnl = new Panel()
@@ -143,6 +146,11 @@ namespace RentalBikeApp.Presentation
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
+
+            returnHomePageBut.Click += ReturnHomePageBut_Click;
+            bikeBut.Click += BikeBut_Click;
+            electricBut.Click += ElectricBut_Click;
+            tandemBut.Click += TandemBut_Click;
 
             infoPnl.Controls.Add(nameLbl);
             infoPnl.Controls.Add(nameTxt);

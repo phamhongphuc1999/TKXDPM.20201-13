@@ -10,6 +10,9 @@ namespace RentalBikeApp.Presentation
         public Panel listBikePnl;
         public Button returnStationBut;
 
+        /// <summary>
+        /// Initalized control in ListBikeForm
+        /// </summary>
         public void DrawListBikes()
         {
             searchTxt = new TextBox()
@@ -58,6 +61,8 @@ namespace RentalBikeApp.Presentation
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Helvetica", 12, FontStyle.Regular)
             };
+
+            returnStationBut.Click += ReturnStationBut_Click;
 
             this.Controls.Add(searchTxt);
             this.Controls.Add(categoryBikeRtb);

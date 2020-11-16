@@ -4,16 +4,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RentalBikeApp.Entities.SQLEntities
 {
     [Table("Stations")]
-    public class Station
+    public class Station: BaseErrorEntity
     {
         [Key]
         public int StationId { get; set; }
 
-        [Required(ErrorMessage = "NameStation is required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "NameStation is required")]
         [StringLength(200)]
         public string NameStation { get; set; }
 
-        [Required(ErrorMessage = "AddressStation is required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "AddressStation is required")]
         [StringLength(200)]
         public string AddressStation { get; set; }
 

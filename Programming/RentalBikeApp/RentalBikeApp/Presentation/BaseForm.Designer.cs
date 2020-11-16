@@ -25,6 +25,9 @@ namespace RentalBikeApp.Presentation
             base.Dispose(disposing);
         }
 
+        /// <summary>
+        /// Initialized control in BaseForm
+        /// </summary>
         protected void DrawBaseForm()
         {
             lineLbl = new Label()

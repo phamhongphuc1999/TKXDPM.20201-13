@@ -8,6 +8,16 @@ namespace RentalBikeApp
 {
     public static class Utilities
     {
+        /// <summary>
+        /// Convert date to string format: yyyy-mm-dd hh:mm:ss
+        /// </summary>
+        /// <param name="year">year of date to convert</param>
+        /// <param name="mounth">mounth of date to convert</param>
+        /// <param name="day">day of date to convert</param>
+        /// <param name="hour">hour of date to convert</param>
+        /// <param name="minute">minute of date to convert</param>
+        /// <param name="second">second of date to convert</param>
+        /// <returns>the string with format: yyyy-mm-dd hh:mm:ss</returns>
         public static string ConvertDateToString(int year, int mounth, int day, int hour, int minute, int second)
         {
             DateTime date = new DateTime(year, mounth, day, hour, minute, second);
@@ -16,6 +26,11 @@ namespace RentalBikeApp
             return result.Substring(0, length - 1);
         }
 
+        /// <summary>
+        /// Convert date to string format: yyyy-mm-dd hh:mm:ss
+        /// </summary>
+        /// <param name="date">date want to convert</param>
+        /// <returns>the string with format: yyyy-mm-dd hh:mm:ss</returns>
         public static string ConvertDateToString(DateTime date)
         {
             string result = date.ToString("u");
@@ -23,6 +38,11 @@ namespace RentalBikeApp
             return result.Substring(0, length - 1);
         }
 
+        /// <summary>
+        /// Hash the specified string with MD5 hash code
+        /// </summary>
+        /// <param name="input">the string plaintext</param>
+        /// <returns>the MD5 hash</returns>
         public static string MD5Hash(string input)
         {
             StringBuilder hash = new StringBuilder();
@@ -36,6 +56,13 @@ namespace RentalBikeApp
             return hash.ToString();
         }
 
+        /// <summary>
+        /// Sent a request to the specified url
+        /// </summary>
+        /// <param name="url">The url sent to</param>
+        /// <param name="method">The http method of request</param>
+        /// <param name="requestContent">The request's body</param>
+        /// <returns>The response with string format or exception message if cause error</returns>
         public static async Task<string> GetWebContent(string url, HttpMethod method, string requestContent = null)
         {
             HttpClient httpClient = new HttpClient();

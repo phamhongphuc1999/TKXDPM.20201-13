@@ -10,29 +10,60 @@ namespace RentalBikeApp.Presentation
 {
     public partial class ListBikeForm : BaseForm
     {
+        private StationService stationService;
         private BikeService bikeService;
 
-        private event EventHandler but_Click;
-        public event EventHandler But_Click
+        private HomePageForm _homePageForm;
+        public HomePageForm homePageForm
         {
-            add { but_Click += value; }
-            remove { but_Click -= value; }
+            get { return _homePageForm; }
+            set { _homePageForm = value; }
+        }
+
+        private BikeDetailForm _bikeDetailForm;
+        public BikeDetailForm bikeDetailForm
+        {
+            get { return _bikeDetailForm; }
+            set { _bikeDetailForm = value; }
+        }
+
+        private RentBikeForm _rentBikeForm;
+        public RentBikeForm rentBikeForm
+        {
+            get { return _rentBikeForm; }
+            set { _rentBikeForm = value; }
+        }
+
+        private StationDetailForm _stationDetailForm;
+        public StationDetailForm stationDetailForm
+        {
+            get { return _stationDetailForm; }
+            set { _stationDetailForm = value; }
         }
 
         public ListBikeForm()
         {
+            stationService = new StationService();
             bikeService = new BikeService();
 
             InitializeComponent("ListBikesForm", "List Bikes");
             DrawBaseForm();
             DrawListBikes();
+            homePageBut.Click += HomePageBut_Click;
+            rentBikeBut.Click += RentBikeBut_Click;
         }
 
+        
+        /// <summary>
+        /// Fill ListBikeForm with bike's information in specified category
+        /// </summary>
+        /// <param name="station">The station contain list bike is displayed</param>
+        /// <param name="category">The specified bike's category</param>
         public void FillListBikes(Station station, Config.SQL.BikeCategory category)
         {
             listBikePnl.Controls.Clear();
             List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId, category);
-            int count = bikesList.Count(x => x.BikeStatus);
+            int count = bikesList.Count(x => !x.BikeStatus);
             if (category == Config.SQL.BikeCategory.BIKE) categoryBikeRtb.Text = "Xe đạp thường";
             else if (category == Config.SQL.BikeCategory.ELECTRIC) categoryBikeRtb.Text = "Xe đạp điện";
             else categoryBikeRtb.Text = "Xe đạp đôi";
@@ -51,19 +82,38 @@ namespace RentalBikeApp.Presentation
                     Tag = bike.BikeId
                 };
                 Y += 55; count1++;
-                but.Click += but_Click;
+                but.Click += But_Click;
                 listBikePnl.Controls.Add(but);
             }
         }
 
-        //private void But_Click(object sender, System.EventArgs e)
-        //{
-        //    Button but = sender as Button;
-        //    Bike bike = bikeService.GetBikeById((int)but.Tag);
-        //    bikeDetailForm.FillBikeInformation(station, bike);
-        //    bikeDetailForm.Show("ListBikesForm");
-        //    this.Hide();
-        //    bikeDetailForm.Show();
-        //}
+        private void But_Click(object sender, EventArgs e)
+        {
+            Button but = sender as Button;
+            Bike bike = bikeService.GetBikeById((int)but.Tag);
+            _bikeDetailForm.FillBikeInformation(Config.CURRENT_STATION, bike);
+            _bikeDetailForm.Show(this);
+            this.Hide();
+            bikeDetailForm.Show();
+        }
+
+        private void RentBikeBut_Click(object sender, EventArgs e)
+        {
+            _rentBikeForm.Show(this);
+            this.Hide();
+        }
+
+        private void HomePageBut_Click(object sender, EventArgs e)
+        {
+            _homePageForm.RenderStationList(_homePageForm.stationPnl);
+            _homePageForm.Show(this);
+            this.Hide();
+        }
+
+        private void ReturnStationBut_Click(object sender, EventArgs e)
+        {
+            stationDetailForm.Show(this);
+            this.Hide();
+        }
     }
 }

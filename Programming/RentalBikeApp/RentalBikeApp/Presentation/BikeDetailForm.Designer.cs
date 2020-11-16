@@ -11,6 +11,9 @@ namespace RentalBikeApp.Presentation
         public TextBox qrCodeTxt, categoryBikeTxt, licenceTxt, manufactureTxt, powerTxt;
         public Button returnListBikeBut, rentThisBikeBut;
 
+        /// <summary>
+        /// Initialized control in BikeDetailForm
+        /// </summary>
         public void DrawBikeDetail()
         {
             bikeDetailPnl = new Panel()
@@ -117,6 +120,9 @@ namespace RentalBikeApp.Presentation
                 Font = new Font("Helvetica", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")
             };
+
+            returnListBikeBut.Click += ReturnListBikeBut_Click;
+            rentThisBikeBut.Click += RentThisBikeBut_Click;
 
             bikeDetailPnl.Controls.Add(stationRtb);
             bikeDetailPnl.Controls.Add(qrCodeLbl);

@@ -5,12 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RentalBikeApp.Entities.SQLEntities
 {
     [Table("Cards")]
-    public class Card
+    public class Card: BaseErrorEntity
     {
         [Key]
         public int CardId { get; set; }
 
-        [Required(ErrorMessage = "Bank is required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Bank is required")]
         [StringLength(100)]
         public string Bank { get; set; }
 
@@ -18,11 +18,11 @@ namespace RentalBikeApp.Entities.SQLEntities
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime ExpirationDate { get; set; }
 
-        [Required(ErrorMessage = "SecurityCode is required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "SecurityCode is required")]
         [StringLength(10)]
         public string SecurityCode { get; set; }
 
-        [Required(ErrorMessage = "PrivateToken is required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "PrivateToken is required")]
         [StringLength(100)]
         public string PrivateToken { get; set; }
 
