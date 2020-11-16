@@ -15,8 +15,50 @@ namespace RentalBikeApp.Presentation
         {
             InitializeComponent("RentBikeForm", "Rent Bike");
             DrawBaseForm();
+            DrawRentBikeInfoForm();
+            DrawRentingBikeForm();
+            DrawRentBikeForm();
             homePageBut.Click += HomePageBut_Click;
             rentBikeBut.Click += RentBikeBut_Click;
+
+            DisplayRentBike();
+        }
+
+        public void DisplayRentBike()
+        {
+            if(Config.RENT_BIKE_STATUS == Config.RENT_BIKE.RENT_BIKE)
+            {
+                rentBikePnl.Visible = true;
+                rentingBikePnl.Visible = false;
+                rentBikeInfoPnl.Visible = false;
+            }
+            else if(Config.RENT_BIKE_STATUS == Config.RENT_BIKE.RENTING_BIKE)
+            {
+                rentBikePnl.Visible = false;
+                rentingBikePnl.Visible = true;
+                rentBikeInfoPnl.Visible = false;
+            }
+            else
+            {
+                rentBikePnl.Visible = false;
+                rentingBikePnl.Visible = false;
+                rentBikeInfoPnl.Visible = true;
+            }
+        }
+
+        public void FillRentBikeForm()
+        {
+
+        }
+
+        public void FillRentingBikeForm()
+        {
+
+        }
+
+        public void FillRentBikeInfoForm()
+        {
+
         }
 
         private void RentBikeBut_Click(object sender, EventArgs e)

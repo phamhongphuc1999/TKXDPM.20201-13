@@ -13,18 +13,18 @@ namespace RentalBikeApp.Entities.SQLEntities
         [ForeignKey("Station")]
         public int StationId { get; set; }
 
-        [Required(ErrorMessage = "QRCode is required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "QRCode is required")]
         [StringLength(100)]
         public string QRCode { get; set; }
 
-        [Required(ErrorMessage = "Category is required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Category is required")]
         [StringLength(20)]
         public string Category { get; set; }
 
         [StringLength(20)]
         public string LicensePlate { get; set; }
 
-        [Required(ErrorMessage = "Manufacturer is required")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Manufacturer is required")]
         [StringLength(200)]
         public string Manufacturer { get; set; }
 

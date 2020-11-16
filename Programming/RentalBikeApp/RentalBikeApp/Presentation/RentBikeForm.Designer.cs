@@ -1,39 +1,310 @@
-﻿namespace RentalBikeApp.Presentation
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace RentalBikeApp.Presentation
 {
     partial class RentBikeForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        public Panel rentBikePnl, rentingBikePnl, rentBikeInfoPnl;
 
         /// <summary>
-        /// Clean up any resources being used.
+        /// Control in RentBikePanel
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        public TextBox rentBikeQrCodeTxt;
+        public Button rentBikeRentBut;
+
+        /// <summary>
+        /// Control in RentBikeInfoPanel
+        /// </summary>
+        public Label rentBikeInfoQrCodeLbl, rentBikeInfoCategoryLbl, rentBikeInfoLicenseLbl, rentBikeInfoDepositLbl;
+        public TextBox rentBikeInfoQrCodeTxt, rentBikeInfoCategoryTxt, rentBikeInfoLicenseTxt, rentBikeInfoDepositTxt;
+        public Button rentBikeInfoDetailBut, rentBikeInfoRentThisBikeBut;
+        public Label rentBikeLineLbl;
+
+        /// <summary>
+        /// Control in RentingBikePanel
+        /// </summary>
+        public Label rentingQrCodeLbl, rentingCategoryLbl, rentingLicenseLbl, rentingManufactureLbl;
+        public TextBox rentingQrCodeTxt, rentingCategoryTxt, rentingLicenseTxt, rentingManufactureTxt;
+        public Label rentingTimedRentLbl, rentingRemainPowerLbl, rentingTimedRentValueLbl, rentingRemainPowerValueLbl;
+        public Label rentingHorizontalLineLbl, rentingVerticalLineLbl;
+        public Button rentingSelectReceiveStationBut;
+
+        /// <summary>
+        /// Display RentBikeForm to enter QRcode
+        /// </summary>
+        public void DrawRentBikeForm()
         {
-            if (disposing && (components != null))
+            rentBikePnl = new Panel()
             {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
+                Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 80),
+                Location = new Point(0, 0)
+            };
+            rentBikeQrCodeTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(rentBikePnl.ClientSize.Width - 40, 40),
+                Location = new Point(20, 150)
+            };
+            rentBikeRentBut = new Button()
+            {
+                Text = "Thuê",
+                Size = new Size(300, 50),
+                Location = new Point(250, 230),
+                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
+                FlatStyle = FlatStyle.Flat
+            };
+            rentBikePnl.Controls.Add(rentBikeQrCodeTxt);
+            rentBikePnl.Controls.Add(rentBikeRentBut);
+            this.Controls.Add(rentBikePnl);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        private void InitializeComponent()
+        public void DrawRentingBikeForm()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "RentBike";
+            rentingBikePnl = new Panel()
+            {
+                Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 80),
+                Location = new Point(0, 0)
+            };
+            rentingQrCodeLbl = new Label()
+            {
+                Text = "Mã xe",
+                Size = new Size(150, 40),
+                Location = new Point(20, 15),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentingQrCodeTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(355, 40),
+                Location = new Point(190, 15),
+                ReadOnly = true
+            };
+            rentingCategoryLbl = new Label()
+            {
+                Text = "Loại xe",
+                Size = new Size(150, 40),
+                Location = new Point(20, 70),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentingCategoryTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(355, 40),
+                Location = new Point(190, 70),
+                ReadOnly = true
+            };
+            rentingLicenseLbl = new Label()
+            {
+                Text = "Biển số xe",
+                Size = new Size(150, 40),
+                Location = new Point(20, 125),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentingLicenseTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(355, 40),
+                Location = new Point(190, 125),
+                ReadOnly = true
+            };
+            rentingManufactureLbl = new Label()
+            {
+                Text = "Hãng sản xuất",
+                Size = new Size(150, 40),
+                Location = new Point(20, 180),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentingManufactureTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(355, 40),
+                Location = new Point(190, 180),
+                ReadOnly = true
+            };
+            rentingVerticalLineLbl = new Label()
+            {
+                AutoSize = false,
+                BackColor = Color.Black,
+                BorderStyle = BorderStyle.Fixed3D,
+                Size = new Size(4, 235),
+                Location = new Point(565, 0)
+            };
+            rentingTimedRentLbl = new Label()
+            {
+                Size = new Size(195, 40),
+                Location = new Point(585, 15),
+                Text = "Thời gian đã thuê",
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentingTimedRentValueLbl = new Label()
+            {
+                Size = new Size(195, 40),
+                Location = new Point(585, 70),
+                Text = "00:00:00",
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            rentingRemainPowerLbl = new Label()
+            {
+                Text = "Lượng pin còn lại",
+                Size = new Size(195, 40),
+                Location = new Point(585, 125),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentingRemainPowerValueLbl = new Label()
+            {
+                Text = "100%",
+                Size = new Size(195, 40),
+                Location = new Point(585, 180),
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+            rentingHorizontalLineLbl = new Label()
+            {
+                AutoSize = false,
+                BackColor = Color.Black,
+                BorderStyle = BorderStyle.Fixed3D,
+                Size = new Size(this.Width, 4),
+                Location = new Point(0, 235)
+            };
+            rentingSelectReceiveStationBut = new Button()
+            {
+                Size = new Size(300, 50),
+                Location = new Point(250, 300),
+                Text = "Chọn bãi xe để trả",
+                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
+                FlatStyle = FlatStyle.Flat
+            };
+            rentingBikePnl.Controls.Add(rentingQrCodeLbl);
+            rentingBikePnl.Controls.Add(rentingQrCodeTxt);
+            rentingBikePnl.Controls.Add(rentingCategoryLbl);
+            rentingBikePnl.Controls.Add(rentingCategoryTxt);
+            rentingBikePnl.Controls.Add(rentingLicenseLbl);
+            rentingBikePnl.Controls.Add(rentingLicenseTxt);
+            rentingBikePnl.Controls.Add(rentingManufactureLbl);
+            rentingBikePnl.Controls.Add(rentingManufactureTxt);
+            rentingBikePnl.Controls.Add(rentingVerticalLineLbl);
+            rentingBikePnl.Controls.Add(rentingTimedRentLbl);
+            rentingBikePnl.Controls.Add(rentingTimedRentValueLbl);
+            rentingBikePnl.Controls.Add(rentingRemainPowerLbl);
+            rentingBikePnl.Controls.Add(rentingRemainPowerValueLbl);
+            rentingBikePnl.Controls.Add(rentingHorizontalLineLbl);
+            rentingBikePnl.Controls.Add(rentingSelectReceiveStationBut);
+            this.Controls.Add(rentingBikePnl);
         }
 
-        #endregion
+        public void DrawRentBikeInfoForm()
+        {
+            rentBikeInfoPnl = new Panel()
+            {
+                Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 80),
+                Location = new Point(0, 0)
+            };
+            rentBikeInfoQrCodeLbl = new Label()
+            {
+                Text = "Mã xe",
+                Size = new Size(150, 40),
+                Location = new Point(20, 15),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentBikeInfoQrCodeTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(590, 40),
+                Location = new Point(190, 15),
+                ReadOnly = true
+            };
+            rentBikeInfoCategoryLbl = new Label()
+            {
+                Text = "Loại xe",
+                Size = new Size(150, 40),
+                Location = new Point(20, 70),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentBikeInfoCategoryTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(590, 40),
+                Location = new Point(190, 70),
+                ReadOnly = true
+            };
+            rentBikeInfoLicenseLbl = new Label()
+            {
+                Text = "Biển số xe",
+                Size = new Size(150, 40),
+                Location = new Point(20, 125),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentBikeInfoLicenseTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(590, 40),
+                Location = new Point(190, 125),
+                ReadOnly = true
+            };
+            rentBikeInfoDepositLbl = new Label()
+            {
+                Text = "Tiền cọc",
+                Size = new Size(150, 40),
+                Location = new Point(20, 180),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
+            };
+            rentBikeInfoDepositTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(590, 40),
+                Location = new Point(190, 180),
+                ReadOnly = true
+            };
+            rentBikeInfoDetailBut = new Button()
+            {
+                Text = "Xem thông tin chi tiết của xe này",
+                Size = new Size(400, 50),
+                Location = new Point(380, 260),
+                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
+                FlatStyle = FlatStyle.Flat
+            };
+            rentBikeLineLbl = new Label()
+            {
+                AutoSize = false,
+                BackColor = Color.Black,
+                BorderStyle = BorderStyle.Fixed3D,
+                Size = new Size(this.Width, 4),
+                Location = new Point(0, 330)
+            };
+            rentBikeInfoRentThisBikeBut = new Button()
+            {
+                Text = "Thuê xe này",
+                Size = new Size(400, 50),
+                Location = new Point(380, 350),
+                Font = new Font("Helvetica", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
+                FlatStyle = FlatStyle.Flat
+            };
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoQrCodeLbl);
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoQrCodeTxt);
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoCategoryLbl);
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoCategoryTxt);
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoLicenseLbl);
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoLicenseTxt);
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoDepositLbl);
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoDepositTxt);
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoDetailBut);
+            rentBikeInfoPnl.Controls.Add(rentBikeLineLbl);
+            rentBikeInfoPnl.Controls.Add(rentBikeInfoRentThisBikeBut);
+            this.Controls.Add(rentBikeInfoPnl);
+        }
     }
 }

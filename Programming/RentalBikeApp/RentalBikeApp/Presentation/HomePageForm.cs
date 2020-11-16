@@ -27,11 +27,11 @@ namespace RentalBikeApp.Presentation
             rentBikeForm = new RentBikeForm();
             cardInformationForm = new CardInformationForm();
 
-            CreateListBikeForm();
-            CreateRentBikeForm();
-            CreateStationDetailForm();
-            CreateBikeDetailForm();
-            CreateCardInformationForm();
+            CreateLinkListBikeForm();
+            CreateLinkRentBikeForm();
+            CreateLinkStationDetailForm();
+            CreateLinkBikeDetailForm();
+            CreateLinkCardInformationForm();
 
             InitializeComponent("HomePageForm", "Home Page");
             DrawBaseForm();
@@ -39,14 +39,16 @@ namespace RentalBikeApp.Presentation
             RenderStationList(this.stationPnl);
             this.StartPosition = FormStartPosition.CenterScreen;
 
+            Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
+
             homePageBut.Click += HomePageBut_Click;
             rentBikeBut.Click += RentBikeBut_Click;
         }
 
         /// <summary>
-        /// Initialized control in DetailForm as HomaPageForm's property
+        /// Create relationship between StationDetailFrom and other form
         /// </summary>
-        private void CreateStationDetailForm()
+        private void CreateLinkStationDetailForm()
         {
             stationDetailForm.homePageForm = this;
             stationDetailForm.rentBikeForm = rentBikeForm;
@@ -54,9 +56,9 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
-        /// Initialized control in ListBikeForm as HomaPageForm's property
+        /// Create relationship between ListBikeForm and other form
         /// </summary>
-        private void CreateListBikeForm()
+        private void CreateLinkListBikeForm()
         {
             listBikeForm.homePageForm = this;
             listBikeForm.rentBikeForm = rentBikeForm;
@@ -65,9 +67,9 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
-        /// Initialized control in BikeDetailForm as HomaPageForm's property
+        /// Create relationship between BikeDetailForm and other form
         /// </summary>
-        private void CreateBikeDetailForm()
+        private void CreateLinkBikeDetailForm()
         {
             bikeDetailForm.homePageForm = this;
             bikeDetailForm.rentBikeForm = rentBikeForm;
@@ -75,17 +77,17 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
-        /// Initialized control in RentBikeForm as HomaPageForm's property
+        /// Create relationship between RentBikeForm and other form
         /// </summary>
-        private void CreateRentBikeForm()
+        private void CreateLinkRentBikeForm()
         {
             rentBikeForm.homePageForm = this;
         }
 
         /// <summary>
-        /// Initialized control in CardInformation as HomaPageForm's property
+        /// Create relationship between CardInformationForm and other form
         /// </summary>
-        private void CreateCardInformationForm()
+        private void CreateLinkCardInformationForm()
         {
             cardInformationForm.homePageForm = this;
             cardInformationForm.rentBikeForm = rentBikeForm;

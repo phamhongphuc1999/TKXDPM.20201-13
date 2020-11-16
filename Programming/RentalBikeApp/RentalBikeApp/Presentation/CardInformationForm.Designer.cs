@@ -24,7 +24,9 @@ namespace RentalBikeApp.Presentation
             {
                 Text = "Tên chủ xe",
                 Size = new Size(120, 40),
-                Location = new Point(20, 5)
+                Location = new Point(20, 5),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
             };
             owerTxt = new TextBox()
             {
@@ -36,7 +38,9 @@ namespace RentalBikeApp.Presentation
             {
                 Text = "Mã xe",
                 Size = new Size(120, 40),
-                Location = new Point(20, 55)
+                Location = new Point(20, 55),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
             };
             cardCodeTxt = new TextBox()
             {
@@ -48,7 +52,9 @@ namespace RentalBikeApp.Presentation
             {
                 Text = "Ngân hàng phát hành",
                 Size = new Size(120, 40),
-                Location = new Point(20, 105)
+                Location = new Point(20, 105),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
             };
             bankTxt = new TextBox()
             {
@@ -60,7 +66,9 @@ namespace RentalBikeApp.Presentation
             {
                 Text = "Mã bảo mật",
                 Size = new Size(120, 40),
-                Location = new Point(20, 155)
+                Location = new Point(20, 155),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
             };
             securityCodeTxt = new TextBox()
             {
@@ -72,7 +80,9 @@ namespace RentalBikeApp.Presentation
             {
                 Text = "Ngày hết hạn",
                 Size = new Size(120, 40),
-                Location = new Point(20, 205)
+                Location = new Point(20, 205),
+                TextAlign = ContentAlignment.MiddleCenter,
+                BackColor = ColorTranslator.FromHtml("#3d8af7")
             };
             expirationDateTxt = new TextBox()
             {
