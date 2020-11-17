@@ -4,6 +4,7 @@ namespace RentalBikeApp
 {
     public static class Config
     {
+        //Config for SQL server
         public static class SQL
         {
             //private static string _SQL_CONNECT_STRING = "Data Source=.\\MSSQLSERVER123;Initial Catalog=RentalBike;Integrated Security=True";
@@ -23,6 +24,7 @@ namespace RentalBikeApp
             }
         }
 
+        //Config for API
         public static class API_INFO
         {
             public const string BASE_URL = " https://ecopark-system-api.herokuapp.com";

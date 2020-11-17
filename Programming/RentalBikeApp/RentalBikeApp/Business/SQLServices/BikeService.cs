@@ -11,7 +11,7 @@ namespace RentalBikeApp.Business.SQLServices
 
         public BikeService()
         {
-            connecter = new SQLConnecter();
+            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         }
 
         /// <summary>Get bike by QR code</summary>

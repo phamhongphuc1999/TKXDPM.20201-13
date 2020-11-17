@@ -12,7 +12,7 @@ namespace RentalBikeApp.Business.SQLServices
 
         public TransactionService()
         {
-            connecter = new SQLConnecter();
+            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         }
 
         /// <summary>Insert new transaction when user deposit money to rent the bike</summary>

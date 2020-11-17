@@ -10,7 +10,7 @@ namespace RentalBikeApp.Business.SQLServices
 
         public UserService()
         {
-            connecter = new SQLConnecter();
+            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         }
 
         /// <summary>

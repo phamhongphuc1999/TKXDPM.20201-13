@@ -86,7 +86,7 @@ namespace RentalBikeApp
         static extern IntPtr SendMessage(IntPtr hWnd, UInt32 Msg, Int32 wParam, Int32 lParam);
 
         /// <summary>
-        /// 
+        /// Set comboBox's height
         /// </summary>
         /// <param name="comboBoxHandle"></param>
         /// <param name="comboBoxDesiredHeight"></param>

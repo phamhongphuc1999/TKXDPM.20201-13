@@ -11,7 +11,7 @@ namespace RentalBikeApp.Business.SQLServices
 
         public StationService()
         {
-            connecter = new SQLConnecter();
+            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         }
 
         /// <summary>get list stations</summary>

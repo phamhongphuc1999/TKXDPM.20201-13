@@ -8,10 +8,10 @@ namespace RentalBikeApp.Data
         private SQLData sqlData;
         private DbContextOptionsBuilder<SQLData> option;
 
-        public SQLConnecter()
+        public SQLConnecter(string CONNECT_STRING)
         {
             option = new DbContextOptionsBuilder<SQLData>();
-            option.UseSqlServer(Config.SQL.SQL_CONNECT_STRING);
+            option.UseSqlServer(CONNECT_STRING);
             sqlData = new SQLData(option.Options);
         }
 
@@ -24,8 +24,5 @@ namespace RentalBikeApp.Data
         {
             get { return option; }
         }
-
-        public SQLData SqlData1 { get => sqlData; set => sqlData = value; }
-        public DbContextOptionsBuilder<SQLData> Option1 { get => option; set => option = value; }
     }
 }
