@@ -1,33 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
-
-namespace RentalBikeApp.Presentation
+﻿namespace RentalBikeApp.Presentation
 {
-    public partial class TransactionInformationForm : Form
+    public partial class TransactionInformationForm : BaseForm
     {
+        private HomePageForm _homePageForm;
+        public HomePageForm homePageForm
+        {
+            get { return _homePageForm; }
+            set { _homePageForm = value; }
+        }
+
+        private RentBikeForm _rentBikeForm;
+        public RentBikeForm rentBikeForm
+        {
+            get { return _rentBikeForm; }
+            set { _rentBikeForm = value; }
+        }
+
         public TransactionInformationForm()
         {
-            InitializeComponent();
+            InitializeComponent("TransactionInformationForm", "Transaction Information");
+            DrawBaseForm();
+            DrawTransactionInformationForm();
+            homePageBut.Click += HomePageBut_Click;
+            rentBikeBut.Click += RentBikeBut_Click;
         }
 
-        private void TransactionInformationForm_Load(object sender, EventArgs e)
+        private void RentBikeBut_Click(object sender, System.EventArgs e)
         {
-
+            _rentBikeForm.Show();
+            this.Show();
         }
 
-        private void label4_Click(object sender, EventArgs e)
+        private void HomePageBut_Click(object sender, System.EventArgs e)
         {
-
+            _homePageForm.RenderStationList(_homePageForm.stationPnl);
+            _homePageForm.Show();
+            this.Hide();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void PermitBut_Click(object sender, System.EventArgs e)
         {
-
+            
         }
     }
 }

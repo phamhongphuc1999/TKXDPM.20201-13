@@ -1,5 +1,4 @@
 ﻿using RentalBikeApp.Entities.SQLEntities;
-using System;
 
 namespace RentalBikeApp
 {
@@ -7,11 +6,8 @@ namespace RentalBikeApp
     {
         public static class SQL
         {
-            private const string SOURCE = "DESKTOP-TM16V8B\\SQLEXPRESS";
-            private const string NAME_DATABASE = "RentalBike";
-            private const string USERNAME = "sa";
-            private const string PASSWORD = "phamhongphuc";
-            private static string _SQL_CONNECT_STRING = "Data Source=.\\MSSQLSERVER123;Initial Catalog=RentalBike;Integrated Security=True";
+            //private static string _SQL_CONNECT_STRING = "Data Source=.\\MSSQLSERVER123;Initial Catalog=RentalBike;Integrated Security=True";
+            private static string _SQL_CONNECT_STRING = "data source=DESKTOP-TM16V8B\\SQLEXPRESS;initial catalog=RentalBike;user id=sa;password=phamhongphuc;MultipleActiveResultSets=True;";
 
             public static string SQL_CONNECT_STRING
             {
