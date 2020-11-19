@@ -7,12 +7,19 @@ namespace RentalBikeApp.Presentation
     {
         public Panel stationPnl;
         public Label lineSearchLbl;
+        public TextBox searchTxt;
 
         /// <summary>
         /// Initialized control in HomePageForm
         /// </summary>
         public void DrawHomePage()
         {
+            searchTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(this.ClientSize.Width - 40, 40),
+                Location = new Point(20, 5)
+            };
             stationPnl = new Panel()
             {
                 Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 130),
@@ -30,6 +37,7 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(this.Width, 4),
                 Location = new Point(0, 50)
             };
+            this.Controls.Add(searchTxt);
             this.Controls.Add(stationPnl);
             this.Controls.Add(lineSearchLbl);
         }

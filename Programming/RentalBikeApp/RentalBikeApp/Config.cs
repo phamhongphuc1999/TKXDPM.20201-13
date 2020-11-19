@@ -1,4 +1,7 @@
-﻿using RentalBikeApp.Entities.SQLEntities;
+﻿// Copyright (c) Microsoft. All Rights Reserved.
+//  License under the Apache License, Version 2.0.
+
+using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp
 {

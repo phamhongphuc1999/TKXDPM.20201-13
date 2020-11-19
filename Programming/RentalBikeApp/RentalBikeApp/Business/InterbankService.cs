@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿// Copyright (c) Microsoft. All Rights Reserved.
+//  License under the Apache License, Version 2.0.
+
+using Newtonsoft.Json;
 using RentalBikeApp.Entities.APIEntities;
 using System.Net.Http;
 using System.Threading.Tasks;

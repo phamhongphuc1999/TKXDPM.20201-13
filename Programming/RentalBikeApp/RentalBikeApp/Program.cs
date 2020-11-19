@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft. All Rights Reserved.
+//  License under the Apache License, Version 2.0.
+
 using System;
 using RentalBikeApp.Presentation;
 using System.Windows.Forms;

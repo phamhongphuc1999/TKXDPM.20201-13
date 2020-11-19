@@ -1,4 +1,7 @@
-﻿using RentalBikeApp.Data;
+﻿// Copyright (c) Microsoft. All Rights Reserved.
+//  License under the Apache License, Version 2.0.
+
+using RentalBikeApp.Data;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 using System.Linq;
