@@ -44,7 +44,8 @@ namespace RentalBikeApp.Presentation
             {
                 Multiline = true,
                 Size = new Size(rentBikePnl.ClientSize.Width - 40, 40),
-                Location = new Point(20, 150)
+                Location = new Point(20, 150),
+                PlaceholderText = "Nhập mã QR code của xe"
             };
             rentBikeRentBut = new Button()
             {
@@ -55,6 +56,9 @@ namespace RentalBikeApp.Presentation
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
+
+            rentBikeRentBut.Click += RentBikeRentBut_Click;
+
             rentBikePnl.Controls.Add(rentBikeQrCodeTxt);
             rentBikePnl.Controls.Add(rentBikeRentBut);
             this.Controls.Add(rentBikePnl);

@@ -7,12 +7,14 @@ using System.Windows.Forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class HomePageForm : BaseForm
     {
         private StationService stationService;
+        private List<Station> stationList;
 
         private StationDetailForm stationDetailForm;
         private ListBikeForm listBikeForm;
@@ -23,6 +25,7 @@ namespace RentalBikeApp.Presentation
         public HomePageForm()
         {
             stationService = new StationService();
+            stationList = stationService.GetListStations();
 
             stationDetailForm = new StationDetailForm();
             listBikeForm = new ListBikeForm();
@@ -51,14 +54,13 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Get station in the database and display in specified panel
         /// </summary>
-        /// <param name="pnl">The specified panel</param>
+        /// <param name="pnl">The specified panel to display station list</param>
         public void RenderStationList(Panel pnl)
         {
             pnl.Controls.Clear();
-            List<Station> stationList = stationService.GetListStations();
             int X = 20, Y = 5;
             int count = 0;
-            foreach (Station station in stationList)
+            foreach(Station station in stationList)
             {
                 Button but = new Button()
                 {
@@ -72,6 +74,17 @@ namespace RentalBikeApp.Presentation
                 but.Click += But_Click;
                 pnl.Controls.Add(but);
             }
+        }
+
+        /// <summary>
+        /// Get station in the database and display in specified panel
+        /// </summary>
+        /// <param name="stationList">The specified station list to display</param>
+        /// <param name="pnl">The specified panel to display station list</param>
+        public void RenderStationList(List<Station> stationList, Panel pnl)
+        {
+            this.stationList = stationList;
+            RenderStationList(pnl);
         }
 
         /// <summary>
@@ -111,6 +124,7 @@ namespace RentalBikeApp.Presentation
         private void CreateLinkRentBikeForm()
         {
             rentBikeForm.homePageForm = this;
+            rentBikeForm.bikeDetailForm = bikeDetailForm;
         }
 
         /// <summary>
@@ -153,6 +167,34 @@ namespace RentalBikeApp.Presentation
             stationDetailForm.FillStationDetail(station);
             Config.CURRENT_STATION = station;
             stationDetailForm.Show(this);
+        }
+
+        private void SearchBut_Click(object sender, EventArgs e)
+        {
+            String nameStation = searchTxt.Text;
+            if (nameStation == "")
+            {
+                MessageBox.Show("Nhập tên bãi xe bạn muốn tìm kiếm");
+                return;
+            }
+            List<Station> stations = stationList.Where(x => x.NameStation.Contains(nameStation)).ToList();
+            if(stations.Count() == 0)
+            {
+                MessageBox.Show("Không tìm thấy bãi xe " + nameStation);
+                searchTxt.Text = "";
+                return;
+            }
+            cancelSearchBut.Visible = true;
+            searchTxt.Width = this.ClientSize.Width - 180;
+            this.RenderStationList(stations, this.stationPnl);
+        }
+
+        private void CancelSearchBut_Click(object sender, EventArgs e)
+        {
+            searchTxt.Text = "";
+            searchTxt.Width = this.ClientSize.Width - 140;
+            this.stationList = stationService.GetListStations();
+            RenderStationList(this.stationPnl);
         }
         #endregion
     }

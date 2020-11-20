@@ -45,7 +45,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Fill station information in StationDetailForm
         /// </summary>
-        /// <param name="station"></param>
+        /// <param name="station">The station is displayed</param>
         public void FillStationDetail(Station station)
         {
             nameTxt.Text = station.NameStation;

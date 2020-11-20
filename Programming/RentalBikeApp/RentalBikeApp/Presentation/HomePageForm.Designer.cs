@@ -8,6 +8,7 @@ namespace RentalBikeApp.Presentation
         public Panel stationPnl;
         public Label lineSearchLbl;
         public TextBox searchTxt;
+        public Button searchBut, cancelSearchBut;
 
         /// <summary>
         /// Initialized control in HomePageForm
@@ -17,8 +18,22 @@ namespace RentalBikeApp.Presentation
             searchTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(this.ClientSize.Width - 40, 40),
-                Location = new Point(20, 5)
+                Size = new Size(this.ClientSize.Width - 140, 40),
+                Location = new Point(20, 5),
+                PlaceholderText= "Nhập tên bãi xe muốn tìm kiếm"
+            };
+            searchBut = new Button()
+            {
+                Size = new Size(100, 40),
+                Location = new Point(680, 5),
+                Text = "Search"
+            };
+            cancelSearchBut = new Button()
+            {
+                Size = new Size(40, 40),
+                Location = new Point(640, 5),
+                Text = "X",
+                Visible = true
             };
             stationPnl = new Panel()
             {
@@ -37,7 +52,13 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(this.Width, 4),
                 Location = new Point(0, 50)
             };
+
+            searchBut.Click += SearchBut_Click;
+            cancelSearchBut.Click += CancelSearchBut_Click;
+
             this.Controls.Add(searchTxt);
+            this.Controls.Add(searchBut);
+            this.Controls.Add(cancelSearchBut);
             this.Controls.Add(stationPnl);
             this.Controls.Add(lineSearchLbl);
         }
