@@ -2,6 +2,7 @@
 //  License under the Apache License, Version 2.0.
 
 using RentalBikeApp.Entities.SQLEntities;
+using System.Windows.Forms;
 
 namespace RentalBikeApp.Presentation
 {
@@ -57,6 +58,7 @@ namespace RentalBikeApp.Presentation
                 categoryBikeTxt.Text = "Xe đạp điện";
                 powerTxt.Text = "100%";
             }
+            rentThisBikeBut.Tag = bike.BikeId;
         }
 
         private void RentBikeBut_Click(object sender, System.EventArgs e)
@@ -74,7 +76,18 @@ namespace RentalBikeApp.Presentation
 
         private void RentThisBikeBut_Click(object sender, System.EventArgs e)
         {
-            _rentBikeForm.Show(this);
+            Button rentThisBikeBut = sender as Button;
+            int bikeId = (int)rentThisBikeBut.Tag;
+            if(Config.RENT_BIKE_STATUS != Config.RENT_BIKE.RENTING_BIKE)
+            {
+                _rentBikeForm.FillRentBikeForm(bikeId, Config.RENT_BIKE.RENT_BIKE_INFO);
+                _rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO);
+            }
+            else
+            {
+                _rentBikeForm.FillRentBikeForm(bikeId, Config.RENT_BIKE.RENTING_BIKE);
+                _rentBikeForm.Show(this, Config.RENT_BIKE.RENTING_BIKE);
+            }
             this.Hide();
         }
 

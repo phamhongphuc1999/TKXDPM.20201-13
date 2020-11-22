@@ -1,6 +1,10 @@
 ﻿// Copyright (c) Microsoft. All Rights Reserved.
 //  License under the Apache License, Version 2.0.
 
+using RentalBikeApp.Entities.SQLEntities;
+using System;
+using System.Windows.Forms;
+
 namespace RentalBikeApp.Presentation
 {
     public partial class CardInformationForm : BaseForm
@@ -19,6 +23,13 @@ namespace RentalBikeApp.Presentation
             set { _rentBikeForm = value; }
         }
 
+        private TransactionInformationForm _transactionInformationForm;
+        public TransactionInformationForm transactionInformationForm
+        {
+            get { return _transactionInformationForm; }
+            set { _transactionInformationForm = value; }
+        }
+
         public CardInformationForm()
         {
             InitializeComponent("CardInformationForm", "Card Information");
@@ -34,10 +45,24 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
-        private void HomePageBut_Click(object sender, System.EventArgs e)
+        private void HomePageBut_Click(object sender, EventArgs e)
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
             _homePageForm.Show(this);
+            this.Hide();
+        }
+
+        private void SubmitBut_Click(object sender, EventArgs e)
+        {
+            Button but = sender as Button;
+            _transactionInformationForm.FillTransactionInformation((int)but.Tag, new Card());
+            _transactionInformationForm.Show(this);
+            this.Hide();
+        }
+
+        private void CancelBut_Click(object sender, EventArgs e)
+        {
+            _rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO);
             this.Hide();
         }
     }

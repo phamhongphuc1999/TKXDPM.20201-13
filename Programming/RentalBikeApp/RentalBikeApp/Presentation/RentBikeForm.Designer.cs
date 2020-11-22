@@ -29,6 +29,7 @@ namespace RentalBikeApp.Presentation
         public Label rentingTimedRentLbl, rentingRemainPowerLbl, rentingTimedRentValueLbl, rentingRemainPowerValueLbl;
         public Label rentingHorizontalLineLbl, rentingVerticalLineLbl;
         public Button rentingSelectReceiveStationBut;
+        public Timer rentBikeTmr;
 
         /// <summary>
         /// Display RentBikeForm to enter QRcode
@@ -64,8 +65,15 @@ namespace RentalBikeApp.Presentation
             this.Controls.Add(rentBikePnl);
         }
 
+        /// <summary>
+        /// Display RentBikeform when user is renting bike
+        /// </summary>
         public void DrawRentingBikeForm()
         {
+            rentBikeTmr = new Timer()
+            {
+                Interval = 1000
+            };
             rentingBikePnl = new Panel()
             {
                 Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 80),
@@ -77,7 +85,9 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(150, 40),
                 Location = new Point(20, 15),
                 TextAlign = ContentAlignment.MiddleCenter,
-                BackColor = ColorTranslator.FromHtml("#3d8af7")
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
             };
             rentingQrCodeTxt = new TextBox()
             {
@@ -196,6 +206,10 @@ namespace RentalBikeApp.Presentation
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
+
+            rentBikeTmr.Tick += RentBikeTmr_Tick;
+            rentingSelectReceiveStationBut.Click += RentingSelectReceiveStationBut_Click;
+
             rentingBikePnl.Controls.Add(rentingQrCodeLbl);
             rentingBikePnl.Controls.Add(rentingQrCodeTxt);
             rentingBikePnl.Controls.Add(rentingCategoryLbl);
@@ -214,6 +228,9 @@ namespace RentalBikeApp.Presentation
             this.Controls.Add(rentingBikePnl);
         }
 
+        /// <summary>
+        /// Display RentBikeForm to display bike information
+        /// </summary>
         public void DrawRentBikeInfoForm()
         {
             rentBikeInfoPnl = new Panel()
@@ -326,6 +343,10 @@ namespace RentalBikeApp.Presentation
             rentBikeInfoPnl.Controls.Add(rentBikeInfoDetailBut);
             rentBikeInfoPnl.Controls.Add(rentBikeLineLbl);
             rentBikeInfoPnl.Controls.Add(rentBikeInfoRentThisBikeBut);
+
+            rentBikeInfoDetailBut.Click += RentBikeInfoDetailBut_Click;
+            rentBikeInfoRentThisBikeBut.Click += RentBikeInfoRentThisBikeBut_Click;
+
             this.Controls.Add(rentBikeInfoPnl);
         }
     }

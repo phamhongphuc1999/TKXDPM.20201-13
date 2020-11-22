@@ -21,6 +21,8 @@ namespace RentalBikeApp.Presentation
         private BikeDetailForm bikeDetailForm;
         private RentBikeForm rentBikeForm;
         private CardInformationForm cardInformationForm;
+        private TransactionInformationForm transactionInformationForm;
+        private ReturnBikeForm returnBikeForm;
 
         public HomePageForm()
         {
@@ -32,12 +34,16 @@ namespace RentalBikeApp.Presentation
             bikeDetailForm = new BikeDetailForm();
             rentBikeForm = new RentBikeForm();
             cardInformationForm = new CardInformationForm();
+            transactionInformationForm = new TransactionInformationForm();
+            returnBikeForm = new ReturnBikeForm();
 
             CreateLinkListBikeForm();
             CreateLinkRentBikeForm();
             CreateLinkStationDetailForm();
             CreateLinkBikeDetailForm();
             CreateLinkCardInformationForm();
+            CreateLinkTransactionInformationForm();
+            CreateLinkReturnBikeForm();
 
             InitializeComponent("HomePageForm", "Home Page");
             DrawBaseForm();
@@ -125,6 +131,8 @@ namespace RentalBikeApp.Presentation
         {
             rentBikeForm.homePageForm = this;
             rentBikeForm.bikeDetailForm = bikeDetailForm;
+            rentBikeForm.returnBikeForm = returnBikeForm;
+            rentBikeForm.cardInformationForm = cardInformationForm;
         }
 
         /// <summary>
@@ -134,31 +142,44 @@ namespace RentalBikeApp.Presentation
         {
             cardInformationForm.homePageForm = this;
             cardInformationForm.rentBikeForm = rentBikeForm;
+            cardInformationForm.transactionInformationForm = transactionInformationForm;
         }
 
-        #region Base Form Event
+        /// <summary>
+        /// Create relationship between TransactionFormationForm and other form
+        /// </summary>
+        private void CreateLinkTransactionInformationForm()
+        {
+            transactionInformationForm.homePageForm = this;
+            transactionInformationForm.rentBikeForm = rentBikeForm;
+        }
+
+        /// <summary>
+        /// Create relationship between ReturnBikeForm and other form
+        /// </summary>
+        private void CreateLinkReturnBikeForm()
+        {
+            returnBikeForm.homePageForm = this;
+            returnBikeForm.rentBikeForm = rentBikeForm;
+        }
+
         private void HomePageBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
             Form form = but.Parent as Form;
             this.RenderStationList(this.stationPnl);
             this.Show(form);
-            bool check = form is HomePageForm;
-            if (!check) form.Hide();
+            if (!(form is HomePageForm)) form.Hide();
         }
 
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
             Form form = but.Parent as Form;
-            this.RenderStationList(this.stationPnl);
-            rentBikeForm.Show(form);
-            bool check = form is RentBikeForm;
-            if (!check) form.Hide();
+            rentBikeForm.Show(form, Config.RENT_BIKE_STATUS);
+            this.Hide();
         }
-        #endregion
 
-        #region Home Page Form Event
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
@@ -196,6 +217,5 @@ namespace RentalBikeApp.Presentation
             this.stationList = stationService.GetListStations();
             RenderStationList(this.stationPnl);
         }
-        #endregion
     }
 }
