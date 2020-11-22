@@ -124,6 +124,10 @@ namespace RentalBikeApp.Presentation
                 Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")
             };
+
+            cancelBut.Click += CancelBut_Click;
+            submitBut.Click += SubmitBut_Click;
+
             cardInformationPnl.Controls.Add(owerLbl);
             cardInformationPnl.Controls.Add(owerTxt);
             cardInformationPnl.Controls.Add(cardCodeLbl);

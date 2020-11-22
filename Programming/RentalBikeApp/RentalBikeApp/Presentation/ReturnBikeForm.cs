@@ -13,6 +13,20 @@ namespace RentalBikeApp.Presentation
     {
         private StationService stationService;
 
+        private HomePageForm _homePageForm;
+        public HomePageForm homePageForm
+        {
+            get { return _homePageForm; }
+            set { _homePageForm = value; }
+        }
+
+        private RentBikeForm _rentBikeForm;
+        public RentBikeForm rentBikeForm
+        {
+            get { return _rentBikeForm; }
+            set { _rentBikeForm = value; }
+        }
+
         public ReturnBikeForm()
         {
             stationService = new StationService();
