@@ -3,8 +3,10 @@
 
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace RentalBikeApp.Presentation
@@ -12,6 +14,7 @@ namespace RentalBikeApp.Presentation
     public partial class ReturnBikeForm : BaseForm
     {
         private StationService stationService;
+        private List<Station> stationList;
 
         private HomePageForm _homePageForm;
         public HomePageForm homePageForm
@@ -27,14 +30,25 @@ namespace RentalBikeApp.Presentation
             set { _rentBikeForm = value; }
         }
 
+        private TransactionInformationForm _transactionInformationForm;
+        public TransactionInformationForm transactionInformationForm
+        {
+            get { return _transactionInformationForm; }
+            set { _transactionInformationForm = value; }
+        }
+
         public ReturnBikeForm()
         {
             stationService = new StationService();
+            stationList = stationService.GetListStations();
 
             InitializeComponent("ReturnBikeForm", "Return Bike");
             DrawBaseForm();
             DrawReturnBikeForm();
             RenderStationList(this.listStationPnl);
+
+            homePageBut.Click += HomePageBut_Click;
+            rentBikeBut.Click += RentBikeBut_Click;
         }
 
         /// <summary>
@@ -44,7 +58,6 @@ namespace RentalBikeApp.Presentation
         public void RenderStationList(Panel pnl)
         {
             pnl.Controls.Clear();
-            List<Station> stationList = stationService.GetListStations();
             int X = 20, Y = 5;
             int count = 0;
             foreach (Station station in stationList)
@@ -63,14 +76,74 @@ namespace RentalBikeApp.Presentation
             }
         }
 
-        private void But_Click(object sender, System.EventArgs e)
+        /// <summary>
+        /// Get station in the database and display in specified panel
+        /// </summary>
+        /// <param name="stationList">The specified station list to display</param>
+        /// <param name="pnl">The specified panel to display station list</param>
+        public void RenderStationList(List<Station> stationList, Panel pnl)
         {
-            
+            this.stationList = stationList;
+            RenderStationList(pnl);
         }
 
-        private void CancelBut_Click(object sender, System.EventArgs e)
+        private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            
+            _rentBikeForm.Show(this);
+            this.Hide();
+        }
+
+        private void HomePageBut_Click(object sender, EventArgs e)
+        {
+            _homePageForm.RenderStationList(_homePageForm.stationPnl);
+            _homePageForm.Show(this);
+            this.Hide();
+        }
+
+        private void But_Click(object sender, EventArgs e)
+        {
+            Button but = sender as Button;
+            string nameStation = but.Text;
+            DialogResult result = MessageBox.Show(string.Format("Bạn có chắc muốn trả xe ở bãi xe: {0}", nameStation), "Thông Báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            if(result == DialogResult.OK)
+            {
+                _rentBikeForm.rentBikeTmr.Stop();
+                _transactionInformationForm.Show(this);
+                this.Hide();
+            }
+        }
+
+        private void CancelBut_Click(object sender, EventArgs e)
+        {
+            _rentBikeForm.Show(this);
+            this.Hide();
+        }
+
+        private void CancelSearchBut_Click(object sender, EventArgs e)
+        {
+            searchTxt.Text = "";
+            searchTxt.Width = this.ClientSize.Width - 140;
+            this.stationList = stationService.GetListStations();
+            RenderStationList(this.listStationPnl);
+        }
+
+        private void SearchBut_Click(object sender, EventArgs e)
+        {
+            string nameStation = searchTxt.Text;
+            if (nameStation == "")
+            {
+                MessageBox.Show("Nhập tên bãi xe bạn muốn tìm kiếm");
+                return;
+            }
+            List<Station> stations = stationList.Where(x => x.NameStation.Contains(nameStation)).ToList();
+            if (stations.Count() == 0)
+            {
+                MessageBox.Show("Không tìm thấy bãi xe " + nameStation);
+                searchTxt.Text = "";
+                return;
+            }
+            searchTxt.Width = this.ClientSize.Width - 180;
+            this.RenderStationList(stations, this.listStationPnl);
         }
     }
 }

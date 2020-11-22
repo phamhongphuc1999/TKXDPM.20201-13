@@ -161,6 +161,7 @@ namespace RentalBikeApp.Presentation
         {
             returnBikeForm.homePageForm = this;
             returnBikeForm.rentBikeForm = rentBikeForm;
+            returnBikeForm.transactionInformationForm = transactionInformationForm;
         }
 
         private void HomePageBut_Click(object sender, EventArgs e)
@@ -192,22 +193,21 @@ namespace RentalBikeApp.Presentation
 
         private void SearchBut_Click(object sender, EventArgs e)
         {
-            String nameStation = searchTxt.Text;
+            string nameStation = searchTxt.Text;
             if (nameStation == "")
             {
-                MessageBox.Show("Nhập tên bãi xe bạn muốn tìm kiếm");
+                MessageBox.Show("Nhập tên bãi xe bạn muốn tìm kiếm", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             List<Station> stations = stationList.Where(x => x.NameStation.Contains(nameStation)).ToList();
             if(stations.Count() == 0)
             {
-                MessageBox.Show("Không tìm thấy bãi xe " + nameStation);
+                MessageBox.Show("Không tìm thấy bãi xe " + nameStation, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 searchTxt.Text = "";
                 return;
             }
-            cancelSearchBut.Visible = true;
             searchTxt.Width = this.ClientSize.Width - 180;
-            this.RenderStationList(stations, this.stationPnl);
+            this.RenderStationList(stationList, this.stationPnl);
         }
 
         private void CancelSearchBut_Click(object sender, EventArgs e)

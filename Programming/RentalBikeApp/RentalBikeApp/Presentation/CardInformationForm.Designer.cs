@@ -25,7 +25,7 @@ namespace RentalBikeApp.Presentation
             owerLbl = new Label()
             {
                 Text = "Tên chủ xe",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 5),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -35,14 +35,14 @@ namespace RentalBikeApp.Presentation
             owerTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(620, 40),
-                Location = new Point(160, 5),
+                Size = new Size(590, 40),
+                Location = new Point(190, 5),
                 PlaceholderText = "Nhập tên chủ thẻ"
             };
             cardCodeLbl = new Label()
             {
                 Text = "Mã xe",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 55),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -52,14 +52,14 @@ namespace RentalBikeApp.Presentation
             cardCodeTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(620, 40),
-                Location = new Point(160, 55),
+                Size = new Size(590, 40),
+                Location = new Point(190, 55),
                 PlaceholderText = "Nhập mã thẻ"
             };
             bankLbl = new Label()
             {
                 Text = "Ngân hàng phát hành",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 105),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -68,8 +68,8 @@ namespace RentalBikeApp.Presentation
             };
             bankCb = new ComboBox()
             {
-                Width = 620,
-                Location = new Point(160, 105)
+                Width = 590,
+                Location = new Point(190, 105)
             };
             Utilities.SetComboBoxHeight(bankCb.Handle, 35);
             bankCb.Items.Add("Bank 1");
@@ -77,7 +77,7 @@ namespace RentalBikeApp.Presentation
             securityCodeLbl = new Label
             {
                 Text = "Mã bảo mật",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 155),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -87,14 +87,14 @@ namespace RentalBikeApp.Presentation
             securityCodeTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(620, 40),
-                Location = new Point(160, 155),
+                Size = new Size(590, 40),
+                Location = new Point(190, 155),
                 PlaceholderText = "Nhập mã bảo mật"
             };
             expirationDateLbl = new Label()
             {
                 Text = "Ngày hết hạn",
-                Size = new Size(120, 40),
+                Size = new Size(150, 40),
                 Location = new Point(20, 205),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -103,14 +103,14 @@ namespace RentalBikeApp.Presentation
             };
             expirationDtp = new DateTimePicker()
             {
-                Size = new Size(620, 40),
-                Location = new Point(160, 205)
+                Size = new Size(590, 40),
+                Location = new Point(190, 205)
             };
             cancelBut = new Button()
             {
                 Text = "Hủy",
-                Size = new Size(150, 50),
-                Location = new Point(380, 307),
+                Size = new Size(200, 50),
+                Location = new Point(350, 307),
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")
@@ -118,8 +118,8 @@ namespace RentalBikeApp.Presentation
             submitBut = new Button
             {
                 Text = "Xác nhận",
-                Size = new Size(150, 50),
-                Location = new Point(630, 307),
+                Size = new Size(200, 50),
+                Location = new Point(580, 307),
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")

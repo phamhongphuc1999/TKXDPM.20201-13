@@ -26,14 +26,16 @@ namespace RentalBikeApp.Presentation
             {
                 Size = new Size(100, 40),
                 Location = new Point(680, 5),
-                Text = "Search"
+                Text = "Search",
+                Font = new Font("Arial", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
+                FlatStyle = FlatStyle.Flat
             };
             cancelSearchBut = new Button()
             {
                 Size = new Size(40, 40),
                 Location = new Point(640, 5),
-                Text = "X",
-                Visible = true
+                Text = "X"
             };
             stationPnl = new Panel()
             {

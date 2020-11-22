@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace RentalBikeApp.Presentation
@@ -67,10 +68,11 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId, category);
             int count = bikesList.Count(x => !x.BikeStatus);
-            if (category == Config.SQL.BikeCategory.BIKE) categoryBikeRtb.Text = "Xe đạp thường";
-            else if (category == Config.SQL.BikeCategory.ELECTRIC) categoryBikeRtb.Text = "Xe đạp điện";
-            else categoryBikeRtb.Text = "Xe đạp đôi";
-            numberRtb.Text = string.Format("Còn lại {0} xe", count.ToString());
+            string categoryBike = "";
+            if (category == Config.SQL.BikeCategory.BIKE) categoryBike = "Xe đạp thường";
+            else if (category == Config.SQL.BikeCategory.ELECTRIC) categoryBike = "Xe đạp điện";
+            else categoryBike = "Xe đạp đôi";
+            descriptionRtb.Text = string.Format("{0}\nCòn lại {1} xe", categoryBike, count.ToString());
             stationRtb.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
             int X = 20, Y = 5;
             int count1 = 1;
@@ -116,6 +118,32 @@ namespace RentalBikeApp.Presentation
         private void ReturnStationBut_Click(object sender, EventArgs e)
         {
             stationDetailForm.Show(this);
+            this.Hide();
+        }
+
+        private void SearchBut_Click(object sender, EventArgs e)
+        {
+            string qrCode = searchTxt.Text;
+            if(qrCode == "")
+            {
+                MessageBox.Show("Nhập mã xe bạn muốn tìm kiếm", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            Regex r = new Regex("([0-9]){0,8}");
+            if (!r.IsMatch(qrCode))
+            {
+                MessageBox.Show("Mã xe bạn nhập không hợp lệ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            Bike bike = bikeService.GetBikeByQRCode(qrCode);
+            if(bike == null)
+            {
+                MessageBox.Show("Không tìm thấy mã xe: " + qrCode, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            Station station = stationService.GetStationById(bike.StationId);
+            _bikeDetailForm.FillBikeInformation(station, bike);
+            _bikeDetailForm.Show(this);
             this.Hide();
         }
     }
