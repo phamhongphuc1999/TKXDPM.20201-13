@@ -11,7 +11,7 @@
 - Task 1: Phạm Hồng Phúc
 - Task 2: Phạm Hồng Phúc, Sư Hữu Vũ Quang, Ngô Minh Quang
 - Task 3: Phạm Hồng Phúc, Sư Hữu Vũ Quang, Ngô Minh Quang, Trần Minh Quang
-- Task 4: Phạm Hồng Phúc, Sư Hữu Vũ Quang, Ngô Minh Quang
+- Task 4: Phạm Hồng Phúc
 - Task 5: Phạm Hồng Phúc, Sư Hữu Vũ Quang, Ngô Minh Quang
 
 ## Revisions

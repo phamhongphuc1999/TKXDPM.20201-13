@@ -1,6 +1,4 @@
-
 ---
-
 # ArchitectureDesign
 ## Tasks
 - Task1: Vẽ biểu đồ trình tự và biểu đồ lớp phân tích cho use case "hiển thị xe trong bãi và thông tin của xe"

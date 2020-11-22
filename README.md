@@ -21,7 +21,6 @@
 - Trần Minh Quang reviews Task 2 Đặc tả Usecase "Hiển Thị xe trong bãi và thông tin của xe" đầy đủ bao gồm biểu đò,luồng sự kiện chính,luồng sự kiện thay thế,biểu đồ hoạt động,dữ liệu đầu vào ,dữ liệu đầu ra....
 
 ---
-
 # ArchitectureDesign
 ## Tasks
 - Task1: Vẽ biểu đồ trình tự và biểu đồ lớp phân tích cho use case "hiển thị xe trong bãi và thông tin của xe"
@@ -37,3 +36,21 @@
 - Ngô Minh Quang review Task3: 
 - Phạm Hồng Phúc review Task1:
 - Sư Hữu Vũ Quang review Task2:
+
+---
+# DetailDesign
+## Tasks
+- Task 1: Thiết kế giao diện màn hình, thiết kế mockup cho các màn hình
+- Task 2: Vẽ biểu đồ dịch chuyển màn hình, viết đặc tả màn hình
+- Task 3: Biểu đồ thiết kế lớp chi tiết, thiết kế lớp chi tiết
+- Task 4: Vẽ biểu đồ E-R, thiết kế chi tiết các thành phần trong cơ sở dữ liệu
+- Task 5: Hoàn thiện, viết SDD
+
+## Contributions
+- Task 1: Phạm Hồng Phúc
+- Task 2: Phạm Hồng Phúc, Sư Hữu Vũ Quang, Ngô Minh Quang
+- Task 3: Phạm Hồng Phúc, Sư Hữu Vũ Quang, Ngô Minh Quang, Trần Minh Quang
+- Task 4: Phạm Hồng Phúc
+- Task 5: Phạm Hồng Phúc, Sư Hữu Vũ Quang, Ngô Minh Quang
+
+## Revisions
