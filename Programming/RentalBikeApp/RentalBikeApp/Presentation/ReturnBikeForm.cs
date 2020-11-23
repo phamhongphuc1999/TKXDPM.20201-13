@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft. All Rights Reserved.
 //  License under the Apache License, Version 2.0.
 
+using System;
+using System.Linq;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Collections.Generic;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace RentalBikeApp.Presentation
 {
@@ -108,6 +108,7 @@ namespace RentalBikeApp.Presentation
             if(result == DialogResult.OK)
             {
                 _rentBikeForm.rentBikeTmr.Stop();
+                _transactionInformationForm.FillTransactionInformation(Config.TRANSACTION_STATUS.PAY);
                 _transactionInformationForm.Show(this);
                 this.Hide();
             }

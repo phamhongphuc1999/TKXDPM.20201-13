@@ -69,7 +69,7 @@ namespace RentalBikeApp.Presentation
 
         private void RentBikeBut_Click(object sender, System.EventArgs e)
         {
-            _rentBikeForm.Show(this);
+            _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
             this.Hide();
         }
 

@@ -2,6 +2,7 @@
 //  License under the Apache License, Version 2.0.
 
 using RentalBikeApp.Entities.SQLEntities;
+using System.Collections.Generic;
 
 namespace RentalBikeApp
 {
@@ -56,12 +57,25 @@ namespace RentalBikeApp
 
         public static Station CURRENT_STATION;
 
+        public enum TRANSACTION_STATUS
+        {
+            RENT_BIKE,
+            PAY
+        }
+
         public enum RENT_BIKE
         {
             RENT_BIKE,
             RENTING_BIKE,
             RENT_BIKE_INFO
         }
+
+        public static Dictionary<string, string> BIKE_CATEGORY = new Dictionary<string, string>()
+        {
+            {"bike", "Xe đạp thường" },
+            {"electric", "Xe đạp điện" },
+            {"tandem", "Xe đạp đôi" }
+        };
 
         public static RENT_BIKE RENT_BIKE_STATUS;
     }

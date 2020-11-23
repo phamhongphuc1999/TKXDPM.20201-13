@@ -207,7 +207,7 @@ namespace RentalBikeApp.Presentation
                 return;
             }
             searchTxt.Width = this.ClientSize.Width - 180;
-            this.RenderStationList(stationList, this.stationPnl);
+            this.RenderStationList(stations, this.stationPnl);
         }
 
         private void CancelSearchBut_Click(object sender, EventArgs e)

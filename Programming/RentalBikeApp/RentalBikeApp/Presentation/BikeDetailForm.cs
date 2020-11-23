@@ -48,16 +48,10 @@ namespace RentalBikeApp.Presentation
         {
             stationRtb.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
             qrCodeTxt.Text = bike.QRCode;
-            licenceTxt.Text = bike.LicensePlate;
             manufactureTxt.Text = bike.Manufacturer;
-            powerTxt.Text = "";
-            if (bike.Category == "bike") categoryBikeTxt.Text = "Xe đạp thường";
-            else if (bike.Category == "tandem") categoryBikeTxt.Text = "Xe đạp đôi";
-            else
-            {
-                categoryBikeTxt.Text = "Xe đạp điện";
-                powerTxt.Text = "100%";
-            }
+            categoryBikeTxt.Text = Config.BIKE_CATEGORY[bike.Category];
+            powerTxt.Text = (bike.Category == "electric") ? "100%" : "Không có thông tin";
+            licenceTxt.Text = (bike.LicensePlate == "") ? "Không có thông tin" : bike.LicensePlate;
             rentThisBikeBut.Tag = bike.BikeId;
         }
 

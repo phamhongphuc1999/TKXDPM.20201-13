@@ -57,7 +57,6 @@ namespace RentalBikeApp.Presentation
             rentBikeBut.Click += RentBikeBut_Click;
         }
 
-        
         /// <summary>
         /// Fill ListBikeForm with bike's information in specified category
         /// </summary>
@@ -68,10 +67,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId, category);
             int count = bikesList.Count(x => !x.BikeStatus);
-            string categoryBike = "";
-            if (category == Config.SQL.BikeCategory.BIKE) categoryBike = "Xe đạp thường";
-            else if (category == Config.SQL.BikeCategory.ELECTRIC) categoryBike = "Xe đạp điện";
-            else categoryBike = "Xe đạp đôi";
+            string categoryBike = Config.BIKE_CATEGORY[bikesList[0].Category];
             descriptionRtb.Text = string.Format("{0}\nCòn lại {1} xe", categoryBike, count.ToString());
             stationRtb.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
             int X = 20, Y = 5;
@@ -104,7 +100,7 @@ namespace RentalBikeApp.Presentation
 
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this);
+            _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
             this.Hide();
         }
 

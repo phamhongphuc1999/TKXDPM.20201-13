@@ -103,8 +103,10 @@ namespace RentalBikeApp.Presentation
         {
             Bike bike = bikeService.GetBikeById(bikeId);
             rentingQrCodeTxt.Text = bike.QRCode;
-            rentingCategoryTxt.Text = bike.Category;
-            rentingLicenseTxt.Text = bike.LicensePlate;
+            rentingCategoryTxt.Text = Config.BIKE_CATEGORY[bike.Category];
+            if (bike.Category != "electric") rentingRemainPowerValueLbl.Text = "Không có thông tin";
+            else rentingRemainPowerValueLbl.Text = "100%";
+            rentingLicenseTxt.Text = (bike.LicensePlate == "") ? "Không có thông tin" : bike.LicensePlate;
             rentingManufactureTxt.Text = bike.Manufacturer;
         }
 
@@ -116,8 +118,8 @@ namespace RentalBikeApp.Presentation
         {
             Bike bike = bikeService.GetBikeById(bikeId);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
-            rentBikeInfoCategoryTxt.Text = bike.Category;
-            rentBikeInfoLicenseTxt.Text = bike.LicensePlate;
+            rentBikeInfoCategoryTxt.Text = Config.BIKE_CATEGORY[bike.Category];
+            rentBikeInfoLicenseTxt.Text = (bike.LicensePlate == "") ? "Không có thông tin" : bike.LicensePlate;
             rentBikeInfoDepositTxt.Text = "1000";
             rentBikeInfoDetailBut.Tag = bike.BikeId;
             rentBikeInfoRentThisBikeBut.Tag = bike.BikeId;
