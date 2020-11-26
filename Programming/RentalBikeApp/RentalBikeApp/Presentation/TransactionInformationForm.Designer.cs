@@ -8,7 +8,7 @@ namespace RentalBikeApp.Presentation
         public Panel transactionPnl;
         public Label depositLbl, rentalMoneyLbl, remainMoneyLbl, transactionDateLbl;
         public TextBox depositTxt, rentalMoneyTxt, remainMoneyTxt, transactionDateTxt;
-        public Button permitBut;
+        public Button permitBut, cancelBut;
 
         /// <summary>
         /// Initialized control in TransactionInformationForm
@@ -97,8 +97,19 @@ namespace RentalBikeApp.Presentation
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
+            cancelBut = new Button()
+            {
+                Text = "Hủy",
+                Size = new Size(250, 50),
+                Location = new Point(250, 300),
+                Font = new Font("Arial", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
+                FlatStyle = FlatStyle.Flat,
+                Visible = true
+            };
 
             permitBut.Click += PermitBut_Click;
+            cancelBut.Click += CancelBut_Click;
 
             transactionPnl.Controls.Add(depositLbl);
             transactionPnl.Controls.Add(depositTxt);
@@ -109,6 +120,7 @@ namespace RentalBikeApp.Presentation
             transactionPnl.Controls.Add(transactionDateLbl);
             transactionPnl.Controls.Add(transactionDateTxt);
             transactionPnl.Controls.Add(permitBut);
+            transactionPnl.Controls.Add(cancelBut);
             this.Controls.Add(transactionPnl);
         }
     }

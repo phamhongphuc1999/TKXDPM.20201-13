@@ -22,6 +22,12 @@ namespace RentalBikeApp
         /// <param name="minute">minute of date to convert</param>
         /// <param name="second">second of date to convert</param>
         /// <returns>the string with format: yyyy-mm-dd hh:mm:ss</returns>
+        /// <example>
+        /// <code>
+        /// string date = Utilities.ConvertDateToString(1999, 12, 04, 10, 50, 00);
+        /// console.Write(date);
+        /// </code>
+        /// </example>
         public static string ConvertDateToString(int year, int mounth, int day, int hour, int minute, int second)
         {
             DateTime date = new DateTime(year, mounth, day, hour, minute, second);
@@ -35,6 +41,12 @@ namespace RentalBikeApp
         /// </summary>
         /// <param name="date">date want to convert</param>
         /// <returns>the string with format: yyyy-mm-dd hh:mm:ss</returns>
+        /// <example>
+        /// <code>
+        /// string date = Utilities.ConvertDateToString(DateTime.Now);
+        /// Console.Write(date);
+        /// </code>
+        /// </example>
         public static string ConvertDateToString(DateTime date)
         {
             string result = date.ToString("u");
@@ -65,8 +77,9 @@ namespace RentalBikeApp
         /// </summary>
         /// <param name="url">The url sent to</param>
         /// <param name="method">The http method of request</param>
-        /// <param name="requestContent">The request's body</param>
+        /// <param name="requestContent">The request's body, format json</param>
         /// <returns>The response with string format or exception message if cause error</returns>
+        /// <exception cref="System.Exception">Throw when error</exception>
         public static async Task<string> GetWebContent(string url, HttpMethod method, string requestContent = null)
         {
             HttpClient httpClient = new HttpClient();

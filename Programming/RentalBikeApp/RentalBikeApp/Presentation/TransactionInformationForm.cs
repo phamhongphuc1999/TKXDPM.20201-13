@@ -3,6 +3,7 @@
 
 using System;
 using System.Windows.Forms;
+using static RentalBikeApp.Config;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
@@ -23,21 +24,11 @@ namespace RentalBikeApp.Presentation
             set { _rentBikeForm = value; }
         }
 
-        private Config.TRANSACTION_STATUS status;
-
-        public void FillTransactionInformation(Config.TRANSACTION_STATUS status)
+        private CardInformationForm _cardInformationForm;
+        public CardInformationForm cardInformationForm
         {
-            this.status = status;
-        }
-
-        public void FillTransactionInformation(int bikeId, Card card, Config.TRANSACTION_STATUS status)
-        {
-            this.status = status;
-            depositTxt.Text = "111";
-            rentalMoneyTxt.Text = "111";
-            remainMoneyTxt.Text = "111";
-            transactionDateTxt.Text = Utilities.ConvertDateToString(DateTime.Now);
-            permitBut.Tag = bikeId;
+            get { return _cardInformationForm; }
+            set { _cardInformationForm = value; }
         }
 
         public TransactionInformationForm()
@@ -49,36 +40,71 @@ namespace RentalBikeApp.Presentation
             rentBikeBut.Click += RentBikeBut_Click;
         }
 
-        private void RentBikeBut_Click(object sender, System.EventArgs e)
+        private TRANSACTION_STATUS status;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void FillTransactionInformationWhenPay()
+        {
+            this.status = TRANSACTION_STATUS.PAY;
+            remainMoneyTxt.Text = "111";
+            transactionDateTxt.Text = Utilities.ConvertDateToString(DateTime.Now);
+            cancelBut.Visible = false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bikeId"></param>
+        /// <param name="card"></param>
+        public void FillTransactionInformationWhenRentBike(int bikeId, Card card)
+        {
+            this.status = TRANSACTION_STATUS.RENT_BIKE;
+            depositTxt.Text = "111";
+            rentalMoneyTxt.Text = "111";
+            remainMoneyTxt.Text = "Không có dữ liệu";
+            transactionDateTxt.Text = "Không có dữ liệu";
+            permitBut.Tag = bikeId;
+            cancelBut.Visible = true;
+        }
+
+        private void RentBikeBut_Click(object sender, EventArgs e)
         {
             _rentBikeForm.Show();
             this.Show();
         }
 
-        private void HomePageBut_Click(object sender, System.EventArgs e)
+        private void HomePageBut_Click(object sender, EventArgs e)
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
             _homePageForm.Show();
             this.Hide();
         }
 
-        private void PermitBut_Click(object sender, System.EventArgs e)
+        private void PermitBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            if(status == Config.TRANSACTION_STATUS.RENT_BIKE)
+            if (status == TRANSACTION_STATUS.RENT_BIKE)
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENTING_BIKE;
                 _rentBikeForm.FillRentBikeForm((int)but.Tag, Config.RENT_BIKE_STATUS);
                 _rentBikeForm.rentBikeTmr.Start();
                 _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
             }
-            else if(status == Config.TRANSACTION_STATUS.PAY)
+            else if (status == TRANSACTION_STATUS.PAY)
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
                 MessageBox.Show("Thanh toán tiền thuê xe thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 _homePageForm.RenderStationList(_homePageForm.stationPnl);
                 _homePageForm.Show(this);
             }
+            this.Hide();
+        }
+
+        private void CancelBut_Click(object sender, EventArgs e)
+        {
+            _cardInformationForm.Show(this);
             this.Hide();
         }
     }

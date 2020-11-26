@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft. All Rights Reserved.
 //  License under the Apache License, Version 2.0.
 
+using System;
+using System.Linq;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Collections.Generic;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
-using System.Windows.Forms;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
 
 namespace RentalBikeApp.Presentation
 {
@@ -152,6 +152,7 @@ namespace RentalBikeApp.Presentation
         {
             transactionInformationForm.homePageForm = this;
             transactionInformationForm.rentBikeForm = rentBikeForm;
+            transactionInformationForm.cardInformationForm = cardInformationForm;
         }
 
         /// <summary>

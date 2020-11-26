@@ -1,8 +1,9 @@
 ﻿// Copyright (c) Microsoft. All Rights Reserved.
 //  License under the Apache License, Version 2.0.
 
-using RentalBikeApp.Entities.SQLEntities;
+using System;
 using System.Windows.Forms;
+using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
 {
@@ -55,20 +56,20 @@ namespace RentalBikeApp.Presentation
             rentThisBikeBut.Tag = bike.BikeId;
         }
 
-        private void RentBikeBut_Click(object sender, System.EventArgs e)
+        private void RentBikeBut_Click(object sender, EventArgs e)
         {
             _rentBikeForm.Show(this);
             this.Hide();
         }
 
-        private void HomePageBut_Click(object sender, System.EventArgs e)
+        private void HomePageBut_Click(object sender, EventArgs e)
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
             _homePageForm.Show(this);
             this.Hide();
         }
 
-        private void RentThisBikeBut_Click(object sender, System.EventArgs e)
+        private void RentThisBikeBut_Click(object sender, EventArgs e)
         {
             Button rentThisBikeBut = sender as Button;
             int bikeId = (int)rentThisBikeBut.Tag;
@@ -85,7 +86,7 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
-        private void ReturnListBikeBut_Click(object sender, System.EventArgs e)
+        private void ReturnListBikeBut_Click(object sender, EventArgs e)
         {
             _listBikeForm.Show(this);
             this.Hide();

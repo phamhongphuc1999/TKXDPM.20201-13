@@ -1,1 +1,1 @@
-tầng Presentation Layer (GUI)
+Presentation Layer (GUI)

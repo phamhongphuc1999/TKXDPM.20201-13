@@ -108,7 +108,7 @@ namespace RentalBikeApp.Presentation
             if(result == DialogResult.OK)
             {
                 _rentBikeForm.rentBikeTmr.Stop();
-                _transactionInformationForm.FillTransactionInformation(Config.TRANSACTION_STATUS.PAY);
+                _transactionInformationForm.FillTransactionInformationWhenPay();
                 _transactionInformationForm.Show(this);
                 this.Hide();
             }

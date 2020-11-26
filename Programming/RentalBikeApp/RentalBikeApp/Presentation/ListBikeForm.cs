@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Microsoft. All Rights Reserved.
 //  License under the Apache License, Version 2.0.
 
+using System;
+using System.Linq;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace RentalBikeApp.Presentation
 {

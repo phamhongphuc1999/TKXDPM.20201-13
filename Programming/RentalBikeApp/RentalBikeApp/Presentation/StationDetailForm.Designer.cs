@@ -153,7 +153,7 @@ namespace RentalBikeApp.Presentation
             {
                 Size = new Size(250, 50),
                 Location = new Point(530, 345),
-                Text = "Quay lại bãi xe",
+                Text = "Quay lại trang chủ",
                 Font = new Font("Helvetica", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat

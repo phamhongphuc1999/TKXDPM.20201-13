@@ -39,7 +39,7 @@ namespace RentalBikeApp.Presentation
             rentBikeBut.Click += RentBikeBut_Click;
         }
 
-        private void RentBikeBut_Click(object sender, System.EventArgs e)
+        private void RentBikeBut_Click(object sender, EventArgs e)
         {
             _rentBikeForm.Show(this);
             this.Hide();
@@ -55,7 +55,7 @@ namespace RentalBikeApp.Presentation
         private void SubmitBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            _transactionInformationForm.FillTransactionInformation((int)but.Tag, new Card(), Config.TRANSACTION_STATUS.RENT_BIKE);
+            _transactionInformationForm.FillTransactionInformationWhenRentBike((int)but.Tag, new Card());
             _transactionInformationForm.Show(this);
             this.Hide();
         }
