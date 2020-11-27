@@ -61,6 +61,29 @@ namespace RentalBikeApp
             /// </value>
             public const string RESET_URL = "/api/card/reset-balance";
 
+            ///<value>
+            ///enum use to define the command in request when call process transaction API
+            ///</value>
+            ///<remarks>
+            ///PAY: API call to pay rental money
+            ///REFUND: API call to refund money
+            ///</remarks>
+            public enum COMMAND
+            {
+                PAY, REFUND
+            }
+
+            public static Dictionary<string, string> ERROR_CODE = new Dictionary<string, string>()
+            {
+                {"01", "Thẻ không hợp lệ" },
+                {"02", "Thẻ không đủ số dư" },
+                {"03", "Internal Server Error" },
+                {"04", "Giao dịch bị nghi ngờ gian lận" },
+                {"05", "Không đủ thông tin giao dịch" },
+                {"06", "Thiếu thông tin version" },
+                {"07", "Số tiền không hợp lệ" }
+            };
+
             /// <summary>
             /// This static class provide information of card
             /// </summary>
@@ -85,18 +108,6 @@ namespace RentalBikeApp
                 /// get value of card expiration date
                 /// </value>
                 public const string DATE_EXPIRED = "1125";
-            }
-
-            ///<value>
-            ///enum use to define the command in request when call process transaction API
-            ///</value>
-            ///<remarks>
-            ///PAY: API call to pay rental money
-            ///REFUND: API call to refund money
-            ///</remarks>
-            public enum COMMAND
-            {
-                PAY, REFUND
             }
 
             /// <summary>

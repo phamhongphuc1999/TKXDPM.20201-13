@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using RentalBikeApp.Entities.APIEntities;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RentalBikeApp.Business
 {
@@ -14,14 +15,13 @@ namespace RentalBikeApp.Business
         /// <param name="body">The request's body</param>
         /// <param name="command">The definition of the request is for payment or refund</param>
         /// <returns>The process transaction response information</returns>
-        public ProcessTransactionResponse ProcessTransaction(ProcessTransactionRequest body, Config.API_INFO.COMMAND command)
+        public async Task<ProcessTransactionResponse> ProcessTransaction(ProcessTransactionRequest body, Config.API_INFO.COMMAND command)
         {
             if (command == Config.API_INFO.COMMAND.PAY) body.transaction.command = "pay";
             else body.transaction.command = "refund";
-            Task<string> result = Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.PROCESS_URL, 
+            string result = await Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.PROCESS_URL, 
                 HttpMethod.Patch, JsonConvert.SerializeObject(body));
-            result.Wait();
-            ProcessTransactionResponse response = JsonConvert.DeserializeObject<ProcessTransactionResponse>(result.Result);
+            ProcessTransactionResponse response = JsonConvert.DeserializeObject<ProcessTransactionResponse>(result);
             return response;
         }
 
@@ -31,7 +31,7 @@ namespace RentalBikeApp.Business
         /// <param name="_version">The API's version</param>
         /// <param name="_appCode">The code use to authentication</param>
         /// <returns>The process transaction response information</returns>
-        public ProcessTransactionResponse ProcessTransaction(TransactionInfo transactionInfo, Config.API_INFO.COMMAND command, 
+        public async Task<ProcessTransactionResponse> ProcessTransaction(TransactionInfo transactionInfo, Config.API_INFO.COMMAND command, 
             string _version = "1.0.1", string _appCode = Config.API_INFO.KEY.APP_CODE)
         {
             if (command == Config.API_INFO.COMMAND.PAY) transactionInfo.command = "pay";
@@ -46,10 +46,9 @@ namespace RentalBikeApp.Business
                     transaction = transactionInfo
                 }))
             };
-            Task<string> result = Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.PROCESS_URL,
+            string result = await Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.PROCESS_URL,
                 HttpMethod.Patch, JsonConvert.SerializeObject(body));
-            result.Wait();
-            ProcessTransactionResponse response = JsonConvert.DeserializeObject<ProcessTransactionResponse>(result.Result);
+            ProcessTransactionResponse response = JsonConvert.DeserializeObject<ProcessTransactionResponse>(result);
             return response;
         }
 

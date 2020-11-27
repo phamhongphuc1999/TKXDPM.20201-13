@@ -94,13 +94,13 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
-        private void PermitBut_Click(object sender, EventArgs e)
+        private async void PermitBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
             if (status == TRANSACTION_STATUS.RENT_BIKE)
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENTING_BIKE;
-                ProcessTransactionResponse result = interbankService.ProcessTransaction(new TransactionInfo
+                ProcessTransactionResponse result = await interbankService.ProcessTransaction(new TransactionInfo
                 {
                     cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
                     owner = Config.API_INFO.CARD_INFO.OWER,
@@ -108,14 +108,28 @@ namespace RentalBikeApp.Presentation
                     dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
                     transactionContent = "Thanh toan Mass",
                     amount = this.deposit,
-                    createdAt = Utilities.ConvertDateToString(DateTime.Now)
+                    createdAt = Utilities.ConvertDateToString(2020, 11, 10, 18, 30, 20)
                 }, Config.API_INFO.COMMAND.PAY);
-                MessageBox.Show(result.errorCode);
-                _rentBikeForm.FillRentBikeForm((int)but.Tag, Config.RENT_BIKE_STATUS);
-                _rentBikeForm.rentBikeTmr.Start();
-                _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
+                string error = result.errorCode;
+                if(error == "00")
+                {
+                    _rentBikeForm.FillRentBikeForm((int)but.Tag, Config.RENT_BIKE_STATUS);
+                    _rentBikeForm.rentBikeTmr.Start();
+                    _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
+                }
+                else if(error == "01" || error == "02" || error == "05")
+                {
+                    MessageBox.Show(API_INFO.ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _cardInformationForm.Show(this);
+                }
+                else
+                {
+                    MessageBox.Show(API_INFO.ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                
             }
-            else if (status == TRANSACTION_STATUS.PAY)
+            else if (status == TRANSACTION_STATUS.PAY) 
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
                 MessageBox.Show("Thanh toán tiền thuê xe thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
