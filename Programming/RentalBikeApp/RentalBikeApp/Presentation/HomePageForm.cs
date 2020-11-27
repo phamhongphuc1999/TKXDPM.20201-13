@@ -188,7 +188,6 @@ namespace RentalBikeApp.Presentation
             Station station = stationService.GetStationById((int)but.Tag);
             this.Hide();
             stationDetailForm.FillStationDetail(station);
-            Config.CURRENT_STATION = station;
             stationDetailForm.Show(this);
         }
 

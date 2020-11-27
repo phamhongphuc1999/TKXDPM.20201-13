@@ -2,10 +2,10 @@
 //  License under the Apache License, Version 2.0.
 
 using Newtonsoft.Json;
-using RentalBikeApp.Entities.APIEntities;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Windows.Forms;
+using RentalBikeApp.Entities.APIEntities;
+using System;
 
 namespace RentalBikeApp.Business
 {
@@ -58,7 +58,7 @@ namespace RentalBikeApp.Business
         /// <param name="_cvvCode"></param>
         /// <param name="_dateExpired"></param>
         /// <returns>The reset response information</returns>
-        public ResetResponse ResetAccount(string _cardCode = Config.API_INFO.CARD_INFO.CARD_CODE, string _owner = Config.API_INFO.CARD_INFO.OWER,
+        public async Task<ResetResponse> ResetAccount(string _cardCode = Config.API_INFO.CARD_INFO.CARD_CODE, string _owner = Config.API_INFO.CARD_INFO.OWER,
             string _cvvCode = Config.API_INFO.CARD_INFO.CVV, string _dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED)
         {
             var body = new
@@ -68,10 +68,30 @@ namespace RentalBikeApp.Business
                 cvvCode = _cvvCode,
                 dateExpired = _dateExpired
             };
-            Task<string> result = Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.RESET_URL,
+            string result = await Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.RESET_URL,
                 HttpMethod.Patch, JsonConvert.SerializeObject(body));
-            ResetResponse response = JsonConvert.DeserializeObject<ResetResponse>(result.Result);
+            ResetResponse response = JsonConvert.DeserializeObject<ResetResponse>(result);
             return response;
+        }
+
+        /// <summary>
+        /// Calculate rental fee for rental bike
+        /// </summary>
+        /// <param name="timeRent">The time that the user has rented the car</param>
+        /// <param name="category">The category of rental bike</param>
+        /// <returns>The rental money that use must rent</returns>
+        public int CalculateFee(string timeRent, Config.SQL.BikeCategory category)
+        {
+            string[] times = timeRent.Split(':');
+            double hour = Int64.Parse(times[0]);
+            double minute = Int64.Parse(times[1]);
+            double second = Int64.Parse(times[2]);
+            double timeMinutes = 60 * hour + minute + Math.Abs(second / 60) - 10;
+            if (category != Config.SQL.BikeCategory.BIKE) timeMinutes = 1.5 * timeMinutes;
+            if (timeMinutes <= 0) return 0;
+            timeMinutes -= 30;
+            if (timeMinutes <= 0) return 10000;
+            return (int)(10000 + Math.Abs(timeMinutes / 15));
         }
     }
 }

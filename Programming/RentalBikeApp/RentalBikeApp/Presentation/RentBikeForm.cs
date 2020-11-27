@@ -100,9 +100,9 @@ namespace RentalBikeApp.Presentation
         /// Fill bike information in rent bike form when rent bike status is RENTING_BIKE
         /// </summary>
         /// <param name="bikeId">The bike id of specified bike</param>
-        private void FillRentingBikeForm(int bikeId)
+        public void FillRentingBikeForm()
         {
-            Bike bike = bikeService.GetBikeById(bikeId);
+            Bike bike = Config.RENTAL_BIKE;
             rentingQrCodeTxt.Text = bike.QRCode;
             rentingCategoryTxt.Text = Config.BIKE_CATEGORY[bike.Category];
             if (bike.Category != "electric") rentingRemainPowerValueLbl.Text = "Không có thông tin";
@@ -115,7 +115,7 @@ namespace RentalBikeApp.Presentation
         /// Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
         /// </summary>
         /// <param name="bikeId">The bike id of specified bike</param>
-        private void FillRentBikeInfoForm(int bikeId)
+        public void FillRentBikeInfoForm(int bikeId)
         {
             Bike bike = bikeService.GetBikeById(bikeId);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
@@ -126,16 +126,16 @@ namespace RentalBikeApp.Presentation
             rentBikeInfoRentThisBikeBut.Tag = bike.BikeId;
         }
 
-        /// <summary>
-        /// Fill bike information in rent bike form base on specified rent bike status
-        /// </summary>
-        /// <param name="bikeId">The bike id of specified bike</param>
-        /// <param name="rentBike">The specified rent bike status</param>
-        public void FillRentBikeForm(int bikeId, Config.RENT_BIKE rentBike)
-        {
-            if (rentBike == Config.RENT_BIKE.RENTING_BIKE) FillRentingBikeForm(bikeId);
-            else if (rentBike == Config.RENT_BIKE.RENT_BIKE_INFO) FillRentBikeInfoForm(bikeId);
-        }
+        ///// <summary>
+        ///// Fill bike information in rent bike form base on specified rent bike status
+        ///// </summary>
+        ///// <param name="bikeId">The bike id of specified bike</param>
+        ///// <param name="rentBike">The specified rent bike status</param>
+        //public void FillRentBikeForm(int bikeId, Config.RENT_BIKE rentBike)
+        //{
+        //    if (rentBike == Config.RENT_BIKE.RENTING_BIKE) FillRentingBikeForm(bikeId);
+        //    else if (rentBike == Config.RENT_BIKE.RENT_BIKE_INFO) FillRentBikeInfoForm(bikeId);
+        //}
 
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
@@ -164,8 +164,7 @@ namespace RentalBikeApp.Presentation
                 rentBikeQrCodeTxt.Text = "";
                 return;
             }
-            Station station = stationService.GetStationById(bike.StationId);
-            _bikeDetailForm.FillBikeInformation(station, bike);
+            _bikeDetailForm.FillBikeInformation(bike);
             _bikeDetailForm.Show(this);
             this.Hide();
         }
@@ -175,7 +174,7 @@ namespace RentalBikeApp.Presentation
         private void RentBikeInfoRentThisBikeBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            cardInformationForm.submitBut.Tag = but.Tag;
+            Config.RENTAL_BIKE = bikeService.GetBikeById((int)but.Tag);
             cardInformationForm.Show(this);
             this.Hide();
         }
@@ -184,8 +183,7 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             Bike bike = bikeService.GetBikeById((int)but.Tag);
-            Station station = stationService.GetStationById(bike.StationId);
-            bikeDetailForm.FillBikeInformation(station, bike);
+            bikeDetailForm.FillBikeInformation(bike);
             bikeDetailForm.Show(this);
             this.Hide();
         }
@@ -203,7 +201,8 @@ namespace RentalBikeApp.Presentation
             second = second % 60;
             hour += (minute / 60);
             minute = minute % 60;
-            rentingTimedRentValueLbl.Text = String.Format("{0}:{1}:{2}", hour, minute.ToString("D2"), second.ToString("D2"));
+            Config.TIME_RENTAL_BIKE = String.Format("{0}:{1}:{2}", hour, minute.ToString("D2"), second.ToString("D2"));
+            rentingTimedRentValueLbl.Text = Config.TIME_RENTAL_BIKE;
         }
 
         private void RentingSelectReceiveStationBut_Click(object sender, EventArgs e)

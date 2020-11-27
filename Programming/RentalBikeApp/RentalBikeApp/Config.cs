@@ -120,8 +120,16 @@ namespace RentalBikeApp
             }
         }
 
-        ///<value>Get current station</value>
-        public static Station CURRENT_STATION;
+        ///<Value>get current rent bike form status</Value>
+        public static RENT_BIKE RENT_BIKE_STATUS;
+
+        ///<Value>get current rental bike</Value>
+        public static Bike RENTAL_BIKE;
+
+        /// <value>
+        /// Get the time rental bike
+        /// </value>
+        public static string TIME_RENTAL_BIKE;
 
         ///<value>
         /// enum use to define the transaction form status
@@ -170,8 +178,5 @@ namespace RentalBikeApp
             {"electric", 700000 },
             {"tandem", 550000 }
         };
-
-        ///<Value>get current rent bike form status</Value>
-        public static RENT_BIKE RENT_BIKE_STATUS;
     }
 }
