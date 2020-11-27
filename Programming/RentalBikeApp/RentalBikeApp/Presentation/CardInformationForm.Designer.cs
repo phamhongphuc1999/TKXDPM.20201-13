@@ -41,7 +41,7 @@ namespace RentalBikeApp.Presentation
             };
             cardCodeLbl = new Label()
             {
-                Text = "Mã xe",
+                Text = "Mã thẻ",
                 Size = new Size(150, 40),
                 Location = new Point(20, 55),
                 TextAlign = ContentAlignment.MiddleCenter,
@@ -72,8 +72,10 @@ namespace RentalBikeApp.Presentation
                 Location = new Point(190, 105)
             };
             Utilities.SetComboBoxHeight(bankCb.Handle, 35);
-            bankCb.Items.Add("Bank 1");
+            bankCb.Items.Insert(0, "Chọn tên ngân hàng phát hành thẻ");
+            bankCb.SelectedIndex = 0;
             bankCb.Items.Add("Bank 2");
+            bankCb.SelectedIndex = 0;
             securityCodeLbl = new Label
             {
                 Text = "Mã bảo mật",

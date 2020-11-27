@@ -2,11 +2,11 @@
 //  License under the Apache License, Version 2.0.
 
 using System;
-using System.Net.Http;
-using System.Runtime.InteropServices;
-using System.Security.Cryptography;
 using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Runtime.InteropServices;
 
 namespace RentalBikeApp
 {

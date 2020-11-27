@@ -41,7 +41,10 @@ namespace RentalBikeApp.Business
                 version = _version,
                 transaction = transactionInfo,
                 appCode = _appCode,
-                hashCode = Utilities.MD5Hash(JsonConvert.SerializeObject(transactionInfo))
+                hashCode = Utilities.MD5Hash(JsonConvert.SerializeObject(new {
+                    secretKey = Config.API_INFO.KEY.SECRET_KEY,
+                    transaction = transactionInfo
+                }))
             };
             Task<string> result = Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.PROCESS_URL,
                 HttpMethod.Patch, JsonConvert.SerializeObject(body));

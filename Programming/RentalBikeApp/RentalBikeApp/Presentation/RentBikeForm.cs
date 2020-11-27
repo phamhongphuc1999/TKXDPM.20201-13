@@ -69,6 +69,7 @@ namespace RentalBikeApp.Presentation
                 rentBikePnl.Visible = true;
                 rentingBikePnl.Visible = false;
                 rentBikeInfoPnl.Visible = false;
+                rentBikeQrCodeTxt.Text = "";
             }
             else if(rentBike == Config.RENT_BIKE.RENTING_BIKE)
             {

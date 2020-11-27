@@ -3,13 +3,19 @@
 
 using System;
 using System.Windows.Forms;
+using RentalBikeApp.Business;
 using static RentalBikeApp.Config;
 using RentalBikeApp.Entities.SQLEntities;
+using RentalBikeApp.Business.SQLServices;
+using RentalBikeApp.Entities.APIEntities;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class TransactionInformationForm : BaseForm
     {
+        private BikeService bikeService;
+        private InterbankService interbankService;
+
         private HomePageForm _homePageForm;
         public HomePageForm homePageForm
         {
@@ -31,8 +37,13 @@ namespace RentalBikeApp.Presentation
             set { _cardInformationForm = value; }
         }
 
+        private int deposit;
+
         public TransactionInformationForm()
         {
+            bikeService = new BikeService();
+            interbankService = new InterbankService();
+
             InitializeComponent("TransactionInformationForm", "Transaction Information");
             DrawBaseForm();
             DrawTransactionInformationForm();
@@ -60,9 +71,10 @@ namespace RentalBikeApp.Presentation
         /// <param name="card"></param>
         public void FillTransactionInformationWhenRentBike(int bikeId, Card card)
         {
+            Bike bike = bikeService.GetBikeById(bikeId);
             this.status = TRANSACTION_STATUS.RENT_BIKE;
-            depositTxt.Text = "111";
-            rentalMoneyTxt.Text = "111";
+            this.deposit = Config.BIKE_DEPOSIT[bike.Category];
+            depositTxt.Text = String.Format("{0:n0}", this.deposit);
             remainMoneyTxt.Text = "Không có dữ liệu";
             transactionDateTxt.Text = "Không có dữ liệu";
             permitBut.Tag = bikeId;
@@ -88,6 +100,17 @@ namespace RentalBikeApp.Presentation
             if (status == TRANSACTION_STATUS.RENT_BIKE)
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENTING_BIKE;
+                ProcessTransactionResponse result = interbankService.ProcessTransaction(new TransactionInfo
+                {
+                    cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
+                    owner = Config.API_INFO.CARD_INFO.OWER,
+                    cvvCode = Config.API_INFO.CARD_INFO.CVV,
+                    dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
+                    transactionContent = "Thanh toan Mass",
+                    amount = this.deposit,
+                    createdAt = Utilities.ConvertDateToString(DateTime.Now)
+                }, Config.API_INFO.COMMAND.PAY);
+                MessageBox.Show(result.errorCode);
                 _rentBikeForm.FillRentBikeForm((int)but.Tag, Config.RENT_BIKE_STATUS);
                 _rentBikeForm.rentBikeTmr.Start();
                 _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);

@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft. All Rights Reserved.
 //  License under the Apache License, Version 2.0.
 
-using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
+using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp
 {
@@ -140,11 +140,24 @@ namespace RentalBikeApp
             RENT_BIKE_INFO
         }
 
+        /// <value>
+        /// Translate bike category
+        /// </value>
         public static Dictionary<string, string> BIKE_CATEGORY = new Dictionary<string, string>()
         {
             {"bike", "Xe đạp thường" },
             {"electric", "Xe đạp điện" },
             {"tandem", "Xe đạp đôi" }
+        };
+
+        /// <value>
+        /// Define bike deposit base on bike category
+        /// </value>
+        public static Dictionary<string, int> BIKE_DEPOSIT = new Dictionary<string, int>()
+        {
+            {"bike", 400000 },
+            {"electric", 700000 },
+            {"tandem", 550000 }
         };
 
         ///<Value>get current rent bike form status</Value>
