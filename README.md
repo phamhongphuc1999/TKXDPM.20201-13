@@ -36,9 +36,9 @@
 
 ## Revisions
 - Ngô Minh Quang review Task3: 
-- Phạm Hồng Phúc review Task1:
+- Trần Minh Quang review Task1:
 - Sư Hữu Vũ Quang review Task2: Biểu đồ trình tự thể hiện đầy đủ phương thức, cách thức với các đối tượng. Biểu đồ lớp phân tích UC "Thuê xe" được chuyển từ Biểu đồ trình tự nên thể hiện đầy đủ nội dung yêu cầu và các lớp có trong UC "Thuê xe"
-- Phạm Hồng Phúc review Task 4
+- Phạm Hồng Phúc review Task 4: Biểu đồ lớp phân tích gộp đã thể hiện được tương tác giữa các use case khác nhau
 ---
 # DetailDesign
 ## Tasks
@@ -56,7 +56,7 @@
 - Task 5: Phạm Hồng Phúc, Sư Hữu Vũ Quang, Ngô Minh Quang,Trần Minh Quang
 
 ## Revisions
-- Phạm Hồng Phúc review Task 5:
+- Phạm Hồng Phúc review Task 5: Tài liệu SDD đúng cấu trúc, bố cục rõ ràng, đầy đủ các thành phần, có đề mục rõ ràng, có đánh số trang
 - Sư Hữu Vũ Quang review Task 1,4: Giao diện, mock up đầy đủ thiết kế sát với dự tính ban đầu của nhóm, hiển thị khá đầy đủ chức năng, một số chức năng còn chưa hợp lý(đang bàn bạc); Biểu đồ E-R, database khá hoàn thiện, còn thiếu một số trường đang tiếp tục hoàn thiện 
 - Ngô Minh Quang review Task 2:
 - Trần Minh Quang review Task 3:
