@@ -36,6 +36,7 @@ namespace RentalBikeApp.Presentation
         }
 
         private int deposit;
+        private int rentalMoney;
 
         public TransactionInformationForm()
         {
@@ -59,6 +60,13 @@ namespace RentalBikeApp.Presentation
             remainMoneyTxt.Text = "111";
             transactionDateTxt.Text = Utilities.ConvertDateToString(DateTime.Now);
             cancelBut.Visible = false;
+
+            Config.SQL.BikeCategory category = SQL.BikeCategory.BIKE;
+            if (Config.RENTAL_BIKE.Category == "bike") category = SQL.BikeCategory.BIKE;
+            else if (Config.RENTAL_BIKE.Category == "electric") category = SQL.BikeCategory.ELECTRIC;
+            else if (Config.RENTAL_BIKE.Category == "tandem") category = SQL.BikeCategory.TANDEM;
+            rentalMoney = interbankService.CalculateFee(Config.TIME_RENTAL_BIKE, category);
+            rentalMoneyTxt.Text = rentalMoney.ToString();
         }
 
         /// <summary>
@@ -99,9 +107,9 @@ namespace RentalBikeApp.Presentation
                     owner = Config.API_INFO.CARD_INFO.OWER,
                     cvvCode = Config.API_INFO.CARD_INFO.CVV,
                     dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                    transactionContent = "Thanh toan Mass",
+                    transactionContent = "Pay Deposit",
                     amount = this.deposit,
-                    createdAt = Utilities.ConvertDateToString(2020, 11, 10, 18, 30, 20)
+                    createdAt = Utilities.ConvertDateToString(DateTime.Now)
                 }, Config.API_INFO.COMMAND.PAY);
                 string error = result.errorCode;
                 if(error == "00")
@@ -124,47 +132,36 @@ namespace RentalBikeApp.Presentation
             else if (status == TRANSACTION_STATUS.PAY) 
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
-                Config.SQL.BikeCategory category = SQL.BikeCategory.BIKE;
-                if (Config.RENTAL_BIKE.Category == "bike") category = SQL.BikeCategory.BIKE;
-                else if (Config.RENTAL_BIKE.Category == "electric") category = SQL.BikeCategory.ELECTRIC;
-                else if (Config.RENTAL_BIKE.Category == "tandem") category = SQL.BikeCategory.TANDEM;
-                int rentalMoney = interbankService.CalculateFee(Config.TIME_RENTAL_BIKE, category);
-                rentalMoneyTxt.Text = rentalMoney.ToString();
-                ProcessTransactionResponse result = await interbankService.ProcessTransaction(new TransactionInfo
+                ProcessTransactionResponse response = await interbankService.ProcessTransaction(new TransactionInfo
                 {
                     cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
                     owner = Config.API_INFO.CARD_INFO.OWER,
                     cvvCode = Config.API_INFO.CARD_INFO.CVV,
                     dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                    transactionContent = "Thanh toan Mass",
-                    amount = rentalMoney,
-                    createdAt = Utilities.ConvertDateToString(2020, 11, 10, 18, 30, 20)
+                    transactionContent = "Pay rental money",
+                    amount = this.rentalMoney,
+                    createdAt = Utilities.ConvertDateToString(DateTime.Now)
                 }, Config.API_INFO.COMMAND.PAY);
-                string error = result.errorCode;
-                if(error == "0")
+                string error = response.errorCode;
+                if(error == "00")
                 {
-                    result = await interbankService.ProcessTransaction(new TransactionInfo
+                    ProcessTransactionResponse response1 = await interbankService.ProcessTransaction(new TransactionInfo
                     {
                         cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
                         owner = Config.API_INFO.CARD_INFO.OWER,
                         cvvCode = Config.API_INFO.CARD_INFO.CVV,
                         dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                        transactionContent = "Thanh toan Mass",
-                        amount = deposit,
-                        createdAt = Utilities.ConvertDateToString(2020, 11, 10, 18, 30, 20)
+                        transactionContent = "Refund deposit",
+                        amount = this.deposit,
+                        createdAt = Utilities.ConvertDateToString(DateTime.Now)
                     }, Config.API_INFO.COMMAND.REFUND);
                     MessageBox.Show("Thanh toán tiền thuê xe thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _homePageForm.RenderStationList(_homePageForm.stationPnl);
                     _homePageForm.Show(this);
                 }
-                else if (error == "01" || error == "02" || error == "05")
-                {
-                    MessageBox.Show(API_INFO.ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    _cardInformationForm.Show(this);
-                }
                 else
                 {
-                    MessageBox.Show(API_INFO.ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(API_INFO.ERROR_CODE[response.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
