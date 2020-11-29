@@ -14,7 +14,6 @@ namespace RentalBikeApp.Presentation
 {
     public partial class ListBikeForm : BaseForm
     {
-        private StationService stationService;
         private BikeService bikeService;
 
         private HomePageForm _homePageForm;
@@ -47,7 +46,6 @@ namespace RentalBikeApp.Presentation
 
         public ListBikeForm()
         {
-            stationService = new StationService();
             bikeService = new BikeService();
 
             InitializeComponent("ListBikesForm", "List Bikes");
@@ -92,7 +90,7 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             Bike bike = bikeService.GetBikeById((int)but.Tag);
-            _bikeDetailForm.FillBikeInformation(Config.CURRENT_STATION, bike);
+            _bikeDetailForm.FillBikeInformation(bike);
             _bikeDetailForm.Show(this);
             this.Hide();
             bikeDetailForm.Show();
@@ -137,8 +135,7 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Không tìm thấy mã xe: " + qrCode, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            Station station = stationService.GetStationById(bike.StationId);
-            _bikeDetailForm.FillBikeInformation(station, bike);
+            _bikeDetailForm.FillBikeInformation(bike);
             _bikeDetailForm.Show(this);
             this.Hide();
         }

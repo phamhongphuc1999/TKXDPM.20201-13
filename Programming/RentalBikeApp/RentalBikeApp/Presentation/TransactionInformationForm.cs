@@ -6,14 +6,12 @@ using System.Windows.Forms;
 using RentalBikeApp.Business;
 using static RentalBikeApp.Config;
 using RentalBikeApp.Entities.SQLEntities;
-using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.APIEntities;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class TransactionInformationForm : BaseForm
     {
-        private BikeService bikeService;
         private InterbankService interbankService;
 
         private HomePageForm _homePageForm;
@@ -38,10 +36,10 @@ namespace RentalBikeApp.Presentation
         }
 
         private int deposit;
+        private int rentalMoney;
 
         public TransactionInformationForm()
         {
-            bikeService = new BikeService();
             interbankService = new InterbankService();
 
             InitializeComponent("TransactionInformationForm", "Transaction Information");
@@ -54,7 +52,7 @@ namespace RentalBikeApp.Presentation
         private TRANSACTION_STATUS status;
 
         /// <summary>
-        /// 
+        /// Fill transaction form with transaction's information when user process transaction for pay rental money
         /// </summary>
         public void FillTransactionInformationWhenPay()
         {
@@ -62,22 +60,26 @@ namespace RentalBikeApp.Presentation
             remainMoneyTxt.Text = "111";
             transactionDateTxt.Text = Utilities.ConvertDateToString(DateTime.Now);
             cancelBut.Visible = false;
+
+            Config.SQL.BikeCategory category = SQL.BikeCategory.BIKE;
+            if (Config.RENTAL_BIKE.Category == "bike") category = SQL.BikeCategory.BIKE;
+            else if (Config.RENTAL_BIKE.Category == "electric") category = SQL.BikeCategory.ELECTRIC;
+            else if (Config.RENTAL_BIKE.Category == "tandem") category = SQL.BikeCategory.TANDEM;
+            rentalMoney = interbankService.CalculateFee(Config.TIME_RENTAL_BIKE, category);
+            rentalMoneyTxt.Text = rentalMoney.ToString();
         }
 
         /// <summary>
-        /// 
+        /// Fill transaction form with transaction's information when user process transaction for pay deposit money
         /// </summary>
-        /// <param name="bikeId"></param>
-        /// <param name="card"></param>
-        public void FillTransactionInformationWhenRentBike(int bikeId, Card card)
+        /// <param name="card">The instance represent user card information</param>
+        public void FillTransactionInformationWhenRentBike(Card card)
         {
-            Bike bike = bikeService.GetBikeById(bikeId);
             this.status = TRANSACTION_STATUS.RENT_BIKE;
-            this.deposit = Config.BIKE_DEPOSIT[bike.Category];
+            this.deposit = Config.BIKE_DEPOSIT[Config.RENTAL_BIKE.Category];
             depositTxt.Text = String.Format("{0:n0}", this.deposit);
             remainMoneyTxt.Text = "Không có dữ liệu";
             transactionDateTxt.Text = "Không có dữ liệu";
-            permitBut.Tag = bikeId;
             cancelBut.Visible = true;
         }
 
@@ -96,7 +98,6 @@ namespace RentalBikeApp.Presentation
 
         private async void PermitBut_Click(object sender, EventArgs e)
         {
-            Button but = sender as Button;
             if (status == TRANSACTION_STATUS.RENT_BIKE)
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENTING_BIKE;
@@ -106,14 +107,14 @@ namespace RentalBikeApp.Presentation
                     owner = Config.API_INFO.CARD_INFO.OWER,
                     cvvCode = Config.API_INFO.CARD_INFO.CVV,
                     dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                    transactionContent = "Thanh toan Mass",
+                    transactionContent = "Pay Deposit",
                     amount = this.deposit,
-                    createdAt = Utilities.ConvertDateToString(2020, 11, 10, 18, 30, 20)
+                    createdAt = Utilities.ConvertDateToString(DateTime.Now)
                 }, Config.API_INFO.COMMAND.PAY);
                 string error = result.errorCode;
                 if(error == "00")
                 {
-                    _rentBikeForm.FillRentBikeForm((int)but.Tag, Config.RENT_BIKE_STATUS);
+                    _rentBikeForm.FillRentingBikeForm();
                     _rentBikeForm.rentBikeTmr.Start();
                     _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
                 }
@@ -127,14 +128,42 @@ namespace RentalBikeApp.Presentation
                     MessageBox.Show(API_INFO.ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                
             }
             else if (status == TRANSACTION_STATUS.PAY) 
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
-                MessageBox.Show("Thanh toán tiền thuê xe thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                _homePageForm.RenderStationList(_homePageForm.stationPnl);
-                _homePageForm.Show(this);
+                ProcessTransactionResponse response = await interbankService.ProcessTransaction(new TransactionInfo
+                {
+                    cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
+                    owner = Config.API_INFO.CARD_INFO.OWER,
+                    cvvCode = Config.API_INFO.CARD_INFO.CVV,
+                    dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
+                    transactionContent = "Pay rental money",
+                    amount = this.rentalMoney,
+                    createdAt = Utilities.ConvertDateToString(DateTime.Now)
+                }, Config.API_INFO.COMMAND.PAY);
+                string error = response.errorCode;
+                if(error == "00")
+                {
+                    ProcessTransactionResponse response1 = await interbankService.ProcessTransaction(new TransactionInfo
+                    {
+                        cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
+                        owner = Config.API_INFO.CARD_INFO.OWER,
+                        cvvCode = Config.API_INFO.CARD_INFO.CVV,
+                        dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
+                        transactionContent = "Refund deposit",
+                        amount = this.deposit,
+                        createdAt = Utilities.ConvertDateToString(DateTime.Now)
+                    }, Config.API_INFO.COMMAND.REFUND);
+                    MessageBox.Show("Thanh toán tiền thuê xe thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _homePageForm.RenderStationList(_homePageForm.stationPnl);
+                    _homePageForm.Show(this);
+                }
+                else
+                {
+                    MessageBox.Show(API_INFO.ERROR_CODE[response.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
             this.Hide();
         }

@@ -3,12 +3,15 @@
 
 using System;
 using System.Windows.Forms;
+using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class BikeDetailForm : BaseForm
     {
+        private StationService stationService;
+
         private HomePageForm _homePageForm;
         public HomePageForm homePageForm
         {
@@ -32,6 +35,8 @@ namespace RentalBikeApp.Presentation
 
         public BikeDetailForm()
         {
+            stationService = new StationService();
+
             InitializeComponent("BikeDetailForm", "Bike Detail");
             DrawBaseForm();
             DrawBikeDetail();
@@ -43,10 +48,10 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Fill bike form with bike's information and station's information
         /// </summary>
-        /// <param name="station">The station contain the specified bike</param>
         /// <param name="bike">The specified bike</param>
-        public void FillBikeInformation(Station station, Bike bike)
+        public void FillBikeInformation(Bike bike)
         {
+            Station station = stationService.GetStationById(bike.StationId);
             stationRtb.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
             qrCodeTxt.Text = bike.QRCode;
             manufactureTxt.Text = bike.Manufacturer;
@@ -75,12 +80,12 @@ namespace RentalBikeApp.Presentation
             int bikeId = (int)rentThisBikeBut.Tag;
             if(Config.RENT_BIKE_STATUS != Config.RENT_BIKE.RENTING_BIKE)
             {
-                _rentBikeForm.FillRentBikeForm(bikeId, Config.RENT_BIKE.RENT_BIKE_INFO);
+                _rentBikeForm.FillRentBikeInfoForm(bikeId);
                 _rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO);
             }
             else
             {
-                _rentBikeForm.FillRentBikeForm(bikeId, Config.RENT_BIKE.RENTING_BIKE);
+                _rentBikeForm.FillRentingBikeForm();
                 _rentBikeForm.Show(this, Config.RENT_BIKE.RENTING_BIKE);
             }
             this.Hide();
