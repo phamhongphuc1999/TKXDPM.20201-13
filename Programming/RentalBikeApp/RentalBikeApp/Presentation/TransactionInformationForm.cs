@@ -15,6 +15,9 @@ namespace RentalBikeApp.Presentation
         private InterbankService interbankService;
 
         private HomePageForm _homePageForm;
+        /// <value>
+        /// get or set the HomePageForm representing the home page screen
+        /// </value>
         public HomePageForm homePageForm
         {
             get { return _homePageForm; }
@@ -22,6 +25,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private RentBikeForm _rentBikeForm;
+        /// <value>
+        /// get or set the RentBikeForm representing the rent bike screen
+        /// </value>
         public RentBikeForm rentBikeForm
         {
             get { return _rentBikeForm; }
@@ -29,6 +35,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private CardInformationForm _cardInformationForm;
+        /// <value>
+        /// get or set the CardInformationForm representing the card information screen
+        /// </value>
         public CardInformationForm cardInformationForm
         {
             get { return _cardInformationForm; }
@@ -66,7 +75,7 @@ namespace RentalBikeApp.Presentation
             else if (Config.RENTAL_BIKE.Category == "electric") category = SQL.BikeCategory.ELECTRIC;
             else if (Config.RENTAL_BIKE.Category == "tandem") category = SQL.BikeCategory.TANDEM;
             rentalMoney = interbankService.CalculateFee(Config.TIME_RENTAL_BIKE, category);
-            rentalMoneyTxt.Text = rentalMoney.ToString();
+            rentalMoneyTxt.Text = (rentalMoney == 0) ? "Miễn phí" : rentalMoney.ToString();
         }
 
         /// <summary>
@@ -83,12 +92,22 @@ namespace RentalBikeApp.Presentation
             cancelBut.Visible = true;
         }
 
+        /// <summary>
+        /// Handle click event RentBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
             _rentBikeForm.Show();
             this.Show();
         }
 
+        /// <summary>
+        /// Handle click event HomePageBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
@@ -96,6 +115,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event PermitBut, send pay or refund transaction end handle the response
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private async void PermitBut_Click(object sender, EventArgs e)
         {
             if (status == TRANSACTION_STATUS.RENT_BIKE)
@@ -168,6 +192,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event Cancelbut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void CancelBut_Click(object sender, EventArgs e)
         {
             _cardInformationForm.Show(this);

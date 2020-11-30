@@ -165,6 +165,11 @@ namespace RentalBikeApp.Presentation
             returnBikeForm.transactionInformationForm = transactionInformationForm;
         }
 
+        /// <summary>
+        /// Handle click event HomePageBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
@@ -174,6 +179,11 @@ namespace RentalBikeApp.Presentation
             if (!(form is HomePageForm)) form.Hide();
         }
 
+        /// <summary>
+        /// Handle click event RentBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
@@ -182,6 +192,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event station detail but
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
@@ -191,6 +206,11 @@ namespace RentalBikeApp.Presentation
             stationDetailForm.Show(this);
         }
 
+        /// <summary>
+        /// Handle click event SearchBut, display result in form
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void SearchBut_Click(object sender, EventArgs e)
         {
             string nameStation = searchTxt.Text;
@@ -210,6 +230,11 @@ namespace RentalBikeApp.Presentation
             this.RenderStationList(stations, this.stationPnl);
         }
 
+        /// <summary>
+        /// Handle click event CancelSearchBut, delete search result, display default form
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void CancelSearchBut_Click(object sender, EventArgs e)
         {
             searchTxt.Text = "";

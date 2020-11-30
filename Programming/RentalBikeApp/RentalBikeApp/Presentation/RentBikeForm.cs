@@ -14,6 +14,9 @@ namespace RentalBikeApp.Presentation
         private StationService stationService;
 
         private HomePageForm _homePageForm;
+        /// <value>
+        /// get or set the HomePageForm representing the home page screen
+        /// </value>
         public HomePageForm homePageForm
         {
             get { return _homePageForm; }
@@ -21,6 +24,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private BikeDetailForm _bikeDetailForm;
+        /// <value>
+        /// get or set the BikeDetailForm representing the bike detail screen
+        /// </value>
         public BikeDetailForm bikeDetailForm
         {
             get { return _bikeDetailForm; }
@@ -28,6 +34,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private CardInformationForm _cardInformationForm;
+        /// <value>
+        /// get or set the CardInformationForm representing the card information screen
+        /// </value>
         public CardInformationForm cardInformationForm
         {
             get { return _cardInformationForm; }
@@ -35,6 +44,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private ReturnBikeForm _returnBikeForm;
+        /// <value>
+        /// get or set the ReturnBikeForm representing the return bike screen
+        /// </value>
         public ReturnBikeForm returnBikeForm
         {
             get { return _returnBikeForm; }
@@ -126,21 +138,20 @@ namespace RentalBikeApp.Presentation
             rentBikeInfoRentThisBikeBut.Tag = bike.BikeId;
         }
 
-        ///// <summary>
-        ///// Fill bike information in rent bike form base on specified rent bike status
-        ///// </summary>
-        ///// <param name="bikeId">The bike id of specified bike</param>
-        ///// <param name="rentBike">The specified rent bike status</param>
-        //public void FillRentBikeForm(int bikeId, Config.RENT_BIKE rentBike)
-        //{
-        //    if (rentBike == Config.RENT_BIKE.RENTING_BIKE) FillRentingBikeForm(bikeId);
-        //    else if (rentBike == Config.RENT_BIKE.RENT_BIKE_INFO) FillRentBikeInfoForm(bikeId);
-        //}
-
+        /// <summary>
+        /// Handle click event RentBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
         }
 
+        /// <summary>
+        /// Handle click event HomePageBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
@@ -149,6 +160,11 @@ namespace RentalBikeApp.Presentation
         }
 
         #region Rent bike handle event
+        /// <summary>
+        /// Handle click event RentBikeRentBut, if user enter correct or code, display detail information of bike have this qr code
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeRentBut_Click(object sender, EventArgs e)
         {
             string qrCode = rentBikeQrCodeTxt.Text;
@@ -171,6 +187,11 @@ namespace RentalBikeApp.Presentation
         #endregion
 
         #region Rent bike information handle event
+        /// <summary>
+        /// Handle click event RentBikeInfoRentThisBikeBut, display CardInformationForm
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeInfoRentThisBikeBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
@@ -179,6 +200,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event RentBikeInfoDetailBut, display detail information of bike
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeInfoDetailBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
@@ -190,6 +216,11 @@ namespace RentalBikeApp.Presentation
         #endregion
 
         #region Renting bike handle event
+        /// <summary>
+        /// Handle tick event of timer, count the rental time
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeTmr_Tick(object sender, EventArgs e)
         {
             string[] times = rentingTimedRentValueLbl.Text.Split(':');
@@ -205,6 +236,11 @@ namespace RentalBikeApp.Presentation
             rentingTimedRentValueLbl.Text = Config.TIME_RENTAL_BIKE;
         }
 
+        /// <summary>
+        /// Handle click event RentingSelectReceiveStationBut, display ReturnBikeForm
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentingSelectReceiveStationBut_Click(object sender, EventArgs e)
         {
             _returnBikeForm.Show(this);

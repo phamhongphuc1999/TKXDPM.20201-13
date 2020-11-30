@@ -13,6 +13,9 @@ namespace RentalBikeApp.Presentation
         private StationService stationService;
 
         private HomePageForm _homePageForm;
+        /// <value>
+        /// get or set the HomePageForm representing the home page screen
+        /// </value>
         public HomePageForm homePageForm
         {
             get { return _homePageForm; }
@@ -20,6 +23,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private RentBikeForm _rentBikeForm;
+        /// <value>
+        /// get or set the RentBikeForm representing the rent bike form
+        /// </value>
         public RentBikeForm rentBikeForm
         {
             get { return _rentBikeForm; }
@@ -27,6 +33,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private ListBikeForm _listBikeForm;
+        /// <value>
+        /// get or set the ListBikeForm representing the list bike screen
+        /// </value>
         public ListBikeForm listBikeForm
         {
             get { return _listBikeForm; }
@@ -61,12 +70,22 @@ namespace RentalBikeApp.Presentation
             rentThisBikeBut.Tag = bike.BikeId;
         }
 
+        /// <summary>
+        /// Handle click event RentBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
             _rentBikeForm.Show(this);
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event HomePageBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
@@ -74,6 +93,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event RentThisBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentThisBikeBut_Click(object sender, EventArgs e)
         {
             Button rentThisBikeBut = sender as Button;
@@ -91,6 +115,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event ReturnListBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void ReturnListBikeBut_Click(object sender, EventArgs e)
         {
             _listBikeForm.Show(this);

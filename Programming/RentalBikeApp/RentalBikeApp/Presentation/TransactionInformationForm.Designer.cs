@@ -6,8 +6,8 @@ namespace RentalBikeApp.Presentation
     partial class TransactionInformationForm
     {
         public Panel transactionPnl;
-        public Label depositLbl, rentalMoneyLbl, remainMoneyLbl, transactionDateLbl;
-        public TextBox depositTxt, rentalMoneyTxt, remainMoneyTxt, transactionDateTxt;
+        public Label depositLbl, rentalMoneyLbl, remainMoneyLbl, transactionDateLbl, noteLbl;
+        public TextBox depositTxt, rentalMoneyTxt, remainMoneyTxt, transactionDateTxt, noteTxt;
         public Button permitBut, cancelBut;
 
         /// <summary>
@@ -88,6 +88,22 @@ namespace RentalBikeApp.Presentation
                 Location = new Point(190, 170),
                 ReadOnly = true
             };
+            noteLbl = new Label()
+            {
+                Text = "Ghi chú",
+                TextAlign = ContentAlignment.MiddleCenter,
+                Size = new Size(150, 40),
+                Location = new Point(20, 225),
+                BackColor = ColorTranslator.FromHtml("#3d8af7"),
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White
+            };
+            noteTxt = new TextBox()
+            {
+                Multiline = true,
+                Size = new Size(590, 40),
+                Location = new Point(190, 225)
+            };
             permitBut = new Button()
             {
                 Text = "Xác nhận",
@@ -119,6 +135,8 @@ namespace RentalBikeApp.Presentation
             transactionPnl.Controls.Add(remainMoneyTxt);
             transactionPnl.Controls.Add(transactionDateLbl);
             transactionPnl.Controls.Add(transactionDateTxt);
+            transactionPnl.Controls.Add(noteLbl);
+            transactionPnl.Controls.Add(noteTxt);
             transactionPnl.Controls.Add(permitBut);
             transactionPnl.Controls.Add(cancelBut);
             this.Controls.Add(transactionPnl);

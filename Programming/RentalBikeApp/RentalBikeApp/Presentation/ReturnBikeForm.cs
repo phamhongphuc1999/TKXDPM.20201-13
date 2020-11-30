@@ -17,6 +17,9 @@ namespace RentalBikeApp.Presentation
         private List<Station> stationList;
 
         private HomePageForm _homePageForm;
+        /// <value>
+        /// get or set the HomePageForm representing the home page screen
+        /// </value>
         public HomePageForm homePageForm
         {
             get { return _homePageForm; }
@@ -24,6 +27,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private RentBikeForm _rentBikeForm;
+        /// <value>
+        /// get or set the RentBikeForm representing the rent bike screen
+        /// </value>
         public RentBikeForm rentBikeForm
         {
             get { return _rentBikeForm; }
@@ -31,6 +37,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private TransactionInformationForm _transactionInformationForm;
+        /// <value>
+        /// get or set the TransactionInformationForm representing the transaction information screen
+        /// </value>
         public TransactionInformationForm transactionInformationForm
         {
             get { return _transactionInformationForm; }
@@ -87,12 +96,22 @@ namespace RentalBikeApp.Presentation
             RenderStationList(pnl);
         }
 
+        /// <summary>
+        /// Handle click event RentBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
             _rentBikeForm.Show(this);
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event HomePageBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
@@ -100,6 +119,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event return station but, choose the station to return renta bike
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
@@ -114,12 +138,22 @@ namespace RentalBikeApp.Presentation
             }
         }
 
+        /// <summary>
+        /// Handle click event CancelBut, cancel return bike action
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void CancelBut_Click(object sender, EventArgs e)
         {
             _rentBikeForm.Show(this);
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event CancelSearchBut, delete the search result, display the default form
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void CancelSearchBut_Click(object sender, EventArgs e)
         {
             searchTxt.Text = "";
@@ -128,6 +162,11 @@ namespace RentalBikeApp.Presentation
             RenderStationList(this.listStationPnl);
         }
 
+        /// <summary>
+        /// Handle click event SearchBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void SearchBut_Click(object sender, EventArgs e)
         {
             string nameStation = searchTxt.Text;

@@ -8,7 +8,12 @@ namespace RentalBikeApp.Presentation
 {
     public partial class StationDetailForm : BaseForm
     {
+        private StationService stationService;
+
         private HomePageForm _homePageForm;
+        /// <value>
+        /// get or set the HomePageForm representing the home page screen
+        /// </value>
         public HomePageForm homePageForm
         {
             get { return _homePageForm; }
@@ -16,6 +21,9 @@ namespace RentalBikeApp.Presentation
         }
 
         private RentBikeForm _rentBikeForm;
+        /// <value>
+        /// get or set the RentBikeForm representing the rent bike screen
+        /// </value>
         public RentBikeForm rentBikeForm
         {
             get { return _rentBikeForm; }
@@ -23,13 +31,14 @@ namespace RentalBikeApp.Presentation
         }
 
         private ListBikeForm _listBikeForm;
+        /// <value>
+        /// get or set the ListBikeForm representing the list bike screen
+        /// </value>
         public ListBikeForm listBikeForm
         {
             get { return _listBikeForm; }
             set { _listBikeForm = value; }
         }
-
-        private StationService stationService;
 
         public StationDetailForm()
         {
@@ -60,6 +69,11 @@ namespace RentalBikeApp.Presentation
             tandemBut.Tag = station.StationId;
         }
 
+        /// <summary>
+        /// Handle click event HomePageBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, System.EventArgs e)
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
@@ -67,12 +81,22 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event RentBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, System.EventArgs e)
         {
             _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event TandemBut, display the list of tandems in this station
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void TandemBut_Click(object sender, System.EventArgs e)
         {
             Station station = stationService.GetStationById((int)tandemBut.Tag);
@@ -81,6 +105,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event ElectricBut, display the list of electric bikes in this station
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void ElectricBut_Click(object sender, System.EventArgs e)
         {
             Station station = stationService.GetStationById((int)electricBut.Tag);
@@ -89,6 +118,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event BikeBut, display list of normal bike in this station
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void BikeBut_Click(object sender, System.EventArgs e)
         {
             Station station = stationService.GetStationById((int)bikeBut.Tag);
@@ -97,6 +131,11 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event ReturnHomePage, display HomePageForm
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void ReturnHomePageBut_Click(object sender, System.EventArgs e)
         {
             _homePageForm.Show(this);
