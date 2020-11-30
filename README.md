@@ -58,5 +58,5 @@
 ## Revisions
 - Phạm Hồng Phúc review Task 5: Tài liệu SDD đúng cấu trúc, bố cục rõ ràng, đầy đủ các thành phần, có đề mục rõ ràng, có đánh số trang
 - Sư Hữu Vũ Quang review Task 1,4: Giao diện, mock up đầy đủ thiết kế sát với dự tính ban đầu của nhóm, hiển thị khá đầy đủ chức năng, một số chức năng còn chưa hợp lý(đang bàn bạc); Biểu đồ E-R, database khá hoàn thiện, còn thiếu một số trường đang tiếp tục hoàn thiện 
-- Ngô Minh Quang review Task 2:Biểu đồ dịch chuyển màn hình và đặc tả màn hình đầy đủ, mô tả được sự dịch chuyển giữa các màn hình.
+- Ngô Minh Quang review Task 2:Biểu đồ dịch chuyển màn hình và đặc tả màn hình đầy đủ, mô tả được sự dịch chuyển giữa các màn hình, màn hình được đặc tả chi tiết và đầy đủ.
 - Trần Minh Quang review Task 3:Biều đồ thiết kế lớp đầy đủ các lớp,các biểu đổ lớp chi tiết đầy đủ các thành phần
