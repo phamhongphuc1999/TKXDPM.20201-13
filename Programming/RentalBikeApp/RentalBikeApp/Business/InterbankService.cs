@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft. All Rights Reserved.
 //  License under the Apache License, Version 2.0.
 
+using System;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using RentalBikeApp.Entities.APIEntities;
-using System;
 
 namespace RentalBikeApp.Business
 {
