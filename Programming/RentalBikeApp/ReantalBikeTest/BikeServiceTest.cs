@@ -1,4 +1,7 @@
-﻿using NUnit.Framework;
+﻿// Copyright (c) Microsoft. All Rights Reserved.
+//  License under the Apache License, Version 2.0.
+
+using NUnit.Framework;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RentalBikeApp", "RentalBikeApp\RentalBikeApp.csproj", "{2557F916-3DF6-403F-A409-9427B8B11EFE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReantalBikeTest", "ReantalBikeTest\ReantalBikeTest.csproj", "{E3DE7E07-388F-40B5-A58E-AA6C9CF1399D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReantalBikeTest", "ReantalBikeTest\ReantalBikeTest.csproj", "{E3DE7E07-388F-40B5-A58E-AA6C9CF1399D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
