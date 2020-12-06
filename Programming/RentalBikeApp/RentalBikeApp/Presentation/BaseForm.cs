@@ -8,6 +8,8 @@ namespace RentalBikeApp.Presentation
 {
     public partial class BaseForm : Form
     {
+        public BaseForm PrevForm { get; set; }
+
         public BaseForm()
         {
             InitializeComponent("BaseForm");
@@ -27,12 +29,13 @@ namespace RentalBikeApp.Presentation
 
         /// <summary>Show form in the location base on specified form's location</summary>
         /// <param name="form">The specified form</param>
-        public void Show(Form form)
+        public void Show(Form form, BaseForm prevForm = null)
         {
             this.Show();
             int locationMainX = form.Location.X;
             int locationMainY = form.Location.Y;
             this.Location = new Point(locationMainX, locationMainY);
+            if (prevForm != null) this.PrevForm = prevForm;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace RentalBikeApp.Presentation
         public RichTextBox stationRtb;
         public Label qrCodeLbl, categoryBikeLbl, licenceLbl, manufactureLbl, powerLbl;
         public TextBox qrCodeTxt, categoryBikeTxt, licenceTxt, manufactureTxt, powerTxt;
-        public Button returnListBikeBut, rentThisBikeBut;
+        public Button rentThisBikeBut;
 
         /// <summary>
         /// Initialized control in BikeDetailForm
@@ -113,15 +113,6 @@ namespace RentalBikeApp.Presentation
                 Location = new Point(180, 282),
                 ReadOnly = true
             };
-            returnListBikeBut = new Button()
-            {
-                Text = "Quay lại danh sách xe",
-                Size = new Size(300, 50),
-                Location = new Point(180, 362),
-                FlatStyle = FlatStyle.Flat,
-                Font = new Font("Arial", 12, FontStyle.Regular),
-                BackColor = ColorTranslator.FromHtml("#d4e3fc")
-            };
             rentThisBikeBut = new Button()
             {
                 Text = "Thuê xe này",
@@ -132,7 +123,6 @@ namespace RentalBikeApp.Presentation
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")
             };
 
-            returnListBikeBut.Click += ReturnListBikeBut_Click;
             rentThisBikeBut.Click += RentThisBikeBut_Click;
 
             bikeDetailPnl.Controls.Add(stationRtb);
@@ -146,7 +136,6 @@ namespace RentalBikeApp.Presentation
             bikeDetailPnl.Controls.Add(manufactureTxt);
             bikeDetailPnl.Controls.Add(powerLbl);
             bikeDetailPnl.Controls.Add(powerTxt);
-            bikeDetailPnl.Controls.Add(returnListBikeBut);
             bikeDetailPnl.Controls.Add(rentThisBikeBut);
             this.Controls.Add(bikeDetailPnl);
         }
