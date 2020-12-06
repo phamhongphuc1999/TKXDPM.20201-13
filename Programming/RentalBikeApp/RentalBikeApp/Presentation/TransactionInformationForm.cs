@@ -7,6 +7,7 @@ using RentalBikeApp.Business;
 using static RentalBikeApp.Config;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Entities.APIEntities;
+using System.Runtime.CompilerServices;
 
 namespace RentalBikeApp.Presentation
 {
@@ -156,38 +157,35 @@ namespace RentalBikeApp.Presentation
             else if (status == TRANSACTION_STATUS.PAY) 
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
-                ProcessTransactionResponse response = await interbankService.ProcessTransaction(new TransactionInfo
+                if(this.deposit < this.rentalMoney)
                 {
-                    cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
-                    owner = Config.API_INFO.CARD_INFO.OWER,
-                    cvvCode = Config.API_INFO.CARD_INFO.CVV,
-                    dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                    transactionContent = "Pay rental money",
-                    amount = this.rentalMoney,
-                    createdAt = Utilities.ConvertDateToString(DateTime.Now)
-                }, Config.API_INFO.COMMAND.PAY);
-                string error = response.errorCode;
-                if(error == "00")
-                {
-                    ProcessTransactionResponse response1 = await interbankService.ProcessTransaction(new TransactionInfo
+                    ProcessTransactionResponse response = await interbankService.ProcessTransaction(new TransactionInfo
                     {
                         cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
                         owner = Config.API_INFO.CARD_INFO.OWER,
                         cvvCode = Config.API_INFO.CARD_INFO.CVV,
                         dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                        transactionContent = "Refund deposit",
-                        amount = this.deposit,
+                        transactionContent = "Pay rental money",
+                        amount = this.rentalMoney - this.deposit,
+                        createdAt = Utilities.ConvertDateToString(DateTime.Now)
+                    }, Config.API_INFO.COMMAND.PAY);
+                    MessageBox.Show(response.errorCode);
+                }
+                else if(this.deposit > this.rentalMoney)
+                {
+                    ProcessTransactionResponse response = await interbankService.ProcessTransaction(new TransactionInfo
+                    {
+                        cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
+                        owner = Config.API_INFO.CARD_INFO.OWER,
+                        cvvCode = Config.API_INFO.CARD_INFO.CVV,
+                        dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
+                        transactionContent = "Pay rental money",
+                        amount = this.deposit - this.rentalMoney,
                         createdAt = Utilities.ConvertDateToString(DateTime.Now)
                     }, Config.API_INFO.COMMAND.REFUND);
-                    MessageBox.Show("Thanh toán tiền thuê xe thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    _homePageForm.RenderStationList(_homePageForm.stationPnl);
-                    _homePageForm.Show(this);
+                    MessageBox.Show(response.errorCode);
                 }
-                else
-                {
-                    MessageBox.Show(API_INFO.ERROR_CODE[response.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                homePageForm.Show(this);
             }
             this.Hide();
         }
