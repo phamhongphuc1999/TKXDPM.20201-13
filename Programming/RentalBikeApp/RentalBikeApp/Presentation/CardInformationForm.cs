@@ -45,6 +45,7 @@ namespace RentalBikeApp.Presentation
             DrawCardInformation();
             homePageBut.Click += HomePageBut_Click;
             rentBikeBut.Click += RentBikeBut_Click;
+            prevFormBut.Click += PrevFormBut_Click;
         }
 
         /// <summary>
@@ -54,7 +55,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this);
+            _rentBikeForm.Show(this, this);
             this.Hide();
         }
 
@@ -68,6 +69,17 @@ namespace RentalBikeApp.Presentation
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
             _homePageForm.Show(this);
             this.Hide();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PrevFormBut_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.PrevForm.Show(this);
         }
 
         /// <summary>

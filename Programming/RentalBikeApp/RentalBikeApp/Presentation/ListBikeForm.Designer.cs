@@ -8,7 +8,7 @@ namespace RentalBikeApp.Presentation
         public RichTextBox descriptionRtb, stationRtb;
         public TextBox searchTxt;
         public Panel listBikePnl;
-        public Button returnStationBut, searchBut;
+        public Button searchBut;
 
         /// <summary>
         /// Initalized control in ListBikeForm
@@ -50,32 +50,21 @@ namespace RentalBikeApp.Presentation
             };
             listBikePnl = new Panel()
             {
-                Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 255),
+                Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 130),
                 Location = new Point(0, 115)
             };
             listBikePnl.HorizontalScroll.Maximum = 0;
             listBikePnl.AutoScroll = false;
             listBikePnl.VerticalScroll.Visible = false;
             listBikePnl.AutoScroll = true;
-            returnStationBut = new Button()
-            {
-                Text = "Quay lại bãi xe",
-                Size = new Size(350, 50),
-                Location = new Point(430, 365),
-                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
-                FlatStyle = FlatStyle.Flat,
-                Font = new Font("Arial", 12, FontStyle.Regular)
-            };
 
             searchBut.Click += SearchBut_Click;
-            returnStationBut.Click += ReturnStationBut_Click;
 
             this.Controls.Add(searchTxt);
             this.Controls.Add(searchBut);
             this.Controls.Add(stationRtb);
             this.Controls.Add(descriptionRtb);
             this.Controls.Add(listBikePnl);
-            this.Controls.Add(returnStationBut);
         }
     }
 }

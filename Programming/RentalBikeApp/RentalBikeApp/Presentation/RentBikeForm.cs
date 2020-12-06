@@ -65,11 +65,12 @@ namespace RentalBikeApp.Presentation
             DrawRentBikeForm();
             homePageBut.Click += HomePageBut_Click;
             rentBikeBut.Click += RentBikeBut_Click;
+            prevFormBut.Click += PrevFormBut_Click;
 
             Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
             DisplayRentBike(Config.RENT_BIKE_STATUS);
         }
-        
+
         /// <summary>
         /// Display rent bike form base on specified rent bike status
         /// </summary>
@@ -102,10 +103,10 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="form">The specified form</param>
         /// <param name="rentBike">The specified rent bike status</param>
-        public void Show(Form form, Config.RENT_BIKE rentBike)
+        public void Show(Form form, Config.RENT_BIKE rentBike, BaseForm prevForm = null)
         {
             DisplayRentBike(rentBike);
-            this.Show(form);
+            this.Show(form, prevForm);
         }
 
         /// <summary>
@@ -157,6 +158,17 @@ namespace RentalBikeApp.Presentation
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
             _homePageForm.Show(this);
             this.Hide();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PrevFormBut_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.PrevForm.Show(this);
         }
 
         #region Rent bike handle event

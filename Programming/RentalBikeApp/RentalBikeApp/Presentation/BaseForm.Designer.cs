@@ -9,7 +9,7 @@ namespace RentalBikeApp.Presentation
         /// Required designer variable.
         /// </summary>
         protected System.ComponentModel.IContainer components = null;
-        public Button homePageBut, rentBikeBut;
+        public Button homePageBut, rentBikeBut, prevFormBut;
         protected Label lineLbl;
         
         /// <summary>
@@ -51,6 +51,15 @@ namespace RentalBikeApp.Presentation
             {
                 Text = "Thuê xe",
                 Size = new Size(220, 50),
+                Location = new Point(290, 435),
+                Font = new Font("Arial", 12, FontStyle.Regular),
+                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
+                FlatStyle = FlatStyle.Flat
+            };
+            prevFormBut = new Button()
+            {
+                Text = "Quay lại",
+                Size = new Size(220, 50),
                 Location = new Point(560, 435),
                 Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
@@ -59,6 +68,7 @@ namespace RentalBikeApp.Presentation
             this.Controls.Add(lineLbl);
             this.Controls.Add(homePageBut);
             this.Controls.Add(rentBikeBut);
+            this.Controls.Add(prevFormBut);
         }
 
         #region Windows Form Designer generated code

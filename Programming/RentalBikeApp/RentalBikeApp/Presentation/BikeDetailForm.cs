@@ -52,6 +52,7 @@ namespace RentalBikeApp.Presentation
 
             homePageBut.Click += HomePageBut_Click;
             rentBikeBut.Click += RentBikeBut_Click;
+            prevFormBut.Click += PrevFormBut_Click;
         }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this);
+            _rentBikeForm.Show(this, this);
             this.Hide();
         }
 
@@ -91,6 +92,17 @@ namespace RentalBikeApp.Presentation
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
             _homePageForm.Show(this);
             this.Hide();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PrevFormBut_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.PrevForm.Show(this, this);
         }
 
         /// <summary>
@@ -112,17 +124,6 @@ namespace RentalBikeApp.Presentation
                 _rentBikeForm.FillRentingBikeForm();
                 _rentBikeForm.Show(this, Config.RENT_BIKE.RENTING_BIKE);
             }
-            this.Hide();
-        }
-
-        /// <summary>
-        /// Handle click event ReturnListBikeBut
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void ReturnListBikeBut_Click(object sender, EventArgs e)
-        {
-            _listBikeForm.Show(this);
             this.Hide();
         }
     }
