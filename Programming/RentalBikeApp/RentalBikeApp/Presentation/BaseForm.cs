@@ -1,5 +1,16 @@
-﻿// Copyright (c) Microsoft. All Rights Reserved.
-//  License under the Apache License, Version 2.0.
+﻿// --------------------RENTAL BIKE APP-----------------
+//
+//
+// Copyright (c) Microsoft. All Rights Reserved.
+// License under the Apache License, Version 2.0.
+//
+//   Su Huu Vu Quang
+//   Pham Hong Phuc
+//   Tran Minh Quang
+//   Ngo Minh Quang
+//
+//
+// ------------------------------------------------------
 
 using System.Drawing;
 using System.Windows.Forms;
@@ -29,6 +40,7 @@ namespace RentalBikeApp.Presentation
 
         /// <summary>Show form in the location base on specified form's location</summary>
         /// <param name="form">The specified form</param>
+        /// <param name="prevForm">The previous form, will be display when press previous form button</param>
         public void Show(Form form, BaseForm prevForm = null)
         {
             this.Show();

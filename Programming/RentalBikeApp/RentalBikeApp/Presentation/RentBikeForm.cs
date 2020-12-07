@@ -1,5 +1,16 @@
-﻿// Copyright (c) Microsoft. All Rights Reserved.
-//  License under the Apache License, Version 2.0.
+﻿// --------------------RENTAL BIKE APP-----------------
+//
+//
+// Copyright (c) Microsoft. All Rights Reserved.
+// License under the Apache License, Version 2.0.
+//
+//   Su Huu Vu Quang
+//   Pham Hong Phuc
+//   Tran Minh Quang
+//   Ngo Minh Quang
+//
+//
+// ------------------------------------------------------
 
 using System;
 using System.Windows.Forms;
@@ -161,10 +172,10 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
-        /// 
+        /// Handle click event PrevFormBut
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
         private void PrevFormBut_Click(object sender, EventArgs e)
         {
             this.Hide();
