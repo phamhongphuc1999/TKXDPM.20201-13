@@ -126,12 +126,28 @@ namespace RentalBikeApp.Presentation
         /// <param name="bikeId">The bike id of specified bike</param>
         public void FillRentingBikeForm()
         {
-            Bike bike = Config.RENTAL_BIKE;
+            BaseBike bike = Config.RENTAL_BIKE;
             rentingQrCodeTxt.Text = bike.QRCode;
-            rentingCategoryTxt.Text = Config.BIKE_CATEGORY[bike.Category];
-            if (bike.Category != "electric") rentingRemainPowerValueLbl.Text = "Không có thông tin";
-            else rentingRemainPowerValueLbl.Text = "100%";
-            rentingLicenseTxt.Text = (bike.LicensePlate == "") ? "Không có thông tin" : bike.LicensePlate;
+            if(bike is Bike)
+            {
+                rentingCategoryTxt.Text = "Xe đạp thường";
+                rentingRemainPowerValueLbl.Text = "Không có thông tin";
+                rentingLicenseTxt.Text = "Không có thông tin";
+            }
+            else if(bike is ElectricBike)
+            {
+                ElectricBike electricBike = bike as ElectricBike;
+                rentingCategoryTxt.Text = "Xe đạp điện";
+                rentingRemainPowerValueLbl.Text = $"${electricBike.Powers}%";
+                rentingLicenseTxt.Text = "Không có thông tin";
+            }
+            else
+            {
+                Tandem tandem = bike as Tandem;
+                rentingCategoryTxt.Text = "Xe đạp đôi";
+                rentingRemainPowerValueLbl.Text = "Không có thông tin";
+                rentingLicenseTxt.Text = tandem.LicensePlate;
+            }
             rentingManufactureTxt.Text = bike.Manufacturer;
         }
 
@@ -141,11 +157,28 @@ namespace RentalBikeApp.Presentation
         /// <param name="bikeId">The bike id of specified bike</param>
         public void FillRentBikeInfoForm(int bikeId)
         {
-            Bike bike = bikeService.GetBikeById(bikeId);
+            BaseBike bike = bikeService.GetBikeById(bikeId);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
-            rentBikeInfoCategoryTxt.Text = Config.BIKE_CATEGORY[bike.Category];
-            rentBikeInfoLicenseTxt.Text = (bike.LicensePlate == "") ? "Không có thông tin" : bike.LicensePlate;
-            rentBikeInfoDepositTxt.Text = "1000";
+            if (bike is Bike)
+            {
+                rentBikeInfoCategoryTxt.Text = "Xe đạp thường";
+                rentingLicenseTxt.Text = "Không có thông tin";
+                rentBikeInfoDepositTxt.Text = Config.BIKE_DEPOSIT["bike"].ToString();
+            }
+            else if (bike is ElectricBike)
+            {
+                rentingCategoryTxt.Text = "Xe đạp điện";
+                rentingLicenseTxt.Text = "Không có thông tin";
+                rentBikeInfoDepositTxt.Text = Config.BIKE_DEPOSIT["electric"].ToString();
+            }
+            else
+            {
+                Tandem tandem = bike as Tandem;
+                rentingCategoryTxt.Text = "Xe đạp đôi";
+                rentingLicenseTxt.Text = tandem.LicensePlate;
+                rentBikeInfoDepositTxt.Text = "700000";
+                rentBikeInfoDepositTxt.Text = Config.BIKE_DEPOSIT["tandem"].ToString();
+            }
             rentBikeInfoDetailBut.Tag = bike.BikeId;
             rentBikeInfoRentThisBikeBut.Tag = bike.BikeId;
         }
@@ -196,7 +229,7 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Nhập mã qr code của xe muốn thuê");
                 return;
             }
-            Bike bike = bikeService.GetBikeByQRCode(qrCode);
+            BaseBike bike = bikeService.GetBikeByQRCode(qrCode);
             if (bike == null)
             {
                 MessageBox.Show("QrCode không hợp lệ");
@@ -231,7 +264,7 @@ namespace RentalBikeApp.Presentation
         private void RentBikeInfoDetailBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            Bike bike = bikeService.GetBikeById((int)but.Tag);
+            BaseBike bike = bikeService.GetBikeById((int)but.Tag);
             bikeDetailForm.FillBikeInformation(bike);
             bikeDetailForm.Show(this);
             this.Hide();

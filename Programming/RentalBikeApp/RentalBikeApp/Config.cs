@@ -47,8 +47,7 @@ namespace RentalBikeApp
             {
                 ELECTRIC,
                 TANDEM,
-                BIKE,
-                ALL
+                BIKE
             }
         }
 
@@ -135,7 +134,7 @@ namespace RentalBikeApp
         public static RENT_BIKE RENT_BIKE_STATUS;
 
         ///<Value>get current rental bike</Value>
-        public static Bike RENTAL_BIKE;
+        public static BaseBike RENTAL_BIKE;
 
         /// <value>
         /// Get the time rental bike

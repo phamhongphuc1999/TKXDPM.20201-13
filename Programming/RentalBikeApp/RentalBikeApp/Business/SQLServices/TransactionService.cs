@@ -38,7 +38,7 @@ namespace RentalBikeApp.Business.SQLServices
         {
             User checkUser = connecter.SqlData.Users.Find(userId);
             if (checkUser == null) return null;
-            Bike checkBike = connecter.SqlData.Bikes.Find(bikeId);
+            BaseBike checkBike = connecter.SqlData.Bikes.Find(bikeId);
             if (checkBike == null) return null;
             Transaction transaction = new Transaction()
             {

@@ -33,8 +33,7 @@ namespace RentalBikeApp.Business.SQLServices
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
         public Bike GetBikeByQRCode(string QRCode)
         {
-            Bike bike = connecter.SqlData.Bikes.SingleOrDefault(x => x.QRCode == QRCode);
-            return bike;
+            return connecter.SqlData.Bikes.SingleOrDefault(x => x.QRCode == QRCode);
         }
 
         /// <summary>Get bike by bike's id</summary>
@@ -42,23 +41,16 @@ namespace RentalBikeApp.Business.SQLServices
         /// <returns>Return the bike with specified ID or null if not found</returns>
         public Bike GetBikeById(int id)
         {
-            Bike bike = connecter.SqlData.Bikes.Find(id);
-            return bike;
+            return connecter.SqlData.Bikes.Find(id);
         }
 
         /// <summary>Filters a list bike in the station base on bike category</summary>
         /// <param name="stationId">The station you want to filter list of bike</param>
-        /// <param name="bikeCategory">the bike category you want to filter</param>
         /// <returns>Return the list base on bike category</returns>
-        public List<Bike> GetListBikesInStation(int stationId, Config.SQL.BikeCategory bikeCategory = Config.SQL.BikeCategory.ALL)
+        public List<Bike> GetListBikesInStation(int stationId)
         {
             List<Bike> bikesList = connecter.SqlData.Bikes.Where(x => x.StationId == stationId).ToList();
-            if (bikeCategory == Config.SQL.BikeCategory.ALL) return bikesList;
-            else if (bikeCategory == Config.SQL.BikeCategory.BIKE)
-                return bikesList.Where(x => x.Category == "bike").ToList();
-            else if (bikeCategory == Config.SQL.BikeCategory.ELECTRIC)
-                return bikesList.Where(x => x.Category == "electric").ToList();
-            else return bikesList.Where(x => x.Category == "tandem").ToList();
+            return bikesList;
         }
     }
 }

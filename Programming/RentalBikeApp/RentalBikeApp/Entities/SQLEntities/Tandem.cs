@@ -12,13 +12,15 @@
 //
 // ------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RentalBikeApp.Entities.SQLEntities
 {
-    [Table("Bikes")]
-    public class Bike: BaseBike
+    [Table("Tandem")]
+    public class Tandem: BaseBike
     {
-
+        [Required]
+        public string LicensePlate { get; set; }
     }
 }
