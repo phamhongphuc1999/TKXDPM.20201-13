@@ -19,9 +19,21 @@ namespace ReantalBikeTest
             stationService = new StationService();
         }
         [Test]
-        public void GetListStation()
+        public void GetListStationsTest()
         {
-            Station station = stationService.GetListStations();
+            List<Station> stations = stationService.GetListStations();
+            Assert.IsTrue(stations.Count > 0);
+        }
+        [Test]
+        public void GetStationByIdTest()
+        {
+            Station station = stationService.GetStationById(1);
+            Assert.IsNotNull(station);   
+        }
+        [Test]
+        public void GetStationByNameTest()
+        {
+            Station station = stationService.GetStationByName("B");
             Assert.IsNotNull(station);
         }
     }
