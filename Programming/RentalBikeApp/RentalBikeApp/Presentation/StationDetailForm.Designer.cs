@@ -8,7 +8,7 @@ namespace RentalBikeApp.Presentation
         private Panel infoPnl;
         private Label nameLbl, addressLbl, areaLbl, numberLbl, distanceLbl, timeLbl;
         private TextBox nameTxt, addressTxt, areaTxt, numberTxt, distanceTxt, timeTxt;
-        public Button bikeBut, tandemBut, electricBut, returnHomePageBut;
+        public Button bikeBut, tandemBut, electricBut;
 
         /// <summary>
         /// Initialized control in StationDetailForm
@@ -124,7 +124,7 @@ namespace RentalBikeApp.Presentation
             };
             bikeBut = new Button()
             {
-                Size = new Size(150, 50),
+                Size = new Size(220, 50),
                 Location = new Point(20, 345),
                 Text = "Xe đạp đơn",
                 Font = new Font("Arial", 12, FontStyle.Regular),
@@ -133,8 +133,8 @@ namespace RentalBikeApp.Presentation
             };
             tandemBut = new Button()
             {
-                Size = new Size(150, 50),
-                Location = new Point(190, 345),
+                Size = new Size(220, 50),
+                Location = new Point(290, 345),
                 Text = "Xe đạp đôi",
                 Font = new Font("Helvetica", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
@@ -142,24 +142,13 @@ namespace RentalBikeApp.Presentation
             };
             electricBut = new Button()
             {
-                Size = new Size(150, 50),
-                Location = new Point(360, 345),
+                Size = new Size(220, 50),
+                Location = new Point(560, 345),
                 Text = "Xe đạp điện",
                 Font = new Font("Helvetica", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
-            returnHomePageBut = new Button()
-            {
-                Size = new Size(250, 50),
-                Location = new Point(530, 345),
-                Text = "Quay lại trang chủ",
-                Font = new Font("Helvetica", 12, FontStyle.Regular),
-                BackColor = ColorTranslator.FromHtml("#d4e3fc"),
-                FlatStyle = FlatStyle.Flat
-            };
-
-            returnHomePageBut.Click += ReturnHomePageBut_Click;
             bikeBut.Click += BikeBut_Click;
             electricBut.Click += ElectricBut_Click;
             tandemBut.Click += TandemBut_Click;
@@ -179,7 +168,6 @@ namespace RentalBikeApp.Presentation
             infoPnl.Controls.Add(bikeBut);
             infoPnl.Controls.Add(tandemBut);
             infoPnl.Controls.Add(electricBut);
-            infoPnl.Controls.Add(returnHomePageBut);
             this.Controls.Add(infoPnl);
         }
     }

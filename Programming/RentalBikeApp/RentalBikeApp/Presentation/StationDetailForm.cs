@@ -1,8 +1,20 @@
-﻿// Copyright (c) Microsoft. All Rights Reserved.
-//  License under the Apache License, Version 2.0.
+﻿// --------------------RENTAL BIKE APP-----------------
+//
+//
+// Copyright (c) Microsoft. All Rights Reserved.
+// License under the Apache License, Version 2.0.
+//
+//   Su Huu Vu Quang
+//   Pham Hong Phuc
+//   Tran Minh Quang
+//   Ngo Minh Quang
+//
+//
+// ------------------------------------------------------
 
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
+using System;
 
 namespace RentalBikeApp.Presentation
 {
@@ -49,6 +61,7 @@ namespace RentalBikeApp.Presentation
             DrawStationDetail();
             rentBikeBut.Click += RentBikeBut_Click;
             homePageBut.Click += HomePageBut_Click;
+            prevFormBut.Click += PrevFormBut_Click;
         }
 
         /// <summary>
@@ -74,7 +87,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void HomePageBut_Click(object sender, System.EventArgs e)
+        private void HomePageBut_Click(object sender, EventArgs e)
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
             _homePageForm.Show(this);
@@ -86,10 +99,21 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void RentBikeBut_Click(object sender, System.EventArgs e)
+        private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
+            _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS, this);
             this.Hide();
+        }
+
+        /// <summary>
+        /// Handle click event PrevFormBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
+        private void PrevFormBut_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.PrevForm.Show(this);
         }
 
         /// <summary>
@@ -97,11 +121,11 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void TandemBut_Click(object sender, System.EventArgs e)
+        private void TandemBut_Click(object sender, EventArgs e)
         {
             Station station = stationService.GetStationById((int)tandemBut.Tag);
             listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.TANDEM);
-            listBikeForm.Show(this);
+            listBikeForm.Show(this, this);
             this.Hide();
         }
 
@@ -110,11 +134,11 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void ElectricBut_Click(object sender, System.EventArgs e)
+        private void ElectricBut_Click(object sender, EventArgs e)
         {
             Station station = stationService.GetStationById((int)electricBut.Tag);
             listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.ELECTRIC);
-            listBikeForm.Show(this);
+            listBikeForm.Show(this, this);
             this.Hide();
         }
 
@@ -123,22 +147,11 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void BikeBut_Click(object sender, System.EventArgs e)
+        private void BikeBut_Click(object sender, EventArgs e)
         {
             Station station = stationService.GetStationById((int)bikeBut.Tag);
             listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.BIKE);
-            listBikeForm.Show(this);
-            this.Hide();
-        }
-
-        /// <summary>
-        /// Handle click event ReturnHomePage, display HomePageForm
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void ReturnHomePageBut_Click(object sender, System.EventArgs e)
-        {
-            _homePageForm.Show(this);
+            listBikeForm.Show(this, this);
             this.Hide();
         }
     }

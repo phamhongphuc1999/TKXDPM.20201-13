@@ -1,5 +1,16 @@
-﻿// Copyright (c) Microsoft. All Rights Reserved.
-//  License under the Apache License, Version 2.0.
+﻿// --------------------RENTAL BIKE APP-----------------
+//
+//
+// Copyright (c) Microsoft. All Rights Reserved.
+// License under the Apache License, Version 2.0.
+//
+//   Su Huu Vu Quang
+//   Pham Hong Phuc
+//   Tran Minh Quang
+//   Ngo Minh Quang
+//
+//
+// ------------------------------------------------------
 
 using System;
 using System.Linq;
@@ -103,7 +114,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this);
+            _rentBikeForm.Show(this, this);
             this.Hide();
         }
 

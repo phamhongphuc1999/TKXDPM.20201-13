@@ -1,5 +1,16 @@
-﻿// Copyright (c) Microsoft. All Rights Reserved.
-//  License under the Apache License, Version 2.0.
+﻿// --------------------RENTAL BIKE APP-----------------
+//
+//
+// Copyright (c) Microsoft. All Rights Reserved.
+// License under the Apache License, Version 2.0.
+//
+//   Su Huu Vu Quang
+//   Pham Hong Phuc
+//   Tran Minh Quang
+//   Ngo Minh Quang
+//
+//
+// ------------------------------------------------------
 
 using System;
 using System.Linq;
@@ -65,6 +76,7 @@ namespace RentalBikeApp.Presentation
             DrawListBikes();
             homePageBut.Click += HomePageBut_Click;
             rentBikeBut.Click += RentBikeBut_Click;
+            prevFormBut.Click += PrevFormBut_Click;
         }
 
         /// <summary>
@@ -77,9 +89,13 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId, category);
             int count = bikesList.Count(x => !x.BikeStatus);
-            string categoryBike = Config.BIKE_CATEGORY[bikesList[0].Category];
-            descriptionRtb.Text = string.Format("{0}\nCòn lại {1} xe", categoryBike, count.ToString());
-            stationRtb.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
+            if (count > 0)
+            {
+                string categoryBike = Config.BIKE_CATEGORY[bikesList[0].Category];
+                descriptionRtb.Text = $"{categoryBike}\nCòn lại {count} xe";
+            }
+            else descriptionRtb.Text = "Bãi xe không còn xe";
+            stationRtb.Text = $"{station.NameStation}\n{station.AddressStation}";
             int X = 20, Y = 5;
             int count1 = 1;
             foreach (Bike bike in bikesList)
@@ -89,7 +105,7 @@ namespace RentalBikeApp.Presentation
                     Location = new Point(X, Y),
                     Size = new Size(listBikePnl.Width - 40, 50),
                     BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
-                    Text = string.Format("xe số {0}:{1}", count1.ToString(), bike.QRCode),
+                    Text = $"xe số {count1}:{bike.QRCode}",
                     Tag = bike.BikeId
                 };
                 Y += 55; count1++;
@@ -110,7 +126,7 @@ namespace RentalBikeApp.Presentation
             _bikeDetailForm.FillBikeInformation(bike);
             _bikeDetailForm.Show(this);
             this.Hide();
-            bikeDetailForm.Show();
+            bikeDetailForm.Show(this, this);
         }
 
         /// <summary>
@@ -120,7 +136,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
+            _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS, this);
             this.Hide();
         }
 
@@ -137,14 +153,14 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
-        /// Handle click event ReturnStationBut
+        /// Handle click event PrevFormBut
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void ReturnStationBut_Click(object sender, EventArgs e)
+        private void PrevFormBut_Click(object sender, EventArgs e)
         {
-            stationDetailForm.Show(this);
             this.Hide();
+            this.PrevForm.Show(this);
         }
 
         /// <summary>

@@ -1,5 +1,16 @@
-﻿// Copyright (c) Microsoft. All Rights Reserved.
-//  License under the Apache License, Version 2.0.
+﻿// --------------------RENTAL BIKE APP-----------------
+//
+//
+// Copyright (c) Microsoft. All Rights Reserved.
+// License under the Apache License, Version 2.0.
+//
+//   Su Huu Vu Quang
+//   Pham Hong Phuc
+//   Tran Minh Quang
+//   Ngo Minh Quang
+//
+//
+// ------------------------------------------------------
 
 using System;
 using System.Windows.Forms;
@@ -7,7 +18,6 @@ using RentalBikeApp.Business;
 using static RentalBikeApp.Config;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Entities.APIEntities;
-using System.Runtime.CompilerServices;
 
 namespace RentalBikeApp.Presentation
 {
@@ -57,6 +67,7 @@ namespace RentalBikeApp.Presentation
             DrawTransactionInformationForm();
             homePageBut.Click += HomePageBut_Click;
             rentBikeBut.Click += RentBikeBut_Click;
+            prevFormBut.Click += PrevFormBut_Click;
         }
 
         private TRANSACTION_STATUS status;
@@ -100,7 +111,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show();
+            _rentBikeForm.Show(this, this);
             this.Show();
         }
 
@@ -113,6 +124,17 @@ namespace RentalBikeApp.Presentation
         {
             _homePageForm.RenderStationList(_homePageForm.stationPnl);
             _homePageForm.Show();
+            this.Hide();
+        }
+
+        /// <summary>
+        /// Handle click event PrevFormBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
+        private void PrevFormBut_Click(object sender, EventArgs e)
+        {
+            this.PrevForm.Show(this);
             this.Hide();
         }
 
@@ -154,7 +176,7 @@ namespace RentalBikeApp.Presentation
                     return;
                 }
             }
-            else if (status == TRANSACTION_STATUS.PAY) 
+            else if (status == TRANSACTION_STATUS.PAY)
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
                 if(this.deposit < this.rentalMoney)
