@@ -22,7 +22,8 @@ namespace RentalBikeApp.Presentation
     public partial class RentBikeForm : BaseForm
     {
         private BikeService bikeService;
-        private StationService stationService;
+        private TandemService tandemService;
+        private ElectricBikeService electricBikeService;
 
         private HomePageForm _homePageForm;
         /// <value>
@@ -67,7 +68,8 @@ namespace RentalBikeApp.Presentation
         public RentBikeForm()
         {
             bikeService = new BikeService();
-            stationService = new StationService();
+            tandemService = new TandemService();
+            electricBikeService = new ElectricBikeService();
 
             InitializeComponent("RentBikeForm", "Rent Bike");
             DrawBaseForm();
@@ -155,17 +157,20 @@ namespace RentalBikeApp.Presentation
         /// Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
         /// </summary>
         /// <param name="bikeId">The bike id of specified bike</param>
-        public void FillRentBikeInfoForm(int bikeId)
+        public void FillRentBikeInfoForm((int, Config.SQL.BikeCategory) bikeInfo)
         {
-            BaseBike bike = bikeService.GetBikeById(bikeId);
+            BaseBike bike;
+            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE) bike = bikeService.GetBikeById(bikeInfo.Item1);
+            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC) bike = electricBikeService.GetBikeById(bikeInfo.Item1);
+            else bike = tandemService.GetBikeById(bikeInfo.Item1);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
-            if (bike is Bike)
+            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
             {
                 rentBikeInfoCategoryTxt.Text = "Xe đạp thường";
                 rentingLicenseTxt.Text = "Không có thông tin";
                 rentBikeInfoDepositTxt.Text = Config.BIKE_DEPOSIT["bike"].ToString();
             }
-            else if (bike is ElectricBike)
+            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC)
             {
                 rentingCategoryTxt.Text = "Xe đạp điện";
                 rentingLicenseTxt.Text = "Không có thông tin";
@@ -179,8 +184,8 @@ namespace RentalBikeApp.Presentation
                 rentBikeInfoDepositTxt.Text = "700000";
                 rentBikeInfoDepositTxt.Text = Config.BIKE_DEPOSIT["tandem"].ToString();
             }
-            rentBikeInfoDetailBut.Tag = bike.BikeId;
-            rentBikeInfoRentThisBikeBut.Tag = bike.BikeId;
+            rentBikeInfoDepositTxt.Tag = bikeInfo;
+            rentBikeInfoRentThisBikeBut.Tag = bikeInfo;
         }
 
         /// <summary>
@@ -229,7 +234,10 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Nhập mã qr code của xe muốn thuê");
                 return;
             }
-            BaseBike bike = bikeService.GetBikeByQRCode(qrCode);
+            BaseBike bike;
+            if (qrCode[0] == '0') bike = bikeService.GetBikeByQRCode(qrCode);
+            else if (qrCode[0] == '1') bike = tandemService.GetBikeByQRCode(qrCode);
+            else bike = electricBikeService.GetBikeByQRCode(qrCode);
             if (bike == null)
             {
                 MessageBox.Show("QrCode không hợp lệ");
@@ -251,7 +259,12 @@ namespace RentalBikeApp.Presentation
         private void RentBikeInfoRentThisBikeBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            Config.RENTAL_BIKE = bikeService.GetBikeById((int)but.Tag);
+            (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
+            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
+                Config.RENTAL_BIKE = bikeService.GetBikeById(bikeInfo.Item1);
+            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC)
+                Config.RENTAL_BIKE = electricBikeService.GetBikeById(bikeInfo.Item1);
+            else Config.RENTAL_BIKE = tandemService.GetBikeById(bikeInfo.Item1);
             cardInformationForm.Show(this);
             this.Hide();
         }
@@ -264,7 +277,13 @@ namespace RentalBikeApp.Presentation
         private void RentBikeInfoDetailBut_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            BaseBike bike = bikeService.GetBikeById((int)but.Tag);
+            (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
+            BaseBike bike;
+            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
+                bike = bikeService.GetBikeById(bikeInfo.Item1);
+            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC)
+                bike = electricBikeService.GetBikeById(bikeInfo.Item1);
+            else bike = tandemService.GetBikeById(bikeInfo.Item1);
             bikeDetailForm.FillBikeInformation(bike);
             bikeDetailForm.Show(this);
             this.Hide();

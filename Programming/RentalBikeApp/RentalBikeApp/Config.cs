@@ -170,16 +170,6 @@ namespace RentalBikeApp
         }
 
         /// <value>
-        /// Translate bike category
-        /// </value>
-        public static Dictionary<string, string> BIKE_CATEGORY = new Dictionary<string, string>()
-        {
-            {"bike", "Xe đạp thường" },
-            {"electric", "Xe đạp điện" },
-            {"tandem", "Xe đạp đôi" }
-        };
-
-        /// <value>
         /// Define bike deposit base on bike category
         /// </value>
         public static Dictionary<string, int> BIKE_DEPOSIT = new Dictionary<string, int>()

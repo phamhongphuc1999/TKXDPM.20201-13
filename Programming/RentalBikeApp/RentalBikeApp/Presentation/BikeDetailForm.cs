@@ -81,6 +81,7 @@ namespace RentalBikeApp.Presentation
                 categoryBikeTxt.Text = "Xe đạp thường";
                 powerTxt.Text = "Không có thông tin";
                 licenceTxt.Text = "Không có thông tin";
+                rentThisBikeBut.Tag = (bike.BikeId, Config.SQL.BikeCategory.BIKE);
             }
             else if(bike is Tandem)
             {
@@ -88,6 +89,7 @@ namespace RentalBikeApp.Presentation
                 categoryBikeTxt.Text = "Xe đạp đôi";
                 powerTxt.Text = "Không có thông tin";
                 licenceTxt.Text = tandem.LicensePlate;
+                rentThisBikeBut.Tag = (bike.BikeId, Config.SQL.BikeCategory.TANDEM);
             }
             else
             {
@@ -95,8 +97,8 @@ namespace RentalBikeApp.Presentation
                 categoryBikeTxt.Text = "Xe đạp điện";
                 powerTxt.Text = $"{electric.Powers}%";
                 licenceTxt.Text = "Không có thông tin";
+                rentThisBikeBut.Tag = (bike.BikeId, Config.SQL.BikeCategory.ELECTRIC);
             }
-            rentThisBikeBut.Tag = bike.BikeId;
         }
 
         /// <summary>
@@ -141,10 +143,10 @@ namespace RentalBikeApp.Presentation
         private void RentThisBikeBut_Click(object sender, EventArgs e)
         {
             Button rentThisBikeBut = sender as Button;
-            int bikeId = (int)rentThisBikeBut.Tag;
+            (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))rentThisBikeBut.Tag;
             if(Config.RENT_BIKE_STATUS != Config.RENT_BIKE.RENTING_BIKE)
             {
-                _rentBikeForm.FillRentBikeInfoForm(bikeId);
+                _rentBikeForm.FillRentBikeInfoForm(bikeInfo);
                 _rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO);
             }
             else
