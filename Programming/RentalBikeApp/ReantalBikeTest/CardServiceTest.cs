@@ -29,10 +29,13 @@ namespace ReantalBikeTest
             cardService = new CardService();
         }
 
+        /// <summary>
+        /// Test for case get card by card holder
+        /// </summary>
         [Test]
         public void GetCardByOwnerTest()
         {
-            Card card = cardService.GetCardByOwner(1);
+            Card card = cardService.GetCardByOwner("Group 13");
             Assert.IsNotNull(card);
         }
     }

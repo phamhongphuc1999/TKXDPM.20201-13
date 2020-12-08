@@ -1,5 +1,16 @@
-﻿// Copyright (c) Microsoft. All Rights Reserved.
-//  License under the Apache License, Version 2.0.
+﻿// --------------------RENTAL BIKE APP-----------------
+//
+//
+// Copyright (c) Microsoft. All Rights Reserved.
+// License under the Apache License, Version 2.0.
+//
+//   Su Huu Vu Quang
+//   Pham Hong Phuc
+//   Tran Minh Quang
+//   Ngo Minh Quang
+//
+//
+// ------------------------------------------------------
 
 using NUnit.Framework;
 using RentalBikeApp.Business.SQLServices;
@@ -18,22 +29,34 @@ namespace ReantalBikeTest
         {
             stationService = new StationService();
         }
+
+        /// <summary>
+        /// Test for get list station
+        /// </summary>
         [Test]
         public void GetListStationsTest()
         {
             List<Station> stations = stationService.GetListStations();
             Assert.IsTrue(stations.Count > 0);
         }
+
+        /// <summary>
+        /// Test for get station by id
+        /// </summary>
         [Test]
         public void GetStationByIdTest()
         {
             Station station = stationService.GetStationById(1);
             Assert.IsNotNull(station);   
         }
+
+        /// <summary>
+        /// Test for get station by name
+        /// </summary>
         [Test]
         public void GetStationByNameTest()
         {
-            Station station = stationService.GetStationByName("B");
+            Station station = stationService.GetStationByName("Station 1");
             Assert.IsNotNull(station);
         }
     }

@@ -29,22 +29,55 @@ namespace ReantalBikeTest
             userService = new UserService();
         }
 
-        [Test]
+        /// <summary>
+        /// Test for insert new user
+        /// </summary>
+        [Test, Order(0)]
         public void InsertNewUserTest()
         {
-            User cus = new User()
+            NewUserInfo newUser = new NewUserInfo()
             {
                 CardId = 1,
-                UserName = "Ngo Minh Quang",
-                AccountPassword = "minhquang",
-                AccountName ="quang.nm173326",
-                CusAddress = "Ha Noi",
+                Name = "Ngo Minh Quang",
+                Password = "minhquang",
+                Username ="quang.nm173326",
+                Address = "Ha Noi",
                 Email = "quang.nm173326@gmail.com",
                 Phone = "0969696969",
-                Gender = "Nam",
-                AccountStatus = "enable"
+                Gender = "Nam"
             };
-            User user = userService.InsertNewUser(cus);
+            User user = userService.InsertNewUser(newUser);
+            Assert.IsNotNull(user);
+        }
+
+        /// <summary>
+        /// Test for insert new user with exist username
+        /// </summary>
+        [Test, Order(1)]
+        public void InsertNewUserWithExistUsernameTest()
+        {
+            NewUserInfo newUser = new NewUserInfo()
+            {
+                CardId = 1,
+                Name = "Ngo Minh Quang",
+                Password = "minhquang",
+                Username = "quang.nm173326",
+                Address = "Ha Noi",
+                Email = "quang.nm173326@gmail.com",
+                Phone = "0969696969",
+                Gender = "Nam"
+            };
+            User user = userService.InsertNewUser(newUser);
+            Assert.IsNull(user);
+        }
+
+        /// <summary>
+        /// Test for delete user base on username
+        /// </summary>
+        [Test, Order(2)]
+        public void DeleteUserTest()
+        {
+            User user = userService.DeleteUserByUsername("quang.nm173326");
             Assert.IsNotNull(user);
         }
     }

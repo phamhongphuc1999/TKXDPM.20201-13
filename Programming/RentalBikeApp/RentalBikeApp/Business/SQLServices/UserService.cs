@@ -32,23 +32,33 @@ namespace RentalBikeApp.Business.SQLServices
         /// </summary>
         /// <param name="newUser">user information to create new user</param>
         /// <returns>The User represent for new user</returns>
-        public User InsertNewUser(User newUser)
+        public User InsertNewUser(NewUserInfo newUser)
         {
-            User checkUser = connecter.SqlData.Users.SingleOrDefault(x => x.AccountName == newUser.AccountName);
+            User checkUser = connecter.SqlData.Users.SingleOrDefault(x => x.Username == newUser.Username);
             if (checkUser != null) return null;
             User user = new User()
             {
                 CardId = newUser.CardId,
-                UserName = newUser.UserName,
-                AccountPassword = newUser.AccountPassword,
-                AccountName = newUser.AccountName,
-                CusAddress = newUser.CusAddress,
+                Name = newUser.Name,
+                Password = newUser.Password,
+                Username = newUser.Username,
+                Address = newUser.Address,
                 Email = newUser.Email,
                 Phone = newUser.Phone,
                 Gender = newUser.Gender,
                 AccountStatus = "enable"
             };
             connecter.SqlData.Users.Add(user);
+            int check = connecter.SqlData.SaveChanges();
+            if (check > 0) return user;
+            else return null;
+        }
+
+        public User DeleteUserByUsername(string username)
+        {
+            User user = connecter.SqlData.Users.SingleOrDefault(x => x.Username == username);
+            if (user == null) return null;
+            connecter.SqlData.Users.Remove(user);
             int check = connecter.SqlData.SaveChanges();
             if (check > 0) return user;
             else return null;

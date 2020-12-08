@@ -30,32 +30,44 @@ namespace ReantalBikeTest
             bikeService = new BikeService();
         }
 
+        /// <summary>
+        /// Test for case get bike with correct QR Code
+        /// </summary>
         [Test]
         public void GetBikeByQRCodeTest()
         {
-            BaseBike bike = bikeService.GetBikeByQRCode("000000001");
+            Bike bike = bikeService.GetBikeByQRCode("000000001");
             Assert.IsNotNull(bike);
         }
 
+        /// <summary>
+        /// Test for case get bike with not exist QR Code
+        /// </summary>
+        [Test]
+        public void GetBikeWithNotExistQRCodeTest()
+        {
+            Bike bike = bikeService.GetBikeByQRCode("000000000");
+            Assert.IsNull(bike);
+        }
+
+        /// <summary>
+        /// Test for case get bike by id
+        /// </summary>
         [Test]
         public void GetBikeByIdTest()
         {
-            BaseBike bike = bikeService.GetBikeById(1);
+            Bike bike = bikeService.GetBikeById(1);
             Assert.IsNotNull(bike);
         }
 
-        //[Test]
-        //public void GetListAllBikesInStationTest()
-        //{
-        //    List<BaseBike> bikes = bikeService.GetListBikesInStation(1);
-        //    Assert.IsTrue(bikes.Count > 0);
-        //}
-
-        //[Test]
-        //public void GetListElectricBikesInStationTest()
-        //{
-        //    List<BaseBike> bikes = bikeService.GetListBikesInStation(1, RentalBikeApp.Config.SQL.BikeCategory.ELECTRIC);
-        //    Assert.IsTrue(bikes.Count > 0);
-        //}
+        /// <summary>
+        /// Test for case get all bike in the station
+        /// </summary>
+        [Test]
+        public void GetListAllBikesInStationTest()
+        {
+            List<Bike> bikes = bikeService.GetListBikesInStation(1);
+            Assert.IsTrue(bikes.Count > 0);
+        }
     }
 }

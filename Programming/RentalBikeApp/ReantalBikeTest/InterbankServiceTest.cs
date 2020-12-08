@@ -32,13 +32,19 @@ namespace ReantalBikeTest
             interbankService = new InterbankService();
         }
 
+        /// <summary>
+        /// Test for Calculate Fee function
+        /// </summary>
         [Test, Order(0)]
         public void CalculateFeeTest()
         {
             int rentalMoney = interbankService.CalculateFee("0:16:00", Config.SQL.BikeCategory.BIKE);
-            Assert.AreEqual(rentalMoney, 15000);
+            Assert.AreEqual(rentalMoney, 10000);
         }
 
+        /// <summary>
+        /// Test for case process transaction with zero amount
+        /// </summary>
         [Test, Order(1)]
         public void ProcessTransactionErrorAmountTest()
         {
@@ -58,6 +64,9 @@ namespace ReantalBikeTest
             Assert.AreEqual("05", result.errorCode);
         }
 
+        /// <summary>
+        /// Test for process correct transaction
+        /// </summary>
         [Test, Order(2)]
         public void ProcessTransactionSuccessTest()
         {
@@ -77,6 +86,9 @@ namespace ReantalBikeTest
             Assert.AreEqual("00", result.errorCode);
         }
 
+        /// <summary>
+        /// Test for case process transaction with not enough money
+        /// </summary>
         [Test, Order(3)]
         public void ProcessTransactionNotEnoughMoneyTest()
         {
@@ -96,6 +108,9 @@ namespace ReantalBikeTest
             Assert.AreEqual("02", result.errorCode);
         }
 
+        /// <summary>
+        /// Test for API reset account
+        /// </summary>
         [Test, Order(4)]
         public void ResetAccountTest()
         {
