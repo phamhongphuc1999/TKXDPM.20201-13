@@ -24,11 +24,11 @@ namespace ReantalBikeTest
    class TransactionServiceTests
     {
        
-        private TransactionService transactionservice;
+        private TransactionService transactionService;
         [SetUp]
         public void Setup()
         {
-            transactionservice = new TransactionService();
+            transactionService = new TransactionService();
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace ReantalBikeTest
         [Test]
         public void GetTransactionByIdTest()
         {
-            Transaction transaction = transactionservice.GetTransactionById(1);
+            Transaction transaction = transactionService.GetTransactionById(1);
             Assert.IsNotNull(transaction);
         }
 
@@ -66,7 +66,7 @@ namespace ReantalBikeTest
         [Test]
         public void GetLastTransactionByUserIdTest()
         {
-            Transaction transaction = transactionservice.GetLastTransactionByUserId(3);
+            Transaction transaction = transactionService.GetLastTransactionByUserId(3);
             Assert.IsNotNull(transaction);
         }
 
@@ -76,7 +76,7 @@ namespace ReantalBikeTest
         [Test]
         public void GetListTransactionsByUserIdTest()
         {
-            List<Transaction> transactions = transactionservice.GetListTransactionsByUserId(1);
+            List<Transaction> transactions = transactionService.GetListTransactionsByUserId(1);
             Assert.IsTrue(transactions.Count > 0);
         }
 
@@ -87,7 +87,7 @@ namespace ReantalBikeTest
         public void UpdateTransactionTest()
         {
             DateTime aDateTime = new DateTime(2020, 12, 20, 00, 00, 00);
-            bool result = transactionservice.UpdateTransaction(1, 10000, aDateTime, "");
+            bool result = transactionService.UpdateTransaction(1, 10000, aDateTime, "");
             Assert.IsTrue(result);
         }
     }
