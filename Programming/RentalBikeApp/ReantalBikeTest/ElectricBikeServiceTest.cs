@@ -15,7 +15,6 @@
 using NUnit.Framework;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
-using System;
 using System.Collections.Generic;
 
 namespace ReantalBikeTest
@@ -24,23 +23,36 @@ namespace ReantalBikeTest
     class ElectricBikeServiceTest
     {
         private ElectricBikeService electricBikeService;
+
         [SetUp]
         public void Setup()
         {
             electricBikeService = new ElectricBikeService();
         }
+
+        /// <summary>
+        /// Test for get bike by QR Code
+        /// </summary>
         [Test]
         public void GetBikeByQRCodeTest()
         {
             ElectricBike electricBike = electricBikeService.GetBikeByQRCode(" ");
             Assert.IsNotNull(electricBike);
         }
+
+        /// <summary>
+        /// Test for get bike by id
+        /// </summary>
         [Test]
         public void GetBikeByIdTest()
         {
             ElectricBike electricBike = electricBikeService.GetBikeById(1);
             Assert.IsNotNull(electricBike);
         }
+
+        /// <summary>
+        /// Test for get list bike in the station
+        /// </summary>
         [Test]
         public void GetListBikesInStationTest()
         {

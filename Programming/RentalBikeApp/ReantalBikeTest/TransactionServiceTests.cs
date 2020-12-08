@@ -51,7 +51,7 @@ namespace ReantalBikeTest
         }
 
         /// <summary>
-        /// Test for get transaction bu id
+        /// Test for get transaction by id
         /// </summary>
         [Test]
         public void GetTransactionByIdTest()

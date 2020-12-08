@@ -39,6 +39,7 @@
 - Trần Minh Quang review Task1:Biểu đồ trình tự thể hiện đầy đủ phương thức, biểu đổ lớp phân tích UC "hiển thị xe trong bãi và thông tin của xe" thể hiện đầy đủ nội dung các yêu cầu
 - Sư Hữu Vũ Quang review Task2: Biểu đồ trình tự thể hiện đầy đủ phương thức, cách thức với các đối tượng. Biểu đồ lớp phân tích UC "Thuê xe" được chuyển từ Biểu đồ trình tự nên thể hiện đầy đủ nội dung yêu cầu và các lớp có trong UC "Thuê xe"
 - Phạm Hồng Phúc review Task 4: Biểu đồ lớp phân tích gộp đã thể hiện được tương tác giữa các use case khác nhau
+
 ---
 # DetailDesign
 ## Tasks
@@ -60,3 +61,15 @@
 - Sư Hữu Vũ Quang review Task 1,4: Giao diện, mock up đầy đủ thiết kế sát với dự tính ban đầu của nhóm, hiển thị khá đầy đủ chức năng, một số chức năng còn chưa hợp lý(đang bàn bạc); Biểu đồ E-R, database khá hoàn thiện, còn thiếu một số trường đang tiếp tục hoàn thiện 
 - Ngô Minh Quang review Task 2:Biểu đồ dịch chuyển màn hình và đặc tả màn hình đầy đủ, mô tả được sự dịch chuyển giữa các màn hình, màn hình được đặc tả chi tiết và đầy đủ.
 - Trần Minh Quang review Task 3:Biều đồ thiết kế lớp đầy đủ các lớp,các biểu đổ lớp chi tiết đầy đủ các thành phần
+
+---
+# Programming
+## Tasks
+## Contributions
+## Revisions
+
+---
+# UnitTest
+## Task
+## Contributions
+## Revisions
