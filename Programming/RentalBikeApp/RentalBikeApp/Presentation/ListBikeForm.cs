@@ -26,6 +26,8 @@ namespace RentalBikeApp.Presentation
     public partial class ListBikeForm : BaseForm
     {
         private BikeService bikeService;
+        private TandemService tandemService;
+        private ElectricBikeService electricBikeService;
 
         private HomePageForm _homePageForm;
         /// <value>
@@ -70,6 +72,8 @@ namespace RentalBikeApp.Presentation
         public ListBikeForm()
         {
             bikeService = new BikeService();
+            tandemService = new TandemService();
+            electricBikeService = new ElectricBikeService();
 
             InitializeComponent("ListBikesForm", "List Bikes");
             DrawBaseForm();
@@ -79,21 +83,13 @@ namespace RentalBikeApp.Presentation
             prevFormBut.Click += PrevFormBut_Click;
         }
 
-        /// <summary>
-        /// Fill ListBikeForm with bike's information in specified category
-        /// </summary>
-        /// <param name="station">The station contain list bike is displayed</param>
-        /// <param name="category">The specified bike's category</param>
-        public void FillListBikes(Station station, Config.SQL.BikeCategory category)
+        private void FillListBikes(Station station)
         {
             listBikePnl.Controls.Clear();
-            List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId, category);
+            List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId);
             int count = bikesList.Count(x => !x.BikeStatus);
             if (count > 0)
-            {
-                string categoryBike = Config.BIKE_CATEGORY[bikesList[0].Category];
-                descriptionRtb.Text = $"{categoryBike}\nCòn lại {count} xe";
-            }
+                descriptionRtb.Text = $"Xe đạp thường\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
             stationRtb.Text = $"{station.NameStation}\n{station.AddressStation}";
             int X = 20, Y = 5;
@@ -106,12 +102,78 @@ namespace RentalBikeApp.Presentation
                     Size = new Size(listBikePnl.Width - 40, 50),
                     BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
                     Text = $"xe số {count1}:{bike.QRCode}",
-                    Tag = bike.BikeId
+                    Tag = (bike.BikeId, Config.SQL.BikeCategory.BIKE)
                 };
                 Y += 55; count1++;
                 but.Click += But_Click;
                 listBikePnl.Controls.Add(but);
             }
+        }
+
+        private void FillListTandems(Station station)
+        {
+            listBikePnl.Controls.Clear();
+            List<Tandem> bikesList = tandemService.GetListBikesInStation(station.StationId);
+            int count = bikesList.Count(x => !x.BikeStatus);
+            if (count > 0)
+                descriptionRtb.Text = $"Xe đạp đôi\nCòn lại {count} xe";
+            else descriptionRtb.Text = "Bãi xe không còn xe";
+            stationRtb.Text = $"{station.NameStation}\n{station.AddressStation}";
+            int X = 20, Y = 5;
+            int count1 = 1;
+            foreach (Tandem bike in bikesList)
+            {
+                Button but = new Button()
+                {
+                    Location = new Point(X, Y),
+                    Size = new Size(listBikePnl.Width - 40, 50),
+                    BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
+                    Text = $"xe số {count1}:{bike.QRCode}",
+                    Tag = (bike.BikeId, Config.SQL.BikeCategory.TANDEM)
+                };
+                Y += 55; count1++;
+                but.Click += But_Click;
+                listBikePnl.Controls.Add(but);
+            }
+        }
+
+        private void FillListElectric(Station station)
+        {
+            listBikePnl.Controls.Clear();
+            List<ElectricBike> bikesList = electricBikeService.GetListBikesInStation(station.StationId);
+            int count = bikesList.Count(x => !x.BikeStatus);
+            if (count > 0)
+                descriptionRtb.Text = $"Xe đạp điện\nCòn lại {count} xe";
+            else descriptionRtb.Text = "Bãi xe không còn xe";
+            stationRtb.Text = $"{station.NameStation}\n{station.AddressStation}";
+            int X = 20, Y = 5;
+            int count1 = 1;
+            foreach (ElectricBike bike in bikesList)
+            {
+                Button but = new Button()
+                {
+                    Location = new Point(X, Y),
+                    Size = new Size(listBikePnl.Width - 40, 50),
+                    BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
+                    Text = $"xe số {count1}:{bike.QRCode}",
+                    Tag = (bike.BikeId, Config.SQL.BikeCategory.ELECTRIC)
+                };
+                Y += 55; count1++;
+                but.Click += But_Click;
+                listBikePnl.Controls.Add(but);
+            }
+        }
+
+        /// <summary>
+        /// Fill ListBikeForm with bike's information in specified category
+        /// </summary>
+        /// <param name="station">The station contain list bike is displayed</param>
+        /// <param name="category">The specified bike's category</param>
+        public void FillListBikes(Station station, Config.SQL.BikeCategory category)
+        {
+            if (category == Config.SQL.BikeCategory.BIKE) FillListBikes(station);
+            else if (category == Config.SQL.BikeCategory.ELECTRIC) FillListElectric(station);
+            else FillListTandems(station);
         }
 
         /// <summary>
@@ -122,7 +184,11 @@ namespace RentalBikeApp.Presentation
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            Bike bike = bikeService.GetBikeById((int)but.Tag);
+            BaseBike bike;
+            (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
+            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE) bike = bikeService.GetBikeById(bikeInfo.Item1);
+            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC) bike = electricBikeService.GetBikeById(bikeInfo.Item1);
+            else bike = tandemService.GetBikeById(bikeInfo.Item1);
             _bikeDetailForm.FillBikeInformation(bike);
             _bikeDetailForm.Show(this);
             this.Hide();
@@ -182,7 +248,7 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Mã xe bạn nhập không hợp lệ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Bike bike = bikeService.GetBikeByQRCode(qrCode);
+            BaseBike bike = bikeService.GetBikeByQRCode(qrCode);
             if(bike == null)
             {
                 MessageBox.Show("Không tìm thấy mã xe: " + qrCode, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

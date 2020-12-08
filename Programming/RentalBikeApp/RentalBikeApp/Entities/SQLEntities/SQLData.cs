@@ -24,6 +24,8 @@ namespace RentalBikeApp.Entities.SQLEntities
 
         public DbSet<User> Users { get; set; }
         public DbSet<Bike> Bikes { get; set; }
+        public DbSet<Tandem> Tandems { get; set; }
+        public DbSet<ElectricBike> ElectricBikes { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<Transaction> Transactions { get; set; }

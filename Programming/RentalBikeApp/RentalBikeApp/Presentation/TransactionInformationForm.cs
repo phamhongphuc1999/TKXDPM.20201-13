@@ -83,9 +83,9 @@ namespace RentalBikeApp.Presentation
             cancelBut.Visible = false;
 
             Config.SQL.BikeCategory category = SQL.BikeCategory.BIKE;
-            if (Config.RENTAL_BIKE.Category == "bike") category = SQL.BikeCategory.BIKE;
-            else if (Config.RENTAL_BIKE.Category == "electric") category = SQL.BikeCategory.ELECTRIC;
-            else if (Config.RENTAL_BIKE.Category == "tandem") category = SQL.BikeCategory.TANDEM;
+            if (Config.RENTAL_BIKE is Bike) category = SQL.BikeCategory.BIKE;
+            else if (Config.RENTAL_BIKE is ElectricBike) category = SQL.BikeCategory.ELECTRIC;
+            else if (Config.RENTAL_BIKE is Tandem) category = SQL.BikeCategory.TANDEM;
             rentalMoney = interbankService.CalculateFee(Config.TIME_RENTAL_BIKE, category);
             rentalMoneyTxt.Text = (rentalMoney == 0) ? "Miễn phí" : rentalMoney.ToString();
         }
@@ -97,7 +97,9 @@ namespace RentalBikeApp.Presentation
         public void FillTransactionInformationWhenRentBike(Card card)
         {
             this.status = TRANSACTION_STATUS.RENT_BIKE;
-            this.deposit = Config.BIKE_DEPOSIT[Config.RENTAL_BIKE.Category];
+            if (Config.RENTAL_BIKE is Bike) this.deposit = Config.BIKE_DEPOSIT["bike"];
+            else if (Config.RENTAL_BIKE is ElectricBike) this.deposit = Config.BIKE_DEPOSIT["electric"];
+            else this.deposit = Config.BIKE_DEPOSIT["tandem"];
             depositTxt.Text = String.Format("{0:n0}", this.deposit);
             remainMoneyTxt.Text = "Không có dữ liệu";
             transactionDateTxt.Text = "Không có dữ liệu";

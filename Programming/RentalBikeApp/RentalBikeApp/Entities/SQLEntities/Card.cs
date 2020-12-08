@@ -28,19 +28,28 @@ namespace RentalBikeApp.Entities.SQLEntities
         [StringLength(100)]
         public string Bank { get; set; }
 
-        [Required(ErrorMessage = "ExpirationDate is required")]
-        [DisplayFormat(DataFormatString = "{0:d}")]
-        public DateTime ExpirationDate { get; set; }
+        [Required(ErrorMessage = "CardCode is required")]
+        [StringLength(50)]
+        public string CardCode { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "SecurityCode is required")]
+        [Required(ErrorMessage = "Owners is required")]
+        [StringLength(50)]
+        public string Owners { get; set; }
+
+        [Required(ErrorMessage = "CVV is required")]
         [StringLength(10)]
-        public string SecurityCode { get; set; }
+        public string CVV { get; set; }
 
-        [Required(AllowEmptyStrings = false, ErrorMessage = "PrivateToken is required")]
-        [StringLength(100)]
-        public string PrivateToken { get; set; }
+        [Required(ErrorMessage = "DateExpired is required")]
+        [StringLength(10)]
+        public string DateExpired { get; set; }
 
-        [StringLength(100)]
-        public string Note { get; set; }
+        [Required(ErrorMessage = "AppCode is required")]
+        [StringLength(50)]
+        public string AppCode { get; set; }
+
+        [Required(ErrorMessage = "SecurityKey is required")]
+        [StringLength(50)]
+        public string SecurityKey { get; set; }
     }
 }
