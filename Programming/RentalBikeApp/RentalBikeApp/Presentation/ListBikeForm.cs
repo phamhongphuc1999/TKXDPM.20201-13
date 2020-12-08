@@ -102,7 +102,7 @@ namespace RentalBikeApp.Presentation
                     Size = new Size(listBikePnl.Width - 40, 50),
                     BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
                     Text = $"xe số {count1}:{bike.QRCode}",
-                    Tag = bike.BikeId
+                    Tag = (bike.BikeId, Config.SQL.BikeCategory.BIKE)
                 };
                 Y += 55; count1++;
                 but.Click += But_Click;
@@ -129,7 +129,7 @@ namespace RentalBikeApp.Presentation
                     Size = new Size(listBikePnl.Width - 40, 50),
                     BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
                     Text = $"xe số {count1}:{bike.QRCode}",
-                    Tag = bike.BikeId
+                    Tag = (bike.BikeId, Config.SQL.BikeCategory.TANDEM)
                 };
                 Y += 55; count1++;
                 but.Click += But_Click;
@@ -156,7 +156,7 @@ namespace RentalBikeApp.Presentation
                     Size = new Size(listBikePnl.Width - 40, 50),
                     BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
                     Text = $"xe số {count1}:{bike.QRCode}",
-                    Tag = bike.BikeId
+                    Tag = (bike.BikeId, Config.SQL.BikeCategory.ELECTRIC)
                 };
                 Y += 55; count1++;
                 but.Click += But_Click;
@@ -184,7 +184,11 @@ namespace RentalBikeApp.Presentation
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            BaseBike bike = bikeService.GetBikeById((int)but.Tag);
+            BaseBike bike;
+            (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
+            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE) bike = bikeService.GetBikeById(bikeInfo.Item1);
+            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC) bike = electricBikeService.GetBikeById(bikeInfo.Item1);
+            else bike = tandemService.GetBikeById(bikeInfo.Item1);
             _bikeDetailForm.FillBikeInformation(bike);
             _bikeDetailForm.Show(this);
             this.Hide();

@@ -141,14 +141,13 @@ namespace RentalBikeApp.Presentation
                 ElectricBike electricBike = bike as ElectricBike;
                 rentingCategoryTxt.Text = "Xe đạp điện";
                 rentingRemainPowerValueLbl.Text = $"${electricBike.Powers}%";
-                rentingLicenseTxt.Text = "Không có thông tin";
+                rentingLicenseTxt.Text = electricBike.LicensePlate;
             }
             else
             {
-                Tandem tandem = bike as Tandem;
                 rentingCategoryTxt.Text = "Xe đạp đôi";
                 rentingRemainPowerValueLbl.Text = "Không có thông tin";
-                rentingLicenseTxt.Text = tandem.LicensePlate;
+                rentingLicenseTxt.Text = "Không có thông tin";
             }
             rentingManufactureTxt.Text = bike.Manufacturer;
         }
@@ -167,22 +166,21 @@ namespace RentalBikeApp.Presentation
             if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
             {
                 rentBikeInfoCategoryTxt.Text = "Xe đạp thường";
-                rentingLicenseTxt.Text = "Không có thông tin";
-                rentBikeInfoDepositTxt.Text = Config.BIKE_DEPOSIT["bike"].ToString();
+                rentBikeInfoLicenseTxt.Text = "Không có thông tin";
+                rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", Config.BIKE_DEPOSIT["bike"]);
             }
             else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC)
             {
-                rentingCategoryTxt.Text = "Xe đạp điện";
-                rentingLicenseTxt.Text = "Không có thông tin";
-                rentBikeInfoDepositTxt.Text = Config.BIKE_DEPOSIT["electric"].ToString();
+                ElectricBike electricBike = bike as ElectricBike;
+                rentBikeInfoCategoryTxt.Text = "Xe đạp điện";
+                rentBikeInfoLicenseTxt.Text = electricBike.LicensePlate;
+                rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", Config.BIKE_DEPOSIT["electric"]);
             }
             else
             {
-                Tandem tandem = bike as Tandem;
-                rentingCategoryTxt.Text = "Xe đạp đôi";
-                rentingLicenseTxt.Text = tandem.LicensePlate;
-                rentBikeInfoDepositTxt.Text = "700000";
-                rentBikeInfoDepositTxt.Text = Config.BIKE_DEPOSIT["tandem"].ToString();
+                rentBikeInfoCategoryTxt.Text = "Xe đạp đôi";
+                rentBikeInfoLicenseTxt.Text = "Không có thông tin";
+                rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", Config.BIKE_DEPOSIT["tandem"]);
             }
             rentBikeInfoDepositTxt.Tag = bikeInfo;
             rentBikeInfoRentThisBikeBut.Tag = bikeInfo;

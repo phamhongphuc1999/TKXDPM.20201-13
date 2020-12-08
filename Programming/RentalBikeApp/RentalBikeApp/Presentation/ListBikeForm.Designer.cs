@@ -50,8 +50,8 @@ namespace RentalBikeApp.Presentation
             };
             listBikePnl = new Panel()
             {
-                Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 130),
-                Location = new Point(0, 115)
+                Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 245),
+                Location = new Point(0, 115),
             };
             listBikePnl.HorizontalScroll.Maximum = 0;
             listBikePnl.AutoScroll = false;

@@ -22,5 +22,8 @@ namespace RentalBikeApp.Entities.SQLEntities
     {
         [Required]
         public int Powers { get; set; }
+
+        [Required]
+        public string LicensePlate { get; set; }
     }
 }

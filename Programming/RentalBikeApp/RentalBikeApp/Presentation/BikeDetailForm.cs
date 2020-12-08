@@ -88,7 +88,7 @@ namespace RentalBikeApp.Presentation
                 Tandem tandem = bike as Tandem;
                 categoryBikeTxt.Text = "Xe đạp đôi";
                 powerTxt.Text = "Không có thông tin";
-                licenceTxt.Text = tandem.LicensePlate;
+                licenceTxt.Text = "Không có thông tin";
                 rentThisBikeBut.Tag = (bike.BikeId, Config.SQL.BikeCategory.TANDEM);
             }
             else
@@ -96,7 +96,7 @@ namespace RentalBikeApp.Presentation
                 ElectricBike electric = bike as ElectricBike;
                 categoryBikeTxt.Text = "Xe đạp điện";
                 powerTxt.Text = $"{electric.Powers}%";
-                licenceTxt.Text = "Không có thông tin";
+                licenceTxt.Text = electric.LicensePlate;
                 rentThisBikeBut.Tag = (bike.BikeId, Config.SQL.BikeCategory.ELECTRIC);
             }
         }
@@ -132,7 +132,7 @@ namespace RentalBikeApp.Presentation
         private void PrevFormBut_Click(object sender, EventArgs e)
         {
             this.Hide();
-            this.PrevForm.Show(this, this);
+            this.PrevForm.Show(this);
         }
 
         /// <summary>

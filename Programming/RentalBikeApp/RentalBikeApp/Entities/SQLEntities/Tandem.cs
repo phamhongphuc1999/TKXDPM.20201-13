@@ -20,7 +20,5 @@ namespace RentalBikeApp.Entities.SQLEntities
     [Table("Tandem")]
     public class Tandem: BaseBike
     {
-        [Required]
-        public string LicensePlate { get; set; }
     }
 }
