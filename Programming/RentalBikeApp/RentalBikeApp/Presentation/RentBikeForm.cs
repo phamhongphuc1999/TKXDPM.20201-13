@@ -182,7 +182,7 @@ namespace RentalBikeApp.Presentation
                 rentBikeInfoLicenseTxt.Text = "Không có thông tin";
                 rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", Config.BIKE_DEPOSIT["tandem"]);
             }
-            rentBikeInfoDepositTxt.Tag = bikeInfo;
+            rentBikeInfoDetailBut.Tag = bikeInfo;
             rentBikeInfoRentThisBikeBut.Tag = bikeInfo;
         }
 

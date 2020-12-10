@@ -52,7 +52,6 @@ namespace RentalBikeApp.Business.SQLServices
             if (checkUser != null) return null;
             User user = new User()
             {
-                CardId = newUser.CardId,
                 Name = newUser.Name,
                 Password = newUser.Password,
                 Username = newUser.Username,

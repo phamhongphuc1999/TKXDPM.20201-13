@@ -37,7 +37,6 @@ namespace ReantalBikeTest
         {
             NewUserInfo newUser = new NewUserInfo()
             {
-                CardId = 1,
                 Name = "Ngo Minh Quang",
                 Password = "minhquang",
                 Username ="quang.nm173326",
@@ -58,7 +57,6 @@ namespace ReantalBikeTest
         {
             NewUserInfo newUser = new NewUserInfo()
             {
-                CardId = 1,
                 Name = "Ngo Minh Quang",
                 Password = "minhquang",
                 Username = "quang.nm173326",

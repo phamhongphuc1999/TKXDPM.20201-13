@@ -12,7 +12,6 @@
 //
 // ------------------------------------------------------
 
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -23,6 +22,10 @@ namespace RentalBikeApp.Entities.SQLEntities
     {
         [Key]
         public int CardId { get; set; }
+
+        [Required]
+        [ForeignKey("User")]
+        public int UserId { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "Bank is required")]
         [StringLength(100)]

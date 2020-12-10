@@ -24,10 +24,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         [Key]
         public int UserId { get; set; }
 
-        [Required(ErrorMessage = "CardId is required")]
-        [ForeignKey("Card")]
-        public int CardId { get; set; }
-
         [Required(AllowEmptyStrings = false, ErrorMessage = "Name is required")]
         [StringLength(200)]
         public string Name { get; set; }
@@ -67,10 +63,6 @@ namespace RentalBikeApp.Entities.SQLEntities
 
     public class NewUserInfo
     {
-        [Required(ErrorMessage = "CardId is required")]
-        [ForeignKey("Card")]
-        public int CardId { get; set; }
-
         [Required(AllowEmptyStrings = false, ErrorMessage = "Name is required")]
         [StringLength(200)]
         public string Name { get; set; }
