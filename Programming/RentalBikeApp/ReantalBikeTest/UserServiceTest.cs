@@ -80,6 +80,34 @@ namespace ReantalBikeTest
             User user = userService.DeleteUserByUsername("quang.nm173326");
             Assert.IsNotNull(user);
         }
+
+        /// <summary>
+        /// Test for login with correct account
+        /// </summary>
+        [Test, Order(3)]
+        public void LoginWithCorrectAccount()
+        {
+            User user = userService.UserLogin(new LoginUserInfo
+            {
+                Username = "user1",
+                Password = "123456789"
+            });
+            Assert.IsNotNull(user);
+        }
+
+        /// <summary>
+        /// Test for login with error account
+        /// </summary>
+        [Test, Order(4)]
+        public void LoginWithErrorAccount()
+        {
+            User user = userService.UserLogin(new LoginUserInfo
+            {
+                Username = "user2",
+                Password = "123456789"
+            });
+            Assert.IsNull(user);
+        }
     }
 
 }

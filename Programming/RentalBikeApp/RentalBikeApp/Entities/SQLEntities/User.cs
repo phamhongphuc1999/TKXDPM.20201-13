@@ -104,4 +104,16 @@ namespace RentalBikeApp.Entities.SQLEntities
         [StringLength(10)]
         public string Gender { get; set; }
     }
+
+    public class LoginUserInfo
+    {
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Username is required")]
+        [StringLength(100)]
+        public string Username { get; set; }
+
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Password is required")]
+        [MinLength(6, ErrorMessage = "password is too short, at least 6 characters")]
+        [MaxLength(100)]
+        public string Password { get; set; }
+    }
 }

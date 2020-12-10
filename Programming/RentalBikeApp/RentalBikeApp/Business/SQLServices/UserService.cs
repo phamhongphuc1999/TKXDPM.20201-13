@@ -28,6 +28,20 @@ namespace RentalBikeApp.Business.SQLServices
         }
 
         /// <summary>
+        /// Login user into program
+        /// </summary>
+        /// <param name="loginUser">Login user information</param>
+        /// <returns>null if login fail or user information if login success</returns>
+        public User UserLogin(LoginUserInfo loginUser)
+        {
+            User user = connecter.SqlData.Users.SingleOrDefault(x => x.Username == loginUser.Username);
+            if (user == null) return null;
+            if (user.Password != loginUser.Password) return null;
+            if (user.AccountStatus == "disable") return null;
+            return user;
+        }
+
+        /// <summary>
         /// Insert new user in database
         /// </summary>
         /// <param name="newUser">user information to create new user</param>
@@ -54,6 +68,11 @@ namespace RentalBikeApp.Business.SQLServices
             else return null;
         }
 
+        /// <summary>
+        /// Delete user information from database
+        /// </summary>
+        /// <param name="username">The username of user want to delete</param>
+        /// <returns>null if delete user fail or true if delete user success</returns>
         public User DeleteUserByUsername(string username)
         {
             User user = connecter.SqlData.Users.SingleOrDefault(x => x.Username == username);
