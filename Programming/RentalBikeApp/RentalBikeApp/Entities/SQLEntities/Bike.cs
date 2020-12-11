@@ -19,6 +19,6 @@ namespace RentalBikeApp.Entities.SQLEntities
     [Table("Bikes")]
     public class Bike: BaseBike
     {
-
+        
     }
 }

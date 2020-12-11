@@ -30,12 +30,14 @@ namespace RentalBikeApp.Presentation
         /// Show form in the location base on specified form's location
         /// </summary>
         /// <param name="nameForm">The name of specified form</param>
-        public void Show(string nameForm)
+        /// <param name="prevForm">The previous form, will be display when press previous form button</param>
+        public void Show(string nameForm, BaseForm prevForm = null)
         {
             this.Show();
             int locationMainX = Application.OpenForms[nameForm].Location.X;
             int locationMainY = Application.OpenForms[nameForm].Location.Y;
             this.Location = new Point(locationMainX, locationMainY);
+            if (prevForm != null) this.PrevForm = prevForm;
         }
 
         /// <summary>Show form in the location base on specified form's location</summary>
