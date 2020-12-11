@@ -14,6 +14,7 @@
 
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
+using static RentalBikeApp.Program;
 using System;
 
 namespace RentalBikeApp.Presentation
@@ -21,36 +22,6 @@ namespace RentalBikeApp.Presentation
     public partial class StationDetailForm : BaseForm
     {
         private StationService stationService;
-
-        private HomePageForm _homePageForm;
-        /// <value>
-        /// get or set the HomePageForm representing the home page screen
-        /// </value>
-        public HomePageForm homePageForm
-        {
-            get { return _homePageForm; }
-            set { _homePageForm = value; }
-        }
-
-        private RentBikeForm _rentBikeForm;
-        /// <value>
-        /// get or set the RentBikeForm representing the rent bike screen
-        /// </value>
-        public RentBikeForm rentBikeForm
-        {
-            get { return _rentBikeForm; }
-            set { _rentBikeForm = value; }
-        }
-
-        private ListBikeForm _listBikeForm;
-        /// <value>
-        /// get or set the ListBikeForm representing the list bike screen
-        /// </value>
-        public ListBikeForm listBikeForm
-        {
-            get { return _listBikeForm; }
-            set { _listBikeForm = value; }
-        }
 
         public StationDetailForm()
         {
@@ -89,8 +60,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
-            _homePageForm.RenderStationList(_homePageForm.stationPnl);
-            _homePageForm.Show(this);
+            homePageForm.RenderStationList(homePageForm.stationPnl);
+            homePageForm.Show(this);
             this.Hide();
         }
 
@@ -101,7 +72,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS, this);
+            rentBikeForm.Show(this, Config.RENT_BIKE_STATUS, this);
             this.Hide();
         }
 

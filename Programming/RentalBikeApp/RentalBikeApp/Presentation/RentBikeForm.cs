@@ -14,6 +14,7 @@
 
 using System;
 using System.Windows.Forms;
+using static RentalBikeApp.Program;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
@@ -24,46 +25,6 @@ namespace RentalBikeApp.Presentation
         private BikeService bikeService;
         private TandemService tandemService;
         private ElectricBikeService electricBikeService;
-
-        private HomePageForm _homePageForm;
-        /// <value>
-        /// get or set the HomePageForm representing the home page screen
-        /// </value>
-        public HomePageForm homePageForm
-        {
-            get { return _homePageForm; }
-            set { _homePageForm = value; }
-        }
-
-        private BikeDetailForm _bikeDetailForm;
-        /// <value>
-        /// get or set the BikeDetailForm representing the bike detail screen
-        /// </value>
-        public BikeDetailForm bikeDetailForm
-        {
-            get { return _bikeDetailForm; }
-            set { _bikeDetailForm = value; }
-        }
-
-        private CardInformationForm _cardInformationForm;
-        /// <value>
-        /// get or set the CardInformationForm representing the card information screen
-        /// </value>
-        public CardInformationForm cardInformationForm
-        {
-            get { return _cardInformationForm; }
-            set { _cardInformationForm = value; }
-        }
-
-        private ReturnBikeForm _returnBikeForm;
-        /// <value>
-        /// get or set the ReturnBikeForm representing the return bike screen
-        /// </value>
-        public ReturnBikeForm returnBikeForm
-        {
-            get { return _returnBikeForm; }
-            set { _returnBikeForm = value; }
-        }
 
         public RentBikeForm()
         {
@@ -202,8 +163,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
-            _homePageForm.RenderStationList(_homePageForm.stationPnl);
-            _homePageForm.Show(this);
+            homePageForm.RenderStationList(homePageForm.stationPnl);
+            homePageForm.Show(this);
             this.Hide();
         }
 
@@ -242,8 +203,8 @@ namespace RentalBikeApp.Presentation
                 rentBikeQrCodeTxt.Text = "";
                 return;
             }
-            _bikeDetailForm.FillBikeInformation(bike);
-            _bikeDetailForm.Show(this);
+            bikeDetailForm.FillBikeInformation(bike);
+            bikeDetailForm.Show(this);
             this.Hide();
         }
         #endregion
@@ -316,7 +277,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentingSelectReceiveStationBut_Click(object sender, EventArgs e)
         {
-            _returnBikeForm.Show(this);
+            returnBikeForm.Show(this);
             this.Hide();
         }
         #endregion

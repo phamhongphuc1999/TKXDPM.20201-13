@@ -17,6 +17,7 @@ using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using static RentalBikeApp.Program;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
@@ -27,34 +28,10 @@ namespace RentalBikeApp.Presentation
         private StationService stationService;
         private List<Station> stationList;
 
-        private StationDetailForm stationDetailForm;
-        private ListBikeForm listBikeForm;
-        private BikeDetailForm bikeDetailForm;
-        private RentBikeForm rentBikeForm;
-        private CardInformationForm cardInformationForm;
-        private TransactionInformationForm transactionInformationForm;
-        private ReturnBikeForm returnBikeForm;
-
         public HomePageForm()
         {
             stationService = new StationService();
             stationList = stationService.GetListStations();
-
-            stationDetailForm = new StationDetailForm();
-            listBikeForm = new ListBikeForm();
-            bikeDetailForm = new BikeDetailForm();
-            rentBikeForm = new RentBikeForm();
-            cardInformationForm = new CardInformationForm();
-            transactionInformationForm = new TransactionInformationForm();
-            returnBikeForm = new ReturnBikeForm();
-
-            CreateLinkListBikeForm();
-            CreateLinkRentBikeForm();
-            CreateLinkStationDetailForm();
-            CreateLinkBikeDetailForm();
-            CreateLinkCardInformationForm();
-            CreateLinkTransactionInformationForm();
-            CreateLinkReturnBikeForm();
 
             InitializeComponent("HomePageForm", "Home Page");
             DrawBaseForm();
@@ -103,78 +80,6 @@ namespace RentalBikeApp.Presentation
         {
             this.stationList = stationList;
             RenderStationList(pnl);
-        }
-
-        /// <summary>
-        /// Create relationship between StationDetailFrom and other form
-        /// </summary>
-        private void CreateLinkStationDetailForm()
-        {
-            stationDetailForm.homePageForm = this;
-            stationDetailForm.rentBikeForm = rentBikeForm;
-            stationDetailForm.listBikeForm = listBikeForm;
-        }
-
-        /// <summary>
-        /// Create relationship between ListBikeForm and other form
-        /// </summary>
-        private void CreateLinkListBikeForm()
-        {
-            listBikeForm.homePageForm = this;
-            listBikeForm.rentBikeForm = rentBikeForm;
-            listBikeForm.bikeDetailForm = bikeDetailForm;
-            listBikeForm.stationDetailForm = stationDetailForm;
-        }
-
-        /// <summary>
-        /// Create relationship between BikeDetailForm and other form
-        /// </summary>
-        private void CreateLinkBikeDetailForm()
-        {
-            bikeDetailForm.homePageForm = this;
-            bikeDetailForm.rentBikeForm = rentBikeForm;
-            bikeDetailForm.listBikeForm = listBikeForm;
-        }
-
-        /// <summary>
-        /// Create relationship between RentBikeForm and other form
-        /// </summary>
-        private void CreateLinkRentBikeForm()
-        {
-            rentBikeForm.homePageForm = this;
-            rentBikeForm.bikeDetailForm = bikeDetailForm;
-            rentBikeForm.returnBikeForm = returnBikeForm;
-            rentBikeForm.cardInformationForm = cardInformationForm;
-        }
-
-        /// <summary>
-        /// Create relationship between CardInformationForm and other form
-        /// </summary>
-        private void CreateLinkCardInformationForm()
-        {
-            cardInformationForm.homePageForm = this;
-            cardInformationForm.rentBikeForm = rentBikeForm;
-            cardInformationForm.transactionInformationForm = transactionInformationForm;
-        }
-
-        /// <summary>
-        /// Create relationship between TransactionFormationForm and other form
-        /// </summary>
-        private void CreateLinkTransactionInformationForm()
-        {
-            transactionInformationForm.homePageForm = this;
-            transactionInformationForm.rentBikeForm = rentBikeForm;
-            transactionInformationForm.cardInformationForm = cardInformationForm;
-        }
-
-        /// <summary>
-        /// Create relationship between ReturnBikeForm and other form
-        /// </summary>
-        private void CreateLinkReturnBikeForm()
-        {
-            returnBikeForm.homePageForm = this;
-            returnBikeForm.rentBikeForm = rentBikeForm;
-            returnBikeForm.transactionInformationForm = transactionInformationForm;
         }
 
         /// <summary>

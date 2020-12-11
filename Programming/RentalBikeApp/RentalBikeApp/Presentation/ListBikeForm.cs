@@ -17,6 +17,7 @@ using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using static RentalBikeApp.Program;
 using System.Text.RegularExpressions;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
@@ -28,46 +29,6 @@ namespace RentalBikeApp.Presentation
         private BikeService bikeService;
         private TandemService tandemService;
         private ElectricBikeService electricBikeService;
-
-        private HomePageForm _homePageForm;
-        /// <value>
-        /// get or set the HomePageForm representing the home page screen
-        /// </value>
-        public HomePageForm homePageForm
-        {
-            get { return _homePageForm; }
-            set { _homePageForm = value; }
-        }
-
-        private BikeDetailForm _bikeDetailForm;
-        /// <value>
-        /// get or set the BikeDetailForm representing the bike detail screen
-        /// </value>
-        public BikeDetailForm bikeDetailForm
-        {
-            get { return _bikeDetailForm; }
-            set { _bikeDetailForm = value; }
-        }
-
-        private RentBikeForm _rentBikeForm;
-        /// <value>
-        /// get or set the RentBikeForm representing the rent bike screen
-        /// </value>
-        public RentBikeForm rentBikeForm
-        {
-            get { return _rentBikeForm; }
-            set { _rentBikeForm = value; }
-        }
-
-        private StationDetailForm _stationDetailForm;
-        /// <value>
-        /// get or set the StationDetailForm representing the station detail screen
-        /// </value>
-        public StationDetailForm stationDetailForm
-        {
-            get { return _stationDetailForm; }
-            set { _stationDetailForm = value; }
-        }
 
         public ListBikeForm()
         {
@@ -189,8 +150,8 @@ namespace RentalBikeApp.Presentation
             if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE) bike = bikeService.GetBikeById(bikeInfo.Item1);
             else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC) bike = electricBikeService.GetBikeById(bikeInfo.Item1);
             else bike = tandemService.GetBikeById(bikeInfo.Item1);
-            _bikeDetailForm.FillBikeInformation(bike);
-            _bikeDetailForm.Show(this);
+            bikeDetailForm.FillBikeInformation(bike);
+            bikeDetailForm.Show(this);
             this.Hide();
             bikeDetailForm.Show(this, this);
         }
@@ -202,7 +163,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS, this);
+            rentBikeForm.Show(this, Config.RENT_BIKE_STATUS, this);
             this.Hide();
         }
 
@@ -213,8 +174,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
-            _homePageForm.RenderStationList(_homePageForm.stationPnl);
-            _homePageForm.Show(this);
+            homePageForm.RenderStationList(homePageForm.stationPnl);
+            homePageForm.Show(this);
             this.Hide();
         }
 
@@ -254,8 +215,8 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Không tìm thấy mã xe: " + qrCode, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            _bikeDetailForm.FillBikeInformation(bike);
-            _bikeDetailForm.Show(this);
+            bikeDetailForm.FillBikeInformation(bike);
+            bikeDetailForm.Show(this);
             this.Hide();
         }
     }

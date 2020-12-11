@@ -23,6 +23,15 @@ namespace RentalBikeApp
     {
         public static SQLConnecter connecter;
 
+        public static HomePageForm homePageForm;
+        public static StationDetailForm stationDetailForm;
+        public static BikeDetailForm bikeDetailForm;
+        public static CardInformationForm cardInformationForm;
+        public static ListBikeForm listBikeForm;
+        public static RentBikeForm rentBikeForm;
+        public static ReturnBikeForm returnBikeForm;
+        public static TransactionInformationForm transactionInformationForm;
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -32,9 +41,21 @@ namespace RentalBikeApp
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            //connect to database
             connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
-            HomePageForm homePage = new HomePageForm();
-            Application.Run(homePage);
+
+            //init the home page
+            homePageForm = new HomePageForm();
+            stationDetailForm = new StationDetailForm();
+            bikeDetailForm = new BikeDetailForm();
+            cardInformationForm = new CardInformationForm();
+            listBikeForm = new ListBikeForm();
+            rentBikeForm = new RentBikeForm();
+            returnBikeForm = new ReturnBikeForm();
+            transactionInformationForm = new TransactionInformationForm();
+
+            Application.Run(homePageForm);
         }
     }
 }
