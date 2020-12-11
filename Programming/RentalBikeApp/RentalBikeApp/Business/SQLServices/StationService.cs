@@ -12,22 +12,15 @@
 //
 // ------------------------------------------------------
 
-using RentalBikeApp.Data;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 using System.Linq;
+using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Business.SQLServices
 {
     public class StationService
     {
-        private SQLConnecter connecter;
-
-        public StationService()
-        {
-            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
-        }
-
         /// <summary>get list stations</summary>
         /// <returns>the list of station</returns>
         public List<Station> GetListStations()

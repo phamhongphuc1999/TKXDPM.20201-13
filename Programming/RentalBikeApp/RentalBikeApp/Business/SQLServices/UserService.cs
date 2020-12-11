@@ -12,21 +12,14 @@
 //
 // ------------------------------------------------------
 
-using RentalBikeApp.Data;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Linq;
+using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Business.SQLServices
 {
     public class UserService
     {
-        private SQLConnecter connecter;
-
-        public UserService()
-        {
-            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
-        }
-
         /// <summary>
         /// Login user into program
         /// </summary>

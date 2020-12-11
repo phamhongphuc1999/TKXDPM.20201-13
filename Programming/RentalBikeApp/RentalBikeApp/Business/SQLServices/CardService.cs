@@ -12,21 +12,14 @@
 //
 // ------------------------------------------------------
 
-using RentalBikeApp.Data;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Linq;
+using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Business.SQLServices
 {
     public class CardService
     {
-        private SQLConnecter connecter;
-
-        public CardService()
-        {
-            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
-        }
-
         /// <summary>
         /// Get card information by owner
         /// </summary>

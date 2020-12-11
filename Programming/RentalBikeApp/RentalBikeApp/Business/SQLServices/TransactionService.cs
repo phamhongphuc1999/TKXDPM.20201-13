@@ -12,23 +12,16 @@
 //
 // ------------------------------------------------------
 
-using RentalBikeApp.Data;
 using RentalBikeApp.Entities.SQLEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Business.SQLServices
 {
     public class TransactionService
     {
-        private SQLConnecter connecter;
-
-        public TransactionService()
-        {
-            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
-        }
-
         /// <summary>Insert new transaction when user deposit money to rent the bike</summary>
         /// <param name="userId">the Id of user who want to rent the bike</param>
         /// <param name="bikeId">the Id of rental bike</param>

@@ -15,11 +15,14 @@
 using System;
 using RentalBikeApp.Presentation;
 using System.Windows.Forms;
+using RentalBikeApp.Data;
 
 namespace RentalBikeApp
 {
     static class Program
     {
+        public static SQLConnecter connecter;
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -29,8 +32,8 @@ namespace RentalBikeApp
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
             HomePageForm homePage = new HomePageForm();
-            RentBikeForm rentBikeForm = new RentBikeForm();
             Application.Run(homePage);
         }
     }

@@ -12,6 +12,7 @@
 //
 // ------------------------------------------------------
 
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -25,6 +26,9 @@ namespace RentalBikeApp.Entities.SQLEntities
         [Required(ErrorMessage = "StationId is required")]
         [ForeignKey("Station")]
         public int StationId { get; set; }
+
+        [Range(0, Int32.MaxValue)]
+        public int Value { get; set; }
 
         [Required(AllowEmptyStrings = false, ErrorMessage = "QRCode is required")]
         [StringLength(100)]
