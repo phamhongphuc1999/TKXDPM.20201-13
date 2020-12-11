@@ -56,7 +56,7 @@ namespace ReantalBikeTest
         [Test]
         public void GetListBikesInStationTest()
         {
-            List < Tandem > tandems = tandemService.GetListBikesInStation(1);
+            List <Tandem> tandems = tandemService.GetListBikesInStation(1);
             Assert.IsTrue(tandems.Count > 0);
         }
 

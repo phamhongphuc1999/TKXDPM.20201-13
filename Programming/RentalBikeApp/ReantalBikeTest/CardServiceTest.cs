@@ -30,13 +30,43 @@ namespace ReantalBikeTest
         }
 
         /// <summary>
-        /// Test for case get card by card holder
+        /// Test for case get card by exist card holder
         /// </summary>
         [Test]
-        public void GetCardByOwnerTest()
+        public void GetCardByExistOwnerTest()
         {
             Card card = cardService.GetCardByOwner("Group 13");
             Assert.IsNotNull(card);
+        }
+
+        /// <summary>
+        /// Test for case get card by error card holder
+        /// </summary>
+        [Test]
+        public void GetCardByErrorOwnerTest()
+        {
+            Card card = cardService.GetCardByOwner("123");
+            Assert.IsNull(card);
+        }
+
+        /// <summary>
+        /// Test for case get card by exist user
+        /// </summary>
+        [Test]
+        public void GetCardByExistUser()
+        {
+            Card card = cardService.GetCardByUser(1);
+            Assert.IsNotNull(card);
+        }
+
+        /// <summary>
+        /// Test for case get card by error user
+        /// </summary>
+        [Test]
+        public void GetCardByErrorUser()
+        {
+            Card card = cardService.GetCardByUser(0);
+            Assert.IsNull(card);
         }
     }
 }

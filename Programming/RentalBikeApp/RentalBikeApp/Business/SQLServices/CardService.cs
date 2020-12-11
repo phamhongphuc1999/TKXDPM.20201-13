@@ -36,5 +36,15 @@ namespace RentalBikeApp.Business.SQLServices
         {
             return connecter.SqlData.Cards.SingleOrDefault(x => x.Owners == owner);
         }
+
+        /// <summary>
+        /// Get card information by user id
+        /// </summary>
+        /// <param name="userID">The user's id</param>
+        /// <returns></returns>
+        public Card GetCardByUser(int userID)
+        {
+            return connecter.SqlData.Cards.SingleOrDefault(x => x.UserId == userID);
+        }
     }
 }
