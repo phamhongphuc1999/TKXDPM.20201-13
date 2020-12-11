@@ -16,6 +16,7 @@ using System;
 using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
+using static RentalBikeApp.Program;
 using System.Collections.Generic;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
@@ -26,36 +27,6 @@ namespace RentalBikeApp.Presentation
     {
         private StationService stationService;
         private List<Station> stationList;
-
-        private HomePageForm _homePageForm;
-        /// <value>
-        /// get or set the HomePageForm representing the home page screen
-        /// </value>
-        public HomePageForm homePageForm
-        {
-            get { return _homePageForm; }
-            set { _homePageForm = value; }
-        }
-
-        private RentBikeForm _rentBikeForm;
-        /// <value>
-        /// get or set the RentBikeForm representing the rent bike screen
-        /// </value>
-        public RentBikeForm rentBikeForm
-        {
-            get { return _rentBikeForm; }
-            set { _rentBikeForm = value; }
-        }
-
-        private TransactionInformationForm _transactionInformationForm;
-        /// <value>
-        /// get or set the TransactionInformationForm representing the transaction information screen
-        /// </value>
-        public TransactionInformationForm transactionInformationForm
-        {
-            get { return _transactionInformationForm; }
-            set { _transactionInformationForm = value; }
-        }
 
         public ReturnBikeForm()
         {
@@ -114,7 +85,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this, this);
+            rentBikeForm.Show(this, this);
             this.Hide();
         }
 
@@ -125,8 +96,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
-            _homePageForm.RenderStationList(_homePageForm.stationPnl);
-            _homePageForm.Show(this);
+            homePageForm.RenderStationList(homePageForm.stationPnl);
+            homePageForm.Show(this);
             this.Hide();
         }
 
@@ -142,9 +113,9 @@ namespace RentalBikeApp.Presentation
             DialogResult result = MessageBox.Show(string.Format("Bạn có chắc muốn trả xe ở bãi xe: {0}", nameStation), "Thông Báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if(result == DialogResult.OK)
             {
-                _rentBikeForm.rentBikeTmr.Stop();
-                _transactionInformationForm.FillTransactionInformationWhenPay();
-                _transactionInformationForm.Show(this);
+                rentBikeForm.rentBikeTmr.Stop();
+                transactionInformationForm.FillTransactionInformationWhenPay();
+                transactionInformationForm.Show(this);
                 this.Hide();
             }
         }
@@ -156,7 +127,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void CancelBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this);
+            rentBikeForm.Show(this);
             this.Hide();
         }
 

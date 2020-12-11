@@ -35,15 +35,10 @@ namespace ReantalBikeTest
         [Test, Order(0)]
         public void InsertNewUserTest()
         {
-            NewUserInfo newUser = new NewUserInfo()
+            UserInfo newUser = new UserInfo()
             {
-                Name = "Ngo Minh Quang",
                 Password = "minhquang",
-                Username ="quang.nm173326",
-                Address = "Ha Noi",
-                Email = "quang.nm173326@gmail.com",
-                Phone = "0969696969",
-                Gender = "Nam"
+                Username ="quang.nm173326"
             };
             User user = userService.InsertNewUser(newUser);
             Assert.IsNotNull(user);
@@ -55,15 +50,10 @@ namespace ReantalBikeTest
         [Test, Order(1)]
         public void InsertNewUserWithExistUsernameTest()
         {
-            NewUserInfo newUser = new NewUserInfo()
+            UserInfo newUser = new UserInfo()
             {
-                Name = "Ngo Minh Quang",
                 Password = "minhquang",
-                Username = "quang.nm173326",
-                Address = "Ha Noi",
-                Email = "quang.nm173326@gmail.com",
-                Phone = "0969696969",
-                Gender = "Nam"
+                Username = "quang.nm173326"
             };
             User user = userService.InsertNewUser(newUser);
             Assert.IsNull(user);
@@ -85,7 +75,7 @@ namespace ReantalBikeTest
         [Test, Order(3)]
         public void LoginWithCorrectAccount()
         {
-            User user = userService.UserLogin(new LoginUserInfo
+            User user = userService.UserLogin(new UserInfo
             {
                 Username = "user1",
                 Password = "123456789"
@@ -99,7 +89,7 @@ namespace ReantalBikeTest
         [Test, Order(4)]
         public void LoginWithErrorAccount()
         {
-            User user = userService.UserLogin(new LoginUserInfo
+            User user = userService.UserLogin(new UserInfo
             {
                 Username = "user2",
                 Password = "123456789"

@@ -12,27 +12,20 @@
 //
 // ------------------------------------------------------
 
-using RentalBikeApp.Data;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Linq;
+using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Business.SQLServices
 {
     public class UserService
     {
-        private SQLConnecter connecter;
-
-        public UserService()
-        {
-            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
-        }
-
         /// <summary>
         /// Login user into program
         /// </summary>
         /// <param name="loginUser">Login user information</param>
         /// <returns>null if login fail or user information if login success</returns>
-        public User UserLogin(LoginUserInfo loginUser)
+        public User UserLogin(UserInfo loginUser)
         {
             User user = connecter.SqlData.Users.SingleOrDefault(x => x.Username == loginUser.Username);
             if (user == null) return null;
@@ -46,19 +39,14 @@ namespace RentalBikeApp.Business.SQLServices
         /// </summary>
         /// <param name="newUser">user information to create new user</param>
         /// <returns>The User represent for new user</returns>
-        public User InsertNewUser(NewUserInfo newUser)
+        public User InsertNewUser(UserInfo newUser)
         {
             User checkUser = connecter.SqlData.Users.SingleOrDefault(x => x.Username == newUser.Username);
             if (checkUser != null) return null;
             User user = new User()
             {
-                Name = newUser.Name,
                 Password = newUser.Password,
                 Username = newUser.Username,
-                Address = newUser.Address,
-                Email = newUser.Email,
-                Phone = newUser.Phone,
-                Gender = newUser.Gender,
                 AccountStatus = "enable"
             };
             connecter.SqlData.Users.Add(user);

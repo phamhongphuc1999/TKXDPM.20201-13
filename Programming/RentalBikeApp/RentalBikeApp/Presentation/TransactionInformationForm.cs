@@ -16,6 +16,7 @@ using System;
 using System.Windows.Forms;
 using RentalBikeApp.Business;
 using static RentalBikeApp.Config;
+using static RentalBikeApp.Program;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Entities.APIEntities;
 
@@ -24,36 +25,6 @@ namespace RentalBikeApp.Presentation
     public partial class TransactionInformationForm : BaseForm
     {
         private InterbankService interbankService;
-
-        private HomePageForm _homePageForm;
-        /// <value>
-        /// get or set the HomePageForm representing the home page screen
-        /// </value>
-        public HomePageForm homePageForm
-        {
-            get { return _homePageForm; }
-            set { _homePageForm = value; }
-        }
-
-        private RentBikeForm _rentBikeForm;
-        /// <value>
-        /// get or set the RentBikeForm representing the rent bike screen
-        /// </value>
-        public RentBikeForm rentBikeForm
-        {
-            get { return _rentBikeForm; }
-            set { _rentBikeForm = value; }
-        }
-
-        private CardInformationForm _cardInformationForm;
-        /// <value>
-        /// get or set the CardInformationForm representing the card information screen
-        /// </value>
-        public CardInformationForm cardInformationForm
-        {
-            get { return _cardInformationForm; }
-            set { _cardInformationForm = value; }
-        }
 
         private int deposit;
         private int rentalMoney;
@@ -97,9 +68,7 @@ namespace RentalBikeApp.Presentation
         public void FillTransactionInformationWhenRentBike(Card card)
         {
             this.status = TRANSACTION_STATUS.RENT_BIKE;
-            if (Config.RENTAL_BIKE is Bike) this.deposit = Config.BIKE_DEPOSIT["bike"];
-            else if (Config.RENTAL_BIKE is ElectricBike) this.deposit = Config.BIKE_DEPOSIT["electric"];
-            else this.deposit = Config.BIKE_DEPOSIT["tandem"];
+            this.deposit = 40 * Config.RENTAL_BIKE.Value / 100;
             depositTxt.Text = String.Format("{0:n0}", this.deposit);
             remainMoneyTxt.Text = "Không có dữ liệu";
             transactionDateTxt.Text = "Không có dữ liệu";
@@ -113,7 +82,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this, this);
+            rentBikeForm.Show(this, this);
             this.Show();
         }
 
@@ -124,8 +93,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
-            _homePageForm.RenderStationList(_homePageForm.stationPnl);
-            _homePageForm.Show();
+            homePageForm.RenderStationList(homePageForm.stationPnl);
+            homePageForm.Show();
             this.Hide();
         }
 
@@ -163,14 +132,14 @@ namespace RentalBikeApp.Presentation
                 string error = result.errorCode;
                 if(error == "00")
                 {
-                    _rentBikeForm.FillRentingBikeForm();
-                    _rentBikeForm.rentBikeTmr.Start();
-                    _rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
+                    rentBikeForm.FillRentingBikeForm();
+                    rentBikeForm.rentBikeTmr.Start();
+                    rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
                 }
                 else if(error == "01" || error == "02" || error == "05")
                 {
                     MessageBox.Show(API_INFO.ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    _cardInformationForm.Show(this);
+                    cardInformationForm.Show(this);
                 }
                 else
                 {
@@ -221,7 +190,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void CancelBut_Click(object sender, EventArgs e)
         {
-            _cardInformationForm.Show(this);
+            cardInformationForm.Show(this);
             this.Hide();
         }
     }

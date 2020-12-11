@@ -14,6 +14,7 @@
 
 using System;
 using System.Windows.Forms;
+using static RentalBikeApp.Program;
 using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
@@ -22,36 +23,6 @@ namespace RentalBikeApp.Presentation
     public partial class BikeDetailForm : BaseForm
     {
         private StationService stationService;
-
-        private HomePageForm _homePageForm;
-        /// <value>
-        /// get or set the HomePageForm representing the home page screen
-        /// </value>
-        public HomePageForm homePageForm
-        {
-            get { return _homePageForm; }
-            set { _homePageForm = value; }
-        }
-
-        private RentBikeForm _rentBikeForm;
-        /// <value>
-        /// get or set the RentBikeForm representing the rent bike form
-        /// </value>
-        public RentBikeForm rentBikeForm
-        {
-            get { return _rentBikeForm; }
-            set { _rentBikeForm = value; }
-        }
-
-        private ListBikeForm _listBikeForm;
-        /// <value>
-        /// get or set the ListBikeForm representing the list bike screen
-        /// </value>
-        public ListBikeForm listBikeForm
-        {
-            get { return _listBikeForm; }
-            set { _listBikeForm = value; }
-        }
 
         public BikeDetailForm()
         {
@@ -108,7 +79,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeBut_Click(object sender, EventArgs e)
         {
-            _rentBikeForm.Show(this, this);
+            rentBikeForm.Show(this, this);
             this.Hide();
         }
 
@@ -119,8 +90,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void HomePageBut_Click(object sender, EventArgs e)
         {
-            _homePageForm.RenderStationList(_homePageForm.stationPnl);
-            _homePageForm.Show(this);
+            homePageForm.RenderStationList(homePageForm.stationPnl);
+            homePageForm.Show(this);
             this.Hide();
         }
 
@@ -146,13 +117,13 @@ namespace RentalBikeApp.Presentation
             (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))rentThisBikeBut.Tag;
             if(Config.RENT_BIKE_STATUS != Config.RENT_BIKE.RENTING_BIKE)
             {
-                _rentBikeForm.FillRentBikeInfoForm(bikeInfo);
-                _rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO);
+                rentBikeForm.FillRentBikeInfoForm(bikeInfo);
+                rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO);
             }
             else
             {
-                _rentBikeForm.FillRentingBikeForm();
-                _rentBikeForm.Show(this, Config.RENT_BIKE.RENTING_BIKE);
+                rentBikeForm.FillRentingBikeForm();
+                rentBikeForm.Show(this, Config.RENT_BIKE.RENTING_BIKE);
             }
             this.Hide();
         }

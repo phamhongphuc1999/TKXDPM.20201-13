@@ -169,15 +169,5 @@ namespace RentalBikeApp
             RENTING_BIKE,
             RENT_BIKE_INFO
         }
-
-        /// <value>
-        /// Define bike deposit base on bike category
-        /// </value>
-        public static Dictionary<string, int> BIKE_DEPOSIT = new Dictionary<string, int>()
-        {
-            {"bike", 400000 },
-            {"electric", 700000 },
-            {"tandem", 550000 }
-        };
     }
 }
