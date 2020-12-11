@@ -68,9 +68,7 @@ namespace RentalBikeApp.Presentation
         public void FillTransactionInformationWhenRentBike(Card card)
         {
             this.status = TRANSACTION_STATUS.RENT_BIKE;
-            if (Config.RENTAL_BIKE is Bike) this.deposit = Config.BIKE_DEPOSIT["bike"];
-            else if (Config.RENTAL_BIKE is ElectricBike) this.deposit = Config.BIKE_DEPOSIT["electric"];
-            else this.deposit = Config.BIKE_DEPOSIT["tandem"];
+            this.deposit = 40 * Config.RENTAL_BIKE.Value / 100;
             depositTxt.Text = String.Format("{0:n0}", this.deposit);
             remainMoneyTxt.Text = "Không có dữ liệu";
             transactionDateTxt.Text = "Không có dữ liệu";

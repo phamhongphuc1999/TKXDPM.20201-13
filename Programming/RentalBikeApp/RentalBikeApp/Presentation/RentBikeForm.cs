@@ -124,25 +124,24 @@ namespace RentalBikeApp.Presentation
             else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC) bike = electricBikeService.GetBikeById(bikeInfo.Item1);
             else bike = tandemService.GetBikeById(bikeInfo.Item1);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
+            int deposit = 40 * bike.Value / 100;
             if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
             {
                 rentBikeInfoCategoryTxt.Text = "Xe đạp thường";
                 rentBikeInfoLicenseTxt.Text = "Không có thông tin";
-                rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", Config.BIKE_DEPOSIT["bike"]);
             }
             else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC)
             {
                 ElectricBike electricBike = bike as ElectricBike;
                 rentBikeInfoCategoryTxt.Text = "Xe đạp điện";
                 rentBikeInfoLicenseTxt.Text = electricBike.LicensePlate;
-                rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", Config.BIKE_DEPOSIT["electric"]);
             }
             else
             {
                 rentBikeInfoCategoryTxt.Text = "Xe đạp đôi";
                 rentBikeInfoLicenseTxt.Text = "Không có thông tin";
-                rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", Config.BIKE_DEPOSIT["tandem"]);
             }
+            rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", deposit);
             rentBikeInfoDetailBut.Tag = bikeInfo;
             rentBikeInfoRentThisBikeBut.Tag = bikeInfo;
         }
