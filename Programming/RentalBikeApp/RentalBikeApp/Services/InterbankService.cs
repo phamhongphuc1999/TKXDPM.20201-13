@@ -18,7 +18,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using RentalBikeApp.Entities.APIEntities;
 
-namespace RentalBikeApp.Business
+namespace RentalBikeApp.Services
 {
     public class InterbankService
     {

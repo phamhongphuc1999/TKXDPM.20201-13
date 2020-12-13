@@ -15,7 +15,7 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
-using RentalBikeApp.Business.SQLServices;
+using RentalBikeApp.Services.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation

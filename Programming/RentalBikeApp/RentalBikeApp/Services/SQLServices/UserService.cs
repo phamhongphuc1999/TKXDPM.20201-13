@@ -16,7 +16,7 @@ using RentalBikeApp.Entities.SQLEntities;
 using System.Linq;
 using static RentalBikeApp.Program;
 
-namespace RentalBikeApp.Business.SQLServices
+namespace RentalBikeApp.Services.SQLServices
 {
     public class UserService
     {

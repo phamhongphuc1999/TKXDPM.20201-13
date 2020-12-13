@@ -45,7 +45,7 @@ namespace RentalBikeApp
             //connect to database
             connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
 
-            //init the home page
+            //init the presentation
             homePageForm = new HomePageForm();
             stationDetailForm = new StationDetailForm();
             bikeDetailForm = new BikeDetailForm();
