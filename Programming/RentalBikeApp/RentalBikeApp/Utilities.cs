@@ -18,6 +18,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace RentalBikeApp
 {
@@ -121,6 +122,18 @@ namespace RentalBikeApp
         {
             const Int32 CB_SETITEMHEIGHT = 0x153;
             SendMessage(comboBoxHandle, CB_SETITEMHEIGHT, -1, comboBoxDesiredHeight);
+        }
+
+        /// <summary>
+        /// Valid the string with specified regex
+        /// </summary>
+        /// <param name="reges">the specified regex</param>
+        /// <param name="value">the string</param>
+        /// <returns>true if valid success or return false if valid fail</returns>
+        public static bool InvlidString(string reges, string value)
+        {
+            Regex rg = new Regex(reges);
+            return rg.IsMatch(value);
         }
     }
 }

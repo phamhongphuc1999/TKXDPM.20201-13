@@ -18,7 +18,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
-using System.Text.RegularExpressions;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
@@ -136,12 +135,15 @@ namespace RentalBikeApp.Presentation
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            BaseBike bike;
             (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
-            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE) bike = bikeService.GetBikeById(bikeInfo.Item1);
-            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC) bike = electricBikeService.GetBikeById(bikeInfo.Item1);
-            else bike = tandemService.GetBikeById(bikeInfo.Item1);
-            bikeDetailForm.FillBikeInformation(bike);
+            string stationName = "", stationAddress = "";
+            BaseBike bike = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2, ref stationName, ref stationAddress);
+            if (bike == null)
+            {
+                MessageBox.Show($"Không tìm được xe có id: {bikeInfo.Item1}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            bikeDetailForm.FillBikeInformation(bike, stationName, stationAddress);
             bikeDetailForm.Show(this);
             this.Hide();
             bikeDetailForm.Show(this, this);
@@ -194,19 +196,15 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Nhập mã xe bạn muốn tìm kiếm", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            Regex r = new Regex("([0-9]){0,8}");
-            if (!r.IsMatch(qrCode))
+            if (!Utilities.InvlidString(Config.QRValid, qrCode))
             {
-                MessageBox.Show("Mã xe bạn nhập không hợp lệ", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"QRCode không hợp lệ\nQRCode là dãy số có chín chữ số", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            BaseBike bike = bikeService.GetBikeByQRCode(qrCode);
-            if(bike == null)
-            {
-                MessageBox.Show("Không tìm thấy mã xe: " + qrCode, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            bikeDetailForm.FillBikeInformation(bike);
+            string stationName = "", stationAddress = "";
+            BaseBike bike = bikeStationController.ViewBikeDetail(qrCode, ref stationName, ref stationAddress);
+            if(bike == null) MessageBox.Show($"Không tìm được xe có qrcode: {qrCode}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            bikeDetailForm.FillBikeInformation(bike, stationName, stationAddress);
             bikeDetailForm.Show(this);
             this.Hide();
         }

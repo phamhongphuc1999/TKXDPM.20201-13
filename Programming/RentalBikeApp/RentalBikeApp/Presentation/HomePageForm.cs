@@ -112,7 +112,7 @@ namespace RentalBikeApp.Presentation
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            Station station = stationService.GetStationById((int)but.Tag);
+            Station station = bikeStationController.ViewStationDetail((int)but.Tag);
             this.Hide();
             stationDetailForm.FillStationDetail(station);
             stationDetailForm.Show(this, this);

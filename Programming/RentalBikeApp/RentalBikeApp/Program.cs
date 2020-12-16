@@ -17,6 +17,7 @@ using RentalBikeApp.Presentation;
 using System.Windows.Forms;
 using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
+using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp
 {
@@ -31,6 +32,9 @@ namespace RentalBikeApp
         public static TandemService tandemService;
         public static TransactionService transactionService;
         public static UserService userService;
+
+        public static RentBikeController rentBikeController;
+        public static BikeStationController bikeStationController;
 
         public static HomePageForm homePageForm;
         public static StationDetailForm stationDetailForm;
@@ -62,6 +66,10 @@ namespace RentalBikeApp
             tandemService = new TandemService();
             transactionService = new TransactionService();
             userService = new UserService();
+
+            //init controllers
+            rentBikeController = new RentBikeController();
+            bikeStationController = new BikeStationController();
 
             //init the presentation
             homePageForm = new HomePageForm();
