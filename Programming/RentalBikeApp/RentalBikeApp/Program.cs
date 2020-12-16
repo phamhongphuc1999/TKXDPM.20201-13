@@ -16,12 +16,21 @@ using System;
 using RentalBikeApp.Presentation;
 using System.Windows.Forms;
 using RentalBikeApp.Data;
+using RentalBikeApp.Data.ServiceAgents;
 
 namespace RentalBikeApp
 {
     static class Program
     {
         public static SQLConnecter connecter;
+
+        public static BikeService bikeService;
+        public static CardService cardService;
+        public static ElectricBikeService electricBikeService;
+        public static StationService stationService;
+        public static TandemService tandemService;
+        public static TransactionService transactionService;
+        public static UserService userService;
 
         public static HomePageForm homePageForm;
         public static StationDetailForm stationDetailForm;
@@ -44,6 +53,15 @@ namespace RentalBikeApp
 
             //connect to database
             connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
+
+            //init services
+            bikeService = new BikeService();
+            cardService = new CardService();
+            electricBikeService = new ElectricBikeService();
+            stationService = new StationService();
+            tandemService = new TandemService();
+            transactionService = new TransactionService();
+            userService = new UserService();
 
             //init the presentation
             homePageForm = new HomePageForm();

@@ -16,7 +16,7 @@ using RentalBikeApp.Entities.SQLEntities;
 using System.Linq;
 using static RentalBikeApp.Program;
 
-namespace RentalBikeApp.Services.SQLServices
+namespace RentalBikeApp.Data.ServiceAgents
 {
     public class CardService
     {

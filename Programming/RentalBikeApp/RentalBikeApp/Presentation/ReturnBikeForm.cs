@@ -18,19 +18,16 @@ using System.Drawing;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
 using System.Collections.Generic;
-using RentalBikeApp.Services.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class ReturnBikeForm : BaseForm
     {
-        private StationService stationService;
         private List<Station> stationList;
 
         public ReturnBikeForm()
         {
-            stationService = new StationService();
             stationList = stationService.GetListStations();
 
             InitializeComponent("ReturnBikeForm", "Return Bike");

@@ -15,23 +15,15 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
-using RentalBikeApp.Services.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
+using System.Text.RegularExpressions;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class RentBikeForm : BaseForm
     {
-        private BikeService bikeService;
-        private TandemService tandemService;
-        private ElectricBikeService electricBikeService;
-
         public RentBikeForm()
         {
-            bikeService = new BikeService();
-            tandemService = new TandemService();
-            electricBikeService = new ElectricBikeService();
-
             InitializeComponent("RentBikeForm", "Rent Bike");
             DrawBaseForm();
             DrawRentBikeInfoForm();
@@ -147,6 +139,17 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
+        /// Invalid QRCode
+        /// </summary>
+        /// <param name="qrCode">The string representing qr code</param>
+        /// <returns></returns>
+        private bool InvalidQRCode(string qrCode)
+        {
+            Regex rg = new Regex(Config.QRValid);
+            return rg.IsMatch(qrCode);
+        }
+
+        /// <summary>
         /// Handle click event RentBikeBut
         /// </summary>
         /// <param name="sender">The object send event</param>
@@ -192,13 +195,20 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Nhập mã qr code của xe muốn thuê");
                 return;
             }
+            bool check = InvalidQRCode(qrCode);
+            if (!InvalidQRCode(qrCode))
+            {
+                MessageBox.Show($"QRCode không hợp lệ\nQRCode là dãy số có chín chữ số", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                rentBikeQrCodeTxt.Text = "";
+                return;
+            }
             BaseBike bike;
             if (qrCode[0] == '0') bike = bikeService.GetBikeByQRCode(qrCode);
             else if (qrCode[0] == '1') bike = tandemService.GetBikeByQRCode(qrCode);
             else bike = electricBikeService.GetBikeByQRCode(qrCode);
             if (bike == null)
             {
-                MessageBox.Show("QrCode không hợp lệ");
+                MessageBox.Show($"Không tìm thấy xe có mã qr code {qrCode}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 rentBikeQrCodeTxt.Text = "";
                 return;
             }

@@ -13,7 +13,7 @@
 // ------------------------------------------------------
 
 using NUnit.Framework;
-using RentalBikeApp.Business.SQLServices;
+using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 

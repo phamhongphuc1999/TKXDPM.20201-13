@@ -18,5 +18,6 @@ namespace RentalBikeApp.Bussiness
 {
     public class RentBikeController
     {
+
     }
 }

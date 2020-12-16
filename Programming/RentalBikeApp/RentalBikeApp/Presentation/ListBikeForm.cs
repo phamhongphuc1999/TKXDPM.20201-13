@@ -19,23 +19,14 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
 using System.Text.RegularExpressions;
-using RentalBikeApp.Services.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class ListBikeForm : BaseForm
     {
-        private BikeService bikeService;
-        private TandemService tandemService;
-        private ElectricBikeService electricBikeService;
-
         public ListBikeForm()
         {
-            bikeService = new BikeService();
-            tandemService = new TandemService();
-            electricBikeService = new ElectricBikeService();
-
             InitializeComponent("ListBikesForm", "List Bikes");
             DrawBaseForm();
             DrawListBikes();

@@ -15,19 +15,14 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
-using RentalBikeApp.Services.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class BikeDetailForm : BaseForm
     {
-        private StationService stationService;
-
         public BikeDetailForm()
         {
-            stationService = new StationService();
-
             InitializeComponent("BikeDetailForm", "Bike Detail");
             DrawBaseForm();
             DrawBikeDetail();

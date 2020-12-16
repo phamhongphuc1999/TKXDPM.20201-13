@@ -14,7 +14,7 @@
 
 using NUnit.Framework;
 using RentalBikeApp;
-using RentalBikeApp.Business;
+using RentalBikeApp.Services;
 using RentalBikeApp.Entities.APIEntities;
 using System;
 using System.Threading.Tasks;

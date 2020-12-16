@@ -12,7 +12,6 @@
 //
 // ------------------------------------------------------
 
-using RentalBikeApp.Services.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 using static RentalBikeApp.Program;
 using System;
@@ -21,12 +20,8 @@ namespace RentalBikeApp.Presentation
 {
     public partial class StationDetailForm : BaseForm
     {
-        private StationService stationService;
-
         public StationDetailForm()
         {
-            stationService = new StationService();
-
             InitializeComponent("StationDetailForm", "Station Detail");
             DrawBaseForm();
             DrawStationDetail();
