@@ -15,23 +15,14 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
-using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class RentBikeForm : BaseForm
     {
-        private BikeService bikeService;
-        private TandemService tandemService;
-        private ElectricBikeService electricBikeService;
-
         public RentBikeForm()
         {
-            bikeService = new BikeService();
-            tandemService = new TandemService();
-            electricBikeService = new ElectricBikeService();
-
             InitializeComponent("RentBikeForm", "Rent Bike");
             DrawBaseForm();
             DrawRentBikeInfoForm();
@@ -119,10 +110,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="bikeId">The bike id of specified bike</param>
         public void FillRentBikeInfoForm((int, Config.SQL.BikeCategory) bikeInfo)
         {
-            BaseBike bike;
-            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE) bike = bikeService.GetBikeById(bikeInfo.Item1);
-            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC) bike = electricBikeService.GetBikeById(bikeInfo.Item1);
-            else bike = tandemService.GetBikeById(bikeInfo.Item1);
+            BaseBike bike = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
             int deposit = 40 * bike.Value / 100;
             if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
@@ -189,20 +177,24 @@ namespace RentalBikeApp.Presentation
             string qrCode = rentBikeQrCodeTxt.Text;
             if (qrCode == "")
             {
-                MessageBox.Show("Nhập mã qr code của xe muốn thuê");
+                MessageBox.Show("Nhập mã xe bạn muốn tìm kiếm", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            BaseBike bike;
-            if (qrCode[0] == '0') bike = bikeService.GetBikeByQRCode(qrCode);
-            else if (qrCode[0] == '1') bike = tandemService.GetBikeByQRCode(qrCode);
-            else bike = electricBikeService.GetBikeByQRCode(qrCode);
-            if (bike == null)
+            if (!Utilities.InvlidString(Config.QRValid, qrCode))
             {
-                MessageBox.Show("QrCode không hợp lệ");
+                MessageBox.Show($"QRCode không hợp lệ\nQRCode là dãy số có chín chữ số", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 rentBikeQrCodeTxt.Text = "";
                 return;
             }
-            bikeDetailForm.FillBikeInformation(bike);
+            string stationName = "", stationAddress = "";
+            BaseBike bike = rentBikeController.SubmitQrCode(qrCode, ref stationName, ref stationAddress);
+            if (bike == null)
+            {
+                MessageBox.Show($"Không tìm thấy xe có mã qr code {qrCode}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                rentBikeQrCodeTxt.Text = "";
+                return;
+            }
+            bikeDetailForm.FillBikeInformation(bike, stationName, stationAddress);
             bikeDetailForm.Show(this);
             this.Hide();
         }
@@ -218,11 +210,7 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
-            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
-                Config.RENTAL_BIKE = bikeService.GetBikeById(bikeInfo.Item1);
-            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC)
-                Config.RENTAL_BIKE = electricBikeService.GetBikeById(bikeInfo.Item1);
-            else Config.RENTAL_BIKE = tandemService.GetBikeById(bikeInfo.Item1);
+            Config.RENTAL_BIKE = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2);
             cardInformationForm.Show(this);
             this.Hide();
         }
@@ -236,13 +224,14 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
-            BaseBike bike;
-            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
-                bike = bikeService.GetBikeById(bikeInfo.Item1);
-            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC)
-                bike = electricBikeService.GetBikeById(bikeInfo.Item1);
-            else bike = tandemService.GetBikeById(bikeInfo.Item1);
-            bikeDetailForm.FillBikeInformation(bike);
+            string stationName = "", stationAddress = "";
+            BaseBike bike = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2, ref stationName, ref stationAddress);
+            if (bike == null)
+            {
+                MessageBox.Show($"Không tìm được xe có id: {bikeInfo.Item1}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            bikeDetailForm.FillBikeInformation(bike, stationName, stationAddress);
             bikeDetailForm.Show(this);
             this.Hide();
         }

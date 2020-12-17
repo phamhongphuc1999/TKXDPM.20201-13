@@ -14,7 +14,6 @@
 
 using NUnit.Framework;
 using RentalBikeApp;
-using RentalBikeApp.Business;
 using RentalBikeApp.Entities.APIEntities;
 using System;
 using System.Threading.Tasks;
@@ -24,28 +23,10 @@ namespace ReantalBikeTest
     [TestFixture]
     public class InterbankServiceTest
     {
-        private InterbankService interbankService;
-
-        [SetUp]
-        public void Setup()
-        {
-            interbankService = new InterbankService();
-        }
-
-        /// <summary>
-        /// Test for Calculate Fee function
-        /// </summary>
-        [Test, Order(0)]
-        public void CalculateFeeTest()
-        {
-            int rentalMoney = interbankService.CalculateFee("0:16:00", Config.SQL.BikeCategory.BIKE);
-            Assert.AreEqual(rentalMoney, 10000);
-        }
-
         /// <summary>
         /// Test for case process transaction with zero amount
         /// </summary>
-        [Test, Order(1)]
+        [Test, Order(0)]
         public void ProcessTransactionErrorAmountTest()
         {
             TransactionInfo info = new TransactionInfo()
@@ -58,7 +39,7 @@ namespace ReantalBikeTest
                 amount = 0,
                 createdAt = Utilities.ConvertDateToString(DateTime.Now)
             };
-            Task<ProcessTransactionResponse> response = interbankService.ProcessTransaction(info, Config.API_INFO.COMMAND.PAY);
+            Task<ProcessTransactionResponse> response = InterbankService.ProcessTransaction(info, Config.API_INFO.COMMAND.PAY);
             response.Wait();
             ProcessTransactionResponse result = response.Result;
             Assert.AreEqual("05", result.errorCode);
@@ -67,7 +48,7 @@ namespace ReantalBikeTest
         /// <summary>
         /// Test for process correct transaction
         /// </summary>
-        [Test, Order(2)]
+        [Test, Order(1)]
         public void ProcessTransactionSuccessTest()
         {
             TransactionInfo info = new TransactionInfo()
@@ -80,7 +61,7 @@ namespace ReantalBikeTest
                 amount = 700000,
                 createdAt = Utilities.ConvertDateToString(DateTime.Now)
             };
-            Task<ProcessTransactionResponse> response = interbankService.ProcessTransaction(info, Config.API_INFO.COMMAND.PAY);
+            Task<ProcessTransactionResponse> response = InterbankService.ProcessTransaction(info, Config.API_INFO.COMMAND.PAY);
             response.Wait();
             ProcessTransactionResponse result = response.Result;
             Assert.AreEqual("00", result.errorCode);
@@ -89,7 +70,7 @@ namespace ReantalBikeTest
         /// <summary>
         /// Test for case process transaction with not enough money
         /// </summary>
-        [Test, Order(3)]
+        [Test, Order(2)]
         public void ProcessTransactionNotEnoughMoneyTest()
         {
             TransactionInfo info = new TransactionInfo()
@@ -102,7 +83,7 @@ namespace ReantalBikeTest
                 amount = 700000,
                 createdAt = Utilities.ConvertDateToString(DateTime.Now)
             };
-            Task<ProcessTransactionResponse> response = interbankService.ProcessTransaction(info, Config.API_INFO.COMMAND.PAY);
+            Task<ProcessTransactionResponse> response = InterbankService.ProcessTransaction(info, Config.API_INFO.COMMAND.PAY);
             response.Wait();
             ProcessTransactionResponse result = response.Result;
             Assert.AreEqual("02", result.errorCode);
@@ -111,10 +92,10 @@ namespace ReantalBikeTest
         /// <summary>
         /// Test for API reset account
         /// </summary>
-        [Test, Order(4)]
+        [Test, Order(3)]
         public void ResetAccountTest()
         {
-            Task<ResetResponse> response = interbankService.ResetAccount();
+            Task<ResetResponse> response = InterbankService.ResetAccount();
             response.Wait();
             ResetResponse result = response.Result;
             Assert.AreEqual("00", result.errorCode);

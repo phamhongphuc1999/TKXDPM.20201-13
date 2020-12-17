@@ -14,7 +14,6 @@
 
 using System;
 using System.Windows.Forms;
-using RentalBikeApp.Business;
 using static RentalBikeApp.Config;
 using static RentalBikeApp.Program;
 using RentalBikeApp.Entities.SQLEntities;
@@ -24,15 +23,11 @@ namespace RentalBikeApp.Presentation
 {
     public partial class TransactionInformationForm : BaseForm
     {
-        private InterbankService interbankService;
-
         private int deposit;
         private int rentalMoney;
 
         public TransactionInformationForm()
         {
-            interbankService = new InterbankService();
-
             InitializeComponent("TransactionInformationForm", "Transaction Information");
             DrawBaseForm();
             DrawTransactionInformationForm();
@@ -57,7 +52,7 @@ namespace RentalBikeApp.Presentation
             if (Config.RENTAL_BIKE is Bike) category = SQL.BikeCategory.BIKE;
             else if (Config.RENTAL_BIKE is ElectricBike) category = SQL.BikeCategory.ELECTRIC;
             else if (Config.RENTAL_BIKE is Tandem) category = SQL.BikeCategory.TANDEM;
-            rentalMoney = interbankService.CalculateFee(Config.TIME_RENTAL_BIKE, category);
+            rentalMoney = returnBikeController.CalculateFee(Config.TIME_RENTAL_BIKE, category);
             rentalMoneyTxt.Text = (rentalMoney == 0) ? "Miễn phí" : rentalMoney.ToString();
         }
 
@@ -119,7 +114,7 @@ namespace RentalBikeApp.Presentation
             if (status == TRANSACTION_STATUS.RENT_BIKE)
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENTING_BIKE;
-                ProcessTransactionResponse result = await interbankService.ProcessTransaction(new TransactionInfo
+                ProcessTransactionResponse result = await InterbankService.ProcessTransaction(new TransactionInfo
                 {
                     cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
                     owner = Config.API_INFO.CARD_INFO.OWER,
@@ -133,7 +128,7 @@ namespace RentalBikeApp.Presentation
                 if(error == "00")
                 {
                     rentBikeForm.FillRentingBikeForm();
-                    rentBikeForm.rentBikeTmr.Start();
+                    rentBikeController.BeginRentingBike();
                     rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
                 }
                 else if(error == "01" || error == "02" || error == "05")
@@ -152,7 +147,7 @@ namespace RentalBikeApp.Presentation
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
                 if(this.deposit < this.rentalMoney)
                 {
-                    ProcessTransactionResponse response = await interbankService.ProcessTransaction(new TransactionInfo
+                    ProcessTransactionResponse response = await InterbankService.ProcessTransaction(new TransactionInfo
                     {
                         cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
                         owner = Config.API_INFO.CARD_INFO.OWER,
@@ -166,7 +161,7 @@ namespace RentalBikeApp.Presentation
                 }
                 else if(this.deposit > this.rentalMoney)
                 {
-                    ProcessTransactionResponse response = await interbankService.ProcessTransaction(new TransactionInfo
+                    ProcessTransactionResponse response = await InterbankService.ProcessTransaction(new TransactionInfo
                     {
                         cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
                         owner = Config.API_INFO.CARD_INFO.OWER,

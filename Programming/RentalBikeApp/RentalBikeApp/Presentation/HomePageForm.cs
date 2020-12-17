@@ -18,20 +18,17 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
-using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class HomePageForm : BaseForm
     {
-        private StationService stationService;
         private List<Station> stationList;
 
         public HomePageForm()
         {
-            stationService = new StationService();
-            stationList = stationService.GetListStations();
+            stationList = bikeStationController.ViewListStation();
 
             InitializeComponent("HomePageForm", "Home Page");
             DrawBaseForm();
@@ -115,7 +112,7 @@ namespace RentalBikeApp.Presentation
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            Station station = stationService.GetStationById((int)but.Tag);
+            Station station = bikeStationController.ViewStationDetail((int)but.Tag);
             this.Hide();
             stationDetailForm.FillStationDetail(station);
             stationDetailForm.Show(this, this);
@@ -154,7 +151,7 @@ namespace RentalBikeApp.Presentation
         {
             searchTxt.Text = "";
             searchTxt.Width = this.ClientSize.Width - 140;
-            this.stationList = stationService.GetListStations();
+            this.stationList = bikeStationController.ViewListStation();
             RenderStationList(this.stationPnl);
         }
     }

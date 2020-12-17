@@ -17,7 +17,7 @@ using System.Linq;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
 
-namespace RentalBikeApp.Business.SQLServices
+namespace RentalBikeApp.Data.ServiceAgents
 {
     public class BikeService
     {

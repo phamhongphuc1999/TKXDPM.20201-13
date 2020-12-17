@@ -15,19 +15,14 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
-using RentalBikeApp.Business.SQLServices;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
 {
     public partial class BikeDetailForm : BaseForm
     {
-        private StationService stationService;
-
         public BikeDetailForm()
         {
-            stationService = new StationService();
-
             InitializeComponent("BikeDetailForm", "Bike Detail");
             DrawBaseForm();
             DrawBikeDetail();
@@ -41,10 +36,9 @@ namespace RentalBikeApp.Presentation
         /// Fill bike form with bike's information and station's information
         /// </summary>
         /// <param name="bike">The specified bike</param>
-        public void FillBikeInformation(BaseBike bike)
+        public void FillBikeInformation(BaseBike bike, string stationName, string stationAddress)
         {
-            Station station = stationService.GetStationById(bike.StationId);
-            stationRtb.Text = string.Format("{0}\n{1}", station.NameStation, station.AddressStation);
+            stationRtb.Text = string.Format("{0}\n{1}", stationName, stationAddress);
             qrCodeTxt.Text = bike.QRCode;
             manufactureTxt.Text = bike.Manufacturer;
             if(bike is Bike)
@@ -56,7 +50,6 @@ namespace RentalBikeApp.Presentation
             }
             else if(bike is Tandem)
             {
-                Tandem tandem = bike as Tandem;
                 categoryBikeTxt.Text = "Xe đạp đôi";
                 powerTxt.Text = "Không có thông tin";
                 licenceTxt.Text = "Không có thông tin";

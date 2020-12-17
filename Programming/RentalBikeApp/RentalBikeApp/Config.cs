@@ -169,5 +169,7 @@ namespace RentalBikeApp
             RENTING_BIKE,
             RENT_BIKE_INFO
         }
+
+        public const string QRValid = @"^[0,1,2][0-9]{8}";
     }
 }
