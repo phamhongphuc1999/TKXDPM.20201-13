@@ -13,11 +13,11 @@
 // ------------------------------------------------------
 
 using NUnit.Framework;
-using RentalBikeApp.Data.ServiceAgents;
+using RentalBikeApp.Data.ServiceAgents.BikeServices;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 
-namespace ReantalBikeTest
+namespace ReantalBikeTest.ServiceAgents
 {
     [TestFixture]
     class BikeServiceTest

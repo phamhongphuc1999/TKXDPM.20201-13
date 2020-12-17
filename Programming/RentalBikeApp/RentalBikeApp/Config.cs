@@ -24,17 +24,9 @@ namespace RentalBikeApp
         /// </summary>
         public static class SQL
         {
-            //private static string _SQL_CONNECT_STRING = "Data Source=.\\MSSQLSERVER123;Initial Catalog=RentalBike;Integrated Security=True";
-            // private static string _SQL_CONNECT_STRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=RentalBike;Integrated Security=True;";
-            private static string _SQL_CONNECT_STRING = "data source=DESKTOP-TM16V8B\\SQLEXPRESS;initial catalog=RentalBike;user id=sa;password=phamhongphuc;MultipleActiveResultSets=True;";
-
-            ///<value>
-            ///get the value of sql server connect string
-            ///</value>
-            public static string SQL_CONNECT_STRING
-            {
-                get { return _SQL_CONNECT_STRING; }
-            }
+            //private static string SQL_CONNECT_STRING = "Data Source=.\\MSSQLSERVER123;Initial Catalog=RentalBike;Integrated Security=True";
+            // private static string SQL_CONNECT_STRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=RentalBike;Integrated Security=True;";
+            public const string SQL_CONNECT_STRING = "data source=DESKTOP-TM16V8B\\SQLEXPRESS;initial catalog=RentalBike;user id=sa;password=phamhongphuc;MultipleActiveResultSets=True;";
 
             ///<value>
             ///enum define category bike
@@ -141,6 +133,9 @@ namespace RentalBikeApp
         /// Get the time rental bike
         /// </value>
         public static string TIME_RENTAL_BIKE;
+
+        ///<Value>get current card information</Value>
+        public static Card CARD_INFO;
 
         ///<value>
         /// enum use to define the transaction form status

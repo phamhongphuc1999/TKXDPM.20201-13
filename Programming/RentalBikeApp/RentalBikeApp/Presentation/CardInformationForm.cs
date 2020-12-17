@@ -12,9 +12,10 @@
 //
 // ------------------------------------------------------
 
-using RentalBikeApp.Entities.SQLEntities;
 using static RentalBikeApp.Program;
 using System;
+using System.Windows.Forms;
+using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
 {
@@ -28,6 +29,21 @@ namespace RentalBikeApp.Presentation
             homePageBut.Click += HomePageBut_Click;
             rentBikeBut.Click += RentBikeBut_Click;
             prevFormBut.Click += PrevFormBut_Click;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private (bool, string) ValidCardInfor()
+        {
+            if (owerTxt.Text == "" || cardCodeTxt.Text == "" || securityCodeTxt.Text == "" || bankCb.SelectedIndex == 0)
+                return (false, "Yêu cầu nhập đầy đủ thông tin trước khi xác nhận");
+            Card card = rentBikeController.GetCardInformation(owerTxt.Text);
+            if (card == null) return (false, "Thông tin sai hoặc thẻ không tồn tại");
+            if(card.CardCode != cardCodeTxt.Text || card.SecurityKey != securityCodeTxt.Text)
+                return (false, "Thông tin sai hoặc thẻ không tồn tại");
+            return (true, "");
         }
 
         /// <summary>
@@ -71,7 +87,13 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void SubmitBut_Click(object sender, EventArgs e)
         {
-            transactionInformationForm.FillTransactionInformationWhenRentBike(new Card());
+            (bool, string) info = ValidCardInfor();
+            if (!info.Item1)
+            {
+                MessageBox.Show(info.Item2, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            transactionInformationForm.FillTransactionInformationWhenRentBike();
             transactionInformationForm.Show(this);
             this.Hide();
         }

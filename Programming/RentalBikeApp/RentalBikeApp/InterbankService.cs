@@ -52,7 +52,7 @@ namespace RentalBikeApp
                 transaction = transactionInfo,
                 appCode = _appCode,
                 hashCode = Utilities.MD5Hash(JsonConvert.SerializeObject(new {
-                    secretKey = Config.API_INFO.KEY.SECRET_KEY,
+                    secretKey = Config.CARD_INFO.SecurityKey,
                     transaction = transactionInfo
                 }))
             };

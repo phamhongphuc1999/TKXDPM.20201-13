@@ -60,7 +60,7 @@ namespace RentalBikeApp.Presentation
         /// Fill transaction form with transaction's information when user process transaction for pay deposit money
         /// </summary>
         /// <param name="card">The instance represent user card information</param>
-        public void FillTransactionInformationWhenRentBike(Card card)
+        public void FillTransactionInformationWhenRentBike()
         {
             this.status = TRANSACTION_STATUS.RENT_BIKE;
             this.deposit = 40 * Config.RENTAL_BIKE.Value / 100;
@@ -116,11 +116,11 @@ namespace RentalBikeApp.Presentation
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENTING_BIKE;
                 ProcessTransactionResponse result = await InterbankService.ProcessTransaction(new TransactionInfo
                 {
-                    cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
-                    owner = Config.API_INFO.CARD_INFO.OWER,
-                    cvvCode = Config.API_INFO.CARD_INFO.CVV,
-                    dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                    transactionContent = "Pay Deposit",
+                    cardCode = Config.CARD_INFO.CardCode,
+                    owner = Config.CARD_INFO.Owners,
+                    cvvCode = Config.CARD_INFO.CVV,
+                    dateExpired = Config.CARD_INFO.DateExpired,
+                    transactionContent = noteTxt.Text == ""? "Pay deposit": noteTxt.Text,
                     amount = this.deposit,
                     createdAt = Utilities.ConvertDateToString(DateTime.Now)
                 }, Config.API_INFO.COMMAND.PAY);
@@ -149,10 +149,10 @@ namespace RentalBikeApp.Presentation
                 {
                     ProcessTransactionResponse response = await InterbankService.ProcessTransaction(new TransactionInfo
                     {
-                        cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
-                        owner = Config.API_INFO.CARD_INFO.OWER,
-                        cvvCode = Config.API_INFO.CARD_INFO.CVV,
-                        dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
+                        cardCode = Config.CARD_INFO.CardCode,
+                        owner = Config.CARD_INFO.Owners,
+                        cvvCode = Config.CARD_INFO.CVV,
+                        dateExpired = Config.CARD_INFO.DateExpired,
                         transactionContent = "Pay rental money",
                         amount = this.rentalMoney - this.deposit,
                         createdAt = Utilities.ConvertDateToString(DateTime.Now)
@@ -163,10 +163,10 @@ namespace RentalBikeApp.Presentation
                 {
                     ProcessTransactionResponse response = await InterbankService.ProcessTransaction(new TransactionInfo
                     {
-                        cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
-                        owner = Config.API_INFO.CARD_INFO.OWER,
-                        cvvCode = Config.API_INFO.CARD_INFO.CVV,
-                        dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
+                        cardCode = Config.CARD_INFO.CardCode,
+                        owner = Config.CARD_INFO.Owners,
+                        cvvCode = Config.CARD_INFO.CVV,
+                        dateExpired = Config.CARD_INFO.DateExpired,
                         transactionContent = "Pay rental money",
                         amount = this.deposit - this.rentalMoney,
                         createdAt = Utilities.ConvertDateToString(DateTime.Now)

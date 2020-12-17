@@ -18,7 +18,7 @@ using RentalBikeApp.Entities.SQLEntities;
 using System;
 using System.Collections.Generic;
 
-namespace ReantalBikeTest
+namespace ReantalBikeTest.ServiceAgents
 {
     [TestFixture]
    class TransactionServiceTests

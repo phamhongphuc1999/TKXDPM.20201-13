@@ -17,9 +17,9 @@ using System.Collections.Generic;
 using System.Linq;
 using static RentalBikeApp.Program;
 
-namespace RentalBikeApp.Data.ServiceAgents
+namespace RentalBikeApp.Data.ServiceAgents.BikeServices
 {
-    public class ElectricBikeService
+    public class ElectricBikeService: IBikeService<ElectricBike>
     {
         /// <summary>
         /// 

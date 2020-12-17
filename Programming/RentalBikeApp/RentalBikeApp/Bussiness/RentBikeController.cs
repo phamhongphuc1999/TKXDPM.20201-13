@@ -12,6 +12,7 @@
 //
 // ------------------------------------------------------
 
+using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using static RentalBikeApp.Program;
 
@@ -32,6 +33,13 @@ namespace RentalBikeApp.Bussiness
             else return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="qrCode"></param>
+        /// <param name="stationName"></param>
+        /// <param name="stationAddress"></param>
+        /// <returns></returns>
         public BaseBike SubmitQrCode(string qrCode, ref string stationName, ref string stationAddress)
         {
             BaseBike bike = null;
@@ -45,6 +53,22 @@ namespace RentalBikeApp.Bussiness
             return bike;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="owner"></param>
+        /// <returns></returns>
+        public Card GetCardInformation(string owner)
+        {
+            Card card = cardService.GetCardByOwner(owner);
+            if (card != null) Config.CARD_INFO = card;
+            return card;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public bool BeginRentingBike()
         {
             rentBikeForm.rentBikeTmr.Start();

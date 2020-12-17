@@ -75,7 +75,7 @@ namespace RentalBikeApp.Presentation
             bankCb.Items.Insert(0, "Chọn tên ngân hàng phát hành thẻ");
             bankCb.SelectedIndex = 0;
             bankCb.Items.Add("Bank 2");
-            bankCb.SelectedIndex = 0;
+            bankCb.SelectedIndex = 1;
             securityCodeLbl = new Label
             {
                 Text = "Mã bảo mật",

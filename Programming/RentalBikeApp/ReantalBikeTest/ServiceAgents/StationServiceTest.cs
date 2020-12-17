@@ -17,7 +17,7 @@ using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 
-namespace ReantalBikeTest
+namespace ReantalBikeTest.ServiceAgents
 {
     [TestFixture]
     class StationServiceTest

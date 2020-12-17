@@ -17,6 +17,7 @@ using RentalBikeApp.Presentation;
 using System.Windows.Forms;
 using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
+using RentalBikeApp.Data.ServiceAgents.BikeServices;
 using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp

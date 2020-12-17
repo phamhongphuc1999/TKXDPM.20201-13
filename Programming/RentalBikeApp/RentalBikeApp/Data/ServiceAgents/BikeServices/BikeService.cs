@@ -13,36 +13,36 @@
 // ------------------------------------------------------
 
 using RentalBikeApp.Entities.SQLEntities;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 using static RentalBikeApp.Program;
 
-namespace RentalBikeApp.Data.ServiceAgents
+namespace RentalBikeApp.Data.ServiceAgents.BikeServices
 {
-    public class TandemService
+    public class BikeService: IBikeService<Bike>
     {
-        /// <summary>Get tandem by QR code</summary>
+        /// <summary>Get bike by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
-        public Tandem GetBikeByQRCode(string QRCode)
+        public Bike GetBikeByQRCode(string QRCode)
         {
-            return connecter.SqlData.Tandems.SingleOrDefault(x => x.QRCode == QRCode);
+            return connecter.SqlData.Bikes.SingleOrDefault(x => x.QRCode == QRCode);
         }
 
-        /// <summary>Get tandem by tandem's id</summary>
+        /// <summary>Get bike by bike's id</summary>
         /// <param name="id">the bike's id you want to find</param>
         /// <returns>Return the bike with specified ID or null if not found</returns>
-        public Tandem GetBikeById(int id)
+        public Bike GetBikeById(int id)
         {
-            return connecter.SqlData.Tandems.Find(id);
+            return connecter.SqlData.Bikes.Find(id);
         }
 
-        /// <summary>Filters a list tandem in the station base on bike category</summary>
+        /// <summary>Filters a list bike in the station base on bike category</summary>
         /// <param name="stationId">The station you want to filter list of bike</param>
         /// <returns>Return the list base on bike category</returns>
-        public List<Tandem> GetListBikesInStation(int stationId)
+        public List<Bike> GetListBikesInStation(int stationId)
         {
-            List<Tandem> bikesList = connecter.SqlData.Tandems.Where(x => x.StationId == stationId).ToList();
+            List<Bike> bikesList = connecter.SqlData.Bikes.Where(x => x.StationId == stationId).ToList();
             return bikesList;
         }
     }
