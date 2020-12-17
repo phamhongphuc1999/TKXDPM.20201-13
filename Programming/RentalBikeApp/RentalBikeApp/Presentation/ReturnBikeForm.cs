@@ -28,7 +28,7 @@ namespace RentalBikeApp.Presentation
 
         public ReturnBikeForm()
         {
-            stationList = stationService.GetListStations();
+            stationList = bikeStationController.ViewListStation();
 
             InitializeComponent("ReturnBikeForm", "Return Bike");
             DrawBaseForm();
@@ -137,7 +137,7 @@ namespace RentalBikeApp.Presentation
         {
             searchTxt.Text = "";
             searchTxt.Width = this.ClientSize.Width - 140;
-            this.stationList = stationService.GetListStations();
+            this.stationList = bikeStationController.ViewListStation();
             RenderStationList(this.listStationPnl);
         }
 

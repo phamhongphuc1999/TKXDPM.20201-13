@@ -27,7 +27,7 @@ namespace RentalBikeApp.Bussiness
         /// <param name="qrcode">The qrcode you want to get information</param>
         /// <param name="stationName">representing station name contain the bike</param>
         /// <param name="stationAddress">representing station address contain the bike</param>
-        /// <returns></returns>
+        /// <returns>The BaseBike representing the bike you want to get</returns>
         public BaseBike ViewBikeDetail(string qrcode, ref string stationName, ref string stationAddress)
         {
             BaseBike bike = null;
@@ -44,11 +44,11 @@ namespace RentalBikeApp.Bussiness
         /// <summary>
         /// Get bike information
         /// </summary>
-        /// <param name="bikeId"></param>
-        /// <param name="category"></param>
-        /// <param name="stationName"></param>
-        /// <param name="stationAddress"></param>
-        /// <returns></returns>
+        /// <param name="bikeId">The bike id you want to get information</param>
+        /// <param name="category">The bike type</param>
+        /// <param name="stationName">Representing station name contain the bike</param>
+        /// <param name="stationAddress">Repensting station address contain the bike</param>
+        /// <returns>The BaseBike representing the bike you want to get</returns>
         public BaseBike ViewBikeDetail(int bikeId, BikeCategory category, ref string stationName, ref string stationAddress)
         {
             BaseBike bike = null;
@@ -62,6 +62,12 @@ namespace RentalBikeApp.Bussiness
             return bike;
         }
 
+        /// <summary>
+        /// Get bike information
+        /// </summary>
+        /// <param name="bikeId">The bike id you want to get information</param>
+        /// <param name="category">The bike type</param>
+        /// <returns>The BaseBike representing the bike you want to get</returns>
         public BaseBike ViewBikeDetail(int bikeId, BikeCategory category)
         {
             BaseBike bike = null;
@@ -72,12 +78,12 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Get list bike in specified station
         /// </summary>
-        /// <param name="stationId"></param>
-        /// <param name="stationName"></param>
-        /// <param name="stationAddress"></param>
-        /// <returns></returns>
+        /// <param name="stationId">The station id you want to get list bike</param>
+        /// <param name="stationName">Representing station name contain the bike</param>
+        /// <param name="stationAddress">Repensting station address contain the bike</param>
+        /// <returns>The list bike</returns>
         public List<Bike> ViewListBikeInStation(int stationId, ref string stationName, ref string stationAddress)
         {
             Station station = stationService.GetStationById(stationId);
@@ -88,12 +94,12 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Get list electric bike in specified station
         /// </summary>
-        /// <param name="stationId"></param>
-        /// <param name="stationName"></param>
-        /// <param name="stationAddress"></param>
-        /// <returns></returns>
+        /// <param name="stationId">The station id you want to get list bike</param>
+        /// <param name="stationName">Representing station name contain the bike</param>
+        /// <param name="stationAddress">Repensting station address contain the bike</param>
+        /// <returns>The list electric bike</returns>
         public List<ElectricBike> ViewListElectricBikeInStation(int stationId, ref string stationName, ref string stationAddress)
         {
             Station station = stationService.GetStationById(stationId);
@@ -104,12 +110,12 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Get tandem in specified station
         /// </summary>
-        /// <param name="stationId"></param>
-        /// <param name="stationName"></param>
-        /// <param name="stationAddress"></param>
-        /// <returns></returns>
+        /// <param name="stationId">The station id you want to get list bike</param>
+        /// <param name="stationName">Representing station name contain the bike</param>
+        /// <param name="stationAddress">Repensting station address contain the bike</param>
+        /// <returns>The list tandem</returns>
         public List<Tandem> ViewListTandemInStation(int stationId, ref string stationName, ref string stationAddress)
         {
             Station station = stationService.GetStationById(stationId);
@@ -120,19 +126,19 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Get specified station information
         /// </summary>
-        /// <param name="stationId"></param>
-        /// <returns></returns>
+        /// <param name="stationId">The station id you want to get</param>
+        /// <returns>The station</returns>
         public Station ViewStationDetail(int stationId)
         {
             return stationService.GetStationById(stationId);
         }
 
         /// <summary>
-        /// 
+        /// Get all of station in database
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The list stations</returns>
         public List<Station> ViewListStation()
         {
             List<Station> stations = stationService.GetListStations();
