@@ -44,5 +44,12 @@ namespace RentalBikeApp.Bussiness
             stationAddress = station.AddressStation;
             return bike;
         }
+
+        public bool BeginRentingBike()
+        {
+            rentBikeForm.rentBikeTmr.Start();
+            Station station = stationService.GetStationById(Config.RENTAL_BIKE.StationId);
+            return stationService.UpdateNumberBike(Config.RENTAL_BIKE.StationId, station.NumberOfBike - 1);
+        }
     }
 }

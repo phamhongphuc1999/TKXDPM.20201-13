@@ -110,10 +110,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="bikeId">The bike id of specified bike</param>
         public void FillRentBikeInfoForm((int, Config.SQL.BikeCategory) bikeInfo)
         {
-            BaseBike bike;
-            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE) bike = bikeService.GetBikeById(bikeInfo.Item1);
-            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC) bike = electricBikeService.GetBikeById(bikeInfo.Item1);
-            else bike = tandemService.GetBikeById(bikeInfo.Item1);
+            BaseBike bike = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
             int deposit = 40 * bike.Value / 100;
             if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
@@ -213,11 +210,7 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
-            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
-                Config.RENTAL_BIKE = bikeService.GetBikeById(bikeInfo.Item1);
-            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC)
-                Config.RENTAL_BIKE = electricBikeService.GetBikeById(bikeInfo.Item1);
-            else Config.RENTAL_BIKE = tandemService.GetBikeById(bikeInfo.Item1);
+            Config.RENTAL_BIKE = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2);
             cardInformationForm.Show(this);
             this.Hide();
         }

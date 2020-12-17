@@ -34,15 +34,16 @@ namespace RentalBikeApp.Presentation
             prevFormBut.Click += PrevFormBut_Click;
         }
 
-        private void FillListBikes(Station station)
+        private void FillListBikes(int stationId)
         {
             listBikePnl.Controls.Clear();
-            List<Bike> bikesList = bikeService.GetListBikesInStation(station.StationId);
+            string stationName = "", stationAddress = "";
+            List<Bike> bikesList = bikeStationController.ViewListBikeInStation(stationId, ref stationName, ref stationAddress);
             int count = bikesList.Count(x => !x.BikeStatus);
             if (count > 0)
                 descriptionRtb.Text = $"Xe đạp thường\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
-            stationRtb.Text = $"{station.NameStation}\n{station.AddressStation}";
+            stationRtb.Text = $"{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
             foreach (Bike bike in bikesList)
@@ -61,15 +62,16 @@ namespace RentalBikeApp.Presentation
             }
         }
 
-        private void FillListTandems(Station station)
+        private void FillListTandems(int stationId)
         {
             listBikePnl.Controls.Clear();
-            List<Tandem> bikesList = tandemService.GetListBikesInStation(station.StationId);
+            string stationName = "", stationAddress = "";
+            List<Tandem> bikesList = bikeStationController.ViewListTandemInStation(stationId, ref stationName, ref stationAddress);
             int count = bikesList.Count(x => !x.BikeStatus);
             if (count > 0)
                 descriptionRtb.Text = $"Xe đạp đôi\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
-            stationRtb.Text = $"{station.NameStation}\n{station.AddressStation}";
+            stationRtb.Text = $"{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
             foreach (Tandem bike in bikesList)
@@ -88,15 +90,16 @@ namespace RentalBikeApp.Presentation
             }
         }
 
-        private void FillListElectric(Station station)
+        private void FillListElectric(int stationId)
         {
             listBikePnl.Controls.Clear();
-            List<ElectricBike> bikesList = electricBikeService.GetListBikesInStation(station.StationId);
+            string stationName = "", stationAddress = "";
+            List<ElectricBike> bikesList = bikeStationController.ViewListElectricBikeInStation(stationId, ref stationName, ref stationAddress);
             int count = bikesList.Count(x => !x.BikeStatus);
             if (count > 0)
                 descriptionRtb.Text = $"Xe đạp điện\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
-            stationRtb.Text = $"{station.NameStation}\n{station.AddressStation}";
+            stationRtb.Text = $"{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
             foreach (ElectricBike bike in bikesList)
@@ -120,11 +123,11 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="station">The station contain list bike is displayed</param>
         /// <param name="category">The specified bike's category</param>
-        public void FillListBikes(Station station, Config.SQL.BikeCategory category)
+        public void FillListBikes(int stationId, Config.SQL.BikeCategory category)
         {
-            if (category == Config.SQL.BikeCategory.BIKE) FillListBikes(station);
-            else if (category == Config.SQL.BikeCategory.ELECTRIC) FillListElectric(station);
-            else FillListTandems(station);
+            if (category == Config.SQL.BikeCategory.BIKE) FillListBikes(stationId);
+            else if (category == Config.SQL.BikeCategory.ELECTRIC) FillListElectric(stationId);
+            else FillListTandems(stationId);
         }
 
         /// <summary>

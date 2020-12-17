@@ -15,6 +15,7 @@
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Data.ServiceAgents
@@ -42,6 +43,21 @@ namespace RentalBikeApp.Data.ServiceAgents
         public Station GetStationByName(string nameStation)
         {
             return connecter.SqlData.Stations.SingleOrDefault(x => x.NameStation == nameStation);
+        }
+
+        public bool UpdateNumberBike(int stationId, int numberOfBike)
+        {
+            try
+            {
+                Station station = connecter.SqlData.Stations.SingleOrDefault(x => x.StationId == stationId);
+                station.NumberOfBike = numberOfBike;
+                connecter.SqlData.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

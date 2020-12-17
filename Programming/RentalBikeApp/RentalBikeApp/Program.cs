@@ -35,6 +35,7 @@ namespace RentalBikeApp
 
         public static RentBikeController rentBikeController;
         public static BikeStationController bikeStationController;
+        public static ReturnBikeController returnBikeController;
 
         public static HomePageForm homePageForm;
         public static StationDetailForm stationDetailForm;
@@ -70,6 +71,7 @@ namespace RentalBikeApp
             //init controllers
             rentBikeController = new RentBikeController();
             bikeStationController = new BikeStationController();
+            returnBikeController = new ReturnBikeController();
 
             //init the presentation
             homePageForm = new HomePageForm();

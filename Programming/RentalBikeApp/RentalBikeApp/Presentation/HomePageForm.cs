@@ -28,7 +28,7 @@ namespace RentalBikeApp.Presentation
 
         public HomePageForm()
         {
-            stationList = stationService.GetListStations();
+            stationList = bikeStationController.ViewListStation();
 
             InitializeComponent("HomePageForm", "Home Page");
             DrawBaseForm();
@@ -151,7 +151,7 @@ namespace RentalBikeApp.Presentation
         {
             searchTxt.Text = "";
             searchTxt.Width = this.ClientSize.Width - 140;
-            this.stationList = stationService.GetListStations();
+            this.stationList = bikeStationController.ViewListStation();
             RenderStationList(this.stationPnl);
         }
     }

@@ -89,8 +89,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void TandemBut_Click(object sender, EventArgs e)
         {
-            Station station = stationService.GetStationById((int)tandemBut.Tag);
-            listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.TANDEM);
+            listBikeForm.FillListBikes((int)tandemBut.Tag, Config.SQL.BikeCategory.TANDEM);
             listBikeForm.Show(this, this);
             this.Hide();
         }
@@ -102,8 +101,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void ElectricBut_Click(object sender, EventArgs e)
         {
-            Station station = stationService.GetStationById((int)electricBut.Tag);
-            listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.ELECTRIC);
+            listBikeForm.FillListBikes((int)electricBut.Tag, Config.SQL.BikeCategory.ELECTRIC);
             listBikeForm.Show(this, this);
             this.Hide();
         }
@@ -115,8 +113,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void BikeBut_Click(object sender, EventArgs e)
         {
-            Station station = stationService.GetStationById((int)bikeBut.Tag);
-            listBikeForm.FillListBikes(station, Config.SQL.BikeCategory.BIKE);
+            listBikeForm.FillListBikes((int)bikeBut.Tag, Config.SQL.BikeCategory.BIKE);
             listBikeForm.Show(this, this);
             this.Hide();
         }
