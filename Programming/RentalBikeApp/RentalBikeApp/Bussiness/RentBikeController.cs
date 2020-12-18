@@ -20,10 +20,10 @@ namespace RentalBikeApp.Bussiness
     public class RentBikeController
     {
         /// <summary>
-        /// 
+        /// Get bike by qr code
         /// </summary>
-        /// <param name="qrCode"></param>
-        /// <returns></returns>
+        /// <param name="qrCode">the qrcode to get bike</param>
+        /// <returns>The BaseBike representing the bike has qr code</returns>
         public BaseBike SubmitQrCode(string qrCode)
         {
             if (qrCode[0] == '0') return bikeService.GetBikeByQRCode(qrCode);
@@ -33,12 +33,12 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Get bike by qrcode and save name and address of station contain this bike
         /// </summary>
-        /// <param name="qrCode"></param>
-        /// <param name="stationName"></param>
-        /// <param name="stationAddress"></param>
-        /// <returns></returns>
+        /// <param name="qrCode">The qr code to get bike</param>
+        /// <param name="stationName">The string save name of station</param>
+        /// <param name="stationAddress">The string save address of station</param>
+        /// <returns>The BaseBike representing the bike has qr code</returns>
         public BaseBike SubmitQrCode(string qrCode, ref string stationName, ref string stationAddress)
         {
             BaseBike bike = null;
@@ -53,10 +53,10 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Get card information
         /// </summary>
-        /// <param name="owner"></param>
-        /// <returns></returns>
+        /// <param name="owner">The card owner</param>
+        /// <returns>The Card contain card information</returns>
         public Card GetCardInformation(string owner)
         {
             Card card = cardService.GetCardByOwner(owner);
@@ -65,12 +65,12 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Create new transaction to save deposit transaction
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="qrcode"></param>
-        /// <param name="deposit"></param>
-        /// <returns></returns>
+        /// <param name="userId">The id of user</param>
+        /// <param name="qrcode">The qr code of rental bike</param>
+        /// <param name="deposit">The deposit of rental bike</param>
+        /// <returns>The new transaction</returns>
         public Transaction CreateDepositTransaction(int userId, string qrcode, int deposit)
         {
             Transaction transaction = transactionService.InsertNewTransaction(userId, qrcode, deposit);
@@ -78,9 +78,8 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Start renting bike
         /// </summary>
-        /// <returns></returns>
         public void BeginRentingBike(int bikeId)
         {
             rentBikeForm.rentBikeTmr.Start();

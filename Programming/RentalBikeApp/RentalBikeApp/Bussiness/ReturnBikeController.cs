@@ -42,10 +42,10 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Check availability position in station
         /// </summary>
-        /// <param name="stationId"></param>
-        /// <returns></returns>
+        /// <param name="stationId">The station id</param>
+        /// <returns>true if exist availiability position or false if not</returns>
         public bool CheckStation(int stationId)
         {
             Station station = stationService.GetStationById(stationId);
@@ -57,10 +57,10 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Update bike status after rent bike
         /// </summary>
-        /// <param name="stationId"></param>
-        /// <param name="category"></param>
+        /// <param name="stationId">The return station</param>
+        /// <param name="category">The type of bike</param>
         /// <returns></returns>
         public void UpdateStationAfterReturnbike(int stationId, Config.SQL.BikeCategory category)
         {
@@ -70,11 +70,11 @@ namespace RentalBikeApp.Bussiness
         }
 
         /// <summary>
-        /// 
+        /// Update transaction when user end of rent bike
         /// </summary>
-        /// <param name="transactionId"></param>
-        /// <param name="rentalMoney"></param>
-        /// <param name="content"></param>
+        /// <param name="transactionId">The trasction id</param>
+        /// <param name="rentalMoney">The reantal money</param>
+        /// <param name="content">The transaction content</param>
         /// <returns></returns>
         public Transaction UpdatePaymentTransaction(int transactionId, int rentalMoney, string content = "")
         {

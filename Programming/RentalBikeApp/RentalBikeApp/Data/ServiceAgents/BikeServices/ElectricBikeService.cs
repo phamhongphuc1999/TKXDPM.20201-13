@@ -27,31 +27,25 @@ namespace RentalBikeApp.Data.ServiceAgents.BikeServices
             this.connecter = connecter;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="QRCode"></param>
-        /// <returns></returns>
+        /// <summary>Get bike by QR code</summary>
+        /// <param name="QRCode">QR Code you want to find</param>
+        /// <returns>Return the bike with specified QR Code or null if not found</returns>
         public ElectricBike GetBikeByQRCode(string QRCode)
         {
             return connecter.SqlData.ElectricBikes.SingleOrDefault(x => x.QRCode == QRCode);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <summary>Get bike by bike's id</summary>
+        /// <param name="id">the bike's id you want to find</param>
+        /// <returns>Return the bike with specified ID or null if not found</returns>
         public ElectricBike GetBikeById(int id)
         {
             return connecter.SqlData.ElectricBikes.Find(id);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="stationId"></param>
-        /// <returns></returns>
+        /// <summary>Filters a list bike in the station base on bike category</summary>
+        /// <param name="stationId">The station you want to filter list of bike</param>
+        /// <returns>Return the list base on bike category</returns>
         public List<ElectricBike> GetListBikesInStation(int stationId)
         {
             List<ElectricBike> bikesList = connecter.SqlData.ElectricBikes.Where(x => x.StationId == stationId).ToList();
@@ -59,11 +53,11 @@ namespace RentalBikeApp.Data.ServiceAgents.BikeServices
         }
 
         /// <summary>
-        /// 
+        /// Update bike information
         /// </summary>
-        /// <param name="bikeId"></param>
-        /// <param name="update"></param>
-        /// <returns></returns>
+        /// <param name="bikeId">The bike id</param>
+        /// <param name="update">The update information</param>
+        /// <returns>The bike information after updated</returns>
         public ElectricBike UpdateBike(int bikeId, UpdateBikeInfo update)
         {
             ElectricBike bike = connecter.SqlData.ElectricBikes.Find(bikeId);

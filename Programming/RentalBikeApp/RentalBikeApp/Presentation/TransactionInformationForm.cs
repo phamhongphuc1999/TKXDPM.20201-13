@@ -151,14 +151,14 @@ namespace RentalBikeApp.Presentation
                 else if(this.deposit > this.rentalMoney)
                     response = await InterbankService.ProcessTransaction(Config.CARD_INFO, API_INFO.COMMAND.REFUND, this.deposit - this.rentalMoney,
                         DateTime.Now, "Refund deposit");
-                MessageBox.Show(response.errorCode);
                 string error = response.errorCode;
                 if(error == "00")
                 {
                     Transaction transaction = returnBikeController.UpdatePaymentTransaction(transactionId, this.rentalMoney);
-                    MessageBox.Show("chien");
+                    MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     homePageForm.Show(this);
                 }
+
             }
             this.Hide();
         }

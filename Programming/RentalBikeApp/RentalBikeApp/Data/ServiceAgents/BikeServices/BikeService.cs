@@ -53,10 +53,11 @@ namespace RentalBikeApp.Data.ServiceAgents.BikeServices
         }
 
         /// <summary>
-        /// 
+        /// Update bike information
         /// </summary>
-        /// <param name="update"></param>
-        /// <returns></returns>
+        /// <param name="bikeId">The bike id</param>
+        /// <param name="update">The update information</param>
+        /// <returns>The bike information after updated</returns>
         public Bike UpdateBike(int bikeId, UpdateBikeInfo update)
         {
             Bike bike = connecter.SqlData.Bikes.Find(bikeId);
