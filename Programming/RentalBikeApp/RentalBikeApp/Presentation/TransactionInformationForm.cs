@@ -114,16 +114,8 @@ namespace RentalBikeApp.Presentation
             if (status == TRANSACTION_STATUS.RENT_BIKE)
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENTING_BIKE;
-                ProcessTransactionResponse result = await InterbankService.ProcessTransaction(new TransactionInfo
-                {
-                    cardCode = Config.CARD_INFO.CardCode,
-                    owner = Config.CARD_INFO.Owners,
-                    cvvCode = Config.CARD_INFO.CVV,
-                    dateExpired = Config.CARD_INFO.DateExpired,
-                    transactionContent = noteTxt.Text == ""? "Pay deposit": noteTxt.Text,
-                    amount = this.deposit,
-                    createdAt = Utilities.ConvertDateToString(DateTime.Now)
-                }, Config.API_INFO.COMMAND.PAY);
+                ProcessTransactionResponse result = await InterbankService.ProcessTransaction(Config.CARD_INFO, Config.API_INFO.COMMAND.PAY, this.deposit, DateTime.Now, 
+                    noteTxt.Text == ""? "Transaction content": noteTxt.Text);
                 string error = result.errorCode;
                 if(error == "00")
                 {
@@ -145,34 +137,14 @@ namespace RentalBikeApp.Presentation
             else if (status == TRANSACTION_STATUS.PAY)
             {
                 Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
+                ProcessTransactionResponse response = null;
                 if(this.deposit < this.rentalMoney)
-                {
-                    ProcessTransactionResponse response = await InterbankService.ProcessTransaction(new TransactionInfo
-                    {
-                        cardCode = Config.CARD_INFO.CardCode,
-                        owner = Config.CARD_INFO.Owners,
-                        cvvCode = Config.CARD_INFO.CVV,
-                        dateExpired = Config.CARD_INFO.DateExpired,
-                        transactionContent = "Pay rental money",
-                        amount = this.rentalMoney - this.deposit,
-                        createdAt = Utilities.ConvertDateToString(DateTime.Now)
-                    }, Config.API_INFO.COMMAND.PAY);
-                    MessageBox.Show(response.errorCode);
-                }
+                    response = await InterbankService.ProcessTransaction(Config.CARD_INFO, API_INFO.COMMAND.PAY, this.rentalMoney - this.deposit,
+                        DateTime.Now, "Pay Rental Money");
                 else if(this.deposit > this.rentalMoney)
-                {
-                    ProcessTransactionResponse response = await InterbankService.ProcessTransaction(new TransactionInfo
-                    {
-                        cardCode = Config.CARD_INFO.CardCode,
-                        owner = Config.CARD_INFO.Owners,
-                        cvvCode = Config.CARD_INFO.CVV,
-                        dateExpired = Config.CARD_INFO.DateExpired,
-                        transactionContent = "Pay rental money",
-                        amount = this.deposit - this.rentalMoney,
-                        createdAt = Utilities.ConvertDateToString(DateTime.Now)
-                    }, Config.API_INFO.COMMAND.REFUND);
-                    MessageBox.Show(response.errorCode);
-                }
+                    response = await InterbankService.ProcessTransaction(Config.CARD_INFO, API_INFO.COMMAND.REFUND, this.deposit - this.rentalMoney,
+                        DateTime.Now, "Refund deposit");
+                MessageBox.Show(response.errorCode);
                 homePageForm.Show(this);
             }
             this.Hide();

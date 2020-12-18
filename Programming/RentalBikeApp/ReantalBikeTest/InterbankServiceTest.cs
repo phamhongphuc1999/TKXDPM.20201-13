@@ -15,31 +15,40 @@
 using NUnit.Framework;
 using RentalBikeApp;
 using RentalBikeApp.Entities.APIEntities;
+using RentalBikeApp.Entities.SQLEntities;
 using System;
 using System.Threading.Tasks;
+using static RentalBikeApp.Config.API_INFO;
 
 namespace ReantalBikeTest
 {
     [TestFixture]
     public class InterbankServiceTest
     {
+        private Card testCard;
+
+        [SetUp]
+        public void Setup()
+        {
+            testCard = new Card
+            {
+                CardId = 1, UserId = 1,
+                CardCode = "118609_group13_2020",
+                Owners = "Group 13",
+                CVV = "474", Bank = "Bank 2",
+                DateExpired = "1125",
+                AppCode = "Bi3TiyT5q00=",
+                SecurityKey = "B92s318KCwI="
+            };
+        }
+
         /// <summary>
         /// Test for case process transaction with zero amount
         /// </summary>
         [Test, Order(0)]
         public void ProcessTransactionErrorAmountTest()
         {
-            TransactionInfo info = new TransactionInfo()
-            {
-                cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
-                owner = Config.API_INFO.CARD_INFO.OWER,
-                cvvCode = Config.API_INFO.CARD_INFO.CVV,
-                dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                transactionContent = "Pay Deposit",
-                amount = 0,
-                createdAt = Utilities.ConvertDateToString(DateTime.Now)
-            };
-            Task<ProcessTransactionResponse> response = InterbankService.ProcessTransaction(info, Config.API_INFO.COMMAND.PAY);
+            Task<ProcessTransactionResponse> response = InterbankService.ProcessTransaction(testCard, COMMAND.PAY, 0, DateTime.Now, "Pay Deposit");
             response.Wait();
             ProcessTransactionResponse result = response.Result;
             Assert.AreEqual("05", result.errorCode);
@@ -51,17 +60,7 @@ namespace ReantalBikeTest
         [Test, Order(1)]
         public void ProcessTransactionSuccessTest()
         {
-            TransactionInfo info = new TransactionInfo()
-            {
-                cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
-                owner = Config.API_INFO.CARD_INFO.OWER,
-                cvvCode = Config.API_INFO.CARD_INFO.CVV,
-                dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                transactionContent = "Pay Deposit",
-                amount = 700000,
-                createdAt = Utilities.ConvertDateToString(DateTime.Now)
-            };
-            Task<ProcessTransactionResponse> response = InterbankService.ProcessTransaction(info, Config.API_INFO.COMMAND.PAY);
+            Task<ProcessTransactionResponse> response = InterbankService.ProcessTransaction(testCard, COMMAND.PAY, 700000, DateTime.Now, "Pay Deposit");
             response.Wait();
             ProcessTransactionResponse result = response.Result;
             Assert.AreEqual("00", result.errorCode);
@@ -73,17 +72,7 @@ namespace ReantalBikeTest
         [Test, Order(2)]
         public void ProcessTransactionNotEnoughMoneyTest()
         {
-            TransactionInfo info = new TransactionInfo()
-            {
-                cardCode = Config.API_INFO.CARD_INFO.CARD_CODE,
-                owner = Config.API_INFO.CARD_INFO.OWER,
-                cvvCode = Config.API_INFO.CARD_INFO.CVV,
-                dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED,
-                transactionContent = "Pay Deposit",
-                amount = 700000,
-                createdAt = Utilities.ConvertDateToString(DateTime.Now)
-            };
-            Task<ProcessTransactionResponse> response = InterbankService.ProcessTransaction(info, Config.API_INFO.COMMAND.PAY);
+            Task<ProcessTransactionResponse> response = InterbankService.ProcessTransaction(testCard, COMMAND.PAY, 700000, DateTime.Now, "Pay Deposit");
             response.Wait();
             ProcessTransactionResponse result = response.Result;
             Assert.AreEqual("02", result.errorCode);
@@ -95,7 +84,7 @@ namespace ReantalBikeTest
         [Test, Order(3)]
         public void ResetAccountTest()
         {
-            Task<ResetResponse> response = InterbankService.ResetAccount();
+            Task<ResetResponse> response = InterbankService.ResetAccount(testCard);
             response.Wait();
             ResetResponse result = response.Result;
             Assert.AreEqual("00", result.errorCode);

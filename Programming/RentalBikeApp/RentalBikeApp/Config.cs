@@ -86,41 +86,6 @@ namespace RentalBikeApp
                 {"06", "Thiếu thông tin version" },
                 {"07", "Số tiền không hợp lệ" }
             };
-
-            /// <summary>
-            /// This static class provide information of card
-            /// </summary>
-            public static class CARD_INFO
-            {
-                /// <value>
-                /// get value of card code
-                /// </value>
-                public const string CARD_CODE = "118609_group13_2020";
-
-                /// <value>
-                /// get value of owner card
-                /// </value>
-                public const string OWER = "Group 13";
-
-                /// <value>
-                /// get value of CVV
-                /// </value>
-                public const string CVV = "474";
-
-                /// <value>
-                /// get value of card expiration date
-                /// </value>
-                public const string DATE_EXPIRED = "1125";
-            }
-
-            /// <summary>
-            /// this static class provide information of key
-            /// </summary>
-            public static class KEY
-            {
-                public const string APP_CODE = "Bi3TiyT5q00=";
-                public const string SECRET_KEY = "B92s318KCwI=";
-            }
         }
 
         ///<Value>get current rent bike form status</Value>
