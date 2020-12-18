@@ -87,9 +87,9 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <param name="dateTransaction">the date of the transaction is process</param>
         /// <param name="note">note if necessary</param>
         /// <returns>Return true if success or false if cause error</returns>
-        public bool UpdateTransaction(int userId, int rentalMoney, DateTime dateTransaction, string note = "")
+        public bool UpdateTransaction(int transactionId, int rentalMoney, DateTime dateTransaction, string note = "")
         {
-            Transaction transaction = connecter.SqlData.Transactions.LastOrDefault(x => x.UserId == userId);
+            Transaction transaction = connecter.SqlData.Transactions.Find(transactionId);
             if (transaction == null) return false;
             transaction.RentalMoney = rentalMoney;
             transaction.DateTransaction = dateTransaction;

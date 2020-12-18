@@ -71,21 +71,22 @@ namespace RentalBikeApp.Bussiness
         /// <param name="qrcode"></param>
         /// <param name="deposit"></param>
         /// <returns></returns>
-        public bool CreateDepositTransaction(int userId, string qrcode, int deposit)
+        public Transaction CreateDepositTransaction(int userId, string qrcode, int deposit)
         {
             Transaction transaction = transactionService.InsertNewTransaction(userId, qrcode, deposit);
-            return transaction != null;
+            return transaction;
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public bool BeginRentingBike()
+        public void BeginRentingBike(int bikeId)
         {
             rentBikeForm.rentBikeTmr.Start();
-            Station station = stationService.GetStationById(Config.RENTAL_BIKE.StationId);
-            return stationService.UpdateNumberBike(Config.RENTAL_BIKE.StationId, station.NumberOfBike - 1);
+            if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1 });
+            else if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1 });
+            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1 });
         }
     }
 }

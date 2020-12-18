@@ -16,6 +16,7 @@ using RentalBikeApp.Entities.SQLEntities;
 using static RentalBikeApp.Program;
 using static RentalBikeApp.Config.SQL;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RentalBikeApp.Bussiness
 {
@@ -90,7 +91,7 @@ namespace RentalBikeApp.Bussiness
             List<Bike> bikes = bikeService.GetListBikesInStation(stationId);
             stationName = station.NameStation;
             stationAddress = station.AddressStation;
-            return bikes;
+            return bikes.Where(x => !x.BikeStatus).ToList();
         }
 
         /// <summary>
@@ -106,7 +107,7 @@ namespace RentalBikeApp.Bussiness
             List<ElectricBike> electricBikes = electricBikeService.GetListBikesInStation(stationId);
             stationName = station.NameStation;
             stationAddress = station.AddressStation;
-            return electricBikes;
+            return electricBikes.Where(x => !x.BikeStatus).ToList();
         }
 
         /// <summary>
@@ -122,7 +123,7 @@ namespace RentalBikeApp.Bussiness
             List<Tandem> tandems = tandemService.GetListBikesInStation(stationId);
             stationName = station.NameStation;
             stationAddress = station.AddressStation;
-            return tandems;
+            return tandems.Where(x => !x.BikeStatus).ToList();
         }
 
         /// <summary>

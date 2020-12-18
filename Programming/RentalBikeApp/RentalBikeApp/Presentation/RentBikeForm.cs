@@ -210,6 +210,7 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
+            Config.RENTAL_BIKE_CATEGORY = bikeInfo.Item2;
             Config.RENTAL_BIKE = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2);
             cardInformationForm.Show(this);
             this.Hide();

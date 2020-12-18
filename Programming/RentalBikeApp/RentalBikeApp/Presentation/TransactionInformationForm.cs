@@ -65,7 +65,7 @@ namespace RentalBikeApp.Presentation
             this.status = TRANSACTION_STATUS.RENT_BIKE;
             this.deposit = 40 * Config.RENTAL_BIKE.Value / 100;
             depositTxt.Text = String.Format("{0:n0}", this.deposit);
-            remainMoneyTxt.Text = "Không có dữ liệu";
+            rentalMoneyTxt.Text = "Không có dữ liệu";
             transactionDateTxt.Text = "Không có dữ liệu";
             cancelBut.Visible = true;
         }
@@ -119,10 +119,15 @@ namespace RentalBikeApp.Presentation
                 string error = result.errorCode;
                 if(error == "00")
                 {
-                    if (!rentBikeController.CreateDepositTransaction(1, Config.RENTAL_BIKE.QRCode, this.deposit))
+                    Transaction transaction = rentBikeController.CreateDepositTransaction(1, Config.RENTAL_BIKE.QRCode, this.deposit);
+                    if (transaction == null)
+                    {
                         MessageBox.Show("Hệ thống không thể lưu thông tin giao dịch", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    Config.transactionId = transaction.TransactionId;
                     rentBikeForm.FillRentingBikeForm();
-                    rentBikeController.BeginRentingBike();
+                    rentBikeController.BeginRentingBike(Config.RENTAL_BIKE.BikeId);
                     rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
                 }
                 else if(error == "01" || error == "02" || error == "05")
@@ -147,7 +152,13 @@ namespace RentalBikeApp.Presentation
                     response = await InterbankService.ProcessTransaction(Config.CARD_INFO, API_INFO.COMMAND.REFUND, this.deposit - this.rentalMoney,
                         DateTime.Now, "Refund deposit");
                 MessageBox.Show(response.errorCode);
-                homePageForm.Show(this);
+                string error = response.errorCode;
+                if(error == "00")
+                {
+                    Transaction transaction = returnBikeController.UpdatePaymentTransaction(transactionId, this.rentalMoney);
+                    MessageBox.Show("chien");
+                    homePageForm.Show(this);
+                }
             }
             this.Hide();
         }

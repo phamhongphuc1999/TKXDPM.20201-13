@@ -107,9 +107,14 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             string nameStation = but.Text;
-            DialogResult result = MessageBox.Show(string.Format("Bạn có chắc muốn trả xe ở bãi xe: {0}", nameStation), "Thông Báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show($"Bạn có chắc muốn trả xe ở bãi xe: {nameStation}", "Thông Báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if(result == DialogResult.OK)
             {
+                if (!returnBikeController.CheckStation((int)but.Tag))
+                {
+                    MessageBox.Show($"Bãi đỗ xe: {but.Text} đã đầy, vui lòng chọn bãi khác để trả xe", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 rentBikeForm.rentBikeTmr.Stop();
                 transactionInformationForm.FillTransactionInformationWhenPay();
                 transactionInformationForm.Show(this);

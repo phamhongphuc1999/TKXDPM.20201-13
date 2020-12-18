@@ -35,6 +35,7 @@ namespace RentalBikeApp.Presentation
             owerTxt = new TextBox()
             {
                 Multiline = true,
+                Text = "Group 13",
                 Size = new Size(590, 40),
                 Location = new Point(190, 5),
                 PlaceholderText = "Nhập tên chủ thẻ"
@@ -52,6 +53,7 @@ namespace RentalBikeApp.Presentation
             cardCodeTxt = new TextBox()
             {
                 Multiline = true,
+                Text = "118609_group13_2020",
                 Size = new Size(590, 40),
                 Location = new Point(190, 55),
                 PlaceholderText = "Nhập mã thẻ"
@@ -89,6 +91,7 @@ namespace RentalBikeApp.Presentation
             securityCodeTxt = new TextBox()
             {
                 Multiline = true,
+                Text = "B92s318KCwI=",
                 Size = new Size(590, 40),
                 Location = new Point(190, 155),
                 PlaceholderText = "Nhập mã bảo mật"

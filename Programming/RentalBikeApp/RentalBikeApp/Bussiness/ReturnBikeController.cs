@@ -12,7 +12,10 @@
 //
 // ------------------------------------------------------
 
+using RentalBikeApp.Entities.SQLEntities;
+using static RentalBikeApp.Program;
 using System;
+using System.Linq;
 
 namespace RentalBikeApp.Bussiness
 {
@@ -36,6 +39,49 @@ namespace RentalBikeApp.Bussiness
             timeMinutes -= 30;
             if (timeMinutes <= 0) return 10000;
             return (int)(10000 + Math.Abs(timeMinutes / 15));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns></returns>
+        public bool CheckStation(int stationId)
+        {
+            Station station = stationService.GetStationById(stationId);
+            int bikes = bikeService.GetListBikesInStation(stationId).Where(x => !x.BikeStatus).ToList().Count;
+            int tandems = tandemService.GetListBikesInStation(stationId).Where(x => !x.BikeStatus).ToList().Count;
+            int electrics = electricBikeService.GetListBikesInStation(stationId).Where(x => !x.BikeStatus).ToList().Count;
+            if (station.NumberOfBike > (bikes + electrics + tandems)) return true;
+            return false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        public void UpdateStationAfterReturnbike(int stationId, Config.SQL.BikeCategory category)
+        {
+            if (category == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(Config.RENTAL_BIKE.BikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
+            else if (category == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(Config.RENTAL_BIKE.BikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
+            else tandemService.UpdateBike(Config.RENTAL_BIKE.BikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="transactionId"></param>
+        /// <param name="rentalMoney"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public Transaction UpdatePaymentTransaction(int transactionId, int rentalMoney, string content = "")
+        {
+            bool check = transactionService.UpdateTransaction(transactionId, rentalMoney, DateTime.Now, content);
+            if (!check) return null;
+            Transaction transaction = transactionService.GetTransactionById(transactionId);
+            return transaction;
         }
     }
 }

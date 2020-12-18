@@ -12,6 +12,7 @@
 //
 // ------------------------------------------------------
 
+using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 
 namespace RentalBikeApp.Data.ServiceAgents.BikeServices
@@ -21,5 +22,6 @@ namespace RentalBikeApp.Data.ServiceAgents.BikeServices
         public TBike GetBikeByQRCode(string QRCode);
         public TBike GetBikeById(int id);
         public List<TBike> GetListBikesInStation(int stationId);
+        public TBike UpdateBike(int bikeId, UpdateBikeInfo update);
     }
 }

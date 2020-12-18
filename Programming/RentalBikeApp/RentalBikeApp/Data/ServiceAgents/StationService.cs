@@ -49,20 +49,5 @@ namespace RentalBikeApp.Data.ServiceAgents
         {
             return connecter.SqlData.Stations.SingleOrDefault(x => x.NameStation == nameStation);
         }
-
-        public bool UpdateNumberBike(int stationId, int numberOfBike)
-        {
-            try
-            {
-                Station station = connecter.SqlData.Stations.SingleOrDefault(x => x.StationId == stationId);
-                station.NumberOfBike = numberOfBike;
-                connecter.SqlData.SaveChanges();
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
     }
 }

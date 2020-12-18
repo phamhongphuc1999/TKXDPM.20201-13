@@ -27,4 +27,17 @@ namespace RentalBikeApp.Entities.SQLEntities
         [Required(ErrorMessage = "BikeStatus is required")]
         public bool BikeStatus { get; set; }
     }
+
+    public class UpdateBikeInfo
+    {
+        public int StationId { get; set; }
+
+        public int Value { get; set; }
+
+        public string QRCode { get; set; }
+
+        public string Manufacturer { get; set; }
+
+        public int BikeStatus { get; set; }
+    }
 }

@@ -91,6 +91,8 @@ namespace RentalBikeApp
         ///<Value>get current rent bike form status</Value>
         public static RENT_BIKE RENT_BIKE_STATUS;
 
+        public static SQL.BikeCategory RENTAL_BIKE_CATEGORY;
+
         ///<Value>get current rental bike</Value>
         public static BaseBike RENTAL_BIKE;
 
@@ -101,6 +103,11 @@ namespace RentalBikeApp
 
         ///<Value>get current card information</Value>
         public static Card CARD_INFO;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static int transactionId;
 
         ///<value>
         /// enum use to define the transaction form status
