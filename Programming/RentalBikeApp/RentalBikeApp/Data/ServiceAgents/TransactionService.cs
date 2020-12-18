@@ -16,27 +16,36 @@ using RentalBikeApp.Entities.SQLEntities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Data.ServiceAgents
 {
     public class TransactionService
     {
+        private SQLConnecter connecter;
+
+        public TransactionService(SQLConnecter connecter)
+        {
+            this.connecter = connecter;
+        }
+
         /// <summary>Insert new transaction when user deposit money to rent the bike</summary>
         /// <param name="userId">the Id of user who want to rent the bike</param>
         /// <param name="bikeId">the Id of rental bike</param>
         /// <param name="deposit">the desposit money to rent the bike</param>
         /// <returns>Return the new transaction or null if get error</returns>
-        public Transaction InsertNewTransaction(int userId, int bikeId, int deposit)
+        public Transaction InsertNewTransaction(int userId, string qrcode, int deposit)
         {
             User checkUser = connecter.SqlData.Users.Find(userId);
             if (checkUser == null) return null;
-            BaseBike checkBike = connecter.SqlData.Bikes.Find(bikeId);
+            BaseBike checkBike = null;
+            if (qrcode[0] == '0') checkBike = connecter.SqlData.Bikes.SingleOrDefault(x => x.QRCode == qrcode);
+            else if (qrcode[0] == '1') checkBike = connecter.SqlData.Tandems.SingleOrDefault(x => x.QRCode == qrcode);
+            else if (qrcode[0] == '2') checkBike = connecter.SqlData.ElectricBikes.SingleOrDefault(x => x.QRCode == qrcode);
             if (checkBike == null) return null;
             Transaction transaction = new Transaction()
             {
                 UserId = userId,
-                BikeId = bikeId,
+                BikeQrCode = qrcode,
                 Deposit = deposit,
                 RentalMoney = 0,
                 TotalTimeRent = 0,

@@ -13,6 +13,8 @@
 // ------------------------------------------------------
 
 using NUnit.Framework;
+using RentalBikeApp;
+using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents.BikeServices;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
@@ -22,12 +24,13 @@ namespace ReantalBikeTest.ServiceAgents
     [TestFixture]
     class TandemServiceTest
     {
+        private SQLConnecter connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         private TandemService tandemService;
 
         [SetUp]
         public void Setup()
         {
-            tandemService = new TandemService();
+            tandemService = new TandemService(connecter);
         }
 
         /// <summary>
@@ -36,8 +39,18 @@ namespace ReantalBikeTest.ServiceAgents
         [Test]
         public void GetBikeByQRCodeTest()
         {
-            Tandem tandem = tandemService.GetBikeByQRCode(" ");
+            Tandem tandem = tandemService.GetBikeByQRCode("100000001");
             Assert.IsNotNull(tandem);
+        }
+
+        /// <summary>
+        /// Test for get bike by not exist QR Code
+        /// </summary>
+        [Test]
+        public void GetBikeByNotExistQRCodeTest()
+        {
+            Tandem tandem = tandemService.GetBikeByQRCode("100000000");
+            Assert.IsNull(tandem);
         }
 
         /// <summary>
@@ -59,6 +72,5 @@ namespace ReantalBikeTest.ServiceAgents
             List <Tandem> tandems = tandemService.GetListBikesInStation(1);
             Assert.IsTrue(tandems.Count > 0);
         }
-
     }
 }

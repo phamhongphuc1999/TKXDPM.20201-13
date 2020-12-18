@@ -13,6 +13,8 @@
 // ------------------------------------------------------
 
 using NUnit.Framework;
+using RentalBikeApp;
+using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents.BikeServices;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
@@ -22,12 +24,13 @@ namespace ReantalBikeTest.ServiceAgents
     [TestFixture]
     class BikeServiceTest
     {
+        private SQLConnecter connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         private BikeService bikeService;
 
         [SetUp]
         public void Setup()
         {
-            bikeService = new BikeService();
+            bikeService = new BikeService(connecter);
         }
 
         /// <summary>
@@ -37,7 +40,7 @@ namespace ReantalBikeTest.ServiceAgents
         public void GetBikeByQRCodeTest()
         {
             Bike bike = bikeService.GetBikeByQRCode("000000001");
-            Assert.IsNotNull(bike);
+            Assert.IsTrue(bike is Bike);
         }
 
         /// <summary>
@@ -57,7 +60,7 @@ namespace ReantalBikeTest.ServiceAgents
         public void GetBikeByIdTest()
         {
             Bike bike = bikeService.GetBikeById(1);
-            Assert.IsNotNull(bike);
+            Assert.IsTrue(bike is Bike);
         }
 
         /// <summary>

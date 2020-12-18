@@ -13,6 +13,8 @@
 // ------------------------------------------------------
 
 using NUnit.Framework;
+using RentalBikeApp;
+using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System;
@@ -23,24 +25,25 @@ namespace ReantalBikeTest.ServiceAgents
     [TestFixture]
    class TransactionServiceTests
     {
-       
+        private SQLConnecter connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         private TransactionService transactionService;
+
         [SetUp]
         public void Setup()
         {
-            transactionService = new TransactionService();
+            transactionService = new TransactionService(connecter);
         }
 
         /// <summary>
         /// Test for insert new transaction in database
         /// </summary>
-        [Test]
+        [Test, Order(0)]
         public void InsertNewTransactionTest()
         {
             Transaction transaction = new Transaction()
             {
                 UserId = 1,
-                BikeId = 2,
+                BikeQrCode = "000000001",
                 Deposit = 1000000,
                 RentalMoney = 0,
                 TotalTimeRent = 0,
@@ -53,7 +56,7 @@ namespace ReantalBikeTest.ServiceAgents
         /// <summary>
         /// Test for get transaction by id
         /// </summary>
-        [Test]
+        [Test, Order(1)]
         public void GetTransactionByIdTest()
         {
             Transaction transaction = transactionService.GetTransactionById(1);
@@ -63,7 +66,7 @@ namespace ReantalBikeTest.ServiceAgents
         /// <summary>
         /// Test for get last transaction by user id
         /// </summary>
-        [Test]
+        [Test, Order(2)]
         public void GetLastTransactionByUserIdTest()
         {
             Transaction transaction = transactionService.GetLastTransactionByUserId(3);
@@ -73,7 +76,7 @@ namespace ReantalBikeTest.ServiceAgents
         /// <summary>
         /// Test for get list transaction by user id
         /// </summary>
-        [Test]
+        [Test, Order(3)]
         public void GetListTransactionsByUserIdTest()
         {
             List<Transaction> transactions = transactionService.GetListTransactionsByUserId(1);
@@ -83,7 +86,7 @@ namespace ReantalBikeTest.ServiceAgents
         /// <summary>
         /// Test for update transaction
         /// </summary>
-        [Test]
+        [Test, Order(4)]
         public void UpdateTransactionTest()
         {
             DateTime aDateTime = new DateTime(2020, 12, 20, 00, 00, 00);

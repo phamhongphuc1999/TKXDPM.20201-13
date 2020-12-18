@@ -15,12 +15,18 @@
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 using System.Linq;
-using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Data.ServiceAgents.BikeServices
 {
     public class ElectricBikeService: IBikeService<ElectricBike>
     {
+        private SQLConnecter connecter;
+
+        public ElectricBikeService(SQLConnecter connecter)
+        {
+            this.connecter = connecter;
+        }
+
         /// <summary>
         /// 
         /// </summary>

@@ -30,7 +30,7 @@ namespace RentalBikeApp.Entities.SQLEntities
 
         [Required(ErrorMessage = "BikeId is required")]
         [ForeignKey("Bike")]
-        public int BikeId { get; set; }
+        public string BikeQrCode { get; set; }
 
         [Required(ErrorMessage = "Deposit is required")]
         public int Deposit { get; set; }

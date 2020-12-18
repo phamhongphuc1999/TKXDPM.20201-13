@@ -15,12 +15,18 @@
 using RentalBikeApp.Entities.SQLEntities;
 using System.Linq;
 using System.Collections.Generic;
-using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Data.ServiceAgents.BikeServices
 {
     public class BikeService: IBikeService<Bike>
     {
+        private SQLConnecter connecter;
+
+        public BikeService(SQLConnecter connecter)
+        {
+            this.connecter = connecter;
+        }
+
         /// <summary>Get bike by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>
         /// <returns>Return the bike with specified QR Code or null if not found</returns>

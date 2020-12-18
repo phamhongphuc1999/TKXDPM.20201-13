@@ -20,6 +20,13 @@ namespace RentalBikeApp.Data.ServiceAgents
 {
     public class CardService
     {
+        private SQLConnecter connecter;
+
+        public CardService(SQLConnecter connecter)
+        {
+            this.connecter = connecter;
+        }
+
         /// <summary>
         /// Get card information by owner
         /// </summary>

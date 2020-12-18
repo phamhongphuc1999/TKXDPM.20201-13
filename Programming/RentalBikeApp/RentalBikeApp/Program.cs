@@ -61,13 +61,13 @@ namespace RentalBikeApp
             connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
 
             //init services
-            bikeService = new BikeService();
-            cardService = new CardService();
-            electricBikeService = new ElectricBikeService();
-            stationService = new StationService();
-            tandemService = new TandemService();
-            transactionService = new TransactionService();
-            userService = new UserService();
+            bikeService = new BikeService(connecter);
+            cardService = new CardService(connecter);
+            electricBikeService = new ElectricBikeService(connecter);
+            stationService = new StationService(connecter);
+            tandemService = new TandemService(connecter);
+            transactionService = new TransactionService(connecter);
+            userService = new UserService(connecter);
 
             //init controllers
             rentBikeController = new RentBikeController();

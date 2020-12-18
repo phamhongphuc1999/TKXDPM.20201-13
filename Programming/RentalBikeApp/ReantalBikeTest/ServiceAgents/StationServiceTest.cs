@@ -13,6 +13,8 @@
 // ------------------------------------------------------
 
 using NUnit.Framework;
+using RentalBikeApp;
+using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
@@ -22,12 +24,13 @@ namespace ReantalBikeTest.ServiceAgents
     [TestFixture]
     class StationServiceTest
     {
+        private SQLConnecter connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         private StationService stationService;
 
         [SetUp]
         public void Setup()
         {
-            stationService = new StationService();
+            stationService = new StationService(connecter);
         }
 
         /// <summary>
@@ -58,6 +61,16 @@ namespace ReantalBikeTest.ServiceAgents
         {
             Station station = stationService.GetStationByName("Station 1");
             Assert.IsNotNull(station);
+        }
+
+        /// <summary>
+        /// Test for get station by not exist name
+        /// </summary>
+        [Test]
+        public void GetStationByNotExistNameTest()
+        {
+            Station station = stationService.GetStationByName("abc");
+            Assert.IsNull(station);
         }
     }
 }

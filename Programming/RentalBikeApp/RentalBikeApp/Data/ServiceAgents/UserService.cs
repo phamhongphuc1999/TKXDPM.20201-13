@@ -14,12 +14,18 @@
 
 using RentalBikeApp.Entities.SQLEntities;
 using System.Linq;
-using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Data.ServiceAgents
 {
     public class UserService
     {
+        private SQLConnecter connecter;
+
+        public UserService(SQLConnecter connecter)
+        {
+            this.connecter = connecter;
+        }
+
         /// <summary>
         /// Login user into program
         /// </summary>

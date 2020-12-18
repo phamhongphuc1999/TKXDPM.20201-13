@@ -12,7 +12,6 @@
 //
 // ------------------------------------------------------
 
-using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using static RentalBikeApp.Program;
 
@@ -63,6 +62,19 @@ namespace RentalBikeApp.Bussiness
             Card card = cardService.GetCardByOwner(owner);
             if (card != null) Config.CARD_INFO = card;
             return card;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="qrcode"></param>
+        /// <param name="deposit"></param>
+        /// <returns></returns>
+        public bool CreateDepositTransaction(int userId, string qrcode, int deposit)
+        {
+            Transaction transaction = transactionService.InsertNewTransaction(userId, qrcode, deposit);
+            return transaction != null;
         }
 
         /// <summary>

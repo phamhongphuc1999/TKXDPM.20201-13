@@ -15,13 +15,18 @@
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Data.ServiceAgents
 {
     public class StationService
     {
+        private SQLConnecter connecter;
+
+        public StationService(SQLConnecter connecter)
+        {
+            this.connecter = connecter;
+        }
+
         /// <summary>get list stations</summary>
         /// <returns>the list of station</returns>
         public List<Station> GetListStations()

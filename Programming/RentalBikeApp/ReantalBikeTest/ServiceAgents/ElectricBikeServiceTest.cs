@@ -13,6 +13,8 @@
 // ------------------------------------------------------
 
 using NUnit.Framework;
+using RentalBikeApp;
+using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents.BikeServices;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
@@ -22,12 +24,13 @@ namespace ReantalBikeTest.ServiceAgents
     [TestFixture]
     class ElectricBikeServiceTest
     {
+        private SQLConnecter connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         private ElectricBikeService electricBikeService;
 
         [SetUp]
         public void Setup()
         {
-            electricBikeService = new ElectricBikeService();
+            electricBikeService = new ElectricBikeService(connecter);
         }
 
         /// <summary>
@@ -36,8 +39,18 @@ namespace ReantalBikeTest.ServiceAgents
         [Test]
         public void GetBikeByQRCodeTest()
         {
-            ElectricBike electricBike = electricBikeService.GetBikeByQRCode(" ");
-            Assert.IsNotNull(electricBike);
+            ElectricBike electricBike = electricBikeService.GetBikeByQRCode("200000001");
+            Assert.IsTrue(electricBike is ElectricBike);
+        }
+
+        /// <summary>
+        /// Test for get bike by not exist QR Code
+        /// </summary>
+        [Test]
+        public void GetBikeByNotExistQRcodeTest()
+        {
+            ElectricBike electricBike = electricBikeService.GetBikeByQRCode("200000000");
+            Assert.IsNull(electricBike);
         }
 
         /// <summary>
@@ -47,7 +60,7 @@ namespace ReantalBikeTest.ServiceAgents
         public void GetBikeByIdTest()
         {
             ElectricBike electricBike = electricBikeService.GetBikeById(1);
-            Assert.IsNotNull(electricBike);
+            Assert.IsTrue(electricBike is ElectricBike);
         }
 
         /// <summary>

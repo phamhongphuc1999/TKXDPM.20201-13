@@ -13,6 +13,8 @@
 // ------------------------------------------------------
 
 using NUnit.Framework;
+using RentalBikeApp;
+using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 
@@ -21,12 +23,13 @@ namespace ReantalBikeTest.ServiceAgents
     [TestFixture]
     class UserServiceTest
     {
+        private SQLConnecter connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
         private UserService userService;
 
         [SetUp]
         public void Setup()
         {
-            userService = new UserService();
+            userService = new UserService(connecter);
         }
 
         /// <summary>
