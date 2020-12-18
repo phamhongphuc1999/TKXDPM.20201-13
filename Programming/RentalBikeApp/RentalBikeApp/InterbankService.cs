@@ -12,13 +12,13 @@
 //
 // ------------------------------------------------------
 
+using System;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using RentalBikeApp.Entities.APIEntities;
 using RentalBikeApp.Entities.SQLEntities;
 using static RentalBikeApp.Config.API_INFO;
-using System;
 
 namespace RentalBikeApp
 {
@@ -71,15 +71,14 @@ namespace RentalBikeApp
         /// <param name="_cvvCode"></param>
         /// <param name="_dateExpired"></param>
         /// <returns>The reset response information</returns>
-        public static async Task<ResetResponse> ResetAccount(string _cardCode = Config.API_INFO.CARD_INFO.CARD_CODE, string _owner = Config.API_INFO.CARD_INFO.OWER,
-            string _cvvCode = Config.API_INFO.CARD_INFO.CVV, string _dateExpired = Config.API_INFO.CARD_INFO.DATE_EXPIRED)
+        public static async Task<ResetResponse> ResetAccount(Card card)
         {
             var body = new
             {
-                cardCode = _cardCode,
-                owner = _owner,
-                cvvCode = _cvvCode,
-                dateExpired = _dateExpired
+                cardCode = card.CardCode,
+                owner = card.Owners,
+                cvvCode = card.CVV,
+                dateExpired = card.DateExpired
             };
             string result = await Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.RESET_URL,
                 HttpMethod.Patch, JsonConvert.SerializeObject(body));
