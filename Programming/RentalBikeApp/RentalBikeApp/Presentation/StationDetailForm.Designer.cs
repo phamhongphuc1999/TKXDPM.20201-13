@@ -23,7 +23,7 @@ namespace RentalBikeApp.Presentation
             nameLbl = new Label()
             {
                 Text = "Tên",
-                Size = new Size(120, 40),
+                Size = new Size(140, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 15),
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -40,7 +40,7 @@ namespace RentalBikeApp.Presentation
             addressLbl = new Label()
             {
                 Text = "Địa chỉ",
-                Size = new Size(120, 40),
+                Size = new Size(140, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 68),
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -57,7 +57,7 @@ namespace RentalBikeApp.Presentation
             areaLbl = new Label()
             {
                 Text = "Diện tích",
-                Size = new Size(120, 40),
+                Size = new Size(140, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 121),
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -74,7 +74,7 @@ namespace RentalBikeApp.Presentation
             numberLbl = new Label()
             {
                 Text = "Số xe",
-                Size = new Size(120, 40),
+                Size = new Size(140, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 174),
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -91,7 +91,7 @@ namespace RentalBikeApp.Presentation
             distanceLbl = new Label()
             {
                 Text = "Khoảng cách",
-                Size = new Size(120, 40),
+                Size = new Size(140, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 227),
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -108,7 +108,7 @@ namespace RentalBikeApp.Presentation
             timeLbl = new Label()
             {
                 Text = "Thời gian",
-                Size = new Size(120, 40),
+                Size = new Size(140, 40),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point(20, 280),
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),

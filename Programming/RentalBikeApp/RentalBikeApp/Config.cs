@@ -105,7 +105,7 @@ namespace RentalBikeApp
         public static Card CARD_INFO;
 
         /// <summary>
-        /// 
+        /// Get current transaction
         /// </summary>
         public static int transactionId;
 

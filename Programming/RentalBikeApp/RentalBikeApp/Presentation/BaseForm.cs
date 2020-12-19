@@ -24,6 +24,11 @@ namespace RentalBikeApp.Presentation
         public BaseForm()
         {
             InitializeComponent("BaseForm");
+            DrawBaseForm();
+            this.FormClosing += BaseForm_FormClosing;
+            this.homePageBut.Click += HomePageBut_Click;
+            this.rentBikeBut.Click += RentBikeBut_Click;
+            this.prevFormBut.Click += PrevFormBut_Click;
         }
 
         /// <summary>
@@ -50,6 +55,51 @@ namespace RentalBikeApp.Presentation
             int locationMainY = form.Location.Y;
             this.Location = new Point(locationMainX, locationMainY);
             if (prevForm != null) this.PrevForm = prevForm;
+        }
+
+        /// <summary>
+        /// Handle click event RentBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
+        protected virtual void RentBikeBut_Click(object sender, System.EventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// Handle click event HomePageBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
+        protected virtual void HomePageBut_Click(object sender, System.EventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// Handle click event PrevFormBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
+        protected virtual void PrevFormBut_Click(object sender, System.EventArgs e)
+        {
+            this.Hide();
+            this.PrevForm.Show(this);
+        }
+
+        /// <summary>
+        /// Handle click event FormClosing
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
+        protected virtual void BaseForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(Config.RENT_BIKE_STATUS == Config.RENT_BIKE.RENTING_BIKE)
+            {
+                MessageBox.Show("Vui lòng trả xe trước khi thoát chương trình", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            DialogResult result = MessageBox.Show("Bạn có chắc muốn thoát chương trình?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            if (result == DialogResult.Cancel) e.Cancel = true;
         }
     }
 }

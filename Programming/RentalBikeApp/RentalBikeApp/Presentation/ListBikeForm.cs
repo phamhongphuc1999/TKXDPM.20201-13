@@ -24,14 +24,10 @@ namespace RentalBikeApp.Presentation
 {
     public partial class ListBikeForm : BaseForm
     {
-        public ListBikeForm()
+        public ListBikeForm(): base()
         {
             InitializeComponent("ListBikesForm", "List Bikes");
-            DrawBaseForm();
             DrawListBikes();
-            homePageBut.Click += HomePageBut_Click;
-            rentBikeBut.Click += RentBikeBut_Click;
-            prevFormBut.Click += PrevFormBut_Click;
         }
 
         private void FillListBikes(int stationId)
@@ -157,7 +153,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void RentBikeBut_Click(object sender, EventArgs e)
+        protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
             rentBikeForm.Show(this, Config.RENT_BIKE_STATUS, this);
             this.Hide();
@@ -168,22 +164,11 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void HomePageBut_Click(object sender, EventArgs e)
+        protected override void HomePageBut_Click(object sender, EventArgs e)
         {
             homePageForm.RenderStationList(homePageForm.stationPnl);
             homePageForm.Show(this);
             this.Hide();
-        }
-
-        /// <summary>
-        /// Handle click event PrevFormBut
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void PrevFormBut_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            this.PrevForm.Show(this);
         }
 
         /// <summary>

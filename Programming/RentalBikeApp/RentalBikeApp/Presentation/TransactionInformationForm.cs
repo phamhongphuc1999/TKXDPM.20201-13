@@ -26,14 +26,10 @@ namespace RentalBikeApp.Presentation
         private int deposit;
         private int rentalMoney;
 
-        public TransactionInformationForm()
+        public TransactionInformationForm(): base()
         {
             InitializeComponent("TransactionInformationForm", "Transaction Information");
-            DrawBaseForm();
             DrawTransactionInformationForm();
-            homePageBut.Click += HomePageBut_Click;
-            rentBikeBut.Click += RentBikeBut_Click;
-            prevFormBut.Click += PrevFormBut_Click;
         }
 
         private TRANSACTION_STATUS status;
@@ -75,7 +71,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void RentBikeBut_Click(object sender, EventArgs e)
+        protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
             rentBikeForm.Show(this, this);
             this.Show();
@@ -86,21 +82,10 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void HomePageBut_Click(object sender, EventArgs e)
+        protected override void HomePageBut_Click(object sender, EventArgs e)
         {
             homePageForm.RenderStationList(homePageForm.stationPnl);
             homePageForm.Show();
-            this.Hide();
-        }
-
-        /// <summary>
-        /// Handle click event PrevFormBut
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void PrevFormBut_Click(object sender, EventArgs e)
-        {
-            this.PrevForm.Show(this);
             this.Hide();
         }
 
