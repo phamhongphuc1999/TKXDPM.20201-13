@@ -170,6 +170,12 @@ namespace RentalBikeApp.Presentation
                 rentBikeQrCodeTxt.Text = "";
                 return;
             }
+            if (bike.BikeStatus)
+            {
+                MessageBox.Show($"Xe đang được thuê, vui lòng chọn xe khác", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                rentBikeQrCodeTxt.Text = "";
+                return;
+            }
             bikeDetailForm.FillBikeInformation(bike, stationName, stationAddress);
             bikeDetailForm.Show(this);
             this.Hide();
