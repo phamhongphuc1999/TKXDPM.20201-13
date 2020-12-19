@@ -28,9 +28,9 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
-        /// 
+        /// Valid card information
         /// </summary>
-        /// <returns></returns>
+        /// <returns>(bool, string) tuple, Item1 representing status valid, true when valid success, false when valid fail. Item2 representing response message</returns>
         private (bool, string) ValidCardInfor()
         {
             if (owerTxt.Text == "" || cardCodeTxt.Text == "" || securityCodeTxt.Text == "" || bankCb.SelectedIndex == 0)

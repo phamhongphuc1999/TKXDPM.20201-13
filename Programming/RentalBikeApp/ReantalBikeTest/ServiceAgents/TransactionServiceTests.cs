@@ -12,12 +12,12 @@
 //
 // ------------------------------------------------------
 
+using System;
 using NUnit.Framework;
 using RentalBikeApp;
 using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
-using System;
 using System.Collections.Generic;
 
 namespace ReantalBikeTest.ServiceAgents
@@ -69,7 +69,7 @@ namespace ReantalBikeTest.ServiceAgents
         [Test, Order(2)]
         public void GetLastTransactionByUserIdTest()
         {
-            Transaction transaction = transactionService.GetLastTransactionByUserId(3);
+            Transaction transaction = transactionService.GetLastTransactionByUserId(1);
             Assert.IsNotNull(transaction);
         }
 

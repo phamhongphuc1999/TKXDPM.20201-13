@@ -19,30 +19,15 @@ namespace RentalBikeApp.Data
 {
     public class SQLConnecter
     {
-        private SQLData sqlData;
-        private DbContextOptionsBuilder<SQLData> option;
+        public SQLData SqlData { get; private set; }
+
+        public DbContextOptionsBuilder<SQLData> Option { get; private set; }
 
         public SQLConnecter(string CONNECT_STRING)
         {
-            option = new DbContextOptionsBuilder<SQLData>();
-            option.UseSqlServer(CONNECT_STRING);
-            sqlData = new SQLData(option.Options);
-        }
-        
-        /// <value>
-        /// Get SQL data
-        /// </value>
-        public SQLData SqlData
-        {
-            get { return sqlData; }
-        }
-
-        /// <value>
-        /// Get option of SQL connect
-        /// </value>
-        public DbContextOptionsBuilder<SQLData> Option
-        {
-            get { return option; }
+            Option = new DbContextOptionsBuilder<SQLData>();
+            Option.UseSqlServer(CONNECT_STRING);
+            SqlData = new SQLData(Option.Options);
         }
     }
 }

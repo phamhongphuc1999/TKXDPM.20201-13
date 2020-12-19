@@ -16,6 +16,7 @@ using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
 using RentalBikeApp.Entities.SQLEntities;
+using System.Drawing;
 
 namespace RentalBikeApp.Presentation
 {
@@ -28,22 +29,34 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
-        /// Fill bike form with bike's information and station's information
+        /// Display bike information
         /// </summary>
-        /// <param name="bike">The specified bike</param>
+        /// <param name="bike">The bike information</param>
+        /// <param name="stationName">The station name contain this bike</param>
+        /// <param name="stationAddress">The station address contain this bike</param>
         public void FillBikeInformation(BaseBike bike, string stationName, string stationAddress)
         {
             stationRtb.Text = string.Format("{0}\n{1}", stationName, stationAddress);
             qrCodeTxt.Text = bike.QRCode;
             manufactureTxt.Text = bike.Manufacturer;
-            if(bike is Bike)
+            if (bike.BikeStatus)
+            {
+                statusBikeLbl.Text = "Renting";
+                statusBikeLbl.BackColor = Color.Red;
+            }
+            else
+            {
+                statusBikeLbl.Text = "Availiable";
+                statusBikeLbl.BackColor = Color.Green;
+            }
+            if (bike is Bike)
             {
                 categoryBikeTxt.Text = "Xe đạp thường";
                 powerTxt.Text = "Không có thông tin";
                 licenceTxt.Text = "Không có thông tin";
                 rentThisBikeBut.Tag = (bike.BikeId, Config.SQL.BikeCategory.BIKE);
             }
-            else if(bike is Tandem)
+            else if (bike is Tandem)
             {
                 categoryBikeTxt.Text = "Xe đạp đôi";
                 powerTxt.Text = "Không có thông tin";

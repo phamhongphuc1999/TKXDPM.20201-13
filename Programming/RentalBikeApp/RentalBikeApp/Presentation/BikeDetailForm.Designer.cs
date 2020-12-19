@@ -7,9 +7,9 @@ namespace RentalBikeApp.Presentation
     {
         public Panel bikeDetailPnl;
         public RichTextBox stationRtb;
-        public Label qrCodeLbl, categoryBikeLbl, licenceLbl, manufactureLbl, powerLbl;
-        public TextBox qrCodeTxt, categoryBikeTxt, licenceTxt, manufactureTxt, powerTxt;
         public Button rentThisBikeBut;
+        public TextBox qrCodeTxt, categoryBikeTxt, licenceTxt, manufactureTxt, powerTxt;
+        public Label qrCodeLbl, categoryBikeLbl, licenceLbl, manufactureLbl, powerLbl, statusBikeLbl;
 
         /// <summary>
         /// Initialized control in BikeDetailForm
@@ -23,10 +23,17 @@ namespace RentalBikeApp.Presentation
             };
             stationRtb = new RichTextBox()
             {
-                Size = new Size(bikeDetailPnl.Width - 40, 80),
+                Size = new Size(bikeDetailPnl.Width - 140, 80),
                 Location = new Point(20, 5),
                 SelectionAlignment = HorizontalAlignment.Center,
                 Font = new Font("Arial", 12, FontStyle.Bold)
+            };
+            statusBikeLbl = new Label()
+            {
+                Size = new Size(100, 80),
+                Location = new Point(bikeDetailPnl.Width - 120, 5),
+                ForeColor = Color.White,
+                TextAlign = ContentAlignment.MiddleCenter
             };
             qrCodeLbl = new Label()
             {
@@ -126,6 +133,7 @@ namespace RentalBikeApp.Presentation
             rentThisBikeBut.Click += RentThisBikeBut_Click;
 
             bikeDetailPnl.Controls.Add(stationRtb);
+            bikeDetailPnl.Controls.Add(statusBikeLbl);
             bikeDetailPnl.Controls.Add(qrCodeLbl);
             bikeDetailPnl.Controls.Add(qrCodeTxt);
             bikeDetailPnl.Controls.Add(categoryBikeLbl);

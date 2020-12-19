@@ -30,6 +30,10 @@ namespace RentalBikeApp.Presentation
             DrawListBikes();
         }
 
+        /// <summary>
+        /// Fill ListBikeForm with bike's information in specified category
+        /// </summary>
+        /// <param name="stationId">The station contain list bike is displayed</param>
         private void FillListBikes(int stationId)
         {
             listBikePnl.Controls.Clear();
@@ -58,6 +62,10 @@ namespace RentalBikeApp.Presentation
             }
         }
 
+        /// <summary>
+        /// Fill ListBikeForm with tandem's information in specified category
+        /// </summary>
+        /// <param name="stationId">The station contain list bike is displayed</param>
         private void FillListTandems(int stationId)
         {
             listBikePnl.Controls.Clear();
@@ -86,6 +94,10 @@ namespace RentalBikeApp.Presentation
             }
         }
 
+        /// <summary>
+        /// Fill ListBikeForm with electric bike's information in specified category
+        /// </summary>
+        /// <param name="stationId">The station contain list bike is displayed</param>
         private void FillListElectric(int stationId)
         {
             listBikePnl.Controls.Clear();

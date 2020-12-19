@@ -72,20 +72,19 @@ namespace ReantalBikeTest.ServiceAgents
             List<ElectricBike> electricBikes = electricBikeService.GetListBikesInStation(1);
             Assert.IsTrue(electricBikes.Count > 0);
         }
+
         /// <summary>
         /// Test for update bike
         /// </summary>
         [Test]
         public void UpdateBikeTest()
         {
-            UpdateBikeInfo update = new UpdateBikeInfo();
-            update.StationId = 1;
-            update.Value = 1;
-            update.QRCode = "";
-            update.Manufacturer = "A";
-            update.BikeStatus = 1;
+            UpdateBikeInfo update = new UpdateBikeInfo()
+            {
+                Manufacturer = "A"
+            };
             ElectricBike bike = electricBikeService.UpdateBike(1, update);
-            Assert.IsNotNull(bike);
+            Assert.IsTrue(bike.Manufacturer == "A");
         }
     }
 }

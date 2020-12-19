@@ -23,3 +23,4 @@
 ### Tài liệu tham khảo
 - https://docs.microsoft.com/en-us/dotnet/csharp/codedoc
 - https://stackoverflow.com/questions/25456194/winforms-call-to-async-method-hangs-up-program
+- https://www.tutorialsteacher.com/csharp/csharp-tuple

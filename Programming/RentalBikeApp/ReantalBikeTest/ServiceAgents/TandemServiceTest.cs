@@ -72,20 +72,19 @@ namespace ReantalBikeTest.ServiceAgents
             List <Tandem> tandems = tandemService.GetListBikesInStation(1);
             Assert.IsTrue(tandems.Count > 0);
         }
+
         /// <summary>
         /// Test for update bike
         /// </summary>
         [Test]
         public void UpdateBikeTest()
         {
-            UpdateBikeInfo update = new UpdateBikeInfo();
-            update.StationId = 1;
-            update.Value = 1;
-            update.QRCode = "";
-            update.Manufacturer = "A";
-            update.BikeStatus = 1;
-            Tandem bike = tandemService.UpdateBike(1,update);
-            Assert.IsNotNull(bike);
+            UpdateBikeInfo update = new UpdateBikeInfo
+            {
+                Manufacturer = "ABC"
+            };
+            Tandem bike = tandemService.UpdateBike(1, update);
+            Assert.IsTrue(bike.Manufacturer == "ABC");
         }
     }
 }

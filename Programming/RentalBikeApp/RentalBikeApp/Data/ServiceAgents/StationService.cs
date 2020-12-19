@@ -44,7 +44,7 @@ namespace RentalBikeApp.Data.ServiceAgents
 
         /// <summary></summary>
         /// <param name="nameStation"></param>
-        /// <returns></returns>
+        /// <returns>The station information</returns>
         public Station GetStationByName(string nameStation)
         {
             return connecter.SqlData.Stations.SingleOrDefault(x => x.NameStation == nameStation);
