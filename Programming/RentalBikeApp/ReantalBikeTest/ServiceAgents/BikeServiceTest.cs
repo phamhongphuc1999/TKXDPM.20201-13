@@ -72,5 +72,18 @@ namespace ReantalBikeTest.ServiceAgents
             List<Bike> bikes = bikeService.GetListBikesInStation(1);
             Assert.IsTrue(bikes.Count > 0);
         }
+
+        /// <summary>
+        /// Test for case update bike
+        /// </summary>
+        [Test]
+        public void UpdateBikeTest()
+        {
+            Bike bike = bikeService.UpdateBike(1, new UpdateBikeInfo
+            {
+                Manufacturer = "ABC"
+            });
+            Assert.IsTrue(bike.Manufacturer == "ABC");
+        }
     }
 }

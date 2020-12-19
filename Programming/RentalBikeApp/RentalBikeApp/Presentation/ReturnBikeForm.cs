@@ -26,17 +26,13 @@ namespace RentalBikeApp.Presentation
     {
         private List<Station> stationList;
 
-        public ReturnBikeForm()
+        public ReturnBikeForm(): base()
         {
             stationList = bikeStationController.ViewListStation();
 
             InitializeComponent("ReturnBikeForm", "Return Bike");
-            DrawBaseForm();
             DrawReturnBikeForm();
             RenderStationList(this.listStationPnl);
-
-            homePageBut.Click += HomePageBut_Click;
-            rentBikeBut.Click += RentBikeBut_Click;
         }
 
         /// <summary>
@@ -80,7 +76,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void RentBikeBut_Click(object sender, EventArgs e)
+        protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
             rentBikeForm.Show(this, this);
             this.Hide();
@@ -91,7 +87,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void HomePageBut_Click(object sender, EventArgs e)
+        protected override void HomePageBut_Click(object sender, EventArgs e)
         {
             homePageForm.RenderStationList(homePageForm.stationPnl);
             homePageForm.Show(this);

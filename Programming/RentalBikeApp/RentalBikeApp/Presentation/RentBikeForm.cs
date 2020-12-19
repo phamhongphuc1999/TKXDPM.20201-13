@@ -21,16 +21,12 @@ namespace RentalBikeApp.Presentation
 {
     public partial class RentBikeForm : BaseForm
     {
-        public RentBikeForm()
+        public RentBikeForm(): base()
         {
             InitializeComponent("RentBikeForm", "Rent Bike");
-            DrawBaseForm();
             DrawRentBikeInfoForm();
             DrawRentingBikeForm();
             DrawRentBikeForm();
-            homePageBut.Click += HomePageBut_Click;
-            rentBikeBut.Click += RentBikeBut_Click;
-            prevFormBut.Click += PrevFormBut_Click;
 
             Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
             DisplayRentBike(Config.RENT_BIKE_STATUS);
@@ -135,35 +131,15 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
-        /// Handle click event RentBikeBut
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void RentBikeBut_Click(object sender, EventArgs e)
-        {
-        }
-
-        /// <summary>
         /// Handle click event HomePageBut
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        private void HomePageBut_Click(object sender, EventArgs e)
+        protected override void HomePageBut_Click(object sender, EventArgs e)
         {
             homePageForm.RenderStationList(homePageForm.stationPnl);
             homePageForm.Show(this);
             this.Hide();
-        }
-
-        /// <summary>
-        /// Handle click event PrevFormBut
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void PrevFormBut_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            this.PrevForm.Show(this);
         }
 
         #region Rent bike handle event
@@ -191,6 +167,12 @@ namespace RentalBikeApp.Presentation
             if (bike == null)
             {
                 MessageBox.Show($"Không tìm thấy xe có mã qr code {qrCode}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                rentBikeQrCodeTxt.Text = "";
+                return;
+            }
+            if (bike.BikeStatus)
+            {
+                MessageBox.Show($"Xe đang được thuê, vui lòng chọn xe khác", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 rentBikeQrCodeTxt.Text = "";
                 return;
             }
