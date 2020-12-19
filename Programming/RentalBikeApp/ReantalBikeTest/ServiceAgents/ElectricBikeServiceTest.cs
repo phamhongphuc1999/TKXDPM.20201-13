@@ -1,4 +1,4 @@
-﻿// --------------------RENTAL BIKE APP-----------------
+// --------------------RENTAL BIKE APP-----------------
 //
 //
 // Copyright (c) Microsoft. All Rights Reserved.
@@ -71,6 +71,21 @@ namespace ReantalBikeTest.ServiceAgents
         {
             List<ElectricBike> electricBikes = electricBikeService.GetListBikesInStation(1);
             Assert.IsTrue(electricBikes.Count > 0);
+        }
+        /// <summary>
+        /// Test for update bike
+        /// </summary>
+        [Test]
+        public void UpdateBikeTest()
+        {
+            UpdateBikeInfo update = new UpdateBikeInfo();
+            update.StationId = 1;
+            update.Value = 1;
+            update.QRCode = "";
+            update.Manufacturer = "A";
+            update.BikeStatus = 1;
+            ElectricBike bike = electricBikeService.UpdateBike(1, update);
+            Assert.IsNotNull(bike);
         }
     }
 }
