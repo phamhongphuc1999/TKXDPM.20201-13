@@ -17,6 +17,9 @@ using System.Linq;
 
 namespace RentalBikeApp.Data.ServiceAgents
 {
+    /// <summary>
+    /// Provides functions to interact with user in the database
+    /// </summary>
     public class UserService
     {
         private SQLConnecter connecter;

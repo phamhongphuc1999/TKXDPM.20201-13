@@ -19,6 +19,9 @@ using System.Linq;
 
 namespace RentalBikeApp.Bussiness
 {
+    /// <summary>
+    /// Provider flow for return bike
+    /// </summary>
     public class ReturnBikeController
     {
         /// <summary>

@@ -17,6 +17,9 @@ using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Data
 {
+    /// <summary>
+    /// This class provider a method and option to connect SQL server
+    /// </summary>
     public class SQLConnecter
     {
         public SQLData SqlData { get; private set; }

@@ -18,6 +18,9 @@ using System.Linq;
 
 namespace RentalBikeApp.Data.ServiceAgents.BikeServices
 {
+    /// <summary>
+    /// Provides functions to interact with electric bike in the database
+    /// </summary>
     public class ElectricBikeService: IBikeService<ElectricBike>
     {
         private SQLConnecter connecter;

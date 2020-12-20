@@ -19,6 +19,9 @@ using System.Collections.Generic;
 
 namespace RentalBikeApp.Bussiness
 {
+    /// <summary>
+    /// Provider flow for view detail bike and view detail station
+    /// </summary>
     public class BikeStationController
     {
         /// <summary>

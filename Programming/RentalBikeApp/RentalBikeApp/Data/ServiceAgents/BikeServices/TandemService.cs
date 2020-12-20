@@ -18,6 +18,9 @@ using System.Linq;
 
 namespace RentalBikeApp.Data.ServiceAgents.BikeServices
 {
+    /// <summary>
+    /// Provides functions to interact with tandem in the database
+    /// </summary>
     public class TandemService: IBikeService<Tandem>
     {
         private SQLConnecter connecter;

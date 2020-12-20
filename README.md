@@ -85,7 +85,8 @@
 ## Contributions
 - Phạm Hồng Phúc: thực hiện Task 1, Task 8
 - Ngô Minh Quang: thực hiện Task 2, Task 3, Task 4, Task 7
-- Trần Minh QUang:Thực hiện Task 6
+- Trần Minh Quang:Thực hiện Task 6
 ## Revisions
 - Ngô Minh Quang review Task 6: Các hàm test chính xác và đầy đủ.
 - Trần Minh Quang review Task 1: Các hàm test chính xác và đầy đủ.
+- Phạm Hồng Phúc review Task 2, 3, 7: Các hàm test chính xác, test đầy đủ các trường hợp có thể xảy ra

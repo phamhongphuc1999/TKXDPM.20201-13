@@ -14,10 +14,12 @@
 
 using RentalBikeApp.Entities.SQLEntities;
 using System.Linq;
-using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Data.ServiceAgents
 {
+    /// <summary>
+    /// Provides functions to interact with card in the database
+    /// </summary>
     public class CardService
     {
         private SQLConnecter connecter;

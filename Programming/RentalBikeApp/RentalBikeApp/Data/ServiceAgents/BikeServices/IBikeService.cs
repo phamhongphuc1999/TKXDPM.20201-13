@@ -17,6 +17,10 @@ using System.Collections.Generic;
 
 namespace RentalBikeApp.Data.ServiceAgents.BikeServices
 {
+    /// <summary>
+    /// The service IBikeService implements the functions to interact BaseBike in database
+    /// </summary>
+    /// <typeparam name="TBike"></typeparam>
     public interface IBikeService<TBike>
     {
         public TBike GetBikeByQRCode(string QRCode);

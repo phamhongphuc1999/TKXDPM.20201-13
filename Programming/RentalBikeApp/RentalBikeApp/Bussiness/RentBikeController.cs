@@ -17,6 +17,9 @@ using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Bussiness
 {
+    /// <summary>
+    /// Provider flow for rent bike 
+    /// </summary>
     public class RentBikeController
     {
         /// <summary>

@@ -22,6 +22,9 @@ using System.Text.RegularExpressions;
 
 namespace RentalBikeApp
 {
+    /// <summary>
+    /// Provide utility functions for the program
+    /// </summary>
     public static class Utilities
     {
         /// <summary>

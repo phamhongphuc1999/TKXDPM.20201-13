@@ -22,6 +22,9 @@ using static RentalBikeApp.Config.API_INFO;
 
 namespace RentalBikeApp
 {
+    /// <summary>
+    /// Privider functions for process API
+    /// </summary>
     public class InterbankService
     {
         /// <summary>
