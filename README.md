@@ -86,7 +86,9 @@
 - Phạm Hồng Phúc: thực hiện Task 1, Task 8
 - Ngô Minh Quang: thực hiện Task 2, Task 3, Task 4, Task 7
 - Trần Minh Quang:Thực hiện Task 6
+- Sư Hữu Vũ Quang: Thực hiện Task 5
 ## Revisions
 - Ngô Minh Quang review Task 6: Các hàm test chính xác và đầy đủ.
 - Trần Minh Quang review Task 1: Các hàm test chính xác và đầy đủ.
-- Phạm Hồng Phúc review Task 2, 3, 7: Các hàm test chính xác, test đầy đủ các trường hợp có thể xảy ra
+- Phạm Hồng Phúc review Task 2, 5, 7: Các hàm test chính xác, test đầy đủ các trường hợp có thể xảy ra
+- Sư Hữu Vũ Quang review Task 3,8: Các hàm test chính xác, đầy đủ các trường hợp và đưa ra được kết quả say khi chạy
