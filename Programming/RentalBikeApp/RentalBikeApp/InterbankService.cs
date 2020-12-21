@@ -36,7 +36,7 @@ namespace RentalBikeApp
         /// <param name="date">Date time transaction processed</param>
         /// <param name="transactionContent">Note of transaction</param>
         /// <param name="_version">Version of API, default 1.0.1</param>
-        /// <returns></returns>
+        /// <returns>The transaction response information</returns>
         public static async Task<ProcessTransactionResponse> ProcessTransaction(Card card, COMMAND command, int amount, DateTime date, 
             string transactionContent, string _version = "1.0.1")
         {

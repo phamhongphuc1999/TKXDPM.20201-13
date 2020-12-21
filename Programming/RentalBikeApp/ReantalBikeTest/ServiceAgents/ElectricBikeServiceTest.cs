@@ -13,7 +13,6 @@
 // ------------------------------------------------------
 
 using NUnit.Framework;
-using RentalBikeApp;
 using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents.BikeServices;
 using RentalBikeApp.Entities.SQLEntities;
@@ -24,7 +23,7 @@ namespace ReantalBikeTest.ServiceAgents
     [TestFixture]
     class ElectricBikeServiceTest
     {
-        private SQLConnecter connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
+        private SQLConnecter connecter = SQLConnecter.GetInstance();
         private ElectricBikeService electricBikeService;
 
         [SetUp]

@@ -58,7 +58,7 @@ namespace RentalBikeApp
             Application.SetCompatibleTextRenderingDefault(false);
 
             //connect to database
-            connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);
+            connecter = SQLConnecter.GetInstance();
 
             //init services
             bikeService = new BikeService(connecter);
