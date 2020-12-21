@@ -104,11 +104,6 @@ namespace RentalBikeApp
         ///<Value>get current card information</Value>
         public static Card CARD_INFO;
 
-        /// <summary>
-        /// Get current transaction
-        /// </summary>
-        public static int transactionId;
-
         ///<value>
         /// enum use to define the transaction form status
         ///</value>

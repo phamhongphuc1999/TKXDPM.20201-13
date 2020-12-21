@@ -103,17 +103,22 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentThisBikeBut_Click(object sender, EventArgs e)
         {
+            if(statusBikeLbl.BackColor == Color.Red)
+            {
+                MessageBox.Show("Xe đang được thuê, vui lòng chọn xe khác", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             Button rentThisBikeBut = sender as Button;
             (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))rentThisBikeBut.Tag;
             if(Config.RENT_BIKE_STATUS != Config.RENT_BIKE.RENTING_BIKE)
             {
                 rentBikeForm.FillRentBikeInfoForm(bikeInfo);
-                rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO);
+                rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO, this);
             }
             else
             {
                 rentBikeForm.FillRentingBikeForm();
-                rentBikeForm.Show(this, Config.RENT_BIKE.RENTING_BIKE);
+                rentBikeForm.Show(this, Config.RENT_BIKE.RENTING_BIKE, this);
             }
             this.Hide();
         }

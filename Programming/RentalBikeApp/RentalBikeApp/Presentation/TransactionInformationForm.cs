@@ -25,6 +25,8 @@ namespace RentalBikeApp.Presentation
     {
         private int deposit;
         private int rentalMoney;
+        private int stationId;
+        private int transactionId;
 
         public TransactionInformationForm(): base()
         {
@@ -37,11 +39,13 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Fill transaction form with transaction's information when user process transaction for pay rental money
         /// </summary>
-        public void FillTransactionInformationWhenPay()
+        /// <param name="stationId">The return station id</param>
+        public void FillTransactionInformationWhenPay(int stationId)
         {
             this.status = TRANSACTION_STATUS.PAY;
+            this.stationId = stationId;
             remainMoneyTxt.Text = "111";
-            transactionDateTxt.Text = Utilities.ConvertDateToString(DateTime.Now);
+            transactionDateTxt.Text = DateTime.Now.ToString("f");
             cancelBut.Visible = false;
 
             Config.SQL.BikeCategory category = SQL.BikeCategory.BIKE;
@@ -82,7 +86,7 @@ namespace RentalBikeApp.Presentation
                     MessageBox.Show("Hệ thống không thể lưu thông tin giao dịch", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                Config.transactionId = transaction.TransactionId;
+                this.transactionId = transaction.TransactionId;
                 rentBikeForm.FillRentingBikeForm();
                 rentBikeController.BeginRentingBike(Config.RENTAL_BIKE.BikeId);
                 rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
@@ -117,6 +121,7 @@ namespace RentalBikeApp.Presentation
             if (error == "00")
             {
                 Transaction transaction = returnBikeController.UpdatePaymentTransaction(transactionId, this.rentalMoney);
+                returnBikeController.UpdateStationAfterReturnbike(this.stationId, RENTAL_BIKE_CATEGORY);
                 MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 homePageForm.Show(this);
             }

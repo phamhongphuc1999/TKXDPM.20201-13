@@ -169,7 +169,7 @@ namespace RentalBikeApp.Presentation
             {
                 Size = new Size(195, 40),
                 Location = new Point(585, 70),
-                Text = "00:00:00",
+                Text = "0:00:00",
                 TextAlign = ContentAlignment.MiddleCenter
             };
             rentingRemainPowerLbl = new Label()

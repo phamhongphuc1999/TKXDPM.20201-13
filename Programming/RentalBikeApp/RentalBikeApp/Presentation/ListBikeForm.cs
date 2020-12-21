@@ -53,7 +53,7 @@ namespace RentalBikeApp.Presentation
                     Location = new Point(X, Y),
                     Size = new Size(listBikePnl.Width - 40, 50),
                     BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
-                    Text = $"xe số {count1}:{bike.QRCode}",
+                    Text = bike.BikeStatus ? $"xe số {count1}:{bike.QRCode} - renting" : $"xe số {count1}:{bike.QRCode} - availiable",
                     Tag = (bike.BikeId, Config.SQL.BikeCategory.BIKE)
                 };
                 Y += 55; count1++;
@@ -85,7 +85,7 @@ namespace RentalBikeApp.Presentation
                     Location = new Point(X, Y),
                     Size = new Size(listBikePnl.Width - 40, 50),
                     BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
-                    Text = $"xe số {count1}:{bike.QRCode}",
+                    Text = bike.BikeStatus ? $"xe số {count1}:{bike.QRCode} - renting" : $"xe số {count1}:{bike.QRCode} - availiable",
                     Tag = (bike.BikeId, Config.SQL.BikeCategory.TANDEM)
                 };
                 Y += 55; count1++;
@@ -117,7 +117,7 @@ namespace RentalBikeApp.Presentation
                     Location = new Point(X, Y),
                     Size = new Size(listBikePnl.Width - 40, 50),
                     BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
-                    Text = $"xe số {count1}:{bike.QRCode}",
+                    Text = bike.BikeStatus ? $"xe số {count1}:{bike.QRCode} - renting": $"xe số {count1}:{bike.QRCode} - availiable",
                     Tag = (bike.BikeId, Config.SQL.BikeCategory.ELECTRIC)
                 };
                 Y += 55; count1++;
