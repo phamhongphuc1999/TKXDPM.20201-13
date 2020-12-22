@@ -63,19 +63,9 @@ namespace ReantalBikeTest.ServiceAgents
         }
 
         /// <summary>
-        /// Test for get last transaction by user id
-        /// </summary>
-        [Test, Order(2)]
-        public void GetLastTransactionByUserIdTest()
-        {
-            Transaction transaction = transactionService.GetLastTransactionByUserId(1);
-            Assert.IsNotNull(transaction);
-        }
-
-        /// <summary>
         /// Test for get list transaction by user id
         /// </summary>
-        [Test, Order(3)]
+        [Test, Order(2)]
         public void GetListTransactionsByUserIdTest()
         {
             List<Transaction> transactions = transactionService.GetListTransactionsByUserId(1);
@@ -85,7 +75,7 @@ namespace ReantalBikeTest.ServiceAgents
         /// <summary>
         /// Test for update transaction
         /// </summary>
-        [Test, Order(4)]
+        [Test, Order(3)]
         public void UpdateTransactionTest()
         {
             DateTime aDateTime = new DateTime(2020, 12, 20, 00, 00, 00);

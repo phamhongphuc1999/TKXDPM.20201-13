@@ -68,14 +68,6 @@ namespace RentalBikeApp.Data.ServiceAgents
             return connecter.SqlData.Transactions.Find(transactionId);
         }
 
-        /// <summary>Get last transaction of the user</summary>
-        /// <param name="userId">the Id of user</param>
-        /// <returns>Return the last transaction of the specified user</returns>
-        public Transaction GetLastTransactionByUserId(int userId)
-        {
-            return connecter.SqlData.Transactions.LastOrDefault(x => x.UserId == userId);
-        }
-
         /// <summary>Get all of transactions of the user</summary>
         /// <param name="userId">the Id of user</param>
         /// <returns>Return the specified user's transactions list</returns>
