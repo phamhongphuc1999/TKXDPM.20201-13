@@ -1,1 +1,1 @@
-Demo video and installation fuide
+Demo video and installation guide
