@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ShowAllFiles>false</ShowAllFiles>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="Presentation\BaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\BikeDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\CardInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\HomePageForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\ListBikeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\RentBikeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\ReturnBikeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\StationDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\TransactionInformationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
