@@ -15,6 +15,7 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
+using static RentalBikeApp.Config.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Drawing;
 
@@ -25,6 +26,9 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class BikeDetailForm : BaseForm
     {
+        private int bikeId;
+        private BikeCategory category;
+
         public BikeDetailForm(): base()
         {
             InitializeComponent("BikeDetailForm", "Bike Detail");
@@ -57,14 +61,14 @@ namespace RentalBikeApp.Presentation
                 categoryBikeTxt.Text = "Xe đạp thường";
                 powerTxt.Text = "Không có thông tin";
                 licenceTxt.Text = "Không có thông tin";
-                rentThisBikeBut.Tag = (bike.BikeId, Config.SQL.BikeCategory.BIKE);
+                this.category = BikeCategory.BIKE;
             }
             else if (bike is Tandem)
             {
                 categoryBikeTxt.Text = "Xe đạp đôi";
                 powerTxt.Text = "Không có thông tin";
                 licenceTxt.Text = "Không có thông tin";
-                rentThisBikeBut.Tag = (bike.BikeId, Config.SQL.BikeCategory.TANDEM);
+                this.category = BikeCategory.TANDEM;
             }
             else
             {
@@ -72,8 +76,9 @@ namespace RentalBikeApp.Presentation
                 categoryBikeTxt.Text = "Xe đạp điện";
                 powerTxt.Text = $"{electric.Powers}%";
                 licenceTxt.Text = electric.LicensePlate;
-                rentThisBikeBut.Tag = (bike.BikeId, Config.SQL.BikeCategory.ELECTRIC);
+                this.category = BikeCategory.ELECTRIC;
             }
+            this.bikeId = bike.BikeId;
         }
 
         /// <summary>
@@ -111,11 +116,9 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Xe đang được thuê, vui lòng chọn xe khác", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            Button rentThisBikeBut = sender as Button;
-            (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))rentThisBikeBut.Tag;
             if(Config.RENT_BIKE_STATUS != Config.RENT_BIKE.RENTING_BIKE)
             {
-                rentBikeForm.FillRentBikeInfoForm(bikeInfo);
+                rentBikeForm.FillRentBikeInfoForm(this.bikeId, this.category);
                 rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO, this);
             }
             else

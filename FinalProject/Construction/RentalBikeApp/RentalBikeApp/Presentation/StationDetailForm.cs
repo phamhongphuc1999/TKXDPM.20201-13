@@ -23,6 +23,8 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class StationDetailForm : BaseForm
     {
+        private int stationId;
+
         public StationDetailForm(): base()
         {
             InitializeComponent("StationDetailForm", "Station Detail");
@@ -42,9 +44,7 @@ namespace RentalBikeApp.Presentation
             distanceTxt.Text = "100 m";
             timeTxt.Text = "10";
 
-            bikeBut.Tag = station.StationId;
-            electricBut.Tag = station.StationId;
-            tandemBut.Tag = station.StationId;
+            this.stationId = station.StationId;
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void TandemBut_Click(object sender, EventArgs e)
         {
-            listBikeForm.FillListBikes((int)tandemBut.Tag, Config.SQL.BikeCategory.TANDEM);
+            listBikeForm.FillListTandems(this.stationId);
             listBikeForm.Show(this, this);
             this.Hide();
         }
@@ -89,7 +89,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void ElectricBut_Click(object sender, EventArgs e)
         {
-            listBikeForm.FillListBikes((int)electricBut.Tag, Config.SQL.BikeCategory.ELECTRIC);
+            listBikeForm.FillListElectric(this.stationId);
             listBikeForm.Show(this, this);
             this.Hide();
         }
@@ -101,7 +101,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void BikeBut_Click(object sender, EventArgs e)
         {
-            listBikeForm.FillListBikes((int)bikeBut.Tag, Config.SQL.BikeCategory.BIKE);
+            listBikeForm.FillListBikes(this.stationId);
             listBikeForm.Show(this, this);
             this.Hide();
         }

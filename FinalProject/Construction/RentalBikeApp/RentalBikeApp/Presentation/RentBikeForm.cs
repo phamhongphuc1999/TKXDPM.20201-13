@@ -15,6 +15,7 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
+using static RentalBikeApp.Config.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
@@ -24,6 +25,9 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class RentBikeForm : BaseForm
     {
+        private int bikeId;
+        private BikeCategory category;
+
         public RentBikeForm(): base()
         {
             InitializeComponent("RentBikeForm", "Rent Bike");
@@ -107,17 +111,18 @@ namespace RentalBikeApp.Presentation
         /// Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
         /// </summary>
         /// <param name="bikeId">The bike id of specified bike</param>
-        public void FillRentBikeInfoForm((int, Config.SQL.BikeCategory) bikeInfo)
+        public void FillRentBikeInfoForm(int bikeId, Config.SQL.BikeCategory category)
         {
-            BaseBike bike = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2);
+            this.bikeId = bikeId; this.category = category;
+            BaseBike bike = bikeStationController.ViewBikeDetail(bikeId, category);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
             int deposit = 40 * bike.Value / 100;
-            if (bikeInfo.Item2 == Config.SQL.BikeCategory.BIKE)
+            if (category == Config.SQL.BikeCategory.BIKE)
             {
                 rentBikeInfoCategoryTxt.Text = "Xe đạp thường";
                 rentBikeInfoLicenseTxt.Text = "Không có thông tin";
             }
-            else if (bikeInfo.Item2 == Config.SQL.BikeCategory.ELECTRIC)
+            else if (category == Config.SQL.BikeCategory.ELECTRIC)
             {
                 ElectricBike electricBike = bike as ElectricBike;
                 rentBikeInfoCategoryTxt.Text = "Xe đạp điện";
@@ -129,8 +134,6 @@ namespace RentalBikeApp.Presentation
                 rentBikeInfoLicenseTxt.Text = "Không có thông tin";
             }
             rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", deposit);
-            rentBikeInfoDetailBut.Tag = bikeInfo;
-            rentBikeInfoRentThisBikeBut.Tag = bikeInfo;
         }
 
         /// <summary>
@@ -193,10 +196,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeInfoRentThisBikeBut_Click(object sender, EventArgs e)
         {
-            Button but = sender as Button;
-            (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
-            Config.RENTAL_BIKE_CATEGORY = bikeInfo.Item2;
-            Config.RENTAL_BIKE = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2);
+            Config.RENTAL_BIKE_CATEGORY = this.category;
+            Config.RENTAL_BIKE = bikeStationController.ViewBikeDetail(this.bikeId, this.category);
             cardInformationForm.Show(this, this);
             this.Hide();
         }
@@ -208,13 +209,11 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeInfoDetailBut_Click(object sender, EventArgs e)
         {
-            Button but = sender as Button;
-            (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
             string stationName = "", stationAddress = "";
-            BaseBike bike = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2, ref stationName, ref stationAddress);
+            BaseBike bike = bikeStationController.ViewBikeDetail(this.bikeId, this.category , ref stationName, ref stationAddress);
             if (bike == null)
             {
-                MessageBox.Show($"Không tìm được xe có id: {bikeInfo.Item1}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Không tìm được xe có id: {this.bikeId}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             bikeDetailForm.FillBikeInformation(bike, stationName, stationAddress);

@@ -18,6 +18,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
+using static RentalBikeApp.Config.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp.Presentation
@@ -27,6 +28,8 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class ListBikeForm : BaseForm
     {
+        private BikeCategory category;
+
         public ListBikeForm(): base()
         {
             InitializeComponent("ListBikesForm", "List Bikes");
@@ -34,34 +37,48 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
+        /// Create button for display information bike
+        /// </summary>
+        /// <param name="bikeId">The bike id</param>
+        /// <param name="qrCode">The bike qr code</param>
+        /// <param name="status">The bike status</param>
+        /// <param name="X">The horizontal position of the button</param>
+        /// <param name="Y">The vertical position of the button</param>
+        /// <param name="count">The index of button</param>
+        private void CreateButBike(int bikeId, string qrCode, bool status, int X, int Y, int count)
+        {
+            Button but = new Button()
+            {
+                Location = new Point(X, Y),
+                Size = new Size(listBikePnl.Width - 40, 50),
+                BackColor = (count % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
+                Text = status ? $"xe số {count}:{qrCode} - renting" : $"xe số {count}:{qrCode} - availiable",
+                Tag = bikeId
+            };
+            but.Click += But_Click;
+            listBikePnl.Controls.Add(but);
+        }
+
+        /// <summary>
         /// Fill ListBikeForm with bike's information in specified category
         /// </summary>
         /// <param name="stationId">The station contain list bike is displayed</param>
-        private void FillListBikes(int stationId)
+        public void FillListBikes(int stationId)
         {
             listBikePnl.Controls.Clear();
+            category = BikeCategory.BIKE;
             string stationName = "", stationAddress = "";
             List<Bike> bikesList = bikeStationController.ViewListBikeInStation(stationId, ref stationName, ref stationAddress);
             int count = bikesList.Count(x => !x.BikeStatus);
-            if (count > 0)
-                descriptionRtb.Text = $"Xe đạp thường\nCòn lại {count} xe";
+            if (count > 0) descriptionRtb.Text = $"Xe đạp thường\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
             stationRtb.Text = $"{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
             foreach (Bike bike in bikesList)
             {
-                Button but = new Button()
-                {
-                    Location = new Point(X, Y),
-                    Size = new Size(listBikePnl.Width - 40, 50),
-                    BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
-                    Text = bike.BikeStatus ? $"xe số {count1}:{bike.QRCode} - renting" : $"xe số {count1}:{bike.QRCode} - availiable",
-                    Tag = (bike.BikeId, Config.SQL.BikeCategory.BIKE)
-                };
+                CreateButBike(bike.BikeId, bike.QRCode, bike.BikeStatus, X, Y, count1);
                 Y += 55; count1++;
-                but.Click += But_Click;
-                listBikePnl.Controls.Add(but);
             }
         }
 
@@ -69,31 +86,22 @@ namespace RentalBikeApp.Presentation
         /// Fill ListBikeForm with tandem's information in specified category
         /// </summary>
         /// <param name="stationId">The station contain list bike is displayed</param>
-        private void FillListTandems(int stationId)
+        public void FillListTandems(int stationId)
         {
             listBikePnl.Controls.Clear();
+            category = BikeCategory.BIKE;
             string stationName = "", stationAddress = "";
             List<Tandem> bikesList = bikeStationController.ViewListTandemInStation(stationId, ref stationName, ref stationAddress);
             int count = bikesList.Count(x => !x.BikeStatus);
-            if (count > 0)
-                descriptionRtb.Text = $"Xe đạp đôi\nCòn lại {count} xe";
+            if (count > 0) descriptionRtb.Text = $"Xe đạp đôi\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
             stationRtb.Text = $"{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
             foreach (Tandem bike in bikesList)
             {
-                Button but = new Button()
-                {
-                    Location = new Point(X, Y),
-                    Size = new Size(listBikePnl.Width - 40, 50),
-                    BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
-                    Text = bike.BikeStatus ? $"xe số {count1}:{bike.QRCode} - renting" : $"xe số {count1}:{bike.QRCode} - availiable",
-                    Tag = (bike.BikeId, Config.SQL.BikeCategory.TANDEM)
-                };
+                CreateButBike(bike.BikeId, bike.QRCode, bike.BikeStatus, X, Y, count1);
                 Y += 55; count1++;
-                but.Click += But_Click;
-                listBikePnl.Controls.Add(but);
             }
         }
 
@@ -101,44 +109,23 @@ namespace RentalBikeApp.Presentation
         /// Fill ListBikeForm with electric bike's information in specified category
         /// </summary>
         /// <param name="stationId">The station contain list bike is displayed</param>
-        private void FillListElectric(int stationId)
+        public void FillListElectric(int stationId)
         {
             listBikePnl.Controls.Clear();
+            category = BikeCategory.BIKE;
             string stationName = "", stationAddress = "";
             List<ElectricBike> bikesList = bikeStationController.ViewListElectricBikeInStation(stationId, ref stationName, ref stationAddress);
             int count = bikesList.Count(x => !x.BikeStatus);
-            if (count > 0)
-                descriptionRtb.Text = $"Xe đạp điện\nCòn lại {count} xe";
+            if (count > 0) descriptionRtb.Text = $"Xe đạp điện\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
             stationRtb.Text = $"{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
             foreach (ElectricBike bike in bikesList)
             {
-                Button but = new Button()
-                {
-                    Location = new Point(X, Y),
-                    Size = new Size(listBikePnl.Width - 40, 50),
-                    BackColor = (count1 % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
-                    Text = bike.BikeStatus ? $"xe số {count1}:{bike.QRCode} - renting": $"xe số {count1}:{bike.QRCode} - availiable",
-                    Tag = (bike.BikeId, Config.SQL.BikeCategory.ELECTRIC)
-                };
+                CreateButBike(bike.BikeId, bike.QRCode, bike.BikeStatus, X, Y, count1);
                 Y += 55; count1++;
-                but.Click += But_Click;
-                listBikePnl.Controls.Add(but);
             }
-        }
-
-        /// <summary>
-        /// Fill ListBikeForm with bike's information in specified category
-        /// </summary>
-        /// <param name="station">The station contain list bike is displayed</param>
-        /// <param name="category">The specified bike's category</param>
-        public void FillListBikes(int stationId, Config.SQL.BikeCategory category)
-        {
-            if (category == Config.SQL.BikeCategory.BIKE) FillListBikes(stationId);
-            else if (category == Config.SQL.BikeCategory.ELECTRIC) FillListElectric(stationId);
-            else FillListTandems(stationId);
         }
 
         /// <summary>
@@ -149,12 +136,12 @@ namespace RentalBikeApp.Presentation
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            (int, Config.SQL.BikeCategory) bikeInfo = ((int, Config.SQL.BikeCategory))but.Tag;
+            int bikeId = (int)but.Tag;
             string stationName = "", stationAddress = "";
-            BaseBike bike = bikeStationController.ViewBikeDetail(bikeInfo.Item1, bikeInfo.Item2, ref stationName, ref stationAddress);
+            BaseBike bike = bikeStationController.ViewBikeDetail(bikeId, this.category, ref stationName, ref stationAddress);
             if (bike == null)
             {
-                MessageBox.Show($"Không tìm được xe có id: {bikeInfo.Item1}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Không tìm được xe có id: {bikeId}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             bikeDetailForm.FillBikeInformation(bike, stationName, stationAddress);
