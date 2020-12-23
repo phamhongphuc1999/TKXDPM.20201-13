@@ -12,7 +12,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Properties\" />
+
+ <Folder Include="Properties\" />
+
 	</ItemGroup>
 
 </Project>
