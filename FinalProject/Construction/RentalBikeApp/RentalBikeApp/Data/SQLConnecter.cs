@@ -22,8 +22,14 @@ namespace RentalBikeApp.Data
     /// </summary>
     public class SQLConnecter
     {
+        /// <summary>
+        /// representing of SQL database
+        /// </summary>
         public SQLData SqlData { get; private set; }
 
+        /// <summary>
+        /// provider option for configuration connect
+        /// </summary>
         public DbContextOptionsBuilder<SQLData> Option { get; private set; }
 
         private static SQLConnecter connecter;
@@ -35,6 +41,10 @@ namespace RentalBikeApp.Data
             SqlData = new SQLData(Option.Options);
         }
 
+        /// <summary>
+        /// Get only instance of connect
+        /// </summary>
+        /// <returns>The instance represeting the connection</returns>
         public static SQLConnecter GetInstance()
         {
             if(connecter == null) connecter = new SQLConnecter(Config.SQL.SQL_CONNECT_STRING);

@@ -5,10 +5,10 @@ namespace RentalBikeApp.Presentation
 {
     partial class TransactionInformationForm
     {
-        public Panel transactionPnl;
-        public Label depositLbl, rentalMoneyLbl, remainMoneyLbl, transactionDateLbl, noteLbl;
-        public TextBox depositTxt, rentalMoneyTxt, remainMoneyTxt, transactionDateTxt, noteTxt;
-        public Button permitBut, cancelBut;
+        private Panel transactionPnl;
+        private Label depositLbl, rentalMoneyLbl, remainMoneyLbl, transactionDateLbl, noteLbl;
+        private TextBox depositTxt, rentalMoneyTxt, remainMoneyTxt, transactionDateTxt, noteTxt;
+        private Button permitBut, cancelBut;
 
         /// <summary>
         /// Initialized control in TransactionInformationForm

@@ -24,6 +24,10 @@ namespace RentalBikeApp.Data.ServiceAgents
     {
         private SQLConnecter connecter;
 
+        /// <summary>
+        /// contructor of CardService
+        /// </summary>
+        /// <param name="connecter">The connecter</param>
         public CardService(SQLConnecter connecter)
         {
             this.connecter = connecter;
@@ -32,7 +36,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <summary>
         /// Get card information by owner
         /// </summary>
-        /// <param name="ownerId">the owner's id</param>
+        /// <param name="owner">the owner's id</param>
         /// <returns>The instance represent by card</returns>
         public Card GetCardByOwner(string owner)
         {

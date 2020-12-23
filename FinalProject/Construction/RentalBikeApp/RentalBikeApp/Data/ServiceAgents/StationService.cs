@@ -25,6 +25,10 @@ namespace RentalBikeApp.Data.ServiceAgents
     {
         private SQLConnecter connecter;
 
+        /// <summary>
+        /// contructor of StationService
+        /// </summary>
+        /// <param name="connecter">The connecter</param>
         public StationService(SQLConnecter connecter)
         {
             this.connecter = connecter;

@@ -5,11 +5,11 @@ namespace RentalBikeApp.Presentation
 {
     partial class BikeDetailForm
     {
-        public Panel bikeDetailPnl;
-        public RichTextBox stationRtb;
-        public Button rentThisBikeBut;
-        public TextBox qrCodeTxt, categoryBikeTxt, licenceTxt, manufactureTxt, powerTxt;
-        public Label qrCodeLbl, categoryBikeLbl, licenceLbl, manufactureLbl, powerLbl, statusBikeLbl;
+        private Panel bikeDetailPnl;
+        private RichTextBox stationRtb;
+        private Button rentThisBikeBut;
+        private TextBox qrCodeTxt, categoryBikeTxt, licenceTxt, manufactureTxt, powerTxt;
+        private Label qrCodeLbl, categoryBikeLbl, licenceLbl, manufactureLbl, powerLbl, statusBikeLbl;
 
         /// <summary>
         /// Initialized control in BikeDetailForm

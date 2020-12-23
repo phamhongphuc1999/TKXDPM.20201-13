@@ -29,6 +29,9 @@ namespace RentalBikeApp.Presentation
     {
         private List<Station> stationList;
 
+        /// <summary>
+        /// contructor of RentBikeForm
+        /// </summary>
         public ReturnBikeForm(): base()
         {
             stationList = bikeStationController.ViewListStation();

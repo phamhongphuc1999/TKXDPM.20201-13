@@ -31,6 +31,9 @@ namespace RentalBikeApp.Presentation
         private int stationId;
         private int transactionId;
 
+        /// <summary>
+        /// contructor of TransactionInformationForm
+        /// </summary>
         public TransactionInformationForm(): base()
         {
             InitializeComponent("TransactionInformationForm", "Transaction Information");

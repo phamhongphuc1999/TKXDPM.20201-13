@@ -5,10 +5,10 @@ namespace RentalBikeApp.Presentation
 {
     partial class ListBikeForm
     {
-        public RichTextBox descriptionRtb, stationRtb;
-        public TextBox searchTxt;
-        public Panel listBikePnl;
-        public Button searchBut;
+        private RichTextBox descriptionRtb, stationRtb;
+        private TextBox searchTxt;
+        private Panel listBikePnl;
+        private Button searchBut;
 
         /// <summary>
         /// Initalized control in ListBikeForm

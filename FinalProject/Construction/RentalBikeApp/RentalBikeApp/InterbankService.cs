@@ -69,10 +69,7 @@ namespace RentalBikeApp
         }
 
         /// <summary>This function use for test API, it reset the balance in the account</summary>
-        /// <param name="_cardCode"></param>
-        /// <param name="_owner"></param>
-        /// <param name="_cvvCode"></param>
-        /// <param name="_dateExpired"></param>
+        /// <param name="card">the card information</param>
         /// <returns>The reset response information</returns>
         public static async Task<ResetResponse> ResetAccount(Card card)
         {
