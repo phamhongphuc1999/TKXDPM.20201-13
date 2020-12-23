@@ -5,12 +5,12 @@ namespace RentalBikeApp.Presentation
 {
     partial class CardInformationForm
     {
-        public Label owerLbl, cardCodeLbl, bankLbl, securityCodeLbl, expirationDateLbl;
-        public TextBox owerTxt, cardCodeTxt, securityCodeTxt;
-        public Button cancelBut, submitBut;
-        public Panel cardInformationPnl;
-        public ComboBox bankCb;
-        public DateTimePicker expirationDtp;
+        private Label owerLbl, cardCodeLbl, bankLbl, securityCodeLbl, expirationDateLbl;
+        private TextBox owerTxt, cardCodeTxt, securityCodeTxt;
+        private Button cancelBut, submitBut;
+        private Panel cardInformationPnl;
+        private ComboBox bankCb;
+        private DateTimePicker expirationDtp;
 
         /// <summary>
         /// Initialized control in CardInformation

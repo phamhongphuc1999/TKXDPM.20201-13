@@ -155,9 +155,19 @@
             <param name="content">The transaction content</param>
             <returns></returns>
         </member>
+        <member name="T:RentalBikeApp.Config">
+            <summary>
+            this class provider information for config program
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Config.SQL">
             <summary>
             This static class use to config connect to sql server
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Config.SQL.SQL_CONNECT_STRING">
+            <summary>
+            connect string of sql data
             </summary>
         </member>
         <member name="T:RentalBikeApp.Config.SQL.BikeCategory">
@@ -169,6 +179,21 @@
             TANDEM: represent tandem
             BIKE: represent normal bike
             </remarks>
+        </member>
+        <member name="F:RentalBikeApp.Config.SQL.BikeCategory.ELECTRIC">
+            <summary>
+            representing of electric bike
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Config.SQL.BikeCategory.TANDEM">
+            <summary>
+            representing of tandem
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Config.SQL.BikeCategory.BIKE">
+            <summary>
+            representing of bike
+            </summary>
         </member>
         <member name="T:RentalBikeApp.Config.API_INFO">
             <summary>
@@ -199,8 +224,28 @@
             REFUND: API call to refund money
             </remarks>
         </member>
+        <member name="F:RentalBikeApp.Config.API_INFO.COMMAND.PAY">
+            <summary>
+            use when transaction for pay money
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Config.API_INFO.COMMAND.REFUND">
+            <summary>
+            use when transaction for refund deposit
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Config.API_INFO.ERROR_CODE">
+            <summary>
+            error code
+            </summary>
+        </member>
         <member name="F:RentalBikeApp.Config.RENT_BIKE_STATUS">
             <Value>get current rent bike form status</Value>
+        </member>
+        <member name="F:RentalBikeApp.Config.RENTAL_BIKE_CATEGORY">
+            <summary>
+            the category of reantal bike
+            </summary>
         </member>
         <member name="F:RentalBikeApp.Config.RENTAL_BIKE">
             <Value>get current rental bike</Value>
@@ -222,6 +267,16 @@
             PAY: when the user choose a station to return bike, the transaction form status is PAY
             </remarks>
         </member>
+        <member name="F:RentalBikeApp.Config.TRANSACTION_STATUS.RENT_BIKE">
+            <summary>
+            transaction with status ren bike
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Config.TRANSACTION_STATUS.PAY">
+            <summary>
+            transaction with status pay
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Config.RENT_BIKE">
             <value>
              enum use to define the rent bike form status
@@ -232,10 +287,36 @@
             RENT_BIKE_INFO: rent bike form will display some information bike that use want to rent
             </remarks>
         </member>
+        <member name="F:RentalBikeApp.Config.RENT_BIKE.RENT_BIKE">
+            <summary>
+            rent bike form will display QRcode screen
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Config.RENT_BIKE.RENTING_BIKE">
+            <summary>
+            the status of rent bike form when user is renting bike
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Config.RENT_BIKE.RENT_BIKE_INFO">
+            <summary>
+            bike form will display some information bike that use want to rent
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Config.QRValid">
+            <summary>
+            use for valid qr code
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Data.ServiceAgents.BikeServices.BikeService">
             <summary>
             Provides functions to interact with bike in the database
             </summary>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.BikeService.#ctor(RentalBikeApp.Data.SQLConnecter)">
+            <summary>
+            contructor of BikeService
+            </summary>
+            <param name="connecter">The connecter</param>
         </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.BikeService.GetBikeByQRCode(System.String)">
             <summary>Get bike by QR code</summary>
@@ -264,6 +345,12 @@
             <summary>
             Provides functions to interact with electric bike in the database
             </summary>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.ElectricBikeService.#ctor(RentalBikeApp.Data.SQLConnecter)">
+            <summary>
+            contructor of ElectricBikeService
+            </summary>
+            <param name="connecter">The connecter</param>
         </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.ElectricBikeService.GetBikeByQRCode(System.String)">
             <summary>Get bike by QR code</summary>
@@ -294,10 +381,39 @@
             </summary>
             <typeparam name="TBike"></typeparam>
         </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.IBikeService`1.GetBikeByQRCode(System.String)">
+            <summary>Get bike by QR code</summary>
+            <param name="QRCode">QR Code you want to find</param>
+            <returns>Return the bike with specified QR Code or null if not found</returns>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.IBikeService`1.GetBikeById(System.Int32)">
+            <summary>Get bike by bike's id</summary>
+            <param name="id">the bike's id you want to find</param>
+            <returns>Return the bike with specified ID or null if not found</returns>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.IBikeService`1.GetListBikesInStation(System.Int32)">
+            <summary>Filters a list bike in the station base on bike category</summary>
+            <param name="stationId">The station you want to filter list of bike</param>
+            <returns>Return the list base on bike category</returns>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.IBikeService`1.UpdateBike(System.Int32,RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo)">
+            <summary>
+            Update bike information
+            </summary>
+            <param name="bikeId">The bike id</param>
+            <param name="update">The update information</param>
+            <returns>The bike information after updated</returns>
+        </member>
         <member name="T:RentalBikeApp.Data.ServiceAgents.BikeServices.TandemService">
             <summary>
             Provides functions to interact with tandem in the database
             </summary>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.TandemService.#ctor(RentalBikeApp.Data.SQLConnecter)">
+            <summary>
+            contructor of TandemService
+            </summary>
+            <param name="connecter">The connecter</param>
         </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.BikeServices.TandemService.GetBikeByQRCode(System.String)">
             <summary>Get tandem by QR code</summary>
@@ -327,11 +443,17 @@
             Provides functions to interact with card in the database
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.CardService.#ctor(RentalBikeApp.Data.SQLConnecter)">
+            <summary>
+            contructor of CardService
+            </summary>
+            <param name="connecter">The connecter</param>
+        </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.CardService.GetCardByOwner(System.String)">
             <summary>
             Get card information by owner
             </summary>
-            <param name="ownerId">the owner's id</param>
+            <param name="owner">the owner's id</param>
             <returns>The instance represent by card</returns>
         </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.CardService.GetCardByUser(System.Int32)">
@@ -345,6 +467,12 @@
             <summary>
             Provides functions to interact with station in the database
             </summary>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.StationService.#ctor(RentalBikeApp.Data.SQLConnecter)">
+            <summary>
+            contructor of StationService
+            </summary>
+            <param name="connecter">The connecter</param>
         </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.StationService.GetListStations">
             <summary>get list stations</summary>
@@ -365,10 +493,16 @@
             Provides functions to interact with transaction in the database
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.TransactionService.#ctor(RentalBikeApp.Data.SQLConnecter)">
+            <summary>
+            contructor of TransactionService
+            </summary>
+            <param name="connecter">The connecter</param>
+        </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.TransactionService.InsertNewTransaction(System.Int32,System.String,System.Int32)">
             <summary>Insert new transaction when user deposit money to rent the bike</summary>
             <param name="userId">the Id of user who want to rent the bike</param>
-            <param name="bikeId">the Id of rental bike</param>
+            <param name="qrcode">the qrcode of rental bike</param>
             <param name="deposit">the desposit money to rent the bike</param>
             <returns>Return the new transaction or null if get error</returns>
         </member>
@@ -384,7 +518,7 @@
         </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.TransactionService.UpdateTransaction(System.Int32,System.Int32,System.DateTime,System.String)">
             <summary>Update the last transaction of the user after rented bike</summary>
-            <param name="userId">the Id of user</param>
+            <param name="transactionId">the Id of transaction</param>
             <param name="rentalMoney">the rental money that user must to pay after rented bike</param>
             <param name="dateTransaction">the date of the transaction is process</param>
             <param name="note">note if necessary</param>
@@ -394,6 +528,12 @@
             <summary>
             Provides functions to interact with user in the database
             </summary>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.UserService.#ctor(RentalBikeApp.Data.SQLConnecter)">
+            <summary>
+            contructor of UserService
+            </summary>
+            <param name="connecter">The connecter</param>
         </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.UserService.UserLogin(RentalBikeApp.Entities.SQLEntities.UserInfo)">
             <summary>
@@ -421,9 +561,45 @@
             This class provider a method and option to connect SQL server
             </summary>
         </member>
+        <member name="P:RentalBikeApp.Data.SQLConnecter.SqlData">
+            <summary>
+            representing of SQL database
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Data.SQLConnecter.Option">
+            <summary>
+            provider option for configuration connect
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Data.SQLConnecter.GetInstance">
+            <summary>
+            Get only instance of connect
+            </summary>
+            <returns>The instance represeting the connection</returns>
+        </member>
         <member name="T:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest">
             <summary>
             representing the process transaction information body in request
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest.version">
+            <summary>
+            The version of API
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest.transaction">
+            <summary>
+            The transaction information
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest.appCode">
+            <summary>
+            The app code of card
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest.hashCode">
+            <summary>
+            hash for invalid information of request
             </summary>
         </member>
         <member name="T:RentalBikeApp.Entities.APIEntities.ProcessTransactionResponse">
@@ -431,9 +607,49 @@
             representing process transaction response
             </summary>
         </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionResponse.errorCode">
+            <summary>
+            error code of response
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionResponse.transaction">
+            <summary>
+            transaction information
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Entities.APIEntities.ResetResponse">
             <summary>
             representing the reset money response
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.errorCode">
+            <summary>
+            error code of response
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.cardCode">
+            <summary>
+            card code of your card
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.owner">
+            <summary>
+            owner of card
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.cvvCode">
+            <summary>
+            cvv of card
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.dateExpired">
+            <summary>
+            date expired of card
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.balance">
+            <summary>
+            balance of card
             </summary>
         </member>
         <member name="T:RentalBikeApp.Entities.APIEntities.TransactionInfo">
@@ -441,14 +657,109 @@
             representing the transaction information in body of transaction request
             </summary>
         </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.command">
+            <summary>
+            transaction command
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.cardCode">
+            <summary>
+            card code
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.owner">
+            <summary>
+            card owner
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.cvvCode">
+            <summary>
+            card cvv code
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.dateExpired">
+            <summary>
+            card date expired
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.transactionContent">
+            <summary>
+            transaction content(option)
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.amount">
+            <summary>
+            transaction amount money
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.createdAt">
+            <summary>
+            date of transaction created
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.BaseBike">
             <summary>
             this class entend for all of bike in program
             </summary>
         </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.BikeId">
+            <summary>
+            bike id
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.StationId">
+            <summary>
+            station id
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.Value">
+            <summary>
+            bike value
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.QRCode">
+            <summary>
+            bike qrcode
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.Manufacturer">
+            <summary>
+            bike manufacturer
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.BikeStatus">
+            <summary>
+            bike status
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo">
             <summary>
             this class use to save update information bike
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.StationId">
+            <summary>
+            station id contain bike
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.Value">
+            <summary>
+            bike value
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.QRCode">
+            <summary>
+            bike qrcode
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.Manufacturer">
+            <summary>
+            bike manufacturer
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.BikeStatus">
+            <summary>
+            bike status
             </summary>
         </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.Bike">
@@ -461,9 +772,64 @@
             reqresenting the cards table in database
             </summary>
         </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Card.CardId">
+            <summary>
+            card id
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Card.UserId">
+            <summary>
+            id of user has this card
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Card.Bank">
+            <summary>
+            bank publish card
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Card.CardCode">
+            <summary>
+            card code
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Card.Owners">
+            <summary>
+            owner of card
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Card.CVV">
+            <summary>
+            card cvv
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Card.DateExpired">
+            <summary>
+            date expired of card
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Card.AppCode">
+            <summary>
+            card app code
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Card.SecurityKey">
+            <summary>
+            card security key
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.ElectricBike">
             <summary>
             representing the electric bike table in database
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.ElectricBike.Powers">
+            <summary>
+            remain of power
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.ElectricBike.LicensePlate">
+            <summary>
+            the license plate of bike
             </summary>
         </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.SQLData">
@@ -471,9 +837,80 @@
             this class use to interact all of table in database
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.SQLData.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{RentalBikeApp.Entities.SQLEntities.SQLData})">
+            <summary>
+            contructor of SQLData
+            </summary>
+            <param name="option">The option for configurate SQLData</param>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.SQLData.Users">
+            <summary>
+            representing of user table
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.SQLData.Bikes">
+            <summary>
+            representing of bike table
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.SQLData.Tandems">
+            <summary>
+            representing of tandem table
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.SQLData.ElectricBikes">
+            <summary>
+            representing of electric bike table
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.SQLData.Cards">
+            <summary>
+            representing of card table
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.SQLData.Stations">
+            <summary>
+            representing of station table
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.SQLData.Transactions">
+            <summary>
+            representing of transaction table
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.Station">
             <summary>
             reqresenting the stations table in database
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Station.StationId">
+            <summary>
+            station id
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Station.NameStation">
+            <summary>
+            name of station
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Station.AddressStation">
+            <summary>
+            address of station
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Station.AreaStaion">
+            <summary>
+            area of station
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Station.NumberOfBike">
+            <summary>
+            maximute number of bike in station
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Station.Note">
+            <summary>
+            note
             </summary>
         </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.Tandem">
@@ -486,14 +923,84 @@
             reqresenting the transactions table in database
             </summary>
         </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.TransactionId">
+            <summary>
+            transaction id
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.UserId">
+            <summary>
+            user id
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.BikeQrCode">
+            <summary>
+            bike id
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.Deposit">
+            <summary>
+            deposit
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.RentalMoney">
+            <summary>
+            rental money for rent bike
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.TotalTimeRent">
+            <summary>
+            time to rent
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.DateTransaction">
+            <summary>
+            date transaction
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.Note">
+            <summary>
+            note
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.User">
             <summary>
             reqresenting the users table in database
             </summary>
         </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.User.UserId">
+            <summary>
+            user id
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.User.Username">
+            <summary>
+            username
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.User.Password">
+            <summary>
+            password
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.User.AccountStatus">
+            <summary>
+            account status
+            </summary>
+        </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.UserInfo">
             <summary>
             the information when user login
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.UserInfo.Username">
+            <summary>
+            username
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.UserInfo.Password">
+            <summary>
+            passworn
             </summary>
         </member>
         <member name="T:RentalBikeApp.InterbankService">
@@ -515,10 +1022,7 @@
         </member>
         <member name="M:RentalBikeApp.InterbankService.ResetAccount(RentalBikeApp.Entities.SQLEntities.Card)">
             <summary>This function use for test API, it reset the balance in the account</summary>
-            <param name="_cardCode"></param>
-            <param name="_owner"></param>
-            <param name="_cvvCode"></param>
-            <param name="_dateExpired"></param>
+            <param name="card">the card information</param>
             <returns>The reset response information</returns>
         </member>
         <member name="T:RentalBikeApp.Presentation.BaseForm">
@@ -528,12 +1032,12 @@
         </member>
         <member name="P:RentalBikeApp.Presentation.BaseForm.PrevForm">
             <summary>
-            representing the previous form of this form
+            representing of previous form
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.BaseForm.#ctor">
             <summary>
-            contructor of base form
+            contructor of BaseForm
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.BaseForm.Show(System.String,RentalBikeApp.Presentation.BaseForm)">
@@ -598,7 +1102,7 @@
         </member>
         <member name="F:RentalBikeApp.Presentation.BaseForm.lineLbl">
             <summary>
-            
+            draw base form
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.BaseForm.Dispose(System.Boolean)">
@@ -625,7 +1129,7 @@
         </member>
         <member name="M:RentalBikeApp.Presentation.BikeDetailForm.#ctor">
             <summary>
-            The contructor of BikeDetailForm
+            contructor of BikeDetailForm
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.BikeDetailForm.FillBikeInformation(RentalBikeApp.Entities.SQLEntities.BaseBike,System.String,System.String)">
@@ -669,7 +1173,7 @@
         </member>
         <member name="M:RentalBikeApp.Presentation.CardInformationForm.#ctor">
             <summary>
-            contructor of CardInformationform
+            contructor of CardInformationForm
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.CardInformationForm.ValidCardInfor">
@@ -718,7 +1222,7 @@
         </member>
         <member name="M:RentalBikeApp.Presentation.HomePageForm.#ctor">
             <summary>
-            the contructor of HomePageForm
+            contructor of HomePageForm
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.HomePageForm.RenderStationList(System.Windows.Forms.Panel)">
@@ -771,7 +1275,7 @@
         </member>
         <member name="F:RentalBikeApp.Presentation.HomePageForm.stationPnl">
             <summary>
-            the panel for display list of station
+            panel for display stations list
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.HomePageForm.DrawHomePage">
@@ -786,7 +1290,7 @@
         </member>
         <member name="M:RentalBikeApp.Presentation.ListBikeForm.#ctor">
             <summary>
-            
+            contructor of ListBikeForm
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.ListBikeForm.CreateButBike(System.Int32,System.String,System.Boolean,System.Int32,System.Int32,System.Int32)">
@@ -873,18 +1377,19 @@
             </summary>
             <param name="form">The specified form</param>
             <param name="rentBike">The specified rent bike status</param>
+            <param name="prevForm">the previous form</param>
         </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentingBikeForm">
             <summary>
             Fill bike information in rent bike form when rent bike status is RENTING_BIKE
             </summary>
-            <param name="bikeId">The bike id of specified bike</param>
         </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentBikeInfoForm(System.Int32,RentalBikeApp.Config.SQL.BikeCategory)">
             <summary>
             Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
             </summary>
             <param name="bikeId">The bike id of specified bike</param>
+            <param name="category">the bike category</param>
         </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.HomePageBut_Click(System.Object,System.EventArgs)">
             <summary>
@@ -975,7 +1480,7 @@
         </member>
         <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentBikeTmr">
             <summary>
-            Timer
+            timer
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.DrawRentBikeForm">
@@ -1000,7 +1505,7 @@
         </member>
         <member name="M:RentalBikeApp.Presentation.ReturnBikeForm.#ctor">
             <summary>
-            Contructor of ReturnBikeForm
+            contructor of RentBikeForm
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.ReturnBikeForm.RenderStationList(System.Windows.Forms.Panel)">
@@ -1070,7 +1575,7 @@
         </member>
         <member name="M:RentalBikeApp.Presentation.StationDetailForm.#ctor">
             <summary>
-            Contructor of StationDetailForm
+            contructor of StationDetailForm
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.StationDetailForm.FillStationDetail(RentalBikeApp.Entities.SQLEntities.Station)">
@@ -1122,6 +1627,11 @@
         <member name="T:RentalBikeApp.Presentation.TransactionInformationForm">
             <summary>
             provider to function and event to help user interact with transaction information screen
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.TransactionInformationForm.#ctor">
+            <summary>
+            contructor of TransactionInformationForm
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.TransactionInformationForm.FillTransactionInformationWhenPay(System.Int32)">

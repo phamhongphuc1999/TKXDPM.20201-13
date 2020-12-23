@@ -23,37 +23,64 @@ namespace RentalBikeApp.Entities.SQLEntities
     [Table("Cards")]
     public class Card
     {
+        /// <summary>
+        /// card id
+        /// </summary>
         [Key]
         public int CardId { get; set; }
 
+        /// <summary>
+        /// id of user has this card
+        /// </summary>
         [Required]
         [ForeignKey("User")]
         public int UserId { get; set; }
 
+        /// <summary>
+        /// bank publish card
+        /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Bank is required")]
         [StringLength(100)]
         public string Bank { get; set; }
 
+        /// <summary>
+        /// card code
+        /// </summary>
         [Required(ErrorMessage = "CardCode is required")]
         [StringLength(50)]
         public string CardCode { get; set; }
 
+        /// <summary>
+        /// owner of card
+        /// </summary>
         [Required(ErrorMessage = "Owners is required")]
         [StringLength(50)]
         public string Owners { get; set; }
 
+        /// <summary>
+        /// card cvv
+        /// </summary>
         [Required(ErrorMessage = "CVV is required")]
         [StringLength(10)]
         public string CVV { get; set; }
 
+        /// <summary>
+        /// date expired of card
+        /// </summary>
         [Required(ErrorMessage = "DateExpired is required")]
         [StringLength(10)]
         public string DateExpired { get; set; }
 
+        /// <summary>
+        /// card app code
+        /// </summary>
         [Required(ErrorMessage = "AppCode is required")]
         [StringLength(50)]
         public string AppCode { get; set; }
 
+        /// <summary>
+        /// card security key
+        /// </summary>
         [Required(ErrorMessage = "SecurityKey is required")]
         [StringLength(50)]
         public string SecurityKey { get; set; }

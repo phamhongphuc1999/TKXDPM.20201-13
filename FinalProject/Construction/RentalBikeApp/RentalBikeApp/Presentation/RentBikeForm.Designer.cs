@@ -5,30 +5,34 @@ namespace RentalBikeApp.Presentation
 {
     partial class RentBikeForm
     {
-        public Panel rentBikePnl, rentingBikePnl, rentBikeInfoPnl;
+        private Panel rentBikePnl, rentingBikePnl, rentBikeInfoPnl;
 
         /// <summary>
         /// Control in RentBikePanel
         /// </summary>
-        public TextBox rentBikeQrCodeTxt;
-        public Button rentBikeRentBut;
+        private TextBox rentBikeQrCodeTxt;
+        private Button rentBikeRentBut;
 
         /// <summary>
         /// Control in RentBikeInfoPanel
         /// </summary>
-        public Label rentBikeInfoQrCodeLbl, rentBikeInfoCategoryLbl, rentBikeInfoLicenseLbl, rentBikeInfoDepositLbl;
-        public TextBox rentBikeInfoQrCodeTxt, rentBikeInfoCategoryTxt, rentBikeInfoLicenseTxt, rentBikeInfoDepositTxt;
-        public Button rentBikeInfoDetailBut, rentBikeInfoRentThisBikeBut;
-        public Label rentBikeLineLbl;
+        private Label rentBikeInfoQrCodeLbl, rentBikeInfoCategoryLbl, rentBikeInfoLicenseLbl, rentBikeInfoDepositLbl;
+        private TextBox rentBikeInfoQrCodeTxt, rentBikeInfoCategoryTxt, rentBikeInfoLicenseTxt, rentBikeInfoDepositTxt;
+        private Button rentBikeInfoDetailBut, rentBikeInfoRentThisBikeBut;
+        private Label rentBikeLineLbl;
 
         /// <summary>
         /// Control in RentingBikePanel
         /// </summary>
         public Label rentingQrCodeLbl, rentingCategoryLbl, rentingLicenseLbl, rentingManufactureLbl;
-        public TextBox rentingQrCodeTxt, rentingCategoryTxt, rentingLicenseTxt, rentingManufactureTxt;
-        public Label rentingTimedRentLbl, rentingRemainPowerLbl, rentingTimedRentValueLbl, rentingRemainPowerValueLbl;
-        public Label rentingHorizontalLineLbl, rentingVerticalLineLbl;
-        public Button rentingSelectReceiveStationBut;
+        private TextBox rentingQrCodeTxt, rentingCategoryTxt, rentingLicenseTxt, rentingManufactureTxt;
+        private Label rentingTimedRentLbl, rentingRemainPowerLbl, rentingTimedRentValueLbl, rentingRemainPowerValueLbl;
+        private Label rentingHorizontalLineLbl, rentingVerticalLineLbl;
+        private Button rentingSelectReceiveStationBut;
+
+        /// <summary>
+        /// timer
+        /// </summary>
         public Timer rentBikeTmr;
 
         /// <summary>

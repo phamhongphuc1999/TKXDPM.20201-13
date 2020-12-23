@@ -21,16 +21,47 @@ namespace RentalBikeApp.Entities.SQLEntities
     /// </summary>
     public class SQLData: DbContext
     {
+        /// <summary>
+        /// contructor of SQLData
+        /// </summary>
+        /// <param name="option">The option for configurate SQLData</param>
         public SQLData(DbContextOptions<SQLData> option): base(option)
         {
         }
 
+        /// <summary>
+        /// representing of user table
+        /// </summary>
         public DbSet<User> Users { get; set; }
+
+        /// <summary>
+        /// representing of bike table
+        /// </summary>
         public DbSet<Bike> Bikes { get; set; }
+
+        /// <summary>
+        /// representing of tandem table
+        /// </summary>
         public DbSet<Tandem> Tandems { get; set; }
+
+        /// <summary>
+        /// representing of electric bike table
+        /// </summary>
         public DbSet<ElectricBike> ElectricBikes { get; set; }
+
+        /// <summary>
+        /// representing of card table
+        /// </summary>
         public DbSet<Card> Cards { get; set; }
+
+        /// <summary>
+        /// representing of station table
+        /// </summary>
         public DbSet<Station> Stations { get; set; }
+
+        /// <summary>
+        /// representing of transaction table
+        /// </summary>
         public DbSet<Transaction> Transactions { get; set; }
     }
 }

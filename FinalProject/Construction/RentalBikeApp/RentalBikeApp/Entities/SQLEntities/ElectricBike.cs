@@ -24,9 +24,15 @@ namespace RentalBikeApp.Entities.SQLEntities
     [Table("ElectricBike")]
     public class ElectricBike: BaseBike
     {
+        /// <summary>
+        /// remain of power
+        /// </summary>
         [Required]
         public int Powers { get; set; }
 
+        /// <summary>
+        /// the license plate of bike
+        /// </summary>
         [Required]
         public string LicensePlate { get; set; }
     }

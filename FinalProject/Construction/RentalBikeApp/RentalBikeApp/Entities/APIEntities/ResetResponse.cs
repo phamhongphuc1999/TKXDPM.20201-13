@@ -19,11 +19,34 @@ namespace RentalBikeApp.Entities.APIEntities
     /// </summary>
     public class ResetResponse
     {
+        /// <summary>
+        /// error code of response
+        /// </summary>
         public string errorCode { get; set; }
+
+        /// <summary>
+        /// card code of your card
+        /// </summary>
         public string cardCode { get; set; }
+
+        /// <summary>
+        /// owner of card
+        /// </summary>
         public string owner { get; set; }
+
+        /// <summary>
+        /// cvv of card
+        /// </summary>
         public string cvvCode { get; set; }
+
+        /// <summary>
+        /// date expired of card
+        /// </summary>
         public string dateExpired { get; set; }
+
+        /// <summary>
+        /// balance of card
+        /// </summary>
         public string balance { get; set; }
     }
 }

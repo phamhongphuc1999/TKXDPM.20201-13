@@ -9,7 +9,25 @@ namespace RentalBikeApp.Presentation
         /// Required designer variable.
         /// </summary>
         protected System.ComponentModel.IContainer components = null;
-        public Button homePageBut, rentBikeBut, prevFormBut;
+
+        /// <summary>
+        /// Home page button
+        /// </summary>
+        public Button homePageBut;
+
+        /// <summary>
+        /// rent bike button
+        /// </summary>
+        public Button rentBikeBut;
+
+        /// <summary>
+        /// previous form button
+        /// </summary>
+        public Button prevFormBut;
+
+        /// <summary>
+        /// draw base form
+        /// </summary>
         protected Label lineLbl;
         
         /// <summary>

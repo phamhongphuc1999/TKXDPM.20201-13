@@ -17,6 +17,9 @@ using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp
 {
+    /// <summary>
+    /// this class provider information for config program
+    /// </summary>
     public static class Config
     {
         /// <summary>
@@ -24,11 +27,14 @@ namespace RentalBikeApp
         /// </summary>
         public static class SQL
         {
+            /// <summary>
+            /// connect string of sql data
+            /// </summary>
             //private static string SQL_CONNECT_STRING = "Data Source=.\\MSSQLSERVER123;Initial Catalog=RentalBike;Integrated Security=True";
             // private static string SQL_CONNECT_STRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=RentalBike;Integrated Security=True;";
-            public const string SQL_CONNECT_STRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=RentalBike;Integrated Security=True";
-            //public const string SQL_CONNECT_STRING = "data source=DESKTOP-TM16V8B\\SQLEXPRESS;initial catalog=RentalBike;user id=sa;password=phamhongphuc;MultipleActiveResultSets=True;";
-          //  public const string SQL_CONNECT_STRING = "Server=tcp:ecobike.database.windows.net,1433;Initial Catalog=RentalBike;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            //public const string SQL_CONNECT_STRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=RentalBike;Integrated Security=True";
+            public const string SQL_CONNECT_STRING = "data source=DESKTOP-TM16V8B\\SQLEXPRESS;initial catalog=RentalBike;user id=sa;password=phamhongphuc;MultipleActiveResultSets=True;";
+            //public const string SQL_CONNECT_STRING = "Server=tcp:ecobike.database.windows.net,1433;Initial Catalog=RentalBike;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
             ///<value>
             ///enum define category bike
             ///</value>
@@ -39,8 +45,17 @@ namespace RentalBikeApp
             ///</remarks>
             public enum BikeCategory
             {
+                /// <summary>
+                /// representing of electric bike
+                /// </summary>
                 ELECTRIC,
+                /// <summary>
+                /// representing of tandem
+                /// </summary>
                 TANDEM,
+                /// <summary>
+                /// representing of bike
+                /// </summary>
                 BIKE
             }
         }
@@ -74,9 +89,19 @@ namespace RentalBikeApp
             ///</remarks>
             public enum COMMAND
             {
-                PAY, REFUND
+                /// <summary>
+                /// use when transaction for pay money
+                /// </summary>
+                PAY, 
+                /// <summary>
+                /// use when transaction for refund deposit
+                /// </summary>
+                REFUND
             }
 
+            /// <summary>
+            /// error code
+            /// </summary>
             public static Dictionary<string, string> ERROR_CODE = new Dictionary<string, string>()
             {
                 {"01", "Thẻ không hợp lệ" },
@@ -92,6 +117,9 @@ namespace RentalBikeApp
         ///<Value>get current rent bike form status</Value>
         public static RENT_BIKE RENT_BIKE_STATUS;
 
+        /// <summary>
+        /// the category of reantal bike
+        /// </summary>
         public static SQL.BikeCategory RENTAL_BIKE_CATEGORY;
 
         ///<Value>get current rental bike</Value>
@@ -114,7 +142,13 @@ namespace RentalBikeApp
         ///</remarks>
         public enum TRANSACTION_STATUS
         {
+            /// <summary>
+            /// transaction with status ren bike
+            /// </summary>
             RENT_BIKE,
+            /// <summary>
+            /// transaction with status pay
+            /// </summary>
             PAY
         }
 
@@ -128,11 +162,23 @@ namespace RentalBikeApp
         ///</remarks>
         public enum RENT_BIKE
         {
+            /// <summary>
+            /// rent bike form will display QRcode screen
+            /// </summary>
             RENT_BIKE,
+            /// <summary>
+            /// the status of rent bike form when user is renting bike
+            /// </summary>
             RENTING_BIKE,
+            /// <summary>
+            /// bike form will display some information bike that use want to rent
+            /// </summary>
             RENT_BIKE_INFO
         }
 
+        /// <summary>
+        /// use for valid qr code
+        /// </summary>
         public const string QRValid = @"^[0,1,2][0-9]{8}";
     }
 }

@@ -23,27 +23,51 @@ namespace RentalBikeApp.Entities.APIEntities
     [Serializable]
     public class TransactionInfo
     {
+        /// <summary>
+        /// transaction command
+        /// </summary>
         [Required]
         public string command { get; set; }
 
+        /// <summary>
+        /// card code
+        /// </summary>
         [Required]
         public string cardCode { get; set; }
 
+        /// <summary>
+        /// card owner
+        /// </summary>
         [Required]
         public string owner { get; set; }
 
+        /// <summary>
+        /// card cvv code
+        /// </summary>
         [Required]
         public string cvvCode { get; set; }
 
+        /// <summary>
+        /// card date expired
+        /// </summary>
         [Required]
         public string dateExpired { get; set; }
 
+        /// <summary>
+        /// transaction content(option)
+        /// </summary>
         [Required]
         public string transactionContent { get; set; }
 
+        /// <summary>
+        /// transaction amount money
+        /// </summary>
         [Required]
         public int amount { get; set; }
 
+        /// <summary>
+        /// date of transaction created
+        /// </summary>
         [Required]
         public string createdAt { get; set; }
     }
