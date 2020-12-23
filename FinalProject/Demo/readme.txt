@@ -1,1 +1,2 @@
 Demo video and installation guide
+Hiện nhóm em chỉ đóng gói xuất ra file .exe và chạy được trên local, khi triển khai qua máy khác thì không chạy được. Nhóm em sẽ tìm hiểu thêm và sẽ bổ sung nếu có thể để kịp bảo vệ vào buổi học tiếp ạ
