@@ -82,7 +82,7 @@ namespace RentalBikeApp.Presentation
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 500);
-            this.Icon = new Icon("../../..//icon/rental-bike.ico");
+            this.Icon = new Icon("../../../icon/rental-bike.ico");
             this.Text = textForm;
             this.Name = formName;
         }

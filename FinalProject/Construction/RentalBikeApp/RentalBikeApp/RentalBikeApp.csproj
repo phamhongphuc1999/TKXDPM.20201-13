@@ -12,11 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-<<<<<<< HEAD
-	  <Folder Include="icon\" />
-=======
 	  <Folder Include="Properties\" />
->>>>>>> 7caf0de28689c7ac87ea5070e7053230808cd458
 	</ItemGroup>
 
 </Project>

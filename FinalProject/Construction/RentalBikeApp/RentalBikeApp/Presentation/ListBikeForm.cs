@@ -89,7 +89,7 @@ namespace RentalBikeApp.Presentation
         public void FillListTandems(int stationId)
         {
             listBikePnl.Controls.Clear();
-            category = BikeCategory.TANDEM;
+            category = BikeCategory.BIKE;
             string stationName = "", stationAddress = "";
             List<Tandem> bikesList = bikeStationController.ViewListTandemInStation(stationId, ref stationName, ref stationAddress);
             int count = bikesList.Count(x => !x.BikeStatus);
@@ -112,7 +112,7 @@ namespace RentalBikeApp.Presentation
         public void FillListElectric(int stationId)
         {
             listBikePnl.Controls.Clear();
-            category = BikeCategory.ELECTRIC;
+            category = BikeCategory.BIKE;
             string stationName = "", stationAddress = "";
             List<ElectricBike> bikesList = bikeStationController.ViewListElectricBikeInStation(stationId, ref stationName, ref stationAddress);
             int count = bikesList.Count(x => !x.BikeStatus);
