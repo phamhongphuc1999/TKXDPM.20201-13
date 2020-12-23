@@ -7,8 +7,8 @@
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-	  <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
-	  <DocumentationFile>D:\Documents\TKXDPM\TKXDPM.20201-13\FinalProject\Construction\RentalBikeApp\RentalBikeApp\RentalBikeApp.xml</DocumentationFile>
+		<GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+		<DocumentationFile>D:\Documents\TKXDPM\TKXDPM.20201-13\FinalProject\Construction\RentalBikeApp\RentalBikeApp\RentalBikeApp.xml</DocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -18,7 +18,7 @@
 
 	<ItemGroup>
 
- <Folder Include="Properties\" />
+		<Folder Include="Properties\" />
 
 	</ItemGroup>
 
