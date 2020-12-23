@@ -1,4 +1,4 @@
-slide bảo vệ, SRS, SĐ, file .astah
+slide bảo vệ, SRS, SDD, file .astah
 - slide bảo vệ cần có
 -- phân công công việc
 -- 1 interaction diagram điển hình

@@ -91,4 +91,4 @@
 - Ngô Minh Quang review Task 6: Các hàm test chính xác và đầy đủ.
 - Trần Minh Quang review Task 1: Các hàm test chính xác và đầy đủ.
 - Phạm Hồng Phúc review Task 2, 5, 7: Các hàm test chính xác, test đầy đủ các trường hợp có thể xảy ra
-- Sư Hữu Vũ Quang review Task 3, 8: Các hàm test chính xác, đầy đủ các trường hợp và đưa ra được kết quả say khi chạy
+- Sư Hữu Vũ Quang review Task 3,4, 8: Các hàm test chính xác, đầy đủ các trường hợp và đưa ra được kết quả say khi chạy
