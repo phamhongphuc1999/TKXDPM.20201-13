@@ -5,10 +5,14 @@ namespace RentalBikeApp.Presentation
 {
     partial class HomePageForm
     {
+        /// <summary>
+        /// panel for display stations list
+        /// </summary>
         public Panel stationPnl;
-        public Label lineSearchLbl;
-        public TextBox searchTxt;
-        public Button searchBut, cancelSearchBut;
+
+        private Label lineSearchLbl;
+        private TextBox searchTxt;
+        private Button searchBut, cancelSearchBut;
 
         /// <summary>
         /// Initialized control in HomePageForm

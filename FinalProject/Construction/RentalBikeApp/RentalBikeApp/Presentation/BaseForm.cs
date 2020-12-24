@@ -22,8 +22,14 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class BaseForm : Form
     {
+        /// <summary>
+        /// representing of previous form
+        /// </summary>
         public BaseForm PrevForm { get; set; }
 
+        /// <summary>
+        /// contructor of BaseForm
+        /// </summary>
         public BaseForm()
         {
             InitializeComponent("BaseForm");

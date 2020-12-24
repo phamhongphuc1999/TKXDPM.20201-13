@@ -5,9 +5,9 @@ namespace RentalBikeApp.Presentation
 {
     partial class ReturnBikeForm
     {
-        public TextBox searchTxt;
-        public Panel returnBikePnl, listStationPnl;
-        public Button cancelBut, searchBut, cancelSearchBut;
+        private TextBox searchTxt;
+        private Panel returnBikePnl, listStationPnl;
+        private Button cancelBut, searchBut, cancelSearchBut;
 
         /// <summary>
         /// Initialized control in ReturnBikeForm

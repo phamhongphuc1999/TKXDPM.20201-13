@@ -8,7 +8,7 @@ namespace RentalBikeApp.Presentation
         private Panel infoPnl;
         private Label nameLbl, addressLbl, areaLbl, numberLbl, distanceLbl, timeLbl;
         private TextBox nameTxt, addressTxt, areaTxt, numberTxt, distanceTxt, timeTxt;
-        public Button bikeBut, tandemBut, electricBut;
+        private Button bikeBut, tandemBut, electricBut;
 
         /// <summary>
         /// Initialized control in StationDetailForm

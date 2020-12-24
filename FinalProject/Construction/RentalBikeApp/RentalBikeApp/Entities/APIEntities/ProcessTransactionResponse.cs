@@ -19,7 +19,14 @@ namespace RentalBikeApp.Entities.APIEntities
     /// </summary>
     public class ProcessTransactionResponse
     {
+        /// <summary>
+        /// error code of response
+        /// </summary>
         public string errorCode { get; set; }
+
+        /// <summary>
+        /// transaction information
+        /// </summary>
         public TransactionInfo transaction { get; set; }
     }
 }

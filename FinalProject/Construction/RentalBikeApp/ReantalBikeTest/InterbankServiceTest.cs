@@ -22,11 +22,17 @@ using static RentalBikeApp.Config.API_INFO;
 
 namespace ReantalBikeTest
 {
+    /// <summary>
+    /// Test for interbank service
+    /// </summary>
     [TestFixture]
     public class InterbankServiceTest
     {
         private Card testCard;
 
+        /// <summary>
+        /// setup before test
+        /// </summary>
         [SetUp]
         public void Setup()
         {

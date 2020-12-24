@@ -28,6 +28,9 @@ namespace RentalBikeApp.Presentation
         private int bikeId;
         private BikeCategory category;
 
+        /// <summary>
+        /// contructor of RentBikeForm
+        /// </summary>
         public RentBikeForm(): base()
         {
             InitializeComponent("RentBikeForm", "Rent Bike");
@@ -71,6 +74,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="form">The specified form</param>
         /// <param name="rentBike">The specified rent bike status</param>
+        /// <param name="prevForm">the previous form</param>
         public void Show(Form form, Config.RENT_BIKE rentBike, BaseForm prevForm = null)
         {
             DisplayRentBike(rentBike);
@@ -80,7 +84,6 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Fill bike information in rent bike form when rent bike status is RENTING_BIKE
         /// </summary>
-        /// <param name="bikeId">The bike id of specified bike</param>
         public void FillRentingBikeForm()
         {
             BaseBike bike = Config.RENTAL_BIKE;
@@ -111,6 +114,7 @@ namespace RentalBikeApp.Presentation
         /// Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
         /// </summary>
         /// <param name="bikeId">The bike id of specified bike</param>
+        /// <param name="category">the bike category</param>
         public void FillRentBikeInfoForm(int bikeId, Config.SQL.BikeCategory category)
         {
             this.bikeId = bikeId; this.category = category;

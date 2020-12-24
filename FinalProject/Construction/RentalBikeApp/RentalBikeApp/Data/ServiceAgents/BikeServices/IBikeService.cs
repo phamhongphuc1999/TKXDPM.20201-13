@@ -23,9 +23,27 @@ namespace RentalBikeApp.Data.ServiceAgents.BikeServices
     /// <typeparam name="TBike"></typeparam>
     public interface IBikeService<TBike>
     {
+        /// <summary>Get bike by QR code</summary>
+        /// <param name="QRCode">QR Code you want to find</param>
+        /// <returns>Return the bike with specified QR Code or null if not found</returns>
         public TBike GetBikeByQRCode(string QRCode);
+
+        /// <summary>Get bike by bike's id</summary>
+        /// <param name="id">the bike's id you want to find</param>
+        /// <returns>Return the bike with specified ID or null if not found</returns>
         public TBike GetBikeById(int id);
+
+        /// <summary>Filters a list bike in the station base on bike category</summary>
+        /// <param name="stationId">The station you want to filter list of bike</param>
+        /// <returns>Return the list base on bike category</returns>
         public List<TBike> GetListBikesInStation(int stationId);
+
+        /// <summary>
+        /// Update bike information
+        /// </summary>
+        /// <param name="bikeId">The bike id</param>
+        /// <param name="update">The update information</param>
+        /// <returns>The bike information after updated</returns>
         public TBike UpdateBike(int bikeId, UpdateBikeInfo update);
     }
 }

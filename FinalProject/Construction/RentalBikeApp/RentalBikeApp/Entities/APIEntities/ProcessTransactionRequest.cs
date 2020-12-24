@@ -21,15 +21,27 @@ namespace RentalBikeApp.Entities.APIEntities
     /// </summary>
     public class ProcessTransactionRequest
     {
+        /// <summary>
+        /// The version of API
+        /// </summary>
         [Required]
         public string version { get; set; }
 
+        /// <summary>
+        /// The transaction information
+        /// </summary>
         [Required]
         public TransactionInfo transaction { get; set; }
 
+        /// <summary>
+        /// The app code of card
+        /// </summary>
         [Required]
         public string appCode { get; set; }
 
+        /// <summary>
+        /// hash for invalid information of request
+        /// </summary>
         [Required]
         public string hashCode { get; set; }
     }

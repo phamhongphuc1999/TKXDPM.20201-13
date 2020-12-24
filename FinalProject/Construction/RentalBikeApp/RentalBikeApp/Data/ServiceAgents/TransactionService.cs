@@ -26,6 +26,10 @@ namespace RentalBikeApp.Data.ServiceAgents
     {
         private SQLConnecter connecter;
 
+        /// <summary>
+        /// contructor of TransactionService
+        /// </summary>
+        /// <param name="connecter">The connecter</param>
         public TransactionService(SQLConnecter connecter)
         {
             this.connecter = connecter;
@@ -33,7 +37,7 @@ namespace RentalBikeApp.Data.ServiceAgents
 
         /// <summary>Insert new transaction when user deposit money to rent the bike</summary>
         /// <param name="userId">the Id of user who want to rent the bike</param>
-        /// <param name="bikeId">the Id of rental bike</param>
+        /// <param name="qrcode">the qrcode of rental bike</param>
         /// <param name="deposit">the desposit money to rent the bike</param>
         /// <returns>Return the new transaction or null if get error</returns>
         public Transaction InsertNewTransaction(int userId, string qrcode, int deposit)
@@ -77,7 +81,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         }
 
         /// <summary>Update the last transaction of the user after rented bike</summary>
-        /// <param name="userId">the Id of user</param>
+        /// <param name="transactionId">the Id of transaction</param>
         /// <param name="rentalMoney">the rental money that user must to pay after rented bike</param>
         /// <param name="dateTransaction">the date of the transaction is process</param>
         /// <param name="note">note if necessary</param>

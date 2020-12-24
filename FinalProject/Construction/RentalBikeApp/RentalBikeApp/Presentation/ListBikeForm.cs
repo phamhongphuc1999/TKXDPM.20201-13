@@ -30,6 +30,9 @@ namespace RentalBikeApp.Presentation
     {
         private BikeCategory category;
 
+        /// <summary>
+        /// contructor of ListBikeForm
+        /// </summary>
         public ListBikeForm(): base()
         {
             InitializeComponent("ListBikesForm", "List Bikes");

@@ -24,6 +24,9 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class CardInformationForm : BaseForm
     {
+        /// <summary>
+        /// contructor of CardInformationForm
+        /// </summary>
         public CardInformationForm(): base()
         {
             InitializeComponent("CardInformationForm", "Card Information");
