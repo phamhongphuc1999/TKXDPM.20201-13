@@ -85,7 +85,7 @@ namespace RentalBikeApp.Presentation
                 return;
             }
             transactionInformationForm.FillTransactionInformationWhenRentBike();
-            transactionInformationForm.Show(this);
+            transactionInformationForm.Show(this, this);
             this.Hide();
         }
 

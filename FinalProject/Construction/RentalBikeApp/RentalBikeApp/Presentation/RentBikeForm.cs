@@ -254,7 +254,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentingSelectReceiveStationBut_Click(object sender, EventArgs e)
         {
-            returnBikeForm.Show(this);
+            returnBikeForm.Show(this, this);
             this.Hide();
         }
         #endregion
