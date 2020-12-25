@@ -254,9 +254,6 @@
             error code
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.RENT_BIKE_STATUS">
-            <Value>get current rent bike form status</Value>
-        </member>
         <member name="F:RentalBikeApp.Config.RENTAL_BIKE_CATEGORY">
             <summary>
             the category of reantal bike
@@ -290,31 +287,6 @@
         <member name="F:RentalBikeApp.Config.TRANSACTION_STATUS.PAY">
             <summary>
             transaction with status pay
-            </summary>
-        </member>
-        <member name="T:RentalBikeApp.Config.RENT_BIKE">
-            <value>
-             enum use to define the rent bike form status
-            </value>
-            <remarks>
-            RENT_BIKE: rent bike form will display QRcode screen
-            RENTING_BIKE: the status of rent bike form when user is renting bike
-            RENT_BIKE_INFO: rent bike form will display some information bike that use want to rent
-            </remarks>
-        </member>
-        <member name="F:RentalBikeApp.Config.RENT_BIKE.RENT_BIKE">
-            <summary>
-            rent bike form will display QRcode screen
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Config.RENT_BIKE.RENTING_BIKE">
-            <summary>
-            the status of rent bike form when user is renting bike
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Config.RENT_BIKE.RENT_BIKE_INFO">
-            <summary>
-            bike form will display some information bike that use want to rent
             </summary>
         </member>
         <member name="F:RentalBikeApp.Config.QRValid">
@@ -727,6 +699,16 @@
             station id
             </summary>
         </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.DateRent">
+            <summary>
+            the date begin rent bike
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.Images">
+            <summary>
+            the images of bike
+            </summary>
+        </member>
         <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.Value">
             <summary>
             bike value
@@ -747,10 +729,25 @@
             bike status
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor">
+            <summary>
+            Contructor of BaseBike
+            </summary>
+        </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor(System.Int32,System.Int32,System.String,System.String)">
             <summary>
             Contructor of BaseBike
             </summary>
+            <param name="stationId">The id of station contain bike</param>
+            <param name="value">The value of bike</param>
+            <param name="qrcode">The qrcode of bike</param>
+            <param name="manufacturer">The manufacture of bike</param>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor(System.Int32,System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Contructor of BaseBike
+            </summary>
+            <param name="bikeId">id of base bike</param>
             <param name="stationId">The id of station contain bike</param>
             <param name="value">The value of bike</param>
             <param name="qrcode">The qrcode of bike</param>
@@ -771,6 +768,11 @@
         <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.StationId">
             <summary>
             station id contain bike
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.Images">
+            <summary>
+            Images of bike
             </summary>
         </member>
         <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.Value">
@@ -796,6 +798,11 @@
         <member name="T:RentalBikeApp.Entities.SQLEntities.Bike">
             <summary>
             representing the bikes table in database
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Bike.#ctor">
+            <summary>
+            Contructor of Bike
             </summary>
         </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.Bike.#ctor(System.Int32,System.Int32,System.String,System.String)">
@@ -870,6 +877,11 @@
         <member name="P:RentalBikeApp.Entities.SQLEntities.ElectricBike.LicensePlate">
             <summary>
             the license plate of bike
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.ElectricBike.#ctor">
+            <summary>
+            Contructor of ElectricBike
             </summary>
         </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.ElectricBike.#ctor(System.Int32,System.Int32,System.String,System.String,System.Int32,System.String)">
@@ -967,6 +979,11 @@
         <member name="T:RentalBikeApp.Entities.SQLEntities.Tandem">
             <summary>
             reqresenting the tandem table in database
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Tandem.#ctor">
+            <summary>
+            Contructor of Tandem
             </summary>
         </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.Tandem.#ctor(System.Int32,System.Int32,System.String,System.String)">
@@ -1255,6 +1272,13 @@
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
         </member>
+        <member name="M:RentalBikeApp.Presentation.BikeDetailForm.ViewRentingBut_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handle click event ViewRentingBut
+            </summary>
+            <param name="sender">The object send event</param>
+            <param name="e">An EventArgs</param>
+        </member>
         <member name="M:RentalBikeApp.Presentation.BikeDetailForm.DrawBikeDetail">
             <summary>
             Initialized control in BikeDetailForm
@@ -1459,20 +1483,6 @@
             contructor of RentBikeForm
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.DisplayRentBike(RentalBikeApp.Config.RENT_BIKE)">
-            <summary>
-            Display rent bike form base on specified rent bike status
-            </summary>
-            <param name="rentBike">The specified rent bike status</param>
-        </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.Show(System.Windows.Forms.Form,RentalBikeApp.Config.RENT_BIKE,RentalBikeApp.Presentation.BaseForm)">
-            <summary>
-            Show rent bike form base on specified rent bike status and specified form's location
-            </summary>
-            <param name="form">The specified form</param>
-            <param name="rentBike">The specified rent bike status</param>
-            <param name="prevForm">the previous form</param>
-        </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentingBikeForm">
             <summary>
             Fill bike information in rent bike form when rent bike status is RENTING_BIKE
@@ -1484,6 +1494,11 @@
             </summary>
             <param name="bikeId">The bike id of specified bike</param>
             <param name="category">the bike category</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.DisplayRentbikeQrcode">
+            <summary>
+            display screen to user fill rental bike qrcode
+            </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.HomePageBut_Click(System.Object,System.EventArgs)">
             <summary>
@@ -1526,51 +1541,6 @@
             </summary>
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentBikeQrCodeTxt">
-            <summary>
-            Control in RentBikePanel
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentBikeInfoQrCodeLbl">
-            <summary>
-            Control in RentBikeInfoPanel
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentBikeInfoCategoryLbl">
-            <summary>
-            Control in RentBikeInfoPanel
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentBikeInfoLicenseLbl">
-            <summary>
-            Control in RentBikeInfoPanel
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentBikeInfoDepositLbl">
-            <summary>
-            Control in RentBikeInfoPanel
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentingQrCodeLbl">
-            <summary>
-            Control in RentingBikePanel
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentingCategoryLbl">
-            <summary>
-            Control in RentingBikePanel
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentingLicenseLbl">
-            <summary>
-            Control in RentingBikePanel
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentingManufactureLbl">
-            <summary>
-            Control in RentingBikePanel
-            </summary>
         </member>
         <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentBikeTmr">
             <summary>

@@ -21,7 +21,6 @@ using static RentalBikeApp.Program;
 using static RentalBikeApp.Config.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Bussiness;
-using System.Security.Cryptography.X509Certificates;
 
 namespace RentalBikeApp.Presentation
 {
@@ -79,7 +78,7 @@ namespace RentalBikeApp.Presentation
             string stationName = "", stationAddress = "";
             bikes = bikeStationController.ViewListBikeInStation(stationId, ref stationName, ref stationAddress).Select(bike =>
             {
-                return new BaseBike(bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
+                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
             }).ToList();
             int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp thường\nCòn lại {count} xe";
@@ -105,7 +104,7 @@ namespace RentalBikeApp.Presentation
             string stationName = "", stationAddress = "";
             bikes = bikeStationController.ViewListTandemInStation(stationId, ref stationName, ref stationAddress).Select(bike =>
             {
-                return new BaseBike(bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
+                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
             }).ToList();
             int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp đôi\nCòn lại {count} xe";
@@ -113,7 +112,7 @@ namespace RentalBikeApp.Presentation
             stationRtb.Text = $"{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
-            foreach (Tandem bike in bikes)
+            foreach (BaseBike bike in bikes)
             {
                 CreateButBike(bike.BikeId, bike.QRCode, bike.BikeStatus, X, Y, count1);
                 Y += 55; count1++;
@@ -131,7 +130,7 @@ namespace RentalBikeApp.Presentation
             string stationName = "", stationAddress = "";
             bikes = bikeStationController.ViewListElectricBikeInStation(stationId, ref stationName, ref stationAddress).Select(bike =>
             {
-                return new BaseBike(bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
+                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
             }).ToList();
             int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp điện\nCòn lại {count} xe";
@@ -139,7 +138,7 @@ namespace RentalBikeApp.Presentation
             stationRtb.Text = "{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
-            foreach (ElectricBike bike in bikes)
+            foreach (BaseBike bike in bikes)
             {
                 CreateButBike(bike.BikeId, bike.QRCode, bike.BikeStatus, X, Y, count1);
                 Y += 55; count1++;
@@ -175,7 +174,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
-            rentBikeForm.Show(this, Config.RENT_BIKE_STATUS, this);
+            rentBikeForm.DisplayRentbikeQrcode();
+            rentBikeForm.Show(this, this);
             this.Hide();
         }
 

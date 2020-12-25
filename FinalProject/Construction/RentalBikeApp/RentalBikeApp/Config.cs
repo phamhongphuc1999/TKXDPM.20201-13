@@ -114,9 +114,6 @@ namespace RentalBikeApp
             };
         }
 
-        ///<Value>get current rent bike form status</Value>
-        public static RENT_BIKE RENT_BIKE_STATUS;
-
         /// <summary>
         /// the category of reantal bike
         /// </summary>
@@ -150,30 +147,6 @@ namespace RentalBikeApp
             /// transaction with status pay
             /// </summary>
             PAY
-        }
-
-        ///<value>
-        /// enum use to define the rent bike form status
-        ///</value>
-        ///<remarks>
-        ///RENT_BIKE: rent bike form will display QRcode screen
-        ///RENTING_BIKE: the status of rent bike form when user is renting bike
-        ///RENT_BIKE_INFO: rent bike form will display some information bike that use want to rent
-        ///</remarks>
-        public enum RENT_BIKE
-        {
-            /// <summary>
-            /// rent bike form will display QRcode screen
-            /// </summary>
-            RENT_BIKE,
-            /// <summary>
-            /// the status of rent bike form when user is renting bike
-            /// </summary>
-            RENTING_BIKE,
-            /// <summary>
-            /// bike form will display some information bike that use want to rent
-            /// </summary>
-            RENT_BIKE_INFO
         }
 
         /// <summary>

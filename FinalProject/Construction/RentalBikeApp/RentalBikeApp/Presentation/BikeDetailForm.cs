@@ -13,7 +13,6 @@
 // ------------------------------------------------------
 
 using System;
-using System.Windows.Forms;
 using static RentalBikeApp.Program;
 using static RentalBikeApp.Config.SQL;
 using RentalBikeApp.Entities.SQLEntities;
@@ -49,15 +48,20 @@ namespace RentalBikeApp.Presentation
             stationRtb.Text = string.Format("{0}\n{1}", stationName, stationAddress);
             qrCodeTxt.Text = bike.QRCode;
             manufactureTxt.Text = bike.Manufacturer;
+            avatarPb.Image = Image.FromFile(bike.Images);
             if (bike.BikeStatus)
             {
                 statusBikeLbl.Text = "Renting";
                 statusBikeLbl.BackColor = Color.Red;
+                viewRentingBut.Visible = true;
+                rentThisBikeBut.Visible = false;
             }
             else
             {
                 statusBikeLbl.Text = "Availiable";
                 statusBikeLbl.BackColor = Color.Green;
+                viewRentingBut.Visible = false;
+                rentThisBikeBut.Visible = true;
             }
             if (bike is Bike)
             {
@@ -91,6 +95,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
+            rentBikeForm.DisplayRentbikeQrcode();
             rentBikeForm.Show(this, this);
             this.Hide();
         }
@@ -114,22 +119,20 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentThisBikeBut_Click(object sender, EventArgs e)
         {
-            if(statusBikeLbl.BackColor == Color.Red)
-            {
-                MessageBox.Show("Xe đang được thuê, vui lòng chọn xe khác", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if(Config.RENT_BIKE_STATUS != Config.RENT_BIKE.RENTING_BIKE)
-            {
-                rentBikeForm.FillRentBikeInfoForm(this.bikeId, this.category);
-                rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO, this);
-            }
-            else
-            {
-                rentBikeForm.FillRentingBikeForm();
-                rentBikeForm.Show(this, Config.RENT_BIKE.RENTING_BIKE, this);
-            }
+            rentBikeForm.FillRentBikeInfoForm(this.bikeId, this.category);
+            rentBikeForm.Show(this, this);
             this.Hide();
+        }
+
+        /// <summary>
+        /// Handle click event ViewRentingBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
+        private void ViewRentingBut_Click(object sender, EventArgs e)
+        {
+            rentBikeForm.FillRentingBikeForm();
+            rentBikeForm.Show(this, this);
         }
     }
 }

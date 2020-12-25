@@ -90,6 +90,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
+            rentBikeForm.DisplayRentbikeQrcode();
             rentBikeForm.Show(this, this);
             this.Hide();
         }

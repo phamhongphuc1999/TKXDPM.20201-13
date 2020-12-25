@@ -86,6 +86,9 @@ namespace RentalBikeApp.Entities.SQLEntities
             this.UserId = userId;
             this.BikeQrCode = bikeQrCode;
             this.Deposit = deposit;
+            this.RentalMoney = 0;
+            this.TotalTimeRent = 0;
+            this.DateTransaction = DateTime.Now;
         }
 
         /// <summary>

@@ -18,6 +18,7 @@ using static RentalBikeApp.Program;
 using static RentalBikeApp.Config.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Bussiness;
+using System.Drawing;
 
 namespace RentalBikeApp.Presentation
 {
@@ -44,48 +45,6 @@ namespace RentalBikeApp.Presentation
             DrawRentBikeInfoForm();
             DrawRentingBikeForm();
             DrawRentBikeForm();
-
-            Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
-            DisplayRentBike(Config.RENT_BIKE_STATUS);
-        }
-
-        /// <summary>
-        /// Display rent bike form base on specified rent bike status
-        /// </summary>
-        /// <param name="rentBike">The specified rent bike status</param>
-        private void DisplayRentBike(Config.RENT_BIKE rentBike)
-        {
-            if(rentBike == Config.RENT_BIKE.RENT_BIKE)
-            {
-                rentBikePnl.Visible = true;
-                rentingBikePnl.Visible = false;
-                rentBikeInfoPnl.Visible = false;
-                rentBikeQrCodeTxt.Text = "";
-            }
-            else if(rentBike == Config.RENT_BIKE.RENTING_BIKE)
-            {
-                rentBikePnl.Visible = false;
-                rentingBikePnl.Visible = true;
-                rentBikeInfoPnl.Visible = false;
-            }
-            else
-            {
-                rentBikePnl.Visible = false;
-                rentingBikePnl.Visible = false;
-                rentBikeInfoPnl.Visible = true;
-            }
-        }
-
-        /// <summary>
-        /// Show rent bike form base on specified rent bike status and specified form's location
-        /// </summary>
-        /// <param name="form">The specified form</param>
-        /// <param name="rentBike">The specified rent bike status</param>
-        /// <param name="prevForm">the previous form</param>
-        public void Show(Form form, Config.RENT_BIKE rentBike, BaseForm prevForm = null)
-        {
-            DisplayRentBike(rentBike);
-            this.Show(form, prevForm);
         }
 
         /// <summary>
@@ -94,7 +53,11 @@ namespace RentalBikeApp.Presentation
         public void FillRentingBikeForm()
         {
             BaseBike bike = Config.RENTAL_BIKE;
+            rentBikePnl.Visible = false;
+            rentingBikePnl.Visible = true;
+            rentBikeInfoPnl.Visible = false;
             rentingQrCodeTxt.Text = bike.QRCode;
+            rentingAvatarPb.Image = Image.FromFile(bike.Images);
             if(bike is Bike)
             {
                 rentingCategoryTxt.Text = "Xe đạp thường";
@@ -125,6 +88,9 @@ namespace RentalBikeApp.Presentation
         public void FillRentBikeInfoForm(int bikeId, Config.SQL.BikeCategory category)
         {
             this.bikeId = bikeId; this.category = category;
+            rentBikePnl.Visible = false;
+            rentingBikePnl.Visible = false;
+            rentBikeInfoPnl.Visible = true;
             BaseBike bike = bikeStationController.ViewBikeDetail(bikeId, category);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
             int deposit = 40 * bike.Value / 100;
@@ -145,6 +111,17 @@ namespace RentalBikeApp.Presentation
                 rentBikeInfoLicenseTxt.Text = "Không có thông tin";
             }
             rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", deposit);
+        }
+
+        /// <summary>
+        /// display screen to user fill rental bike qrcode
+        /// </summary>
+        public void DisplayRentbikeQrcode()
+        {
+            rentBikePnl.Visible = true;
+            rentingBikePnl.Visible = false;
+            rentBikeInfoPnl.Visible = false;
+            rentBikeQrCodeTxt.Text = "";
         }
 
         /// <summary>

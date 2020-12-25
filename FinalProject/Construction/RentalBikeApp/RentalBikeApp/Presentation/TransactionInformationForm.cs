@@ -86,7 +86,6 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         private async void PermitButWhenRentBike()
         {
-            Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENTING_BIKE;
             ProcessTransactionResponse result = await InterbankService.ProcessTransaction(Config.CARD_INFO, Config.API_INFO.COMMAND.PAY, this.deposit, DateTime.Now,
                 noteTxt.Text == "" ? "Transaction content" : noteTxt.Text);
             string error = result.errorCode;
@@ -101,7 +100,7 @@ namespace RentalBikeApp.Presentation
                 this.transactionId = transaction.TransactionId;
                 rentBikeForm.FillRentingBikeForm();
                 rentBikeController.BeginRentingBike(Config.RENTAL_BIKE.BikeId);
-                rentBikeForm.Show(this, Config.RENT_BIKE_STATUS);
+                rentBikeForm.Show(this);
             }
             else if (error == "01" || error == "02" || error == "05")
             {
@@ -121,7 +120,6 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         private async void PermitButWhenPay()
         {
-            Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
             ProcessTransactionResponse response = null;
             if (this.deposit < this.rentalMoney)
                 response = await InterbankService.ProcessTransaction(Config.CARD_INFO, API_INFO.COMMAND.PAY, this.rentalMoney - this.deposit,
@@ -147,8 +145,9 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
+            rentBikeForm.DisplayRentbikeQrcode();
             rentBikeForm.Show(this, this);
-            this.Show();
+            this.Hide();
         }
 
         /// <summary>
