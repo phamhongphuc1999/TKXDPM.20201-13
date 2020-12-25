@@ -91,8 +91,11 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected virtual void PrevFormBut_Click(object sender, System.EventArgs e)
         {
-            this.Hide();
-            this.PrevForm.Show(this);
+            if(this.PrevForm != null)
+            {
+                this.Hide();
+                this.PrevForm.Show(this);
+            }
         }
 
         /// <summary>
@@ -102,11 +105,6 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected virtual void BaseForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(Config.RENT_BIKE_STATUS == Config.RENT_BIKE.RENTING_BIKE)
-            {
-                MessageBox.Show("Vui lòng trả xe trước khi thoát chương trình", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
             DialogResult result = MessageBox.Show("Bạn có chắc muốn thoát chương trình?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (result == DialogResult.Cancel) e.Cancel = true;
         }

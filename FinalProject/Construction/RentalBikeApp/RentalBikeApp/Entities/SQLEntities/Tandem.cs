@@ -12,8 +12,6 @@
 //
 // ------------------------------------------------------
 
-using System;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RentalBikeApp.Entities.SQLEntities
@@ -24,5 +22,18 @@ namespace RentalBikeApp.Entities.SQLEntities
     [Table("Tandem")]
     public class Tandem: BaseBike
     {
+        /// <summary>
+        /// Contructor of Tandem
+        /// </summary>
+        public Tandem() : base() { }
+
+        /// <summary>
+        /// Contructor of Tandem
+        /// </summary>
+        /// <param name="stationId">The id of station contain bike</param>
+        /// <param name="value">The value of bike</param>
+        /// <param name="qrcode">The qrcode of bike</param>
+        /// <param name="manufacturer">The manufacture of bike</param>
+        public Tandem(int stationId, int value, string qrcode, string manufacturer) : base(stationId, value, qrcode, manufacturer) { }
     }
 }

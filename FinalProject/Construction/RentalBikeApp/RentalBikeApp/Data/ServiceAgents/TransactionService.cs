@@ -49,15 +49,7 @@ namespace RentalBikeApp.Data.ServiceAgents
             else if (qrcode[0] == '1') checkBike = connecter.SqlData.Tandems.SingleOrDefault(x => x.QRCode == qrcode);
             else if (qrcode[0] == '2') checkBike = connecter.SqlData.ElectricBikes.SingleOrDefault(x => x.QRCode == qrcode);
             if (checkBike == null) return null;
-            Transaction transaction = new Transaction()
-            {
-                UserId = userId,
-                BikeQrCode = qrcode,
-                Deposit = deposit,
-                RentalMoney = 0,
-                TotalTimeRent = 0,
-                DateTransaction = DateTime.Now
-            };
+            Transaction transaction = new Transaction(userId, qrcode, deposit);
             connecter.SqlData.Transactions.Add(transaction);
             int check = connecter.SqlData.SaveChanges();
             if (check > 0) return transaction;
@@ -90,9 +82,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         {
             Transaction transaction = connecter.SqlData.Transactions.Find(transactionId);
             if (transaction == null) return false;
-            transaction.RentalMoney = rentalMoney;
-            transaction.DateTransaction = dateTransaction;
-            if (note != "") transaction.Note = note;
+            transaction.UpdateTransaction(rentalMoney, 0, note);
             int check = connecter.SqlData.SaveChanges();
             return (check > 0);
         }

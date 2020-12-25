@@ -56,12 +56,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         {
             User checkUser = connecter.SqlData.Users.SingleOrDefault(x => x.Username == newUser.Username);
             if (checkUser != null) return null;
-            User user = new User()
-            {
-                Password = newUser.Password,
-                Username = newUser.Username,
-                AccountStatus = "enable"
-            };
+            User user = new User(newUser.Username, newUser.Password);
             connecter.SqlData.Users.Add(user);
             int check = connecter.SqlData.SaveChanges();
             if (check > 0) return user;

@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using static RentalBikeApp.Program;
 using System.Collections.Generic;
 using RentalBikeApp.Entities.SQLEntities;
+using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp.Presentation
 {
@@ -28,12 +29,22 @@ namespace RentalBikeApp.Presentation
     public partial class ReturnBikeForm : BaseForm
     {
         private List<Station> stationList;
+        private BikeStationController bikeStationController;
+        private ReturnBikeController returnBikeController;
+
+        /// <summary>
+        /// current rental bike
+        /// </summary>
+        public BaseBike rentalBike { get; set; }
 
         /// <summary>
         /// contructor of RentBikeForm
         /// </summary>
         public ReturnBikeForm(): base()
         {
+            bikeStationController = new BikeStationController();
+            returnBikeController = new ReturnBikeController();
+
             stationList = bikeStationController.ViewListStation();
 
             InitializeComponent("ReturnBikeForm", "Return Bike");
@@ -45,7 +56,7 @@ namespace RentalBikeApp.Presentation
         /// Get station in the database and display in specified panel
         /// </summary>
         /// <param name="pnl">The specified panel</param>
-        public void RenderStationList(Panel pnl)
+        private void RenderStationList(Panel pnl)
         {
             pnl.Controls.Clear();
             int X = 20, Y = 5;
@@ -71,7 +82,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="stationList">The specified station list to display</param>
         /// <param name="pnl">The specified panel to display station list</param>
-        public void RenderStationList(List<Station> stationList, Panel pnl)
+        private void RenderStationList(List<Station> stationList, Panel pnl)
         {
             this.stationList = stationList;
             RenderStationList(pnl);
@@ -84,6 +95,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
+            rentBikeForm.DisplayRentbikeQrcode();
             rentBikeForm.Show(this, this);
             this.Hide();
         }
@@ -118,8 +130,8 @@ namespace RentalBikeApp.Presentation
                     MessageBox.Show($"Bãi đỗ xe: {but.Text} đã đầy, vui lòng chọn bãi khác để trả xe", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                rentBikeForm.rentBikeTmr.Stop();
-                transactionInformationForm.FillTransactionInformationWhenPay(stationId);
+                rentBikeForm.StopTimer();
+                transactionInformationForm.FillTransactionInformationWhenPay(stationId, this.rentalBike);
                 transactionInformationForm.Show(this);
                 this.Hide();
             }

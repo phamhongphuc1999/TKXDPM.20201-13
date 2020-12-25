@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
 using RentalBikeApp.Entities.SQLEntities;
+using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp.Presentation
 {
@@ -28,21 +29,21 @@ namespace RentalBikeApp.Presentation
     public partial class HomePageForm : BaseForm
     {
         private List<Station> stationList;
+        private BikeStationController bikeStationController;
 
         /// <summary>
         /// contructor of HomePageForm
         /// </summary>
         public HomePageForm(): base()
         {
-            stationList = bikeStationController.ViewListStation();
+            bikeStationController = new BikeStationController();
 
+            stationList = bikeStationController.ViewListStation();
+            
             InitializeComponent("HomePageForm", "Home Page");
             DrawHomePage();
             RenderStationList(this.stationPnl);
             this.StartPosition = FormStartPosition.CenterScreen;
-
-            Config.RENT_BIKE_STATUS = Config.RENT_BIKE.RENT_BIKE;
-            prevFormBut.Enabled = false;
         }
 
         /// <summary>
@@ -102,7 +103,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
-            rentBikeForm.Show(this, Config.RENT_BIKE_STATUS, this);
+            rentBikeForm.DisplayRentbikeQrcode();
+            rentBikeForm.Show(this, this);
             this.Hide();
         }
 

@@ -16,6 +16,7 @@ using static RentalBikeApp.Program;
 using System;
 using System.Windows.Forms;
 using RentalBikeApp.Entities.SQLEntities;
+using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp.Presentation
 {
@@ -24,11 +25,21 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class CardInformationForm : BaseForm
     {
+        private Card card;
+        private RentBikeController rentBikeController;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public BaseBike bike { get; set; }
+
         /// <summary>
         /// contructor of CardInformationForm
         /// </summary>
         public CardInformationForm(): base()
         {
+            rentBikeController = new RentBikeController();
+
             InitializeComponent("CardInformationForm", "Card Information");
             DrawCardInformation();
         }
@@ -45,6 +56,7 @@ namespace RentalBikeApp.Presentation
             if (card == null) return (false, "Thông tin sai hoặc thẻ không tồn tại");
             if(card.CardCode != cardCodeTxt.Text || card.SecurityKey != securityCodeTxt.Text)
                 return (false, "Thông tin sai hoặc thẻ không tồn tại");
+            this.card = card;
             return (true, "");
         }
 
@@ -55,6 +67,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected override void RentBikeBut_Click(object sender, EventArgs e)
         {
+            rentBikeForm.DisplayRentbikeQrcode();
             rentBikeForm.Show(this, this);
             this.Hide();
         }
@@ -84,7 +97,7 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show(info.Item2, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            transactionInformationForm.FillTransactionInformationWhenRentBike();
+            transactionInformationForm.FillTransactionInformationWhenRentBike(bike, card);
             transactionInformationForm.Show(this, this);
             this.Hide();
         }
@@ -96,7 +109,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void CancelBut_Click(object sender, EventArgs e)
         {
-            rentBikeForm.Show(this, Config.RENT_BIKE.RENT_BIKE_INFO);
+            rentBikeForm.Show(this);
             this.Hide();
         }
     }

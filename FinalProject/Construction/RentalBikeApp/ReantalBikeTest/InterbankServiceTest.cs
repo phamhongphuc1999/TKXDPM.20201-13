@@ -38,13 +38,13 @@ namespace ReantalBikeTest
         {
             testCard = new Card
             {
-                CardId = 1, UserId = 1,
-                CardCode = "118609_group13_2020",
-                Owners = "Group 13",
-                CVV = "474", Bank = "Bank 2",
-                DateExpired = "1125",
-                AppCode = "Bi3TiyT5q00=",
-                SecurityKey = "B92s318KCwI="
+                //CardId = 1, UserId = 1,
+                //CardCode = "118609_group13_2020",
+                //Owners = "Group 13",
+                //CVV = "474", Bank = "Bank 2",
+                //DateExpired = "1125",
+                //AppCode = "Bi3TiyT5q00=",
+                //SecurityKey = "B92s318KCwI="
             };
         }
 
