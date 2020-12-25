@@ -9,6 +9,11 @@
             Provider flow for view detail bike and view detail station
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Bussiness.BikeStationController.#ctor">
+            <summary>
+            Contructor of BikeStationController
+            </summary>
+        </member>
         <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewBikeDetail(System.String,System.String@,System.String@)">
             <summary>
             Get bike information
@@ -81,6 +86,11 @@
             Provider flow for rent bike 
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Bussiness.RentBikeController.#ctor">
+            <summary>
+            contructor of RentBikeController
+            </summary>
+        </member>
         <member name="M:RentalBikeApp.Bussiness.RentBikeController.SubmitQrCode(System.String)">
             <summary>
             Get bike by qr code
@@ -121,6 +131,11 @@
         <member name="T:RentalBikeApp.Bussiness.ReturnBikeController">
             <summary>
             Provider flow for return bike
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.#ctor">
+            <summary>
+            contructor of ReturnBikeController
             </summary>
         </member>
         <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.CalculateFee(System.String,RentalBikeApp.Config.SQL.BikeCategory)">
@@ -732,6 +747,22 @@
             bike status
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Contructor of BaseBike
+            </summary>
+            <param name="stationId">The id of station contain bike</param>
+            <param name="value">The value of bike</param>
+            <param name="qrcode">The qrcode of bike</param>
+            <param name="manufacturer">The manufacture of bike</param>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.UpdateBike(RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo)">
+            <summary>
+            Update bike information
+            </summary>
+            <param name="update">the update bike information</param>
+            <returns></returns>
+        </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo">
             <summary>
             this class use to save update information bike
@@ -766,6 +797,15 @@
             <summary>
             representing the bikes table in database
             </summary>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Bike.#ctor(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Contructor of Bike
+            </summary>
+            <param name="stationId">The id of station contain bike</param>
+            <param name="value">The value of bike</param>
+            <param name="qrcode">The qrcode of bike</param>
+            <param name="manufacturer">The manufacture of bike</param>
         </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.Card">
             <summary>
@@ -831,6 +871,17 @@
             <summary>
             the license plate of bike
             </summary>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.ElectricBike.#ctor(System.Int32,System.Int32,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            Contructor of ElectricBike
+            </summary>
+            <param name="stationId">The id of station contain bike</param>
+            <param name="value">The value of bike</param>
+            <param name="qrcode">The qrcode of bike</param>
+            <param name="manufacturer">The manufacture of bike</param>
+            <param name="power">The remain power of bike</param>
+            <param name="licensePlate">The license of bike</param>
         </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.SQLData">
             <summary>
@@ -918,6 +969,15 @@
             reqresenting the tandem table in database
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Tandem.#ctor(System.Int32,System.Int32,System.String,System.String)">
+            <summary>
+            Contructor of Tandem
+            </summary>
+            <param name="stationId">The id of station contain bike</param>
+            <param name="value">The value of bike</param>
+            <param name="qrcode">The qrcode of bike</param>
+            <param name="manufacturer">The manufacture of bike</param>
+        </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.Transaction">
             <summary>
             reqresenting the transactions table in database
@@ -963,6 +1023,33 @@
             note
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Transaction.#ctor(System.Int32,System.String,System.Int32)">
+            <summary>
+            Contructor of transaction
+            </summary>
+            <param name="userId">The id of user who process transaction</param>
+            <param name="bikeQrCode">The qr code of rental bike</param>
+            <param name="deposit">The deposit of transaction</param>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Transaction.UpdateTransaction(System.Int32,System.Int32,System.String,System.DateTime)">
+            <summary>
+            Update transaction
+            </summary>
+            <param name="rentalMoney">The rental money of transaction</param>
+            <param name="totalTimeRent">The total time rent of transaction</param>
+            <param name="note">The note of transaction</param>
+            <param name="date">The date process transaction</param>
+            <returns>The transaction before updated</returns>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Transaction.UpdateTransaction(System.Int32,System.Int32,System.String)">
+            <summary>
+            Update transaction
+            </summary>
+            <param name="rentalMoney">The rental money of transaction</param>
+            <param name="totalTimeRent">The total time rent of transaction</param>
+            <param name="note">The note of transaction</param>
+            <returns>The transaction before updated</returns>
+        </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.User">
             <summary>
             reqresenting the users table in database
@@ -987,6 +1074,13 @@
             <summary>
             account status
             </summary>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.User.#ctor(System.String,System.String)">
+            <summary>
+            contructor of User
+            </summary>
+            <param name="username">The username</param>
+            <param name="password">The password</param>
         </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.UserInfo">
             <summary>

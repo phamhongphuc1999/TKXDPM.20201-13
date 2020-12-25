@@ -27,38 +27,38 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// station id
         /// </summary>
         [Key]
-        public int StationId { get; set; }
+        public int StationId { get; private set; }
 
         /// <summary>
         /// name of station
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "NameStation is required")]
         [StringLength(200)]
-        public string NameStation { get; set; }
+        public string NameStation { get; private set; }
 
         /// <summary>
         /// address of station
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "AddressStation is required")]
         [StringLength(200)]
-        public string AddressStation { get; set; }
+        public string AddressStation { get; private set; }
 
         /// <summary>
         /// area of station
         /// </summary>
         [Required(ErrorMessage = "AreaStaion is required")]
-        public int AreaStaion { get; set; }
+        public int AreaStaion { get; private set; }
 
         /// <summary>
         /// maximute number of bike in station
         /// </summary>
         [Required(ErrorMessage = "NumberOfBike is required")]
-        public int NumberOfBike { get; set; }
+        public int NumberOfBike { get; private set; }
 
         /// <summary>
         /// note
         /// </summary>
         [StringLength(100)]
-        public string Note { get; set; }
+        public string Note { get; private set; }
     }
 }

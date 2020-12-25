@@ -12,7 +12,6 @@
 //
 // ------------------------------------------------------
 
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -35,5 +34,20 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// </summary>
         [Required]
         public string LicensePlate { get; set; }
+
+        /// <summary>
+        /// Contructor of ElectricBike
+        /// </summary>
+        /// <param name="stationId">The id of station contain bike</param>
+        /// <param name="value">The value of bike</param>
+        /// <param name="qrcode">The qrcode of bike</param>
+        /// <param name="manufacturer">The manufacture of bike</param>
+        /// <param name="power">The remain power of bike</param>
+        /// <param name="licensePlate">The license of bike</param>
+        public ElectricBike(int stationId, int value, string qrcode, string manufacturer, int power, string licensePlate) : base(stationId, value, qrcode, manufacturer)
+        {
+            this.Powers = power;
+            this.LicensePlate = licensePlate;
+        }
     }
 }

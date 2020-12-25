@@ -27,62 +27,62 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// card id
         /// </summary>
         [Key]
-        public int CardId { get; set; }
+        public int CardId { get; private set; }
 
         /// <summary>
         /// id of user has this card
         /// </summary>
         [Required]
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int UserId { get; private set; }
 
         /// <summary>
         /// bank publish card
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Bank is required")]
         [StringLength(100)]
-        public string Bank { get; set; }
+        public string Bank { get; private set; }
 
         /// <summary>
         /// card code
         /// </summary>
         [Required(ErrorMessage = "CardCode is required")]
         [StringLength(50)]
-        public string CardCode { get; set; }
+        public string CardCode { get; private set; }
 
         /// <summary>
         /// owner of card
         /// </summary>
         [Required(ErrorMessage = "Owners is required")]
         [StringLength(50)]
-        public string Owners { get; set; }
+        public string Owners { get; private set; }
 
         /// <summary>
         /// card cvv
         /// </summary>
         [Required(ErrorMessage = "CVV is required")]
         [StringLength(10)]
-        public string CVV { get; set; }
+        public string CVV { get; private set; }
 
         /// <summary>
         /// date expired of card
         /// </summary>
         [Required(ErrorMessage = "DateExpired is required")]
         [StringLength(10)]
-        public string DateExpired { get; set; }
+        public string DateExpired { get; private set; }
 
         /// <summary>
         /// card app code
         /// </summary>
         [Required(ErrorMessage = "AppCode is required")]
         [StringLength(50)]
-        public string AppCode { get; set; }
+        public string AppCode { get; private set; }
 
         /// <summary>
         /// card security key
         /// </summary>
         [Required(ErrorMessage = "SecurityKey is required")]
         [StringLength(50)]
-        public string SecurityKey { get; set; }
+        public string SecurityKey { get; private set; }
     }
 }

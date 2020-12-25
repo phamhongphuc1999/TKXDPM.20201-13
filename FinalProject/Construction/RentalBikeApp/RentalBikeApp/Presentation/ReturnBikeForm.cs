@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using static RentalBikeApp.Program;
 using System.Collections.Generic;
 using RentalBikeApp.Entities.SQLEntities;
+using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp.Presentation
 {
@@ -28,12 +29,17 @@ namespace RentalBikeApp.Presentation
     public partial class ReturnBikeForm : BaseForm
     {
         private List<Station> stationList;
+        private BikeStationController bikeStationController;
+        private ReturnBikeController returnBikeController;
 
         /// <summary>
         /// contructor of RentBikeForm
         /// </summary>
         public ReturnBikeForm(): base()
         {
+            bikeStationController = new BikeStationController();
+            returnBikeController = new ReturnBikeController();
+
             stationList = bikeStationController.ViewListStation();
 
             InitializeComponent("ReturnBikeForm", "Return Bike");

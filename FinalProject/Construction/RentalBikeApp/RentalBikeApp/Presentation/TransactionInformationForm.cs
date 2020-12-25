@@ -18,6 +18,7 @@ using static RentalBikeApp.Config;
 using static RentalBikeApp.Program;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Entities.APIEntities;
+using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp.Presentation
 {
@@ -30,12 +31,17 @@ namespace RentalBikeApp.Presentation
         private int rentalMoney;
         private int stationId;
         private int transactionId;
+        private RentBikeController rentBikeController;
+        private ReturnBikeController returnBikeController;
 
         /// <summary>
         /// contructor of TransactionInformationForm
         /// </summary>
         public TransactionInformationForm(): base()
         {
+            rentBikeController = new RentBikeController();
+            returnBikeController = new ReturnBikeController();
+
             InitializeComponent("TransactionInformationForm", "Transaction Information");
             DrawTransactionInformationForm();
         }

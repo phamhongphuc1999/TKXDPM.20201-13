@@ -16,6 +16,7 @@ using static RentalBikeApp.Program;
 using System;
 using System.Windows.Forms;
 using RentalBikeApp.Entities.SQLEntities;
+using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp.Presentation
 {
@@ -24,11 +25,15 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class CardInformationForm : BaseForm
     {
+        private RentBikeController rentBikeController;
+
         /// <summary>
         /// contructor of CardInformationForm
         /// </summary>
         public CardInformationForm(): base()
         {
+            rentBikeController = new RentBikeController();
+
             InitializeComponent("CardInformationForm", "Card Information");
             DrawCardInformation();
         }

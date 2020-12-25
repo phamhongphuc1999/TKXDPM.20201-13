@@ -68,12 +68,7 @@ namespace RentalBikeApp.Data.ServiceAgents.BikeServices
         public Bike UpdateBike(int bikeId, UpdateBikeInfo update)
         {
             Bike bike = connecter.SqlData.Bikes.Find(bikeId);
-            if (update.StationId > 0) bike.StationId = update.StationId;
-            if (update.Value > 0) bike.Value = update.Value;
-            if (update.QRCode != null) bike.QRCode = update.QRCode;
-            if (update.Manufacturer != null) bike.Manufacturer = update.Manufacturer;
-            if (update.BikeStatus > 0) bike.BikeStatus = true;
-            if (update.BikeStatus < 0) bike.BikeStatus = false;
+            bike.UpdateBike(update);
             int check = connecter.SqlData.SaveChanges();
             bike = connecter.SqlData.Bikes.Find(bikeId);
             if (check > 0) return bike;

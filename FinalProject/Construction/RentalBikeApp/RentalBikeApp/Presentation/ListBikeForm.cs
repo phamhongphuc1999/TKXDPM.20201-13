@@ -20,6 +20,8 @@ using System.Collections.Generic;
 using static RentalBikeApp.Program;
 using static RentalBikeApp.Config.SQL;
 using RentalBikeApp.Entities.SQLEntities;
+using RentalBikeApp.Bussiness;
+using System.Security.Cryptography.X509Certificates;
 
 namespace RentalBikeApp.Presentation
 {
@@ -29,12 +31,16 @@ namespace RentalBikeApp.Presentation
     public partial class ListBikeForm : BaseForm
     {
         private BikeCategory category;
+        private List<BaseBike> bikes;
+        private BikeStationController bikeStationController;
 
         /// <summary>
         /// contructor of ListBikeForm
         /// </summary>
         public ListBikeForm(): base()
         {
+            bikeStationController = new BikeStationController();
+
             InitializeComponent("ListBikesForm", "List Bikes");
             DrawListBikes();
         }
@@ -71,14 +77,17 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.BIKE;
             string stationName = "", stationAddress = "";
-            List<Bike> bikesList = bikeStationController.ViewListBikeInStation(stationId, ref stationName, ref stationAddress);
-            int count = bikesList.Count(x => !x.BikeStatus);
+            bikes = bikeStationController.ViewListBikeInStation(stationId, ref stationName, ref stationAddress).Select(bike =>
+            {
+                return new BaseBike(bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
+            }).ToList();
+            int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp thường\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
             stationRtb.Text = $"{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
-            foreach (Bike bike in bikesList)
+            foreach (BaseBike bike in bikes)
             {
                 CreateButBike(bike.BikeId, bike.QRCode, bike.BikeStatus, X, Y, count1);
                 Y += 55; count1++;
@@ -94,14 +103,17 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.TANDEM;
             string stationName = "", stationAddress = "";
-            List<Tandem> bikesList = bikeStationController.ViewListTandemInStation(stationId, ref stationName, ref stationAddress);
-            int count = bikesList.Count(x => !x.BikeStatus);
+            bikes = bikeStationController.ViewListTandemInStation(stationId, ref stationName, ref stationAddress).Select(bike =>
+            {
+                return new BaseBike(bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
+            }).ToList();
+            int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp đôi\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
             stationRtb.Text = $"{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
-            foreach (Tandem bike in bikesList)
+            foreach (Tandem bike in bikes)
             {
                 CreateButBike(bike.BikeId, bike.QRCode, bike.BikeStatus, X, Y, count1);
                 Y += 55; count1++;
@@ -117,14 +129,17 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.ELECTRIC;
             string stationName = "", stationAddress = "";
-            List<ElectricBike> bikesList = bikeStationController.ViewListElectricBikeInStation(stationId, ref stationName, ref stationAddress);
-            int count = bikesList.Count(x => !x.BikeStatus);
+            bikes = bikeStationController.ViewListElectricBikeInStation(stationId, ref stationName, ref stationAddress).Select(bike =>
+            {
+                return new BaseBike(bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
+            }).ToList();
+            int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp điện\nCòn lại {count} xe";
             else descriptionRtb.Text = "Bãi xe không còn xe";
             stationRtb.Text = "{stationName}\n{stationAddress}";
             int X = 20, Y = 5;
             int count1 = 1;
-            foreach (ElectricBike bike in bikesList)
+            foreach (ElectricBike bike in bikes)
             {
                 CreateButBike(bike.BikeId, bike.QRCode, bike.BikeStatus, X, Y, count1);
                 Y += 55; count1++;
@@ -194,10 +209,10 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show($"QRCode không hợp lệ\nQRCode là dãy số có chín chữ số", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string stationName = "", stationAddress = "";
-            BaseBike bike = bikeStationController.ViewBikeDetail(qrCode, ref stationName, ref stationAddress);
+            BaseBike bike = bikes.SingleOrDefault(x => x.QRCode == qrCode);
             if(bike == null) MessageBox.Show($"Không tìm được xe có qrcode: {qrCode}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            bikeDetailForm.FillBikeInformation(bike, stationName, stationAddress);
+            Station station = bikeStationController.ViewStationDetail(bike.StationId);
+            bikeDetailForm.FillBikeInformation(bike, station.NameStation, station.AddressStation);
             bikeDetailForm.Show(this);
             this.Hide();
         }

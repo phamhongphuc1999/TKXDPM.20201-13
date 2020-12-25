@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
 using RentalBikeApp.Entities.SQLEntities;
+using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp.Presentation
 {
@@ -28,14 +29,17 @@ namespace RentalBikeApp.Presentation
     public partial class HomePageForm : BaseForm
     {
         private List<Station> stationList;
+        private BikeStationController bikeStationController;
 
         /// <summary>
         /// contructor of HomePageForm
         /// </summary>
         public HomePageForm(): base()
         {
-            stationList = bikeStationController.ViewListStation();
+            bikeStationController = new BikeStationController();
 
+            stationList = bikeStationController.ViewListStation();
+            
             InitializeComponent("HomePageForm", "Home Page");
             DrawHomePage();
             RenderStationList(this.stationPnl);

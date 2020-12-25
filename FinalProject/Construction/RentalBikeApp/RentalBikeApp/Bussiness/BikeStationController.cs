@@ -13,9 +13,11 @@
 // ------------------------------------------------------
 
 using RentalBikeApp.Entities.SQLEntities;
-using static RentalBikeApp.Program;
 using static RentalBikeApp.Config.SQL;
 using System.Collections.Generic;
+using RentalBikeApp.Data.ServiceAgents.BikeServices;
+using RentalBikeApp.Data.ServiceAgents;
+using RentalBikeApp.Data;
 
 namespace RentalBikeApp.Bussiness
 {
@@ -24,6 +26,22 @@ namespace RentalBikeApp.Bussiness
     /// </summary>
     public class BikeStationController
     {
+        private BikeService bikeService;
+        private TandemService tandemService;
+        private ElectricBikeService electricBikeService;
+        private StationService stationService;
+
+        /// <summary>
+        /// Contructor of BikeStationController
+        /// </summary>
+        public BikeStationController()
+        {
+            bikeService = new BikeService(SQLConnecter.GetInstance());
+            tandemService = new TandemService(SQLConnecter.GetInstance());
+            electricBikeService = new ElectricBikeService(SQLConnecter.GetInstance());
+            stationService = new StationService(SQLConnecter.GetInstance());
+        }
+
         /// <summary>
         /// Get bike information
         /// </summary>
