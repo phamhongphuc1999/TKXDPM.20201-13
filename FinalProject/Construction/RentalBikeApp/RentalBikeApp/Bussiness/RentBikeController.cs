@@ -16,6 +16,7 @@ using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Data.ServiceAgents.BikeServices;
 using RentalBikeApp.Entities.SQLEntities;
+using System;
 using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Bussiness
@@ -86,7 +87,6 @@ namespace RentalBikeApp.Bussiness
         public Card GetCardInformation(string owner)
         {
             Card card = cardService.GetCardByOwner(owner);
-            if (card != null) Config.CARD_INFO = card;
             return card;
         }
 
@@ -108,10 +108,10 @@ namespace RentalBikeApp.Bussiness
         /// </summary>
         public void BeginRentingBike(int bikeId)
         {
-            rentBikeForm.rentBikeTmr.Start();
-            if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1 });
-            else if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1 });
-            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1 });
+            rentBikeForm.StartTimer();
+            if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now });
+            else if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now });
+            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now });
         }
     }
 }

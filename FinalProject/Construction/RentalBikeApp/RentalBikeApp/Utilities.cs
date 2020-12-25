@@ -70,6 +70,21 @@ namespace RentalBikeApp
         }
 
         /// <summary>
+        /// Subtract tow date time
+        /// </summary>
+        /// <param name="date1">date time 1</param>
+        /// <param name="date2">date time 2</param>
+        /// <returns>the specified string that display the result</returns>
+        public static string SubtractDate(DateTime date1, DateTime date2)
+        {
+            TimeSpan rawResult = date1 - date2;
+            int hours = 24 * rawResult.Days + rawResult.Hours;
+            int minutes = rawResult.Minutes;
+            int seconds = rawResult.Seconds;
+            return String.Format("{0}:{1}:{2}", hours, minutes.ToString("D2"), seconds.ToString("D2"));
+        }
+
+        /// <summary>
         /// Hash the specified string with MD5 hash code
         /// </summary>
         /// <param name="input">the string plaintext</param>

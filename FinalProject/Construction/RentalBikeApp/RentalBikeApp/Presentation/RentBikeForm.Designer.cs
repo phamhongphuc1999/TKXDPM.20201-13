@@ -21,14 +21,11 @@ namespace RentalBikeApp.Presentation
         private Label rentingQrCodeLbl, rentingCategoryLbl, rentingLicenseLbl, rentingManufactureLbl;
         private TextBox rentingQrCodeTxt, rentingCategoryTxt, rentingLicenseTxt, rentingManufactureTxt;
         private Label rentingTimedRentLbl, rentingRemainPowerLbl, rentingTimedRentValueLbl, rentingRemainPowerValueLbl;
-        private Label rentingHorizontalLineLbl, rentingVerticalLineLbl;
+        private Label rentingHorizontalLineLbl, rentingHorizontalLineLbl1;
         private Button rentingSelectReceiveStationBut;
         private PictureBox rentingAvatarPb;
 
-        /// <summary>
-        /// timer
-        /// </summary>
-        public Timer rentBikeTmr;
+        private Timer rentBikeTmr;
 
         /// <summary>
         /// Display RentBikeForm to enter QRcode
@@ -78,9 +75,17 @@ namespace RentalBikeApp.Presentation
                 Size = new Size(this.ClientSize.Width, this.ClientSize.Height - 80),
                 Location = new Point(0, 0)
             };
+            rentingHorizontalLineLbl1 = new Label
+            {
+                AutoSize = false,
+                BackColor = Color.Black,
+                BorderStyle = BorderStyle.Fixed3D,
+                Size = new Size(this.Width, 4),
+                Location = new Point(0, 80)
+            };
             rentingAvatarPb = new PictureBox()
             {
-                Location = new Point(20, 15),
+                Location = new Point(20, 95),
                 Size = new Size(205, 205),
                 SizeMode = PictureBoxSizeMode.StretchImage
             };
@@ -88,7 +93,7 @@ namespace RentalBikeApp.Presentation
             {
                 Text = "Mã xe",
                 Size = new Size(150, 40),
-                Location = new Point(230, 15),
+                Location = new Point(240, 95),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
                 Font = new Font("Arial", 10, FontStyle.Bold),
@@ -97,15 +102,15 @@ namespace RentalBikeApp.Presentation
             rentingQrCodeTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(145, 40),
-                Location = new Point(400, 15),
+                Size = new Size(370, 40),
+                Location = new Point(410, 95),
                 ReadOnly = true
             };
             rentingCategoryLbl = new Label()
             {
                 Text = "Loại xe",
                 Size = new Size(150, 40),
-                Location = new Point(230, 70),
+                Location = new Point(240, 150),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
                 Font = new Font("Arial", 10, FontStyle.Bold),
@@ -114,15 +119,15 @@ namespace RentalBikeApp.Presentation
             rentingCategoryTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(145, 40),
-                Location = new Point(400, 70),
+                Size = new Size(370, 40),
+                Location = new Point(410, 150),
                 ReadOnly = true
             };
             rentingLicenseLbl = new Label()
             {
                 Text = "Biển số xe",
                 Size = new Size(150, 40),
-                Location = new Point(230, 125),
+                Location = new Point(240, 205),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
                 Font = new Font("Arial", 10, FontStyle.Bold),
@@ -131,15 +136,15 @@ namespace RentalBikeApp.Presentation
             rentingLicenseTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(145, 40),
-                Location = new Point(400, 125),
+                Size = new Size(370, 40),
+                Location = new Point(410, 205),
                 ReadOnly = true
             };
             rentingManufactureLbl = new Label()
             {
                 Text = "Hãng sản xuất",
                 Size = new Size(150, 40),
-                Location = new Point(230, 180),
+                Location = new Point(240, 260),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
                 Font = new Font("Arial", 10, FontStyle.Bold),
@@ -148,22 +153,14 @@ namespace RentalBikeApp.Presentation
             rentingManufactureTxt = new TextBox()
             {
                 Multiline = true,
-                Size = new Size(145, 40),
-                Location = new Point(400, 180),
+                Size = new Size(370, 40),
+                Location = new Point(410, 260),
                 ReadOnly = true
-            };
-            rentingVerticalLineLbl = new Label()
-            {
-                AutoSize = false,
-                BackColor = Color.Black,
-                BorderStyle = BorderStyle.Fixed3D,
-                Size = new Size(4, 235),
-                Location = new Point(565, 0)
             };
             rentingTimedRentLbl = new Label()
             {
                 Size = new Size(195, 40),
-                Location = new Point(585, 15),
+                Location = new Point(20, 20),
                 Text = "Thời gian đã thuê",
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
@@ -172,8 +169,8 @@ namespace RentalBikeApp.Presentation
             };
             rentingTimedRentValueLbl = new Label()
             {
-                Size = new Size(195, 40),
-                Location = new Point(585, 70),
+                Size = new Size(185, 40),
+                Location = new Point(220, 20),
                 Text = "0:00:00",
                 TextAlign = ContentAlignment.MiddleCenter
             };
@@ -181,7 +178,7 @@ namespace RentalBikeApp.Presentation
             {
                 Text = "Lượng pin còn lại",
                 Size = new Size(195, 40),
-                Location = new Point(585, 125),
+                Location = new Point(400, 20),
                 TextAlign = ContentAlignment.MiddleCenter,
                 BackColor = ColorTranslator.FromHtml("#3d8af7"),
                 Font = new Font("Arial", 10, FontStyle.Bold),
@@ -191,7 +188,7 @@ namespace RentalBikeApp.Presentation
             {
                 Text = "100%",
                 Size = new Size(195, 40),
-                Location = new Point(585, 180),
+                Location = new Point(585, 20),
                 TextAlign = ContentAlignment.MiddleCenter
             };
             rentingHorizontalLineLbl = new Label()
@@ -200,12 +197,12 @@ namespace RentalBikeApp.Presentation
                 BackColor = Color.Black,
                 BorderStyle = BorderStyle.Fixed3D,
                 Size = new Size(this.Width, 4),
-                Location = new Point(0, 235)
+                Location = new Point(0, 325)
             };
             rentingSelectReceiveStationBut = new Button()
             {
                 Size = new Size(300, 50),
-                Location = new Point(250, 300),
+                Location = new Point(250, 350),
                 Text = "Chọn bãi xe để trả",
                 Font = new Font("Helvetica", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
@@ -224,7 +221,7 @@ namespace RentalBikeApp.Presentation
             rentingBikePnl.Controls.Add(rentingLicenseTxt);
             rentingBikePnl.Controls.Add(rentingManufactureLbl);
             rentingBikePnl.Controls.Add(rentingManufactureTxt);
-            rentingBikePnl.Controls.Add(rentingVerticalLineLbl);
+            rentingBikePnl.Controls.Add(rentingHorizontalLineLbl1);
             rentingBikePnl.Controls.Add(rentingTimedRentLbl);
             rentingBikePnl.Controls.Add(rentingTimedRentValueLbl);
             rentingBikePnl.Controls.Add(rentingRemainPowerLbl);
@@ -338,6 +335,10 @@ namespace RentalBikeApp.Presentation
                 BackColor = ColorTranslator.FromHtml("#d4e3fc"),
                 FlatStyle = FlatStyle.Flat
             };
+
+            rentBikeInfoDetailBut.Click += RentBikeInfoDetailBut_Click;
+            rentBikeInfoRentThisBikeBut.Click += RentBikeInfoRentThisBikeBut_Click;
+
             rentBikeInfoPnl.Controls.Add(rentBikeInfoQrCodeLbl);
             rentBikeInfoPnl.Controls.Add(rentBikeInfoQrCodeTxt);
             rentBikeInfoPnl.Controls.Add(rentBikeInfoCategoryLbl);
@@ -349,10 +350,6 @@ namespace RentalBikeApp.Presentation
             rentBikeInfoPnl.Controls.Add(rentBikeInfoDetailBut);
             rentBikeInfoPnl.Controls.Add(rentBikeLineLbl);
             rentBikeInfoPnl.Controls.Add(rentBikeInfoRentThisBikeBut);
-
-            rentBikeInfoDetailBut.Click += RentBikeInfoDetailBut_Click;
-            rentBikeInfoRentThisBikeBut.Click += RentBikeInfoRentThisBikeBut_Click;
-
             this.Controls.Add(rentBikeInfoPnl);
         }
     }

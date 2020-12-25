@@ -153,11 +153,12 @@
             <param name="stationId">The station id</param>
             <returns>true if exist availiability position or false if not</returns>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.UpdateStationAfterReturnbike(System.Int32,RentalBikeApp.Config.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.UpdateStationAfterReturnbike(System.Int32,System.Int32,RentalBikeApp.Config.SQL.BikeCategory)">
             <summary>
             Update bike status after rent bike
             </summary>
             <param name="stationId">The return station</param>
+            <param name="bikeId">id of rental bike</param>
             <param name="category">The type of bike</param>
             <returns></returns>
         </member>
@@ -258,17 +259,6 @@
             <summary>
             the category of reantal bike
             </summary>
-        </member>
-        <member name="F:RentalBikeApp.Config.RENTAL_BIKE">
-            <Value>get current rental bike</Value>
-        </member>
-        <member name="F:RentalBikeApp.Config.TIME_RENTAL_BIKE">
-            <value>
-            Get the time rental bike
-            </value>
-        </member>
-        <member name="F:RentalBikeApp.Config.CARD_INFO">
-            <Value>get current card information</Value>
         </member>
         <member name="T:RentalBikeApp.Config.TRANSACTION_STATUS">
             <value>
@@ -743,7 +733,7 @@
             <param name="qrcode">The qrcode of bike</param>
             <param name="manufacturer">The manufacture of bike</param>
         </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor(System.Int32,System.Int32,System.Int32,System.String,System.String)">
+        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor(System.Int32,System.Int32,System.Int32,System.String,System.String,System.Boolean)">
             <summary>
             Contructor of BaseBike
             </summary>
@@ -752,6 +742,7 @@
             <param name="value">The value of bike</param>
             <param name="qrcode">The qrcode of bike</param>
             <param name="manufacturer">The manufacture of bike</param>
+            <param name="status">bike status</param>
         </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.UpdateBike(RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo)">
             <summary>
@@ -768,6 +759,11 @@
         <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.StationId">
             <summary>
             station id contain bike
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.DateRent">
+            <summary>
+            the date begin rent bike
             </summary>
         </member>
         <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.Images">
@@ -1289,6 +1285,11 @@
             provider to function and event to help user interact with card information screen
             </summary>
         </member>
+        <member name="P:RentalBikeApp.Presentation.CardInformationForm.bike">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:RentalBikeApp.Presentation.CardInformationForm.#ctor">
             <summary>
             contructor of CardInformationForm
@@ -1483,7 +1484,23 @@
             contructor of RentBikeForm
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentingBikeForm">
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.StartTimer">
+            <summary>
+            start timer
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.StopTimer">
+            <summary>
+            stop timer
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.GetTotalTimeRent">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentingBikeForm(RentalBikeApp.Entities.SQLEntities.BaseBike)">
             <summary>
             Fill bike information in rent bike form when rent bike status is RENTING_BIKE
             </summary>
@@ -1542,11 +1559,6 @@
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
         </member>
-        <member name="F:RentalBikeApp.Presentation.RentBikeForm.rentBikeTmr">
-            <summary>
-            timer
-            </summary>
-        </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.DrawRentBikeForm">
             <summary>
             Display RentBikeForm to enter QRcode
@@ -1565,6 +1577,11 @@
         <member name="T:RentalBikeApp.Presentation.ReturnBikeForm">
             <summary>
             provider to function and event to help user interact with return bike screen
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Presentation.ReturnBikeForm.rentalBike">
+            <summary>
+            current rental bike
             </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.ReturnBikeForm.#ctor">
@@ -1698,13 +1715,14 @@
             contructor of TransactionInformationForm
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Presentation.TransactionInformationForm.FillTransactionInformationWhenPay(System.Int32)">
+        <member name="M:RentalBikeApp.Presentation.TransactionInformationForm.FillTransactionInformationWhenPay(System.Int32,RentalBikeApp.Entities.SQLEntities.BaseBike)">
             <summary>
             Fill transaction form with transaction's information when user process transaction for pay rental money
             </summary>
             <param name="stationId">The return station id</param>
+            <param name="bike">The rental need to return</param>
         </member>
-        <member name="M:RentalBikeApp.Presentation.TransactionInformationForm.FillTransactionInformationWhenRentBike">
+        <member name="M:RentalBikeApp.Presentation.TransactionInformationForm.FillTransactionInformationWhenRentBike(RentalBikeApp.Entities.SQLEntities.BaseBike,RentalBikeApp.Entities.SQLEntities.Card)">
             <summary>
             Fill transaction form with transaction's information when user process transaction for pay deposit money
             </summary>
@@ -1792,6 +1810,14 @@
             Console.Write(date);
             </code>
             </example>
+        </member>
+        <member name="M:RentalBikeApp.Utilities.SubtractDate(System.DateTime,System.DateTime)">
+            <summary>
+            Subtract tow date time
+            </summary>
+            <param name="date1">date time 1</param>
+            <param name="date2">date time 2</param>
+            <returns>the specified string that display the result</returns>
         </member>
         <member name="M:RentalBikeApp.Utilities.MD5Hash(System.String)">
             <summary>

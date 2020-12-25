@@ -88,14 +88,15 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <param name="value">The value of bike</param>
         /// <param name="qrcode">The qrcode of bike</param>
         /// <param name="manufacturer">The manufacture of bike</param>
-        public BaseBike(int bikeId, int stationId, int value, string qrcode, string manufacturer)
+        /// <param name="status">bike status</param>
+        public BaseBike(int bikeId, int stationId, int value, string qrcode, string manufacturer, bool status = false)
         {
             this.BikeId = bikeId;
             this.StationId = stationId;
             this.Value = value;
             this.QRCode = qrcode;
             this.Manufacturer = manufacturer;
-            this.BikeStatus = false;
+            this.BikeStatus = status;
         }
 
         /// <summary>
@@ -106,7 +107,8 @@ namespace RentalBikeApp.Entities.SQLEntities
         public BaseBike UpdateBike(UpdateBikeInfo update)
         {
             if (update.StationId > 0) this.StationId = update.StationId;
-            if (string.IsNullOrEmpty(update.Images)) this.Images = update.Images;
+            if (update.DateRent != null) this.DateRent = update.DateRent;
+            if (!string.IsNullOrEmpty(update.Images)) this.Images = update.Images;
             if (update.Value > 0) this.Value = update.Value;
             if (update.QRCode != null) this.QRCode = update.QRCode;
             if (update.Manufacturer != null) this.Manufacturer = update.Manufacturer;
@@ -125,6 +127,11 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// station id contain bike
         /// </summary>
         public int StationId { get; set; }
+
+        /// <summary>
+        /// the date begin rent bike
+        /// </summary>
+        public DateTime? DateRent { get; set; }
 
         /// <summary>
         /// Images of bike

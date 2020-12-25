@@ -83,13 +83,14 @@ namespace RentalBikeApp.Bussiness
         /// Update bike status after rent bike
         /// </summary>
         /// <param name="stationId">The return station</param>
+        /// <param name="bikeId">id of rental bike</param>
         /// <param name="category">The type of bike</param>
         /// <returns></returns>
-        public void UpdateStationAfterReturnbike(int stationId, Config.SQL.BikeCategory category)
+        public void UpdateStationAfterReturnbike(int stationId, int bikeId, Config.SQL.BikeCategory category)
         {
-            if (category == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(Config.RENTAL_BIKE.BikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
-            else if (category == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(Config.RENTAL_BIKE.BikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
-            else tandemService.UpdateBike(Config.RENTAL_BIKE.BikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
+            if (category == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
+            else if (category == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
+            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
         }
 
         /// <summary>

@@ -13,7 +13,6 @@
 // ------------------------------------------------------
 
 using System.Collections.Generic;
-using RentalBikeApp.Entities.SQLEntities;
 
 namespace RentalBikeApp
 {
@@ -118,17 +117,6 @@ namespace RentalBikeApp
         /// the category of reantal bike
         /// </summary>
         public static SQL.BikeCategory RENTAL_BIKE_CATEGORY;
-
-        ///<Value>get current rental bike</Value>
-        public static BaseBike RENTAL_BIKE;
-
-        /// <value>
-        /// Get the time rental bike
-        /// </value>
-        public static string TIME_RENTAL_BIKE;
-
-        ///<Value>get current card information</Value>
-        public static Card CARD_INFO;
 
         ///<value>
         /// enum use to define the transaction form status

@@ -139,8 +139,8 @@ namespace RentalBikeApp.Presentation
             viewRentingBut = new Button
             {
                 Text = "Chi tiết",
-                Size = new Size(250, 50),
-                Location = new Point(530, 362),
+                Size = new Size(450, 50),
+                Location = new Point(330, 350),
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")

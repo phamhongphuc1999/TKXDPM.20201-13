@@ -25,7 +25,7 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class BikeDetailForm : BaseForm
     {
-        private int bikeId;
+        private BaseBike bike;
         private BikeCategory category;
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace RentalBikeApp.Presentation
                 licenceTxt.Text = electric.LicensePlate;
                 this.category = BikeCategory.ELECTRIC;
             }
-            this.bikeId = bike.BikeId;
+            this.bike = bike;
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentThisBikeBut_Click(object sender, EventArgs e)
         {
-            rentBikeForm.FillRentBikeInfoForm(this.bikeId, this.category);
+            rentBikeForm.FillRentBikeInfoForm(this.bike.BikeId, this.category);
             rentBikeForm.Show(this, this);
             this.Hide();
         }
@@ -131,8 +131,9 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void ViewRentingBut_Click(object sender, EventArgs e)
         {
-            rentBikeForm.FillRentingBikeForm();
+            rentBikeForm.FillRentingBikeForm(bike);
             rentBikeForm.Show(this, this);
+            this.Hide();
         }
     }
 }

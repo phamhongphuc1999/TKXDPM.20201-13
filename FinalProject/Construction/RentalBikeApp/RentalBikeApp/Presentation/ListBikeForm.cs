@@ -78,7 +78,7 @@ namespace RentalBikeApp.Presentation
             string stationName = "", stationAddress = "";
             bikes = bikeStationController.ViewListBikeInStation(stationId, ref stationName, ref stationAddress).Select(bike =>
             {
-                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
+                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
             }).ToList();
             int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp thường\nCòn lại {count} xe";
@@ -104,7 +104,7 @@ namespace RentalBikeApp.Presentation
             string stationName = "", stationAddress = "";
             bikes = bikeStationController.ViewListTandemInStation(stationId, ref stationName, ref stationAddress).Select(bike =>
             {
-                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
+                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
             }).ToList();
             int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp đôi\nCòn lại {count} xe";
@@ -130,7 +130,7 @@ namespace RentalBikeApp.Presentation
             string stationName = "", stationAddress = "";
             bikes = bikeStationController.ViewListElectricBikeInStation(stationId, ref stationName, ref stationAddress).Select(bike =>
             {
-                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer);
+                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
             }).ToList();
             int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp điện\nCòn lại {count} xe";

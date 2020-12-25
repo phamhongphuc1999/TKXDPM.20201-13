@@ -25,7 +25,13 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class CardInformationForm : BaseForm
     {
+        private Card card;
         private RentBikeController rentBikeController;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public BaseBike bike { get; set; }
 
         /// <summary>
         /// contructor of CardInformationForm
@@ -50,6 +56,7 @@ namespace RentalBikeApp.Presentation
             if (card == null) return (false, "Thông tin sai hoặc thẻ không tồn tại");
             if(card.CardCode != cardCodeTxt.Text || card.SecurityKey != securityCodeTxt.Text)
                 return (false, "Thông tin sai hoặc thẻ không tồn tại");
+            this.card = card;
             return (true, "");
         }
 
@@ -90,7 +97,7 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show(info.Item2, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            transactionInformationForm.FillTransactionInformationWhenRentBike();
+            transactionInformationForm.FillTransactionInformationWhenRentBike(bike, card);
             transactionInformationForm.Show(this, this);
             this.Hide();
         }
