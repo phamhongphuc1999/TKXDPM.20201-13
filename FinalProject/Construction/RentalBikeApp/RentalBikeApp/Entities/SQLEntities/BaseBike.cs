@@ -103,11 +103,12 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// Update bike information
         /// </summary>
         /// <param name="update">the update bike information</param>
+        /// <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
         /// <returns></returns>
-        public BaseBike UpdateBike(UpdateBikeInfo update)
+        public BaseBike UpdateBike(UpdateBikeInfo update, bool isUpdateDate = false)
         {
             if (update.StationId > 0) this.StationId = update.StationId;
-            if (update.DateRent != null) this.DateRent = update.DateRent;
+            if (isUpdateDate) this.DateRent = update.DateRent;
             if (!string.IsNullOrEmpty(update.Images)) this.Images = update.Images;
             if (update.Value > 0) this.Value = update.Value;
             if (update.QRCode != null) this.QRCode = update.QRCode;

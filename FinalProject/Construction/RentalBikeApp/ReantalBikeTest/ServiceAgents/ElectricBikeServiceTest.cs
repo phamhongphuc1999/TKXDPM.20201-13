@@ -14,7 +14,7 @@
 
 using NUnit.Framework;
 using RentalBikeApp.Data;
-using RentalBikeApp.Data.ServiceAgents.BikeServices;
+using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 

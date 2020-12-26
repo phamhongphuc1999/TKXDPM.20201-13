@@ -23,7 +23,7 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class StationDetailForm : BaseForm
     {
-        private int stationId;
+        private Station station;
 
         /// <summary>
         /// contructor of StationDetailForm
@@ -40,14 +40,13 @@ namespace RentalBikeApp.Presentation
         /// <param name="station">The station is displayed</param>
         public void FillStationDetail(Station station)
         {
+            this.station = station;
             nameTxt.Text = station.NameStation;
             addressTxt.Text = station.AddressStation;
             areaTxt.Text = station.AreaStaion.ToString();
             numberTxt.Text = station.NumberOfBike.ToString();
             distanceTxt.Text = "100 m";
-            timeTxt.Text = "10";
-
-            this.stationId = station.StationId;
+            timeTxt.Text = "10 phút";
         }
 
         /// <summary>
@@ -81,7 +80,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void TandemBut_Click(object sender, EventArgs e)
         {
-            listBikeForm.FillListTandems(this.stationId);
+            listBikeForm.FillListTandems(station.StationId, station.NameStation, station.AddressStation);
             listBikeForm.Show(this, this);
             this.Hide();
         }
@@ -93,7 +92,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void ElectricBut_Click(object sender, EventArgs e)
         {
-            listBikeForm.FillListElectric(this.stationId);
+            listBikeForm.FillListElectric(station.StationId, station.NameStation, station.AddressStation);
             listBikeForm.Show(this, this);
             this.Hide();
         }
@@ -105,7 +104,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void BikeBut_Click(object sender, EventArgs e)
         {
-            listBikeForm.FillListBikes(this.stationId);
+            listBikeForm.FillListBikes(station.StationId, station.NameStation, station.AddressStation);
             listBikeForm.Show(this, this);
             this.Hide();
         }

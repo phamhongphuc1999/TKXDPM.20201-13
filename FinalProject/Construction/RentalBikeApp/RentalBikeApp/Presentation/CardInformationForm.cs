@@ -26,12 +26,8 @@ namespace RentalBikeApp.Presentation
     public partial class CardInformationForm : BaseForm
     {
         private Card card;
+        private BaseBike bike;
         private RentBikeController rentBikeController;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public BaseBike bike { get; set; }
 
         /// <summary>
         /// contructor of CardInformationForm
@@ -58,6 +54,14 @@ namespace RentalBikeApp.Presentation
                 return (false, "Thông tin sai hoặc thẻ không tồn tại");
             this.card = card;
             return (true, "");
+        }
+
+        /// <summary>
+        /// Fill card information
+        /// </summary>
+        public void FillCardInformation(BaseBike bike)
+        {
+            this.bike = bike;
         }
 
         /// <summary>

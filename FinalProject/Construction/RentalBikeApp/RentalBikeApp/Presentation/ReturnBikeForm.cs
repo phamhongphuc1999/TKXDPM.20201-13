@@ -31,11 +31,7 @@ namespace RentalBikeApp.Presentation
         private List<Station> stationList;
         private BikeStationController bikeStationController;
         private ReturnBikeController returnBikeController;
-
-        /// <summary>
-        /// current rental bike
-        /// </summary>
-        public BaseBike rentalBike { get; set; }
+        private BaseBike rentalBike;
 
         /// <summary>
         /// contructor of RentBikeForm
@@ -50,6 +46,15 @@ namespace RentalBikeApp.Presentation
             InitializeComponent("ReturnBikeForm", "Return Bike");
             DrawReturnBikeForm();
             RenderStationList(this.listStationPnl);
+        }
+
+        /// <summary>
+        /// Read rental bike need to return
+        /// </summary>
+        /// <param name="bike">The rental bike need to return</param>
+        public void ReadRentalBike(BaseBike bike)
+        {
+            this.rentalBike = bike;
         }
 
         /// <summary>

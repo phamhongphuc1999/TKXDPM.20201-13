@@ -16,46 +16,46 @@ using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace RentalBikeApp.Data.ServiceAgents.BikeServices
+namespace RentalBikeApp.Data.ServiceAgents
 {
     /// <summary>
-    /// Provides functions to interact with electric bike in the database
+    /// Provides functions to interact with tandem in the database
     /// </summary>
-    public class ElectricBikeService: IBikeService<ElectricBike>
+    public class TandemService: IBikeService<Tandem>
     {
         private SQLConnecter connecter;
 
         /// <summary>
-        /// contructor of ElectricBikeService
+        /// contructor of TandemService
         /// </summary>
         /// <param name="connecter">The connecter</param>
-        public ElectricBikeService(SQLConnecter connecter)
+        public TandemService(SQLConnecter connecter)
         {
             this.connecter = connecter;
         }
 
-        /// <summary>Get bike by QR code</summary>
+        /// <summary>Get tandem by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
-        public ElectricBike GetBikeByQRCode(string QRCode)
+        public Tandem GetBikeByQRCode(string QRCode)
         {
-            return connecter.SqlData.ElectricBikes.SingleOrDefault(x => x.QRCode == QRCode);
+            return connecter.SqlData.Tandems.SingleOrDefault(x => x.QRCode == QRCode);
         }
 
-        /// <summary>Get bike by bike's id</summary>
+        /// <summary>Get tandem by tandem's id</summary>
         /// <param name="id">the bike's id you want to find</param>
         /// <returns>Return the bike with specified ID or null if not found</returns>
-        public ElectricBike GetBikeById(int id)
+        public Tandem GetBikeById(int id)
         {
-            return connecter.SqlData.ElectricBikes.Find(id);
+            return connecter.SqlData.Tandems.Find(id);
         }
 
-        /// <summary>Filters a list bike in the station base on bike category</summary>
+        /// <summary>Filters a list tandem in the station base on bike category</summary>
         /// <param name="stationId">The station you want to filter list of bike</param>
         /// <returns>Return the list base on bike category</returns>
-        public List<ElectricBike> GetListBikesInStation(int stationId)
+        public List<Tandem> GetListBikesInStation(int stationId)
         {
-            List<ElectricBike> bikesList = connecter.SqlData.ElectricBikes.Where(x => x.StationId == stationId).ToList();
+            List<Tandem> bikesList = connecter.SqlData.Tandems.Where(x => x.StationId == stationId).ToList();
             return bikesList;
         }
 
@@ -64,13 +64,14 @@ namespace RentalBikeApp.Data.ServiceAgents.BikeServices
         /// </summary>
         /// <param name="bikeId">The bike id</param>
         /// <param name="update">The update information</param>
+        /// <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
         /// <returns>The bike information after updated</returns>
-        public ElectricBike UpdateBike(int bikeId, UpdateBikeInfo update)
+        public Tandem UpdateBike(int bikeId, UpdateBikeInfo update, bool isUpdateDate = false)
         {
-            ElectricBike bike = connecter.SqlData.ElectricBikes.Find(bikeId);
-            bike.UpdateBike(update);
+            Tandem bike = connecter.SqlData.Tandems.Find(bikeId);
+            bike.UpdateBike(update, isUpdateDate);
             int check = connecter.SqlData.SaveChanges();
-            bike = connecter.SqlData.ElectricBikes.Find(bikeId);
+            bike = connecter.SqlData.Tandems.Find(bikeId);
             if (check > 0) return bike;
             return null;
         }

@@ -6,11 +6,10 @@ namespace RentalBikeApp.Presentation
     partial class CardInformationForm
     {
         private Label owerLbl, cardCodeLbl, bankLbl, securityCodeLbl, expirationDateLbl;
-        private TextBox owerTxt, cardCodeTxt, securityCodeTxt;
+        private TextBox owerTxt, cardCodeTxt, securityCodeTxt, expirationTxt;
         private Button cancelBut, submitBut;
         private Panel cardInformationPnl;
         private ComboBox bankCb;
-        private DateTimePicker expirationDtp;
 
         /// <summary>
         /// Initialized control in CardInformation
@@ -106,10 +105,13 @@ namespace RentalBikeApp.Presentation
                 Font = new Font("Arial", 10, FontStyle.Bold),
                 ForeColor = Color.White
             };
-            expirationDtp = new DateTimePicker()
+            expirationTxt = new TextBox()
             {
+                Multiline = true,
+                Text = "474",
                 Size = new Size(590, 40),
-                Location = new Point(190, 205)
+                Location = new Point(190, 205),
+                PlaceholderText = "Nhập ngày hết hạn"
             };
             cancelBut = new Button()
             {
@@ -142,7 +144,7 @@ namespace RentalBikeApp.Presentation
             cardInformationPnl.Controls.Add(securityCodeLbl);
             cardInformationPnl.Controls.Add(securityCodeTxt);
             cardInformationPnl.Controls.Add(expirationDateLbl);
-            cardInformationPnl.Controls.Add(expirationDtp);
+            cardInformationPnl.Controls.Add(expirationTxt);
             cardInformationPnl.Controls.Add(cancelBut);
             cardInformationPnl.Controls.Add(submitBut);
             this.Controls.Add(cardInformationPnl);

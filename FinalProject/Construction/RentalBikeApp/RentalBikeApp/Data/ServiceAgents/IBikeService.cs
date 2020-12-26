@@ -15,7 +15,7 @@
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
 
-namespace RentalBikeApp.Data.ServiceAgents.BikeServices
+namespace RentalBikeApp.Data.ServiceAgents
 {
     /// <summary>
     /// The service IBikeService implements the functions to interact BaseBike in database
@@ -43,7 +43,8 @@ namespace RentalBikeApp.Data.ServiceAgents.BikeServices
         /// </summary>
         /// <param name="bikeId">The bike id</param>
         /// <param name="update">The update information</param>
+        /// <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
         /// <returns>The bike information after updated</returns>
-        public TBike UpdateBike(int bikeId, UpdateBikeInfo update);
+        public TBike UpdateBike(int bikeId, UpdateBikeInfo update, bool isUpdateDate = false);
     }
 }

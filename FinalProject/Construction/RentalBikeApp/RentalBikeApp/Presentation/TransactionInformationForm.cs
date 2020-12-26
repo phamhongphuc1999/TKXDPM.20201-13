@@ -33,6 +33,7 @@ namespace RentalBikeApp.Presentation
         private int transactionId;
         private BaseBike bike;
         private Card card;
+        private TRANSACTION_STATUS status;
         private RentBikeController rentBikeController;
         private ReturnBikeController returnBikeController;
 
@@ -48,8 +49,6 @@ namespace RentalBikeApp.Presentation
             DrawTransactionInformationForm();
         }
 
-        private TRANSACTION_STATUS status;
-
         /// <summary>
         /// Fill transaction form with transaction's information when user process transaction for pay rental money
         /// </summary>
@@ -64,7 +63,7 @@ namespace RentalBikeApp.Presentation
             transactionDateTxt.Text = DateTime.Now.ToString("f");
             cancelBut.Visible = false;
 
-            Config.SQL.BikeCategory category = SQL.BikeCategory.BIKE;
+            SQL.BikeCategory category = SQL.BikeCategory.BIKE;
             if (bike is Bike) category = SQL.BikeCategory.BIKE;
             else if (bike is ElectricBike) category = SQL.BikeCategory.ELECTRIC;
             else if (bike is Tandem) category = SQL.BikeCategory.TANDEM;

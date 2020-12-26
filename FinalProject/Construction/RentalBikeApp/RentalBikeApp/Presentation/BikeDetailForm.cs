@@ -45,7 +45,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="stationAddress">The station address contain this bike</param>
         public void FillBikeInformation(BaseBike bike, string stationName, string stationAddress)
         {
-            stationRtb.Text = string.Format("{0}\n{1}", stationName, stationAddress);
+            stationRtb.Text = $"{stationName}\n{stationAddress}";
             qrCodeTxt.Text = bike.QRCode;
             manufactureTxt.Text = bike.Manufacturer;
             avatarPb.Image = Image.FromFile(bike.Images);
@@ -58,7 +58,7 @@ namespace RentalBikeApp.Presentation
             }
             else
             {
-                statusBikeLbl.Text = "Availiable";
+                statusBikeLbl.Text = "Available";
                 statusBikeLbl.BackColor = Color.Green;
                 viewRentingBut.Visible = false;
                 rentThisBikeBut.Visible = true;

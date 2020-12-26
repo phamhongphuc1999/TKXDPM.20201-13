@@ -14,7 +14,6 @@
 
 using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
-using RentalBikeApp.Data.ServiceAgents.BikeServices;
 using RentalBikeApp.Entities.SQLEntities;
 using System;
 using System.Linq;
@@ -88,9 +87,9 @@ namespace RentalBikeApp.Bussiness
         /// <returns></returns>
         public void UpdateStationAfterReturnbike(int stationId, int bikeId, Config.SQL.BikeCategory category)
         {
-            if (category == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
-            else if (category == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
-            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
+            if (category == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 }, true);
+            else if (category == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 }, true);
+            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 }, true);
         }
 
         /// <summary>
