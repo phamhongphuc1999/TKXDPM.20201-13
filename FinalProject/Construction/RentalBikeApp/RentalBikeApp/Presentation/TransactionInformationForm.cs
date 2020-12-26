@@ -105,7 +105,7 @@ namespace RentalBikeApp.Presentation
                 this.transactionId = transaction.TransactionId;
                 rentBikeForm.FillRentingBikeForm();
                 rentBikeController.BeginRentingBike(bike.BikeId);
-                rentBikeForm.Show(this);
+                rentBikeForm.Show(this, null);
             }
             else if (error == "01" || error == "02" || error == "05")
             {
@@ -126,7 +126,17 @@ namespace RentalBikeApp.Presentation
         private async void PermitButWhenPay()
         {
             if (card == null) card = rentBikeController.GetCardInformation("Group 13");
+            if (this.deposit == 0) this.deposit = 40 * bike.Value / 100;
             ProcessTransactionResponse response = null;
+            if(this.deposit == this.rentalMoney)
+            {
+                Transaction transaction = returnBikeController.UpdatePaymentTransaction(transactionId, this.rentalMoney);
+                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId, RENTAL_BIKE_CATEGORY);
+                MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                homePageForm.Show(this);
+                this.Hide();
+                return;
+            }
             if (this.deposit < this.rentalMoney)
                 response = await InterbankService.ProcessTransaction(card, API_INFO.COMMAND.PAY, this.rentalMoney - this.deposit,
                     DateTime.Now, "Pay Rental Money");

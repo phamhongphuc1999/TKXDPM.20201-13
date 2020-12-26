@@ -74,8 +74,7 @@ namespace RentalBikeApp.Bussiness
             int bikes = bikeService.GetListBikesInStation(stationId).Where(x => !x.BikeStatus).ToList().Count;
             int tandems = tandemService.GetListBikesInStation(stationId).Where(x => !x.BikeStatus).ToList().Count;
             int electrics = electricBikeService.GetListBikesInStation(stationId).Where(x => !x.BikeStatus).ToList().Count;
-            if (station.NumberOfBike > (bikes + electrics + tandems)) return true;
-            return false;
+            return station.NumberOfBike > (bikes + electrics + tandems);
         }
 
         /// <summary>

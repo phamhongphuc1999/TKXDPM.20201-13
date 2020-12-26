@@ -108,9 +108,9 @@ namespace RentalBikeApp.Bussiness
         public void BeginRentingBike(int bikeId)
         {
             rentBikeForm.StartTimer();
-            if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now });
-            else if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now });
-            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now });
+            if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
+            else if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
+            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
         }
     }
 }
