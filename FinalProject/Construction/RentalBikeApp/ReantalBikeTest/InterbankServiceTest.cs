@@ -18,7 +18,7 @@ using RentalBikeApp.Entities.APIEntities;
 using RentalBikeApp.Entities.SQLEntities;
 using System;
 using System.Threading.Tasks;
-using static RentalBikeApp.Config.API_INFO;
+using static RentalBikeApp.Constant.API_INFO;
 
 namespace ReantalBikeTest
 {

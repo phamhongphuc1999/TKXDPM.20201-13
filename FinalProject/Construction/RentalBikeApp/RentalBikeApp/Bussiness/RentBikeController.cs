@@ -17,6 +17,7 @@ using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System;
 using static RentalBikeApp.Program;
+using static RentalBikeApp.Constant.SQL;
 
 namespace RentalBikeApp.Bussiness
 {
@@ -43,19 +44,6 @@ namespace RentalBikeApp.Bussiness
             stationService = new StationService(SQLConnecter.GetInstance());
             cardService = new CardService(SQLConnecter.GetInstance());
             transactionService = new TransactionService(SQLConnecter.GetInstance());
-        }
-
-        /// <summary>
-        /// Get bike by qr code
-        /// </summary>
-        /// <param name="qrCode">the qrcode to get bike</param>
-        /// <returns>The BaseBike representing the bike has qr code</returns>
-        public BaseBike SubmitQrCode(string qrCode)
-        {
-            if (qrCode[0] == '0') return bikeService.GetBikeByQRCode(qrCode);
-            else if (qrCode[0] == '1') return tandemService.GetBikeByQRCode(qrCode);
-            else if (qrCode[0] == '2') return electricBikeService.GetBikeByQRCode(qrCode);
-            else return null;
         }
 
         /// <summary>
@@ -105,11 +93,13 @@ namespace RentalBikeApp.Bussiness
         /// <summary>
         /// Start renting bike
         /// </summary>
-        public void BeginRentingBike(int bikeId)
+        /// <param name="bikeId">bike id</param>
+        /// <param name="category">the bike category</param>
+        public void BeginRentingBike(int bikeId, BikeCategory category)
         {
             rentBikeForm.StartTimer();
-            if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
-            else if (Config.RENTAL_BIKE_CATEGORY == Config.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
+            if (category == BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
+            else if (category == BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
             else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
         }
     }

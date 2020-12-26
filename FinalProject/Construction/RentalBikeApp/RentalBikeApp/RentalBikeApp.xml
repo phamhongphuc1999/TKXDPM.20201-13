@@ -14,16 +14,7 @@
             Contructor of BikeStationController
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewBikeDetail(System.String,System.String@,System.String@)">
-            <summary>
-            Get bike information
-            </summary>
-            <param name="qrcode">The qrcode you want to get information</param>
-            <param name="stationName">representing station name contain the bike</param>
-            <param name="stationAddress">representing station address contain the bike</param>
-            <returns>The BaseBike representing the bike you want to get</returns>
-        </member>
-        <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewBikeDetail(System.Int32,RentalBikeApp.Config.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewBikeDetail(System.Int32,RentalBikeApp.Constant.SQL.BikeCategory)">
             <summary>
             Get bike information
             </summary>
@@ -75,13 +66,6 @@
             contructor of RentBikeController
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.RentBikeController.SubmitQrCode(System.String)">
-            <summary>
-            Get bike by qr code
-            </summary>
-            <param name="qrCode">the qrcode to get bike</param>
-            <returns>The BaseBike representing the bike has qr code</returns>
-        </member>
         <member name="M:RentalBikeApp.Bussiness.RentBikeController.SubmitQrCode(System.String,System.String@,System.String@)">
             <summary>
             Get bike by qrcode and save name and address of station contain this bike
@@ -107,10 +91,12 @@
             <param name="deposit">The deposit of rental bike</param>
             <returns>The new transaction</returns>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.RentBikeController.BeginRentingBike(System.Int32)">
+        <member name="M:RentalBikeApp.Bussiness.RentBikeController.BeginRentingBike(System.Int32,RentalBikeApp.Constant.SQL.BikeCategory)">
             <summary>
             Start renting bike
             </summary>
+            <param name="bikeId">bike id</param>
+            <param name="category">the bike category</param>
         </member>
         <member name="T:RentalBikeApp.Bussiness.ReturnBikeController">
             <summary>
@@ -122,7 +108,7 @@
             contructor of ReturnBikeController
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.CalculateFee(System.String,RentalBikeApp.Config.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.CalculateFee(System.String,RentalBikeApp.Constant.SQL.BikeCategory)">
             <summary>
             Calculate rental fee for rental bike
             </summary>
@@ -137,7 +123,7 @@
             <param name="stationId">The station id</param>
             <returns>true if exist availiability position or false if not</returns>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.UpdateStationAfterReturnbike(System.Int32,System.Int32,RentalBikeApp.Config.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.UpdateStationAfterReturnbike(System.Int32,System.Int32,RentalBikeApp.Constant.SQL.BikeCategory)">
             <summary>
             Update bike status after rent bike
             </summary>
@@ -155,115 +141,97 @@
             <param name="content">The transaction content</param>
             <returns></returns>
         </member>
-        <member name="T:RentalBikeApp.Config">
+        <member name="T:RentalBikeApp.Constant">
             <summary>
-            this class provider information for config program
+            this class provider contants for program
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Config.SQL">
+        <member name="T:RentalBikeApp.Constant.SQL">
             <summary>
             This static class use to config connect to sql server
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.SQL.SQL_CONNECT_STRING">
+        <member name="F:RentalBikeApp.Constant.SQL.SQL_CONNECT_STRING">
             <summary>
             connect string of sql data
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Config.SQL.BikeCategory">
+        <member name="T:RentalBikeApp.Constant.SQL.BikeCategory">
             <value>
             enum define category bike
             </value>
-            <remarks>
-            ELECTRIC: represent electric bike
-            TANDEM: represent tandem
-            BIKE: represent normal bike
-            </remarks>
         </member>
-        <member name="F:RentalBikeApp.Config.SQL.BikeCategory.ELECTRIC">
+        <member name="F:RentalBikeApp.Constant.SQL.BikeCategory.ELECTRIC">
             <summary>
             representing of electric bike
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.SQL.BikeCategory.TANDEM">
+        <member name="F:RentalBikeApp.Constant.SQL.BikeCategory.TANDEM">
             <summary>
             representing of tandem
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.SQL.BikeCategory.BIKE">
+        <member name="F:RentalBikeApp.Constant.SQL.BikeCategory.BIKE">
             <summary>
             representing of bike
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Config.API_INFO">
+        <member name="T:RentalBikeApp.Constant.API_INFO">
             <summary>
             provide the api's information
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.API_INFO.BASE_URL">
+        <member name="F:RentalBikeApp.Constant.API_INFO.BASE_URL">
             <value>
             get api base url
             </value>
         </member>
-        <member name="F:RentalBikeApp.Config.API_INFO.PROCESS_URL">
+        <member name="F:RentalBikeApp.Constant.API_INFO.PROCESS_URL">
             <value>
             get sub api process transaction url
             </value>
         </member>
-        <member name="F:RentalBikeApp.Config.API_INFO.RESET_URL">
+        <member name="F:RentalBikeApp.Constant.API_INFO.RESET_URL">
             <value>
             get sub apj reset balance url
             </value>
         </member>
-        <member name="T:RentalBikeApp.Config.API_INFO.COMMAND">
+        <member name="T:RentalBikeApp.Constant.API_INFO.COMMAND">
             <value>
             enum use to define the command in request when call process transaction API
             </value>
-            <remarks>
-            PAY: API call to pay rental money
-            REFUND: API call to refund money
-            </remarks>
         </member>
-        <member name="F:RentalBikeApp.Config.API_INFO.COMMAND.PAY">
+        <member name="F:RentalBikeApp.Constant.API_INFO.COMMAND.PAY">
             <summary>
             use when transaction for pay money
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.API_INFO.COMMAND.REFUND">
+        <member name="F:RentalBikeApp.Constant.API_INFO.COMMAND.REFUND">
             <summary>
             use when transaction for refund deposit
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.API_INFO.ERROR_CODE">
+        <member name="F:RentalBikeApp.Constant.API_INFO.ERROR_CODE">
             <summary>
             error code
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.RENTAL_BIKE_CATEGORY">
-            <summary>
-            the category of reantal bike
-            </summary>
-        </member>
-        <member name="T:RentalBikeApp.Config.TRANSACTION_STATUS">
+        <member name="T:RentalBikeApp.Constant.TRANSACTION_STATUS">
             <value>
              enum use to define the transaction form status
             </value>
-            <remarks>
-            REN_BIKE: when the user complete fill card information and press permit button, the transaction form status to RENT_BIKE
-            PAY: when the user choose a station to return bike, the transaction form status is PAY
-            </remarks>
         </member>
-        <member name="F:RentalBikeApp.Config.TRANSACTION_STATUS.RENT_BIKE">
+        <member name="F:RentalBikeApp.Constant.TRANSACTION_STATUS.RENT_BIKE">
             <summary>
             transaction with status ren bike
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.TRANSACTION_STATUS.PAY">
+        <member name="F:RentalBikeApp.Constant.TRANSACTION_STATUS.PAY">
             <summary>
             transaction with status pay
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Config.QRValid">
+        <member name="F:RentalBikeApp.Constant.QRValid">
             <summary>
             use for valid qr code
             </summary>
@@ -1104,7 +1072,7 @@
             Privider functions for process API
             </summary>
         </member>
-        <member name="M:RentalBikeApp.InterbankService.ProcessTransaction(RentalBikeApp.Entities.SQLEntities.Card,RentalBikeApp.Config.API_INFO.COMMAND,System.Int32,System.DateTime,System.String,System.String)">
+        <member name="M:RentalBikeApp.InterbankService.ProcessTransaction(RentalBikeApp.Entities.SQLEntities.Card,RentalBikeApp.Constant.API_INFO.COMMAND,System.Int32,System.DateTime,System.String,System.String)">
             <summary>
             Send transaction to server
             </summary>
@@ -1500,7 +1468,7 @@
             Fill bike information in rent bike form when rent bike status is RENTING_BIKE
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentBikeInfoForm(System.Int32,RentalBikeApp.Config.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentBikeInfoForm(System.Int32,RentalBikeApp.Constant.SQL.BikeCategory)">
             <summary>
             Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
             </summary>
@@ -1515,6 +1483,13 @@
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.HomePageBut_Click(System.Object,System.EventArgs)">
             <summary>
             Handle click event HomePageBut
+            </summary>
+            <param name="sender">The object send event</param>
+            <param name="e">An EventArgs</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.RentBikeBut_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handle click event RentBikeBut
             </summary>
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
@@ -1722,6 +1697,8 @@
             <summary>
             Fill transaction form with transaction's information when user process transaction for pay deposit money
             </summary>
+            <param name="bike">the rental bike</param>
+            <param name="card">The card</param>
         </member>
         <member name="M:RentalBikeApp.Presentation.TransactionInformationForm.PermitButWhenRentBike">
             <summary>
@@ -1822,7 +1799,7 @@
             <param name="input">the string plaintext</param>
             <returns>the MD5 hash</returns>
         </member>
-        <member name="M:RentalBikeApp.Utilities.GetWebContent(System.String,System.Net.Http.HttpMethod,System.String)">
+        <member name="M:RentalBikeApp.Utilities.SendRequest(System.String,System.Net.Http.HttpMethod,System.String)">
             <summary>
             Sent a request to the specified url
             </summary>

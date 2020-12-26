@@ -18,7 +18,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using RentalBikeApp.Entities.APIEntities;
 using RentalBikeApp.Entities.SQLEntities;
-using static RentalBikeApp.Config.API_INFO;
+using static RentalBikeApp.Constant.API_INFO;
 
 namespace RentalBikeApp
 {
@@ -62,7 +62,7 @@ namespace RentalBikeApp
                     transaction = info
                 }))
             };
-            string result = await Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.PROCESS_URL,
+            string result = await Utilities.SendRequest(Constant.API_INFO.BASE_URL + Constant.API_INFO.PROCESS_URL,
                 HttpMethod.Patch, JsonConvert.SerializeObject(body));
             ProcessTransactionResponse response = JsonConvert.DeserializeObject<ProcessTransactionResponse>(result);
             return response;
@@ -80,7 +80,7 @@ namespace RentalBikeApp
                 cvvCode = card.CVV,
                 dateExpired = card.DateExpired
             };
-            string result = await Utilities.GetWebContent(Config.API_INFO.BASE_URL + Config.API_INFO.RESET_URL,
+            string result = await Utilities.SendRequest(Constant.API_INFO.BASE_URL + Constant.API_INFO.RESET_URL,
                 HttpMethod.Patch, JsonConvert.SerializeObject(body));
             ResetResponse response = JsonConvert.DeserializeObject<ResetResponse>(result);
             return response;

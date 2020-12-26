@@ -13,7 +13,7 @@
 // ------------------------------------------------------
 
 using RentalBikeApp.Entities.SQLEntities;
-using static RentalBikeApp.Config.SQL;
+using static RentalBikeApp.Constant.SQL;
 using System.Collections.Generic;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Data;
@@ -39,26 +39,6 @@ namespace RentalBikeApp.Bussiness
             tandemService = new TandemService(SQLConnecter.GetInstance());
             electricBikeService = new ElectricBikeService(SQLConnecter.GetInstance());
             stationService = new StationService(SQLConnecter.GetInstance());
-        }
-
-        /// <summary>
-        /// Get bike information
-        /// </summary>
-        /// <param name="qrcode">The qrcode you want to get information</param>
-        /// <param name="stationName">representing station name contain the bike</param>
-        /// <param name="stationAddress">representing station address contain the bike</param>
-        /// <returns>The BaseBike representing the bike you want to get</returns>
-        public BaseBike ViewBikeDetail(string qrcode, ref string stationName, ref string stationAddress)
-        {
-            BaseBike bike = null;
-            if (qrcode[0] == '0') bike = bikeService.GetBikeByQRCode(qrcode);
-            else if (qrcode[0] == '1') bike = tandemService.GetBikeByQRCode(qrcode);
-            else if (qrcode[0] == '2') bike = electricBikeService.GetBikeByQRCode(qrcode);
-            if (bike == null) return null;
-            Station station = stationService.GetStationById(bike.StationId);
-            stationName = station.NameStation;
-            stationAddress = station.AddressStation;
-            return bike;
         }
 
         /// <summary>

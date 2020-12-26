@@ -110,7 +110,7 @@ namespace RentalBikeApp
         /// <param name="requestContent">The request's body, format json</param>
         /// <returns>The response with string format or exception message if cause error</returns>
         /// <exception cref="System.Exception">Throw when error</exception>
-        public static async Task<string> GetWebContent(string url, HttpMethod method, string requestContent = null)
+        public static async Task<string> SendRequest(string url, HttpMethod method, string requestContent = null)
         {
             HttpClient httpClient = new HttpClient();
             try

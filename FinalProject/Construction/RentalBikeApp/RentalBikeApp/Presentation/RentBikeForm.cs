@@ -15,7 +15,7 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Config.SQL;
+using static RentalBikeApp.Constant.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Bussiness;
 using System.Drawing;
@@ -83,8 +83,9 @@ namespace RentalBikeApp.Presentation
             rentBikePnl.Visible = false;
             rentingBikePnl.Visible = true;
             rentBikeInfoPnl.Visible = false;
-            if(bike.DateRent != null)
+            if (bike.DateRent != null)
                 rentingTimedRentValueLbl.Text = Utilities.SubtractDate(DateTime.Now, (DateTime)bike.DateRent);
+            else rentingTimedRentValueLbl.Text = "0:00:00";
             rentingQrCodeTxt.Text = bike.QRCode;
             rentingAvatarPb.Image = Image.FromFile(bike.Images);
             if(bike is Bike)
@@ -97,7 +98,7 @@ namespace RentalBikeApp.Presentation
             {
                 ElectricBike electricBike = bike as ElectricBike;
                 rentingCategoryTxt.Text = "Xe đạp điện";
-                rentingRemainPowerValueLbl.Text = $"${electricBike.Powers}%";
+                rentingRemainPowerValueLbl.Text = $"{electricBike.Powers}%";
                 rentingLicenseTxt.Text = electricBike.LicensePlate;
             }
             else
@@ -114,7 +115,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="bikeId">The bike id of specified bike</param>
         /// <param name="category">the bike category</param>
-        public void FillRentBikeInfoForm(int bikeId, Config.SQL.BikeCategory category)
+        public void FillRentBikeInfoForm(int bikeId, Constant.SQL.BikeCategory category)
         {
             rentBikePnl.Visible = false;
             rentingBikePnl.Visible = false;
@@ -165,6 +166,16 @@ namespace RentalBikeApp.Presentation
             this.Hide();
         }
 
+        /// <summary>
+        /// Handle click event RentBikeBut
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An EventArgs</param>
+        protected override void RentBikeBut_Click(object sender, EventArgs e)
+        {
+            DisplayRentbikeQrcode();
+        }
+
         #region Rent bike handle event
         /// <summary>
         /// Handle click event RentBikeRentBut, if user enter correct or code, display detail information of bike have this qr code
@@ -179,7 +190,7 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Nhập mã xe bạn muốn tìm kiếm", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!Utilities.InvlidString(Config.QRValid, qrCode))
+            if (!Utilities.InvlidString(Constant.QRValid, qrCode))
             {
                 MessageBox.Show($"QRCode không hợp lệ\nQRCode là dãy số có chín chữ số", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 rentBikeQrCodeTxt.Text = "";
@@ -213,7 +224,6 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeInfoRentThisBikeBut_Click(object sender, EventArgs e)
         {
-            Config.RENTAL_BIKE_CATEGORY = this.category;
             this.bike = bikeStationController.ViewBikeDetail(this.bike.BikeId, this.category);
             cardInformationForm.Show(this, this);
             cardInformationForm.FillCardInformation(bike);

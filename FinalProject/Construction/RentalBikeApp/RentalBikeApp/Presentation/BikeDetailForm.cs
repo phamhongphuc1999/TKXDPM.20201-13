@@ -14,7 +14,7 @@
 
 using System;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Config.SQL;
+using static RentalBikeApp.Constant.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Drawing;
 

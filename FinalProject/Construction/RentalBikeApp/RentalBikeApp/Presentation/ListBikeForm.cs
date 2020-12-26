@@ -18,7 +18,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Config.SQL;
+using static RentalBikeApp.Constant.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Bussiness;
 
@@ -210,7 +210,7 @@ namespace RentalBikeApp.Presentation
                 MessageBox.Show("Nhập mã xe bạn muốn tìm kiếm", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            if (!Utilities.InvlidString(Config.QRValid, qrCode))
+            if (!Utilities.InvlidString(Constant.QRValid, qrCode))
             {
                 MessageBox.Show($"QRCode không hợp lệ\nQRCode là dãy số có chín chữ số", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;

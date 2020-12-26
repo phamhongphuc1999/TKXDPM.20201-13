@@ -14,8 +14,9 @@
 
 using System;
 using System.Windows.Forms;
-using static RentalBikeApp.Config;
+using static RentalBikeApp.Constant;
 using static RentalBikeApp.Program;
+using static RentalBikeApp.Constant.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Entities.APIEntities;
 using RentalBikeApp.Bussiness;
@@ -27,6 +28,7 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class TransactionInformationForm : BaseForm
     {
+        private BikeCategory category;
         private int deposit;
         private int rentalMoney;
         private int stationId;
@@ -59,14 +61,12 @@ namespace RentalBikeApp.Presentation
             this.bike = bike;
             this.status = TRANSACTION_STATUS.PAY;
             this.stationId = stationId;
-            remainMoneyTxt.Text = "111";
+            remainMoneyTxt.Text = "1000000";
             transactionDateTxt.Text = DateTime.Now.ToString("f");
             cancelBut.Visible = false;
-
-            SQL.BikeCategory category = SQL.BikeCategory.BIKE;
-            if (bike is Bike) category = SQL.BikeCategory.BIKE;
-            else if (bike is ElectricBike) category = SQL.BikeCategory.ELECTRIC;
-            else if (bike is Tandem) category = SQL.BikeCategory.TANDEM;
+            if (bike is Bike) category = BikeCategory.BIKE;
+            else if (bike is ElectricBike) category = BikeCategory.ELECTRIC;
+            else if (bike is Tandem) category = BikeCategory.TANDEM;
             rentalMoney = returnBikeController.CalculateFee(rentBikeForm.GetTotalTimeRent(), category);
             rentalMoneyTxt.Text = (rentalMoney == 0) ? "Miễn phí" : rentalMoney.ToString();
         }
@@ -74,10 +74,15 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Fill transaction form with transaction's information when user process transaction for pay deposit money
         /// </summary>
+        /// <param name="bike">the rental bike</param>
+        /// <param name="card">The card</param>
         public void FillTransactionInformationWhenRentBike(BaseBike bike, Card card)
         {
             this.bike = bike;
             this.card = card;
+            if (bike is Bike) category = BikeCategory.BIKE;
+            else if (bike is ElectricBike) category = BikeCategory.ELECTRIC;
+            else if (bike is Tandem) category = BikeCategory.TANDEM;
             this.status = TRANSACTION_STATUS.RENT_BIKE;
             this.deposit = 40 * bike.Value / 100;
             depositTxt.Text = String.Format("{0:n0}", this.deposit);
@@ -91,7 +96,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         private async void PermitButWhenRentBike()
         {
-            ProcessTransactionResponse result = await InterbankService.ProcessTransaction(card, Config.API_INFO.COMMAND.PAY, this.deposit, DateTime.Now,
+            ProcessTransactionResponse result = await InterbankService.ProcessTransaction(card, Constant.API_INFO.COMMAND.PAY, this.deposit, DateTime.Now,
                 noteTxt.Text == "" ? "Transaction content" : noteTxt.Text);
             string error = result.errorCode;
             if (error == "00")
@@ -104,7 +109,7 @@ namespace RentalBikeApp.Presentation
                 }
                 this.transactionId = transaction.TransactionId;
                 rentBikeForm.FillRentingBikeForm();
-                rentBikeController.BeginRentingBike(bike.BikeId);
+                rentBikeController.BeginRentingBike(bike.BikeId, this.category);
                 rentBikeForm.Show(this, null);
             }
             else if (error == "01" || error == "02" || error == "05")
@@ -131,7 +136,7 @@ namespace RentalBikeApp.Presentation
             if(this.deposit == this.rentalMoney)
             {
                 Transaction transaction = returnBikeController.UpdatePaymentTransaction(transactionId, this.rentalMoney);
-                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId, RENTAL_BIKE_CATEGORY);
+                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId, this.category);
                 MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 homePageForm.Show(this);
                 this.Hide();
@@ -147,7 +152,7 @@ namespace RentalBikeApp.Presentation
             if (error == "00")
             {
                 Transaction transaction = returnBikeController.UpdatePaymentTransaction(transactionId, this.rentalMoney);
-                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId, RENTAL_BIKE_CATEGORY);
+                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId, this.category);
                 MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 homePageForm.Show(this);
             }
