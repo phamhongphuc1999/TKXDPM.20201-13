@@ -29,16 +29,16 @@ namespace RentalBikeApp.Presentation
     public partial class HomePageForm : BaseForm
     {
         private List<Station> stationList;
-        private BikeStationController bikeStationController;
+        private ViewStationController viewStationController;
 
         /// <summary>
         /// contructor of HomePageForm
         /// </summary>
         public HomePageForm(): base()
         {
-            bikeStationController = new BikeStationController();
+            viewStationController = new ViewStationController();
 
-            stationList = bikeStationController.ViewListStation();
+            stationList = viewStationController.ViewListStation();
             
             InitializeComponent("HomePageForm", "Home Page");
             DrawHomePage();
@@ -110,7 +110,7 @@ namespace RentalBikeApp.Presentation
         private void But_Click(object sender, EventArgs e)
         {
             Button but = sender as Button;
-            Station station = bikeStationController.ViewStationDetail((int)but.Tag);
+            Station station = viewStationController.ViewStationDetail((int)but.Tag);
             this.Hide();
             stationDetailForm.FillStationDetail(station);
             stationDetailForm.Show(this, this);
@@ -149,7 +149,7 @@ namespace RentalBikeApp.Presentation
         {
             searchTxt.Text = "";
             searchTxt.Width = this.ClientSize.Width - 140;
-            this.stationList = bikeStationController.ViewListStation();
+            this.stationList = viewStationController.ViewListStation();
             RenderStationList();
         }
     }

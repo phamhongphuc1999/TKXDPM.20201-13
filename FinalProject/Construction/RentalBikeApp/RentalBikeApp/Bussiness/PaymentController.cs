@@ -20,13 +20,33 @@ using RentalBikeApp.Entities.APIEntities;
 using RentalBikeApp.Entities.SQLEntities;
 using static RentalBikeApp.Constant.API_INFO;
 
-namespace RentalBikeApp
+namespace RentalBikeApp.Bussiness
 {
     /// <summary>
     /// Privider functions for process API
     /// </summary>
-    public class InterbankService
+    public class PaymentController
     {
+        /// <summary>
+        /// Calculate rental fee for rental bike
+        /// </summary>
+        /// <param name="timeRent">The time that the user has rented the car</param>
+        /// <param name="category">The category of rental bike</param>
+        /// <returns>The rental money that use must rent</returns>
+        public int CalculateFee(string timeRent, Constant.SQL.BikeCategory category)
+        {
+            string[] times = timeRent.Split(':');
+            double hour = Int64.Parse(times[0]);
+            double minute = Int64.Parse(times[1]);
+            double second = Int64.Parse(times[2]);
+            double timeMinutes = 60 * hour + minute + Math.Abs(second / 60) - 10;
+            if (category != Constant.SQL.BikeCategory.BIKE) timeMinutes = 1.5 * timeMinutes;
+            if (timeMinutes <= 0) return 0;
+            timeMinutes -= 30;
+            if (timeMinutes <= 0) return 10000;
+            return (int)(10000 + Math.Abs(timeMinutes / 15));
+        }
+
         /// <summary>
         /// Send transaction to server
         /// </summary>
@@ -37,7 +57,7 @@ namespace RentalBikeApp
         /// <param name="transactionContent">Note of transaction</param>
         /// <param name="_version">Version of API, default 1.0.1</param>
         /// <returns>The transaction response information</returns>
-        public static async Task<ProcessTransactionResponse> ProcessTransaction(Card card, COMMAND command, int amount, DateTime date, 
+        public async Task<ProcessTransactionResponse> ProcessTransaction(Card card, COMMAND command, int amount, DateTime date, 
             string transactionContent, string _version = "1.0.1")
         {
             TransactionInfo info = new TransactionInfo
@@ -71,7 +91,7 @@ namespace RentalBikeApp
         /// <summary>This function use for test API, it reset the balance in the account</summary>
         /// <param name="card">the card information</param>
         /// <returns>The reset response information</returns>
-        public static async Task<ResetResponse> ResetAccount(Card card)
+        public async Task<ResetResponse> ResetAccount(Card card)
         {
             var body = new
             {

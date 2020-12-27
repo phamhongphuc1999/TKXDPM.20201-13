@@ -32,14 +32,14 @@ namespace RentalBikeApp.Presentation
         private string stationName, stationAddress;
         private BikeCategory category;
         private List<BaseBike> bikes;
-        private BikeStationController bikeStationController;
+        private ViewBikeController viewBikeController;
 
         /// <summary>
         /// contructor of ListBikeForm
         /// </summary>
         public ListBikeForm(): base()
         {
-            bikeStationController = new BikeStationController();
+            viewBikeController = new ViewBikeController();
 
             InitializeComponent("ListBikesForm", "List Bikes");
             DrawListBikes();
@@ -79,7 +79,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.BIKE;
             this.stationName = stationName; this.stationAddress = stationAddress;
-            bikes = bikeStationController.ViewListBikeInStation(stationId).Select(bike =>
+            bikes = viewBikeController.ViewListBikeInStation(stationId).Select(bike =>
             {
                 return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
             }).ToList();
@@ -107,7 +107,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.TANDEM;
             this.stationName = stationName; this.stationAddress = stationAddress;
-            bikes = bikeStationController.ViewListTandemInStation(stationId).Select(bike =>
+            bikes = viewBikeController.ViewListTandemInStation(stationId).Select(bike =>
             {
                 return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
             }).ToList();
@@ -135,7 +135,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.ELECTRIC;
             this.stationName = stationName; this.stationAddress = stationAddress;
-            bikes = bikeStationController.ViewListElectricBikeInStation(stationId).Select(bike =>
+            bikes = viewBikeController.ViewListElectricBikeInStation(stationId).Select(bike =>
             {
                 return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
             }).ToList();
@@ -161,7 +161,7 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             int bikeId = (int)but.Tag;
-            BaseBike bike = bikeStationController.ViewBikeDetail(bikeId, this.category);
+            BaseBike bike = viewBikeController.ViewBikeDetail(bikeId, this.category);
             if (bike == null)
             {
                 MessageBox.Show($"Không tìm được xe có id: {bikeId}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -217,7 +217,7 @@ namespace RentalBikeApp.Presentation
             }
             BaseBike bike = bikes.SingleOrDefault(x => x.QRCode == qrCode);
             if(bike == null) MessageBox.Show($"Không tìm được xe có qrcode: {qrCode}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            Station station = bikeStationController.ViewStationDetail(bike.StationId);
+            Station station = viewBikeController.GetDetailStationContainbike(bike.StationId);
             bikeDetailForm.FillBikeInformation(bike, station.NameStation, station.AddressStation);
             bikeDetailForm.Show(this);
             this.Hide();

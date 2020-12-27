@@ -29,7 +29,7 @@ namespace RentalBikeApp.Presentation
     public partial class ReturnBikeForm : BaseForm
     {
         private List<Station> stationList;
-        private BikeStationController bikeStationController;
+        private ViewStationController viewStationController;
         private ReturnBikeController returnBikeController;
         private BaseBike rentalBike;
 
@@ -38,10 +38,10 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         public ReturnBikeForm(): base()
         {
-            bikeStationController = new BikeStationController();
+            viewStationController = new ViewStationController();
             returnBikeController = new ReturnBikeController();
 
-            stationList = bikeStationController.ViewListStation();
+            stationList = viewStationController.ViewListStation();
 
             InitializeComponent("ReturnBikeForm", "Return Bike");
             DrawReturnBikeForm();
@@ -160,7 +160,7 @@ namespace RentalBikeApp.Presentation
         {
             searchTxt.Text = "";
             searchTxt.Width = this.ClientSize.Width - 140;
-            this.stationList = bikeStationController.ViewListStation();
+            this.stationList = viewStationController.ViewListStation();
             RenderStationList();
         }
 

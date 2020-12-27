@@ -38,6 +38,7 @@ namespace RentalBikeApp.Presentation
         private TRANSACTION_STATUS status;
         private RentBikeController rentBikeController;
         private ReturnBikeController returnBikeController;
+        private PaymentController paymentController;
 
         /// <summary>
         /// contructor of TransactionInformationForm
@@ -46,6 +47,7 @@ namespace RentalBikeApp.Presentation
         {
             rentBikeController = new RentBikeController();
             returnBikeController = new ReturnBikeController();
+            paymentController = new PaymentController();
 
             InitializeComponent("TransactionInformationForm", "Transaction Information");
             DrawTransactionInformationForm();
@@ -67,7 +69,7 @@ namespace RentalBikeApp.Presentation
             if (bike is Bike) category = BikeCategory.BIKE;
             else if (bike is ElectricBike) category = BikeCategory.ELECTRIC;
             else if (bike is Tandem) category = BikeCategory.TANDEM;
-            rentalMoney = returnBikeController.CalculateFee(rentBikeForm.GetTotalTimeRent(), category);
+            rentalMoney = paymentController.CalculateFee(rentBikeForm.GetTotalTimeRent(), category);
             rentalMoneyTxt.Text = (rentalMoney == 0) ? "Miễn phí" : rentalMoney.ToString();
         }
 
@@ -96,7 +98,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         private async void PermitButWhenRentBike()
         {
-            ProcessTransactionResponse result = await InterbankService.ProcessTransaction(card, Constant.API_INFO.COMMAND.PAY, this.deposit, DateTime.Now,
+            ProcessTransactionResponse result = await paymentController.ProcessTransaction(card, Constant.API_INFO.COMMAND.PAY, this.deposit, DateTime.Now,
                 noteTxt.Text == "" ? "Transaction content" : noteTxt.Text);
             string error = result.errorCode;
             if (error == "00")
@@ -143,10 +145,10 @@ namespace RentalBikeApp.Presentation
                 return;
             }
             if (this.deposit < this.rentalMoney)
-                response = await InterbankService.ProcessTransaction(card, API_INFO.COMMAND.PAY, this.rentalMoney - this.deposit,
+                response = await paymentController.ProcessTransaction(card, API_INFO.COMMAND.PAY, this.rentalMoney - this.deposit,
                     DateTime.Now, "Pay Rental Money");
             else if (this.deposit > this.rentalMoney)
-                response = await InterbankService.ProcessTransaction(card, API_INFO.COMMAND.REFUND, this.deposit - this.rentalMoney,
+                response = await paymentController.ProcessTransaction(card, API_INFO.COMMAND.REFUND, this.deposit - this.rentalMoney,
                     DateTime.Now, "Refund deposit");
             string error = response.errorCode;
             if (error == "00")

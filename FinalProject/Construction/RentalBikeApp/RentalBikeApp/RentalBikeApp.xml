@@ -4,57 +4,35 @@
         <name>RentalBikeApp</name>
     </assembly>
     <members>
-        <member name="T:RentalBikeApp.Bussiness.BikeStationController">
+        <member name="T:RentalBikeApp.Bussiness.PaymentController">
             <summary>
-            Provider flow for view detail bike and view detail station
+            Privider functions for process API
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.BikeStationController.#ctor">
+        <member name="M:RentalBikeApp.Bussiness.PaymentController.CalculateFee(System.String,RentalBikeApp.Constant.SQL.BikeCategory)">
             <summary>
-            Contructor of BikeStationController
+            Calculate rental fee for rental bike
             </summary>
+            <param name="timeRent">The time that the user has rented the car</param>
+            <param name="category">The category of rental bike</param>
+            <returns>The rental money that use must rent</returns>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewBikeDetail(System.Int32,RentalBikeApp.Constant.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Bussiness.PaymentController.ProcessTransaction(RentalBikeApp.Entities.SQLEntities.Card,RentalBikeApp.Constant.API_INFO.COMMAND,System.Int32,System.DateTime,System.String,System.String)">
             <summary>
-            Get bike information
+            Send transaction to server
             </summary>
-            <param name="bikeId">The bike id you want to get information</param>
-            <param name="category">The bike type</param>
-            <returns>The BaseBike representing the bike you want to get</returns>
+            <param name="card">The card information</param>
+            <param name="command">The definition of the request is for payment or refund</param>
+            <param name="amount">The amount of transaction</param>
+            <param name="date">Date time transaction processed</param>
+            <param name="transactionContent">Note of transaction</param>
+            <param name="_version">Version of API, default 1.0.1</param>
+            <returns>The transaction response information</returns>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewListBikeInStation(System.Int32)">
-            <summary>
-            Get list bike in specified station
-            </summary>
-            <param name="stationId">The station id you want to get list bike</param>
-            <returns>The list bike</returns>
-        </member>
-        <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewListElectricBikeInStation(System.Int32)">
-            <summary>
-            Get list electric bike in specified station
-            </summary>
-            <param name="stationId">The station id you want to get list bike</param>
-            <returns>The list electric bike</returns>
-        </member>
-        <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewListTandemInStation(System.Int32)">
-            <summary>
-            Get tandem in specified station
-            </summary>
-            <param name="stationId">The station id you want to get list bike</param>
-            <returns>The list tandem</returns>
-        </member>
-        <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewStationDetail(System.Int32)">
-            <summary>
-            Get specified station information
-            </summary>
-            <param name="stationId">The station id you want to get</param>
-            <returns>The station</returns>
-        </member>
-        <member name="M:RentalBikeApp.Bussiness.BikeStationController.ViewListStation">
-            <summary>
-            Get all of station in database
-            </summary>
-            <returns>The list stations</returns>
+        <member name="M:RentalBikeApp.Bussiness.PaymentController.ResetAccount(RentalBikeApp.Entities.SQLEntities.Card)">
+            <summary>This function use for test API, it reset the balance in the account</summary>
+            <param name="card">the card information</param>
+            <returns>The reset response information</returns>
         </member>
         <member name="T:RentalBikeApp.Bussiness.RentBikeController">
             <summary>
@@ -108,14 +86,6 @@
             contructor of ReturnBikeController
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.CalculateFee(System.String,RentalBikeApp.Constant.SQL.BikeCategory)">
-            <summary>
-            Calculate rental fee for rental bike
-            </summary>
-            <param name="timeRent">The time that the user has rented the car</param>
-            <param name="category">The category of rental bike</param>
-            <returns>The rental money that use must rent</returns>
-        </member>
         <member name="M:RentalBikeApp.Bussiness.ReturnBikeController.CheckStation(System.Int32)">
             <summary>
             Check availability position in station
@@ -140,6 +110,75 @@
             <param name="rentalMoney">The reantal money</param>
             <param name="content">The transaction content</param>
             <returns></returns>
+        </member>
+        <member name="T:RentalBikeApp.Bussiness.ViewBikeController">
+            <summary>
+            Provider flow for view bike
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ViewBikeController.#ctor">
+            <summary>
+            Contructor of ViewBikeController
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ViewBikeController.ViewBikeDetail(System.Int32,RentalBikeApp.Constant.SQL.BikeCategory)">
+            <summary>
+            Get bike information
+            </summary>
+            <param name="bikeId">The bike id you want to get information</param>
+            <param name="category">The bike type</param>
+            <returns>The BaseBike representing the bike you want to get</returns>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ViewBikeController.ViewListBikeInStation(System.Int32)">
+            <summary>
+            Get list bike in specified station
+            </summary>
+            <param name="stationId">The station id you want to get list bike</param>
+            <returns>The list bike</returns>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ViewBikeController.ViewListElectricBikeInStation(System.Int32)">
+            <summary>
+            Get list electric bike in specified station
+            </summary>
+            <param name="stationId">The station id you want to get list bike</param>
+            <returns>The list electric bike</returns>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ViewBikeController.ViewListTandemInStation(System.Int32)">
+            <summary>
+            Get tandem in specified station
+            </summary>
+            <param name="stationId">The station id you want to get list bike</param>
+            <returns>The list tandem</returns>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ViewBikeController.GetDetailStationContainbike(System.Int32)">
+            <summary>
+            Get detail information os station
+            </summary>
+            <param name="stationId">The station id</param>
+            <returns>The station information</returns>
+        </member>
+        <member name="T:RentalBikeApp.Bussiness.ViewStationController">
+            <summary>
+            Provider flow for view detail station
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ViewStationController.#ctor">
+            <summary>
+            Contructor of ViewStationController
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ViewStationController.ViewStationDetail(System.Int32)">
+            <summary>
+            Get specified station information
+            </summary>
+            <param name="stationId">The station id you want to get</param>
+            <returns>The station</returns>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.ViewStationController.ViewListStation">
+            <summary>
+            Get all of station in database
+            </summary>
+            <returns>The list stations</returns>
         </member>
         <member name="T:RentalBikeApp.Constant">
             <summary>
@@ -1083,28 +1122,6 @@
             passworn
             </summary>
         </member>
-        <member name="T:RentalBikeApp.InterbankService">
-            <summary>
-            Privider functions for process API
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.InterbankService.ProcessTransaction(RentalBikeApp.Entities.SQLEntities.Card,RentalBikeApp.Constant.API_INFO.COMMAND,System.Int32,System.DateTime,System.String,System.String)">
-            <summary>
-            Send transaction to server
-            </summary>
-            <param name="card">The card information</param>
-            <param name="command">The definition of the request is for payment or refund</param>
-            <param name="amount">The amount of transaction</param>
-            <param name="date">Date time transaction processed</param>
-            <param name="transactionContent">Note of transaction</param>
-            <param name="_version">Version of API, default 1.0.1</param>
-            <returns>The transaction response information</returns>
-        </member>
-        <member name="M:RentalBikeApp.InterbankService.ResetAccount(RentalBikeApp.Entities.SQLEntities.Card)">
-            <summary>This function use for test API, it reset the balance in the account</summary>
-            <param name="card">the card information</param>
-            <returns>The reset response information</returns>
-        </member>
         <member name="T:RentalBikeApp.Presentation.BaseForm">
             <summary>
             This class extend the function and event to help user interact with screen in progran
@@ -1569,18 +1586,16 @@
             </summary>
             <param name="bike">The rental bike need to return</param>
         </member>
-        <member name="M:RentalBikeApp.Presentation.ReturnBikeForm.RenderStationList(System.Windows.Forms.Panel)">
+        <member name="M:RentalBikeApp.Presentation.ReturnBikeForm.RenderStationList">
             <summary>
             Get station in the database and display in specified panel
             </summary>
-            <param name="pnl">The specified panel</param>
         </member>
-        <member name="M:RentalBikeApp.Presentation.ReturnBikeForm.RenderStationList(System.Collections.Generic.List{RentalBikeApp.Entities.SQLEntities.Station},System.Windows.Forms.Panel)">
+        <member name="M:RentalBikeApp.Presentation.ReturnBikeForm.RenderStationList(System.Collections.Generic.List{RentalBikeApp.Entities.SQLEntities.Station})">
             <summary>
             Get station in the database and display in specified panel
             </summary>
             <param name="stationList">The specified station list to display</param>
-            <param name="pnl">The specified panel to display station list</param>
         </member>
         <member name="M:RentalBikeApp.Presentation.ReturnBikeForm.RentBikeBut_Click(System.Object,System.EventArgs)">
             <summary>
@@ -1773,12 +1788,6 @@
             <param name="minute">minute of date to convert</param>
             <param name="second">second of date to convert</param>
             <returns>the string with format: yyyy-mm-dd hh:mm:ss</returns>
-            <example>
-            <code>
-            string date = Utilities.ConvertDateToString(1999, 12, 04, 10, 50, 00);
-            console.Write(date);
-            </code>
-            </example>
         </member>
         <member name="M:RentalBikeApp.Utilities.ConvertDateToString(System.DateTime)">
             <summary>
@@ -1786,12 +1795,6 @@
             </summary>
             <param name="date">date want to convert</param>
             <returns>the string with format: yyyy-mm-dd hh:mm:ss</returns>
-            <example>
-            <code>
-            string date = Utilities.ConvertDateToString(DateTime.Now);
-            Console.Write(date);
-            </code>
-            </example>
         </member>
         <member name="M:RentalBikeApp.Utilities.SubtractDate(System.DateTime,System.DateTime)">
             <summary>

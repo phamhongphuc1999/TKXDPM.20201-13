@@ -30,7 +30,7 @@ namespace RentalBikeApp.Presentation
         private BikeCategory category;
         private BaseBike bike;
 
-        private BikeStationController bikeStationController;
+        private ViewBikeController viewBikeController;
         private RentBikeController rentBikeController;
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         public RentBikeForm(): base()
         {
-            bikeStationController = new BikeStationController();
+            viewBikeController = new ViewBikeController();
             rentBikeController = new RentBikeController();
 
             InitializeComponent("RentBikeForm", "Rent Bike");
@@ -120,7 +120,7 @@ namespace RentalBikeApp.Presentation
             rentBikePnl.Visible = false;
             rentingBikePnl.Visible = false;
             rentBikeInfoPnl.Visible = true;
-            bike = bikeStationController.ViewBikeDetail(bikeId, category);
+            bike = viewBikeController.ViewBikeDetail(bikeId, category);
             this.category = category;
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
             int deposit = 40 * bike.Value / 100;
@@ -224,7 +224,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeInfoRentThisBikeBut_Click(object sender, EventArgs e)
         {
-            this.bike = bikeStationController.ViewBikeDetail(this.bike.BikeId, this.category);
+            this.bike = viewBikeController.ViewBikeDetail(this.bike.BikeId, this.category);
             cardInformationForm.Show(this, this);
             cardInformationForm.FillCardInformation(bike);
             this.Hide();
