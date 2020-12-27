@@ -236,6 +236,22 @@
             use for valid qr code
             </summary>
         </member>
+        <member name="T:RentalBikeApp.Data.ServiceAgents.BaseService">
+            <summary>
+            Provider function to interact tables in database
+            </summary>
+        </member>
+        <member name="F:RentalBikeApp.Data.ServiceAgents.BaseService.connecter">
+            <summary>
+            the instance representing connection to database
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BaseService.#ctor(RentalBikeApp.Data.SQLConnecter)">
+            <summary>
+            contructor of BaseService
+            </summary>
+            <param name="connecter">the instance representing connection to database</param>
+        </member>
         <member name="T:RentalBikeApp.Data.ServiceAgents.BikeService">
             <summary>
             Provides functions to interact with bike in the database
@@ -1301,18 +1317,16 @@
             contructor of HomePageForm
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Presentation.HomePageForm.RenderStationList(System.Windows.Forms.Panel)">
+        <member name="M:RentalBikeApp.Presentation.HomePageForm.RenderStationList">
             <summary>
             Get station in the database and display in specified panel
             </summary>
-            <param name="pnl">The specified panel to display station list</param>
         </member>
-        <member name="M:RentalBikeApp.Presentation.HomePageForm.RenderStationList(System.Collections.Generic.List{RentalBikeApp.Entities.SQLEntities.Station},System.Windows.Forms.Panel)">
+        <member name="M:RentalBikeApp.Presentation.HomePageForm.RenderStationList(System.Collections.Generic.List{RentalBikeApp.Entities.SQLEntities.Station})">
             <summary>
             Get station in the database and display in specified panel
             </summary>
             <param name="stationList">The specified station list to display</param>
-            <param name="pnl">The specified panel to display station list</param>
         </member>
         <member name="M:RentalBikeApp.Presentation.HomePageForm.HomePageBut_Click(System.Object,System.EventArgs)">
             <summary>
@@ -1348,11 +1362,6 @@
             </summary>
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
-        </member>
-        <member name="F:RentalBikeApp.Presentation.HomePageForm.stationPnl">
-            <summary>
-            panel for display stations list
-            </summary>
         </member>
         <member name="M:RentalBikeApp.Presentation.HomePageForm.DrawHomePage">
             <summary>

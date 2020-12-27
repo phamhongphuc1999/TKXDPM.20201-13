@@ -12,7 +12,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Initialized control in ReturnBikeForm
         /// </summary>
-        public void DrawReturnBikeForm()
+        private void DrawReturnBikeForm()
         {
             returnBikePnl = new Panel()
             {

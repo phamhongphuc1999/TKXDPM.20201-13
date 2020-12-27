@@ -12,6 +12,7 @@
 //
 // ------------------------------------------------------
 
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -25,7 +26,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// representing of previous form
         /// </summary>
-        public BaseForm PrevForm { get; set; }
+        protected BaseForm PrevForm { get; set; }
 
         /// <summary>
         /// contructor of BaseForm
@@ -71,7 +72,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        protected virtual void RentBikeBut_Click(object sender, System.EventArgs e)
+        protected virtual void RentBikeBut_Click(object sender, EventArgs e)
         {
         }
 
@@ -80,7 +81,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        protected virtual void HomePageBut_Click(object sender, System.EventArgs e)
+        protected virtual void HomePageBut_Click(object sender, EventArgs e)
         {
         }
 
@@ -89,7 +90,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         /// <param name="sender">The object send event</param>
         /// <param name="e">An EventArgs</param>
-        protected virtual void PrevFormBut_Click(object sender, System.EventArgs e)
+        protected virtual void PrevFormBut_Click(object sender, EventArgs e)
         {
             if(this.PrevForm != null)
             {

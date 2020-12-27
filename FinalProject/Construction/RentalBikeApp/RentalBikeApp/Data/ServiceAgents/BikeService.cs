@@ -21,18 +21,13 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// <summary>
     /// Provides functions to interact with bike in the database
     /// </summary>
-    public class BikeService: IBikeService<Bike>
+    public class BikeService: BaseService, IBikeService<Bike>
     {
-        private SQLConnecter connecter;
-
         /// <summary>
         /// contructor of BikeService
         /// </summary>
         /// <param name="connecter">The connecter</param>
-        public BikeService(SQLConnecter connecter)
-        {
-            this.connecter = connecter;
-        }
+        public BikeService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>Get bike by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>

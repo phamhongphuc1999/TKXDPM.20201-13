@@ -45,7 +45,7 @@ namespace RentalBikeApp.Presentation
 
             InitializeComponent("ReturnBikeForm", "Return Bike");
             DrawReturnBikeForm();
-            RenderStationList(this.listStationPnl);
+            RenderStationList();
         }
 
         /// <summary>
@@ -60,10 +60,9 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Get station in the database and display in specified panel
         /// </summary>
-        /// <param name="pnl">The specified panel</param>
-        private void RenderStationList(Panel pnl)
+        private void RenderStationList()
         {
-            pnl.Controls.Clear();
+            this.listStationPnl.Controls.Clear();
             int X = 20, Y = 5;
             int count = 0;
             foreach (Station station in stationList)
@@ -71,14 +70,14 @@ namespace RentalBikeApp.Presentation
                 Button but = new Button()
                 {
                     Location = new Point(X, Y),
-                    Size = new Size(pnl.Width - 40, 50),
+                    Size = new Size(this.listStationPnl.Width - 40, 50),
                     BackColor = (count % 2 == 0) ? ColorTranslator.FromHtml("#4dd7fa") : ColorTranslator.FromHtml("#c9f1fd"),
                     Text = station.NameStation,
                     Tag = station.StationId
                 };
                 Y += 55; count++;
                 but.Click += But_Click;
-                pnl.Controls.Add(but);
+                this.listStationPnl.Controls.Add(but);
             }
         }
 
@@ -86,11 +85,10 @@ namespace RentalBikeApp.Presentation
         /// Get station in the database and display in specified panel
         /// </summary>
         /// <param name="stationList">The specified station list to display</param>
-        /// <param name="pnl">The specified panel to display station list</param>
-        private void RenderStationList(List<Station> stationList, Panel pnl)
+        private void RenderStationList(List<Station> stationList)
         {
             this.stationList = stationList;
-            RenderStationList(pnl);
+            RenderStationList();
         }
 
         /// <summary>
@@ -112,7 +110,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected override void HomePageBut_Click(object sender, EventArgs e)
         {
-            homePageForm.RenderStationList(homePageForm.stationPnl);
+            homePageForm.RenderStationList();
             homePageForm.Show(this);
             this.Hide();
         }
@@ -163,7 +161,7 @@ namespace RentalBikeApp.Presentation
             searchTxt.Text = "";
             searchTxt.Width = this.ClientSize.Width - 140;
             this.stationList = bikeStationController.ViewListStation();
-            RenderStationList(this.listStationPnl);
+            RenderStationList();
         }
 
         /// <summary>
@@ -187,7 +185,7 @@ namespace RentalBikeApp.Presentation
                 return;
             }
             searchTxt.Width = this.ClientSize.Width - 180;
-            this.RenderStationList(stations, this.listStationPnl);
+            this.RenderStationList(stations);
         }
     }
 }

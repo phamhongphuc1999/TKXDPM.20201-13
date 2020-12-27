@@ -22,18 +22,13 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// <summary>
     /// Provides functions to interact with transaction in the database
     /// </summary>
-    public class TransactionService
+    public class TransactionService: BaseService
     {
-        private SQLConnecter connecter;
-
         /// <summary>
         /// contructor of TransactionService
         /// </summary>
         /// <param name="connecter">The connecter</param>
-        public TransactionService(SQLConnecter connecter)
-        {
-            this.connecter = connecter;
-        }
+        public TransactionService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>Insert new transaction when user deposit money to rent the bike</summary>
         /// <param name="userId">the Id of user who want to rent the bike</param>

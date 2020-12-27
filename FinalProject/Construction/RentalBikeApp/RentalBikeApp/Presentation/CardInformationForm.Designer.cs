@@ -14,7 +14,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Initialized control in CardInformation
         /// </summary>
-        public void DrawCardInformation()
+        private void DrawCardInformation()
         {
             cardInformationPnl = new Panel()
             {

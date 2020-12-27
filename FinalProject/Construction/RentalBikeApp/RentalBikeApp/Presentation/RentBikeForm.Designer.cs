@@ -30,7 +30,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Display RentBikeForm to enter QRcode
         /// </summary>
-        public void DrawRentBikeForm()
+        private void DrawRentBikeForm()
         {
             rentBikePnl = new Panel()
             {
@@ -64,7 +64,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Display RentBikeform when user is renting bike
         /// </summary>
-        public void DrawRentingBikeForm()
+        private void DrawRentingBikeForm()
         {
             rentBikeTmr = new Timer()
             {
@@ -234,7 +234,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Display RentBikeForm to display bike information
         /// </summary>
-        public void DrawRentBikeInfoForm()
+        private void DrawRentBikeInfoForm()
         {
             rentBikeInfoPnl = new Panel()
             {

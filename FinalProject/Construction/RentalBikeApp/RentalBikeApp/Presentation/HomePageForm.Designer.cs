@@ -5,11 +5,7 @@ namespace RentalBikeApp.Presentation
 {
     partial class HomePageForm
     {
-        /// <summary>
-        /// panel for display stations list
-        /// </summary>
-        public Panel stationPnl;
-
+        private Panel stationPnl;
         private Label lineSearchLbl;
         private TextBox searchTxt;
         private Button searchBut, cancelSearchBut;
@@ -17,7 +13,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Initialized control in HomePageForm
         /// </summary>
-        public void DrawHomePage()
+        private void DrawHomePage()
         {
             searchTxt = new TextBox()
             {

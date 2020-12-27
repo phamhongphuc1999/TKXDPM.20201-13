@@ -13,17 +13,17 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Home page button
         /// </summary>
-        public Button homePageBut;
+        protected Button homePageBut;
 
         /// <summary>
         /// rent bike button
         /// </summary>
-        public Button rentBikeBut;
+        protected Button rentBikeBut;
 
         /// <summary>
         /// previous form button
         /// </summary>
-        public Button prevFormBut;
+        protected Button prevFormBut;
 
         /// <summary>
         /// draw base form

@@ -15,7 +15,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Initialized control in BikeDetailForm
         /// </summary>
-        public void DrawBikeDetail()
+        private void DrawBikeDetail()
         {
             bikeDetailPnl = new Panel()
             {

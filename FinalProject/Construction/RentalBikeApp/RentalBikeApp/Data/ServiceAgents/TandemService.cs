@@ -21,18 +21,13 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// <summary>
     /// Provides functions to interact with tandem in the database
     /// </summary>
-    public class TandemService: IBikeService<Tandem>
+    public class TandemService: BaseService, IBikeService<Tandem>
     {
-        private SQLConnecter connecter;
-
         /// <summary>
         /// contructor of TandemService
         /// </summary>
         /// <param name="connecter">The connecter</param>
-        public TandemService(SQLConnecter connecter)
-        {
-            this.connecter = connecter;
-        }
+        public TandemService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>Get tandem by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>

@@ -13,7 +13,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Initialized control in TransactionInformationForm
         /// </summary>
-        public void DrawTransactionInformationForm()
+        private void DrawTransactionInformationForm()
         {
             transactionPnl = new Panel()
             {

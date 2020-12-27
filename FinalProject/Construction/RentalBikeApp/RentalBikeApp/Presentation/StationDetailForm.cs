@@ -56,7 +56,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected override void HomePageBut_Click(object sender, EventArgs e)
         {
-            homePageForm.RenderStationList(homePageForm.stationPnl);
+            homePageForm.RenderStationList();
             homePageForm.Show(this);
             this.Hide();
         }

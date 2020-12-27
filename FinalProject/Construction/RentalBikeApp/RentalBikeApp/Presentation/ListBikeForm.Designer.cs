@@ -13,7 +13,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// Initalized control in ListBikeForm
         /// </summary>
-        public void DrawListBikes()
+        private void DrawListBikes()
         {
             searchTxt = new TextBox()
             {
