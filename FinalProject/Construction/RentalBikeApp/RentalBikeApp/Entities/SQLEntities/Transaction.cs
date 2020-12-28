@@ -42,7 +42,7 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// </summary>
         [Required(ErrorMessage = "BikeId is required")]
         [ForeignKey("Bike")]
-        public string BikeQrCode { get; private set; }
+        public int BikeId { get; private set; }
 
         /// <summary>
         /// deposit
@@ -79,12 +79,12 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// Contructor of transaction
         /// </summary>
         /// <param name="userId">The id of user who process transaction</param>
-        /// <param name="bikeQrCode">The qr code of rental bike</param>
+        /// <param name="bikeId">The id of rental bike</param>
         /// <param name="deposit">The deposit of transaction</param>
-        public Transaction(int userId, string bikeQrCode, int deposit)
+        public Transaction(int userId, int bikeId, int deposit)
         {
             this.UserId = userId;
-            this.BikeQrCode = bikeQrCode;
+            this.BikeId = bikeId;
             this.Deposit = deposit;
             this.RentalMoney = 0;
             this.TotalTimeRent = 0;
@@ -97,31 +97,13 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <param name="rentalMoney">The rental money of transaction</param>
         /// <param name="totalTimeRent">The total time rent of transaction</param>
         /// <param name="note">The note of transaction</param>
-        /// <param name="date">The date process transaction</param>
         /// <returns>The transaction before updated</returns>
-        public Transaction UpdateTransaction(int rentalMoney, int totalTimeRent, string note, DateTime date)
-        {
-            this.RentalMoney = rentalMoney;
-            this.TotalTimeRent = totalTimeRent;
-            this.DateTransaction = date;
-            this.Note = note;
-            return this;
-        }
-
-        /// <summary>
-        /// Update transaction
-        /// </summary>
-        /// <param name="rentalMoney">The rental money of transaction</param>
-        /// <param name="totalTimeRent">The total time rent of transaction</param>
-        /// <param name="note">The note of transaction</param>
-        /// <returns>The transaction before updated</returns>
-        public Transaction UpdateTransaction(int rentalMoney, int totalTimeRent, string note)
+        public void UpdateTransaction(int rentalMoney, int totalTimeRent, string note)
         {
             this.RentalMoney = rentalMoney;
             this.TotalTimeRent = totalTimeRent;
             this.DateTransaction = DateTime.Now;
             this.Note = note;
-            return this;
         }
     }
 }

@@ -18,14 +18,14 @@ using System.Linq;
 namespace RentalBikeApp.Data.ServiceAgents
 {
     /// <summary>
-    /// Provides functions to interact with card in the database
+    /// Provides functions to interact with card table in the database
     /// </summary>
     public class CardService: BaseService
     {
         /// <summary>
         /// contructor of CardService
         /// </summary>
-        /// <param name="connecter">The connecter</param>
+        /// <param name="connecter">The instance representing connection to database</param>
         public CardService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>

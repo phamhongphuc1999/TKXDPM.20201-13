@@ -81,12 +81,12 @@ namespace RentalBikeApp.Bussiness
         /// Create new transaction to save deposit transaction
         /// </summary>
         /// <param name="userId">The id of user</param>
-        /// <param name="qrcode">The qr code of rental bike</param>
+        /// <param name="bikeId">The id of rental bike</param>
         /// <param name="deposit">The deposit of rental bike</param>
         /// <returns>The new transaction</returns>
-        public Transaction CreateDepositTransaction(int userId, string qrcode, int deposit)
+        public Transaction CreateDepositTransaction(int userId, int bikeId, int deposit)
         {
-            Transaction transaction = transactionService.InsertNewTransaction(userId, qrcode, deposit);
+            Transaction transaction = transactionService.InsertNewTransaction(userId, bikeId, deposit);
             return transaction;
         }
 

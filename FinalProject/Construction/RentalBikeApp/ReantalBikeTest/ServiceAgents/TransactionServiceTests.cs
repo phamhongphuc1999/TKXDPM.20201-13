@@ -39,7 +39,7 @@ namespace ReantalBikeTest.ServiceAgents
         [Test, Order(0)]
         public void InsertNewTransactionTest()
         {
-            Transaction transaction = new Transaction(1, "000000001", 400000);
+            Transaction transaction = new Transaction(1, 1, 400000);
             Assert.IsNotNull(transaction);
             
         }

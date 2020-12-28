@@ -18,16 +18,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RentalBikeApp.Entities.SQLEntities
 {
     /// <summary>
-    /// 
+    /// representing Tandem table in database
     /// </summary>
     [Table("Tandem")]
     public class TandemTable
     {
         /// <summary>
-        /// 
+        /// bike id
         /// </summary>
         [Key]
-        public int BikeId { get; set; }
+        public int BikeId { get; private set; }
     }
 
     /// <summary>
@@ -41,9 +41,9 @@ namespace RentalBikeApp.Entities.SQLEntities
         public Tandem() : base() { }
 
         /// <summary>
-        /// 
+        /// Contructor of Tandem
         /// </summary>
-        /// <param name="bike"></param>
+        /// <param name="bike">the bike information</param>
         public Tandem(BaseBike bike): base(bike) { }
     }
 }

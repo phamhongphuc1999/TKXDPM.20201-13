@@ -18,16 +18,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RentalBikeApp.Entities.SQLEntities
 {
     /// <summary>
-    /// 
+    /// reqresenting the Bikes table in database
     /// </summary>
     [Table("Bikes")]
     public class BikeTable
     {
         /// <summary>
-        /// 
+        /// bike id
         /// </summary>
         [Key]
-        public int BikeId { get; set; }
+        public int BikeId { get; private set; }
     }
 
     /// <summary>
@@ -41,9 +41,9 @@ namespace RentalBikeApp.Entities.SQLEntities
         public Bike(): base() { }
 
         /// <summary>
-        /// 
+        /// Contructor of Bike
         /// </summary>
-        /// <param name="bike"></param>
+        /// <param name="bike">the bike information</param>
         public Bike(BaseBike bike): base(bike) { }
     }
 }

@@ -1,11 +1,25 @@
-﻿using System;
+﻿// --------------------RENTAL BIKE APP-----------------
+//
+//
+// Copyright (c) Microsoft. All Rights Reserved.
+// License under the Apache License, Version 2.0.
+//
+//   Su Huu Vu Quang
+//   Pham Hong Phuc
+//   Tran Minh Quang
+//   Ngo Minh Quang
+//
+//
+// ------------------------------------------------------
+
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RentalBikeApp.Entities.SQLEntities
 {
     /// <summary>
-    /// this class entend for all of bike in program
+    /// Representing the BaseBike table in database
     /// </summary>
     [Table("BaseBike")]
     public class BaseBike
@@ -72,14 +86,14 @@ namespace RentalBikeApp.Entities.SQLEntities
         public BaseBike() { }
 
         /// <summary>
-        /// 
+        /// Contructor of BaseBike
         /// </summary>
-        /// <param name="bikeId"></param>
-        /// <param name="stationId"></param>
-        /// <param name="value"></param>
-        /// <param name="qrcode"></param>
-        /// <param name="manufacturer"></param>
-        /// <param name="bikeStatus"></param>
+        /// <param name="bikeId">id of bike</param>
+        /// <param name="stationId">id of station</param>
+        /// <param name="value">value of bike</param>
+        /// <param name="qrcode">qrcode of bike</param>
+        /// <param name="manufacturer">bike namufacturer</param>
+        /// <param name="bikeStatus">the bike status</param>
         public BaseBike(int bikeId, int stationId, int value, string qrcode, string manufacturer, bool bikeStatus = false)
         {
             this.BikeId = bikeId;
@@ -93,7 +107,7 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <summary>
         /// Contructor of BaseBike
         /// </summary>
-        /// <param name="bike"></param>
+        /// <param name="bike">bike information</param>
         public BaseBike(BaseBike bike)
         {
             this.BikeId = bike.BikeId;
@@ -112,7 +126,7 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// </summary>
         /// <param name="update">the update bike information</param>
         /// <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
-        /// <returns></returns>
+        /// <returns>the bike before updated</returns>
         public BaseBike UpdateBike(UpdateBikeInfo update, bool isUpdateDate = false)
         {
             if (update.StationId > 0) this.StationId = update.StationId;

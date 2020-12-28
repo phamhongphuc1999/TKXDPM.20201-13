@@ -18,7 +18,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RentalBikeApp.Entities.SQLEntities
 {
     /// <summary>
-    /// reqresenting the cards table in database
+    /// reqresenting the Cards table in database
     /// </summary>
     [Table("Cards")]
     public class Card

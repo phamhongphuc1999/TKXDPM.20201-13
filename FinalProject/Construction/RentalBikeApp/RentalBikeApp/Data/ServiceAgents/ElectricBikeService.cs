@@ -26,7 +26,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <summary>
         /// contructor of ElectricBikeService
         /// </summary>
-        /// <param name="connecter">The connecter</param>
+        /// <param name="connecter">The instance representing connection to database</param>
         public ElectricBikeService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>Get bike by QR code</summary>

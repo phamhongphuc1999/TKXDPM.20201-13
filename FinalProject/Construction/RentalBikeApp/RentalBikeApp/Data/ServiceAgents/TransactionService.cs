@@ -27,21 +27,21 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <summary>
         /// contructor of TransactionService
         /// </summary>
-        /// <param name="connecter">The connecter</param>
+        /// <param name="connecter">The instance representing connection to database</param>
         public TransactionService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>Insert new transaction when user deposit money to rent the bike</summary>
         /// <param name="userId">the Id of user who want to rent the bike</param>
-        /// <param name="qrcode">the qrcode of rental bike</param>
+        /// <param name="bikeId">the id of rental bike</param>
         /// <param name="deposit">the desposit money to rent the bike</param>
         /// <returns>Return the new transaction or null if get error</returns>
-        public Transaction InsertNewTransaction(int userId, string qrcode, int deposit)
+        public Transaction InsertNewTransaction(int userId, int bikeId, int deposit)
         {
             User checkUser = connecter.SqlData.Users.Find(userId);
             if (checkUser == null) return null;
-            BaseBike checkBike = connecter.SqlData.BaseBikes.SingleOrDefault(x => x.QRCode == qrcode);
+            BaseBike checkBike = connecter.SqlData.BaseBikes.Find(bikeId);
             if (checkBike == null) return null;
-            Transaction transaction = new Transaction(userId, qrcode, deposit);
+            Transaction transaction = new Transaction(userId, bikeId, deposit);
             connecter.SqlData.Transactions.Add(transaction);
             int check = connecter.SqlData.SaveChanges();
             if (check > 0) return transaction;

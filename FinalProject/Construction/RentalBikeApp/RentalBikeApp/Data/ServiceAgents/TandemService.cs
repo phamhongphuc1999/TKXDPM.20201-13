@@ -26,7 +26,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <summary>
         /// contructor of TandemService
         /// </summary>
-        /// <param name="connecter">The connecter</param>
+        /// <param name="connecter">The instance representing connection to database</param>
         public TandemService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>Get tandem by QR code</summary>

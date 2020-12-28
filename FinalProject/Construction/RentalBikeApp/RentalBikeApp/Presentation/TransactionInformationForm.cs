@@ -103,7 +103,7 @@ namespace RentalBikeApp.Presentation
             string error = result.errorCode;
             if (error == "00")
             {
-                Transaction transaction = rentBikeController.CreateDepositTransaction(1, bike.QRCode, this.deposit);
+                Transaction transaction = rentBikeController.CreateDepositTransaction(1, bike.BikeId, this.deposit);
                 if (transaction == null)
                 {
                     MessageBox.Show("Hệ thống không thể lưu thông tin giao dịch", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);

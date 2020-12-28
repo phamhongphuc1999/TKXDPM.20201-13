@@ -26,10 +26,12 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <summary>
         /// contructor of BikeService
         /// </summary>
-        /// <param name="connecter">The connecter</param>
+        /// <param name="connecter">The instance representing connection to database</param>
         public BikeService(SQLConnecter connecter): base(connecter) { }
 
-        /// <summary>Get bike by QR code</summary>
+        /// <summary>
+        /// Get bike by QR code
+        /// </summary>
         /// <param name="QRCode">QR Code you want to find</param>
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
         public Bike GetBikeByQRCode(string QRCode)

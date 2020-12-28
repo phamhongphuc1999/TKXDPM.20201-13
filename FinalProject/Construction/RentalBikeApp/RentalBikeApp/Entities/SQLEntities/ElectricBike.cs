@@ -18,26 +18,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RentalBikeApp.Entities.SQLEntities
 {
     /// <summary>
-    /// 
+    /// reqresenting the ElectricBike table in database
     /// </summary>
     [Table("ElectricBike")]
     public class ElectricBikeTable
     {
         /// <summary>
-        /// 
+        /// bike id
         /// </summary>
         [Key]
-        public int BikeId { get; set; }
+        public int BikeId { get; private set; }
 
         /// <summary>
-        /// 
+        /// remain of power
         /// </summary>
-        public int Powers { get; set; }
+        public int Powers { get; private set; }
 
         /// <summary>
-        /// 
+        /// the license plate
         /// </summary>
-        public string LicensePlate { get; set; }
+        public string LicensePlate { get; private set; }
     }
     /// <summary>
     /// representing the electric bike table in database
@@ -48,13 +48,13 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// remain of power
         /// </summary>
         [Required]
-        public int Powers { get; set; }
+        public int Powers { get; private set; }
 
         /// <summary>
         /// the license plate of bike
         /// </summary>
         [Required]
-        public string LicensePlate { get; set; }
+        public string LicensePlate { get; private set; }
 
         /// <summary>
         /// Contructor of ElectricBike
@@ -62,10 +62,10 @@ namespace RentalBikeApp.Entities.SQLEntities
         public ElectricBike(): base() { }
 
         /// <summary>
-        /// 
+        /// Contructor of ElectricBike
         /// </summary>
-        /// <param name="bike"></param>
-        /// <param name="electricBike"></param>
+        /// <param name="bike">The base bike information</param>
+        /// <param name="electricBike">The specified electric bike information</param>
         public ElectricBike(BaseBike bike, ElectricBikeTable electricBike): base(bike)
         {
             this.Powers = electricBike.Powers;
