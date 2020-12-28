@@ -774,15 +774,6 @@
             Contructor of BaseBike
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor(System.Int32,System.Int32,System.String,System.String)">
-            <summary>
-            Contructor of BaseBike
-            </summary>
-            <param name="stationId">The id of station contain bike</param>
-            <param name="value">The value of bike</param>
-            <param name="qrcode">The qrcode of bike</param>
-            <param name="manufacturer">The manufacture of bike</param>
-        </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor(System.Int32,System.Int32,System.Int32,System.String,System.String,System.Boolean)">
             <summary>
             
@@ -867,15 +858,6 @@
             <summary>
             Contructor of Bike
             </summary>
-        </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.Bike.#ctor(System.Int32,System.Int32,System.String,System.String)">
-            <summary>
-            Contructor of Bike
-            </summary>
-            <param name="stationId">The id of station contain bike</param>
-            <param name="value">The value of bike</param>
-            <param name="qrcode">The qrcode of bike</param>
-            <param name="manufacturer">The manufacture of bike</param>
         </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.Bike.#ctor(RentalBikeApp.Entities.SQLEntities.BaseBike)">
             <summary>
@@ -973,24 +955,12 @@
             Contructor of ElectricBike
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.ElectricBike.#ctor(System.Int32,System.Int32,System.String,System.String,System.Int32,System.String)">
-            <summary>
-            Contructor of ElectricBike
-            </summary>
-            <param name="stationId">The id of station contain bike</param>
-            <param name="value">The value of bike</param>
-            <param name="qrcode">The qrcode of bike</param>
-            <param name="manufacturer">The manufacture of bike</param>
-            <param name="power">The remain power of bike</param>
-            <param name="licensePlate">The license of bike</param>
-        </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.ElectricBike.#ctor(RentalBikeApp.Entities.SQLEntities.BaseBike,System.Int32,System.String)">
+        <member name="M:RentalBikeApp.Entities.SQLEntities.ElectricBike.#ctor(RentalBikeApp.Entities.SQLEntities.BaseBike,RentalBikeApp.Entities.SQLEntities.ElectricBikeTable)">
             <summary>
             
             </summary>
             <param name="bike"></param>
-            <param name="power"></param>
-            <param name="licensePlate"></param>
+            <param name="electricBike"></param>
         </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.SQLData">
             <summary>
@@ -1097,15 +1067,6 @@
             <summary>
             Contructor of Tandem
             </summary>
-        </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.Tandem.#ctor(System.Int32,System.Int32,System.String,System.String)">
-            <summary>
-            Contructor of Tandem
-            </summary>
-            <param name="stationId">The id of station contain bike</param>
-            <param name="value">The value of bike</param>
-            <param name="qrcode">The qrcode of bike</param>
-            <param name="manufacturer">The manufacture of bike</param>
         </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.Tandem.#ctor(RentalBikeApp.Entities.SQLEntities.BaseBike)">
             <summary>

@@ -72,22 +72,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         public BaseBike() { }
 
         /// <summary>
-        /// Contructor of BaseBike
-        /// </summary>
-        /// <param name="stationId">The id of station contain bike</param>
-        /// <param name="value">The value of bike</param>
-        /// <param name="qrcode">The qrcode of bike</param>
-        /// <param name="manufacturer">The manufacture of bike</param>
-        public BaseBike(int stationId, int value, string qrcode, string manufacturer)
-        {
-            this.StationId = stationId;
-            this.Value = value;
-            this.QRCode = qrcode;
-            this.Manufacturer = manufacturer;
-            this.BikeStatus = false;
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="bikeId"></param>

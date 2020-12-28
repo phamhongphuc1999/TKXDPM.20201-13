@@ -62,31 +62,14 @@ namespace RentalBikeApp.Entities.SQLEntities
         public ElectricBike(): base() { }
 
         /// <summary>
-        /// Contructor of ElectricBike
-        /// </summary>
-        /// <param name="stationId">The id of station contain bike</param>
-        /// <param name="value">The value of bike</param>
-        /// <param name="qrcode">The qrcode of bike</param>
-        /// <param name="manufacturer">The manufacture of bike</param>
-        /// <param name="power">The remain power of bike</param>
-        /// <param name="licensePlate">The license of bike</param>
-        public ElectricBike(int stationId, int value, string qrcode, string manufacturer, int power, string licensePlate) : base(stationId, value, qrcode, manufacturer)
-        {
-            this.Category = "electric";
-            this.Powers = power;
-            this.LicensePlate = licensePlate;
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="bike"></param>
-        /// <param name="power"></param>
-        /// <param name="licensePlate"></param>
-        public ElectricBike(BaseBike bike, int power, string licensePlate): base(bike)
+        /// <param name="electricBike"></param>
+        public ElectricBike(BaseBike bike, ElectricBikeTable electricBike): base(bike)
         {
-            this.Powers = power;
-            this.LicensePlate = licensePlate;
+            this.Powers = electricBike.Powers;
+            this.LicensePlate = electricBike.LicensePlate;
         }
     }
 }

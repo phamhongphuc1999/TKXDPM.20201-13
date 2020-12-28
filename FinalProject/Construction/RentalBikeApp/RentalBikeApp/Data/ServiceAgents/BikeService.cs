@@ -23,23 +23,18 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// </summary>
     public class BikeService: BaseService, IBikeService<Bike>
     {
-        private BaseBikeService baseBikeService;
-
         /// <summary>
         /// contructor of BikeService
         /// </summary>
         /// <param name="connecter">The connecter</param>
-        public BikeService(SQLConnecter connecter): base(connecter)
-        {
-            baseBikeService = new BaseBikeService(connecter);
-        }
+        public BikeService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>Get bike by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
         public Bike GetBikeByQRCode(string QRCode)
         {
-            BaseBike baseBike = baseBikeService.GetBikeByQRCode(QRCode);
+            BaseBike baseBike = connecter.SqlData.BaseBikes.SingleOrDefault(x => x.QRCode == QRCode); ;
             return new Bike(baseBike);
         }
 
@@ -48,7 +43,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the bike with specified ID or null if not found</returns>
         public Bike GetBikeById(int id)
         {
-            BaseBike baseBike = baseBikeService.GetBikeById(id);
+            BaseBike baseBike = connecter.SqlData.BaseBikes.Find(id);
             return new Bike(baseBike);
         }
 
@@ -57,8 +52,8 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the list base on bike category</returns>
         public List<Bike> GetListBikesInStation(int stationId)
         {
-            List<BaseBike> baseBikes = baseBikeService.GetListBikesInStation(stationId);
-            List<Bike> bikes = baseBikes.Where(x => x.Category == "bike").Select(x => new Bike(x)).ToList();
+            IEnumerable<BaseBike> baseBikes = connecter.SqlData.BaseBikes.Where(x => x.Category == "bike");
+            List<Bike> bikes = baseBikes.Select(x => new Bike(x)).ToList();
             return bikes;
         }
 

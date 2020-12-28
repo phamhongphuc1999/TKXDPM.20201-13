@@ -23,23 +23,18 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// </summary>
     public class TandemService: BaseService, IBikeService<Tandem>
     {
-        private BaseBikeService baseBikeService;
-
         /// <summary>
         /// contructor of TandemService
         /// </summary>
         /// <param name="connecter">The connecter</param>
-        public TandemService(SQLConnecter connecter): base(connecter)
-        {
-            baseBikeService = new BaseBikeService(connecter);
-        }
+        public TandemService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>Get tandem by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
         public Tandem GetBikeByQRCode(string QRCode)
         {
-            BaseBike baseBike = baseBikeService.GetBikeByQRCode(QRCode);
+            BaseBike baseBike = connecter.SqlData.BaseBikes.SingleOrDefault(x => x.QRCode == QRCode);
             return new Tandem(baseBike);
         }
 
@@ -48,7 +43,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the bike with specified ID or null if not found</returns>
         public Tandem GetBikeById(int id)
         {
-            BaseBike baseBike = baseBikeService.GetBikeById(id);
+            BaseBike baseBike = connecter.SqlData.BaseBikes.Find(id);
             return new Tandem(baseBike);
         }
 
@@ -57,8 +52,8 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the list base on bike category</returns>
         public List<Tandem> GetListBikesInStation(int stationId)
         {
-            List<BaseBike> bikesList = baseBikeService.GetListBikesInStation(stationId);
-            List<Tandem> tandems = bikesList.Where(x => x.Category == "tandem").Select(x => new Tandem(x)).ToList();
+            IEnumerable<BaseBike> bikesList = connecter.SqlData.BaseBikes.Where(x => x.Category == "tandem");
+            List<Tandem> tandems = bikesList.Select(x => new Tandem(x)).ToList();
             return tandems;
         }
 

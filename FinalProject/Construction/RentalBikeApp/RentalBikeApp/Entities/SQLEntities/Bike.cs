@@ -41,18 +41,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         public Bike(): base() { }
 
         /// <summary>
-        /// Contructor of Bike
-        /// </summary>
-        /// <param name="stationId">The id of station contain bike</param>
-        /// <param name="value">The value of bike</param>
-        /// <param name="qrcode">The qrcode of bike</param>
-        /// <param name="manufacturer">The manufacture of bike</param>
-        public Bike(int stationId, int value, string qrcode, string manufacturer): base(stationId, value, qrcode, manufacturer)
-        {
-            this.Category = "bike";
-        }
-
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="bike"></param>
