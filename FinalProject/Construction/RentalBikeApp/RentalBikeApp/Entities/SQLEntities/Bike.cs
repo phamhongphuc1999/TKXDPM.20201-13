@@ -12,14 +12,27 @@
 //
 // ------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RentalBikeApp.Entities.SQLEntities
 {
     /// <summary>
-    /// representing the bikes table in database
+    /// 
     /// </summary>
     [Table("Bikes")]
+    public class BikeTable
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        [Key]
+        public int BikeId { get; set; }
+    }
+
+    /// <summary>
+    /// representing the bikes table in database
+    /// </summary>
     public class Bike: BaseBike
     {
         /// <summary>
@@ -34,6 +47,15 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <param name="value">The value of bike</param>
         /// <param name="qrcode">The qrcode of bike</param>
         /// <param name="manufacturer">The manufacture of bike</param>
-        public Bike(int stationId, int value, string qrcode, string manufacturer): base(stationId, value, qrcode, manufacturer) { }
+        public Bike(int stationId, int value, string qrcode, string manufacturer): base(stationId, value, qrcode, manufacturer)
+        {
+            this.Category = "bike";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bike"></param>
+        public Bike(BaseBike bike): base(bike) { }
     }
 }

@@ -33,6 +33,7 @@ namespace RentalBikeApp.Presentation
         private BikeCategory category;
         private List<BaseBike> bikes;
         private ViewBikeController viewBikeController;
+        private ViewStationController viewStationController;
 
         /// <summary>
         /// contructor of ListBikeForm
@@ -40,6 +41,7 @@ namespace RentalBikeApp.Presentation
         public ListBikeForm(): base()
         {
             viewBikeController = new ViewBikeController();
+            viewStationController = new ViewStationController();
 
             InitializeComponent("ListBikesForm", "List Bikes");
             DrawListBikes();
@@ -217,7 +219,7 @@ namespace RentalBikeApp.Presentation
             }
             BaseBike bike = bikes.SingleOrDefault(x => x.QRCode == qrCode);
             if(bike == null) MessageBox.Show($"Không tìm được xe có qrcode: {qrCode}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            Station station = viewBikeController.GetDetailStationContainbike(bike.StationId);
+            Station station = viewStationController.ViewStationDetail(bike.StationId);
             bikeDetailForm.FillBikeInformation(bike, station.NameStation, station.AddressStation);
             bikeDetailForm.Show(this);
             this.Hide();

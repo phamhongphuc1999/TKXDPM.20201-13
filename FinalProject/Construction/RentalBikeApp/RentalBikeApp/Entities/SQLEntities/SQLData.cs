@@ -35,19 +35,24 @@ namespace RentalBikeApp.Entities.SQLEntities
         public DbSet<User> Users { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public DbSet<BaseBike> BaseBikes { get; set; }
+
+        /// <summary>
         /// representing of bike table
         /// </summary>
-        public DbSet<Bike> Bikes { get; set; }
+        public DbSet<BikeTable> Bikes { get; set; }
 
         /// <summary>
         /// representing of tandem table
         /// </summary>
-        public DbSet<Tandem> Tandems { get; set; }
+        public DbSet<TandemTable> Tandems { get; set; }
 
         /// <summary>
         /// representing of electric bike table
         /// </summary>
-        public DbSet<ElectricBike> ElectricBikes { get; set; }
+        public DbSet<ElectricBikeTable> ElectricBikes { get; set; }
 
         /// <summary>
         /// representing of card table

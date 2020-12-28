@@ -11,7 +11,6 @@ namespace RentalBikeApp.Bussiness
     /// </summary>
     public class ViewBikeController
     {
-        private StationService stationService;
         private BikeService bikeService;
         private TandemService tandemService;
         private ElectricBikeService electricBikeService;
@@ -21,7 +20,6 @@ namespace RentalBikeApp.Bussiness
         /// </summary>
         public ViewBikeController()
         {
-            stationService = new StationService(SQLConnecter.GetInstance());
             bikeService = new BikeService(SQLConnecter.GetInstance());
             tandemService = new TandemService(SQLConnecter.GetInstance());
             electricBikeService = new ElectricBikeService(SQLConnecter.GetInstance());
@@ -74,16 +72,6 @@ namespace RentalBikeApp.Bussiness
         {
             List<Tandem> tandems = tandemService.GetListBikesInStation(stationId);
             return tandems;
-        }
-
-        /// <summary>
-        /// Get detail information os station
-        /// </summary>
-        /// <param name="stationId">The station id</param>
-        /// <returns>The station information</returns>
-        public Station GetDetailStationContainbike(int stationId)
-        {
-            return stationService.GetStationById(stationId);
         }
     }
 }

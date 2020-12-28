@@ -18,9 +18,30 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RentalBikeApp.Entities.SQLEntities
 {
     /// <summary>
-    /// representing the electric bike table in database
+    /// 
     /// </summary>
     [Table("ElectricBike")]
+    public class ElectricBikeTable
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        [Key]
+        public int BikeId { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Powers { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string LicensePlate { get; set; }
+    }
+    /// <summary>
+    /// representing the electric bike table in database
+    /// </summary>
     public class ElectricBike: BaseBike
     {
         /// <summary>
@@ -50,6 +71,19 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <param name="power">The remain power of bike</param>
         /// <param name="licensePlate">The license of bike</param>
         public ElectricBike(int stationId, int value, string qrcode, string manufacturer, int power, string licensePlate) : base(stationId, value, qrcode, manufacturer)
+        {
+            this.Category = "electric";
+            this.Powers = power;
+            this.LicensePlate = licensePlate;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bike"></param>
+        /// <param name="power"></param>
+        /// <param name="licensePlate"></param>
+        public ElectricBike(BaseBike bike, int power, string licensePlate): base(bike)
         {
             this.Powers = power;
             this.LicensePlate = licensePlate;

@@ -23,18 +23,24 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// </summary>
     public class TandemService: BaseService, IBikeService<Tandem>
     {
+        private BaseBikeService baseBikeService;
+
         /// <summary>
         /// contructor of TandemService
         /// </summary>
         /// <param name="connecter">The connecter</param>
-        public TandemService(SQLConnecter connecter): base(connecter) { }
+        public TandemService(SQLConnecter connecter): base(connecter)
+        {
+            baseBikeService = new BaseBikeService(connecter);
+        }
 
         /// <summary>Get tandem by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
         public Tandem GetBikeByQRCode(string QRCode)
         {
-            return connecter.SqlData.Tandems.SingleOrDefault(x => x.QRCode == QRCode);
+            BaseBike baseBike = baseBikeService.GetBikeByQRCode(QRCode);
+            return new Tandem(baseBike);
         }
 
         /// <summary>Get tandem by tandem's id</summary>
@@ -42,7 +48,8 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the bike with specified ID or null if not found</returns>
         public Tandem GetBikeById(int id)
         {
-            return connecter.SqlData.Tandems.Find(id);
+            BaseBike baseBike = baseBikeService.GetBikeById(id);
+            return new Tandem(baseBike);
         }
 
         /// <summary>Filters a list tandem in the station base on bike category</summary>
@@ -50,8 +57,9 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the list base on bike category</returns>
         public List<Tandem> GetListBikesInStation(int stationId)
         {
-            List<Tandem> bikesList = connecter.SqlData.Tandems.Where(x => x.StationId == stationId).ToList();
-            return bikesList;
+            List<BaseBike> bikesList = baseBikeService.GetListBikesInStation(stationId);
+            List<Tandem> tandems = bikesList.Where(x => x.Category == "tandem").Select(x => new Tandem(x)).ToList();
+            return tandems;
         }
 
         /// <summary>
@@ -63,11 +71,11 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>The bike information after updated</returns>
         public Tandem UpdateBike(int bikeId, UpdateBikeInfo update, bool isUpdateDate = false)
         {
-            Tandem bike = connecter.SqlData.Tandems.Find(bikeId);
-            bike.UpdateBike(update, isUpdateDate);
+            BaseBike baseBike = connecter.SqlData.BaseBikes.Find(bikeId);
+            baseBike.UpdateBike(update, isUpdateDate);
             int check = connecter.SqlData.SaveChanges();
-            bike = connecter.SqlData.Tandems.Find(bikeId);
-            if (check > 0) return bike;
+            baseBike = connecter.SqlData.BaseBikes.Find(bikeId);
+            if (check > 0) new Tandem(baseBike);
             return null;
         }
     }

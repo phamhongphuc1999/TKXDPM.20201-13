@@ -23,18 +23,25 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// </summary>
     public class ElectricBikeService: BaseService, IBikeService<ElectricBike>
     {
+        private BaseBikeService baseBikeService;
+
         /// <summary>
         /// contructor of ElectricBikeService
         /// </summary>
         /// <param name="connecter">The connecter</param>
-        public ElectricBikeService(SQLConnecter connecter): base(connecter) { }
+        public ElectricBikeService(SQLConnecter connecter): base(connecter)
+        {
+            baseBikeService = new BaseBikeService(connecter);
+        }
 
         /// <summary>Get bike by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
         public ElectricBike GetBikeByQRCode(string QRCode)
         {
-            return connecter.SqlData.ElectricBikes.SingleOrDefault(x => x.QRCode == QRCode);
+            BaseBike baseBike = baseBikeService.GetBikeByQRCode(QRCode);
+            ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(baseBike.BikeId);
+            return new ElectricBike(baseBike, electricBike.Powers, electricBike.LicensePlate);
         }
 
         /// <summary>Get bike by bike's id</summary>
@@ -42,7 +49,9 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the bike with specified ID or null if not found</returns>
         public ElectricBike GetBikeById(int id)
         {
-            return connecter.SqlData.ElectricBikes.Find(id);
+            BaseBike baseBike = baseBikeService.GetBikeById(id);
+            ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(baseBike.BikeId);
+            return new ElectricBike(baseBike, electricBike.Powers, electricBike.LicensePlate);
         }
 
         /// <summary>Filters a list bike in the station base on bike category</summary>
@@ -50,8 +59,13 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the list base on bike category</returns>
         public List<ElectricBike> GetListBikesInStation(int stationId)
         {
-            List<ElectricBike> bikesList = connecter.SqlData.ElectricBikes.Where(x => x.StationId == stationId).ToList();
-            return bikesList;
+            List<BaseBike> baseBike = baseBikeService.GetListBikesInStation(stationId);
+            List<ElectricBike> electricBikes = baseBike.Where(x => x.Category == "electric").Select(x =>
+            {
+                ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(x.BikeId);
+                return new ElectricBike(x, electricBike.Powers, electricBike.LicensePlate);
+            }).ToList();
+            return electricBikes;
         }
 
         /// <summary>
@@ -63,11 +77,12 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>The bike information after updated</returns>
         public ElectricBike UpdateBike(int bikeId, UpdateBikeInfo update, bool isUpdateDate = false)
         {
-            ElectricBike bike = connecter.SqlData.ElectricBikes.Find(bikeId);
-            bike.UpdateBike(update, isUpdateDate);
+            BaseBike baseBike = connecter.SqlData.BaseBikes.Find(bikeId);
+            baseBike.UpdateBike(update, isUpdateDate);
             int check = connecter.SqlData.SaveChanges();
-            bike = connecter.SqlData.ElectricBikes.Find(bikeId);
-            if (check > 0) return bike;
+            baseBike = connecter.SqlData.BaseBikes.Find(bikeId);
+            ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(baseBike.BikeId);
+            if (check > 0) new ElectricBike(baseBike, electricBike.Powers, electricBike.LicensePlate);
             return null;
         }
     }

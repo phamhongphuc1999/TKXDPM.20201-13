@@ -39,10 +39,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         {
             User checkUser = connecter.SqlData.Users.Find(userId);
             if (checkUser == null) return null;
-            BaseBike checkBike = null;
-            if (qrcode[0] == '0') checkBike = connecter.SqlData.Bikes.SingleOrDefault(x => x.QRCode == qrcode);
-            else if (qrcode[0] == '1') checkBike = connecter.SqlData.Tandems.SingleOrDefault(x => x.QRCode == qrcode);
-            else if (qrcode[0] == '2') checkBike = connecter.SqlData.ElectricBikes.SingleOrDefault(x => x.QRCode == qrcode);
+            BaseBike checkBike = connecter.SqlData.BaseBikes.SingleOrDefault(x => x.QRCode == qrcode);
             if (checkBike == null) return null;
             Transaction transaction = new Transaction(userId, qrcode, deposit);
             connecter.SqlData.Transactions.Add(transaction);
