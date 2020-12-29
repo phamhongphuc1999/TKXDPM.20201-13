@@ -32,36 +32,41 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <summary>
         /// representing of user table
         /// </summary>
-        public DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public DbSet<BaseBike> BaseBikes { get; private set; }
 
         /// <summary>
         /// representing of bike table
         /// </summary>
-        public DbSet<Bike> Bikes { get; set; }
+        public DbSet<BikeTable> Bikes { get; private set; }
 
         /// <summary>
         /// representing of tandem table
         /// </summary>
-        public DbSet<Tandem> Tandems { get; set; }
+        public DbSet<TandemTable> Tandems { get; private set; }
 
         /// <summary>
         /// representing of electric bike table
         /// </summary>
-        public DbSet<ElectricBike> ElectricBikes { get; set; }
+        public DbSet<ElectricBikeTable> ElectricBikes { get; private set; }
 
         /// <summary>
         /// representing of card table
         /// </summary>
-        public DbSet<Card> Cards { get; set; }
+        public DbSet<Card> Cards { get; private set; }
 
         /// <summary>
         /// representing of station table
         /// </summary>
-        public DbSet<Station> Stations { get; set; }
+        public DbSet<Station> Stations { get; private set; }
 
         /// <summary>
         /// representing of transaction table
         /// </summary>
-        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Transaction> Transactions { get; private set; }
     }
 }

@@ -25,9 +25,7 @@ namespace RentalBikeApp.Bussiness
     /// </summary>
     public class ReturnBikeController
     {
-        private BikeService bikeService;
-        private TandemService tandemService;
-        private ElectricBikeService electricBikeService;
+        private BaseBikeService bikeService;
         private StationService stationService;
         private TransactionService transactionService;
 
@@ -36,9 +34,7 @@ namespace RentalBikeApp.Bussiness
         /// </summary>
         public ReturnBikeController()
         {
-            bikeService = new BikeService(SQLConnecter.GetInstance());
-            tandemService = new TandemService(SQLConnecter.GetInstance());
-            electricBikeService = new ElectricBikeService(SQLConnecter.GetInstance());
+            bikeService = new BaseBikeService(SQLConnecter.GetInstance());
             stationService = new StationService(SQLConnecter.GetInstance());
             transactionService = new TransactionService(SQLConnecter.GetInstance());
         }
@@ -52,9 +48,7 @@ namespace RentalBikeApp.Bussiness
         {
             Station station = stationService.GetStationById(stationId);
             int bikes = bikeService.GetListBikesInStation(stationId).Where(x => !x.BikeStatus).ToList().Count;
-            int tandems = tandemService.GetListBikesInStation(stationId).Where(x => !x.BikeStatus).ToList().Count;
-            int electrics = electricBikeService.GetListBikesInStation(stationId).Where(x => !x.BikeStatus).ToList().Count;
-            return station.NumberOfBike > (bikes + electrics + tandems);
+            return station.NumberOfBike > bikes;
         }
 
         /// <summary>
@@ -62,27 +56,25 @@ namespace RentalBikeApp.Bussiness
         /// </summary>
         /// <param name="stationId">The return station</param>
         /// <param name="bikeId">id of rental bike</param>
-        /// <param name="category">The type of bike</param>
         /// <returns></returns>
-        public void UpdateStationAfterReturnbike(int stationId, int bikeId, Constant.SQL.BikeCategory category)
+        public void UpdateStationAfterReturnbike(int stationId, int bikeId)
         {
-            if (category == Constant.SQL.BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 }, true);
-            else if (category == Constant.SQL.BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 }, true);
-            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 }, true);
+            bikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 }, true);
         }
 
         /// <summary>
         /// Update transaction when user end of rent bike
         /// </summary>
-        /// <param name="transactionId">The trasction id</param>
+        /// <param name="bikeId">The rental bike id</param>
         /// <param name="rentalMoney">The reantal money</param>
         /// <param name="content">The transaction content</param>
         /// <returns></returns>
-        public Transaction UpdatePaymentTransaction(int transactionId, int rentalMoney, string content = "")
+        public Transaction UpdatePaymentTransaction(int bikeId, int rentalMoney, string content = "")
         {
-            bool check = transactionService.UpdateTransaction(transactionId, rentalMoney, DateTime.Now, content);
+            Transaction transaction = transactionService.GetProcessTransaction(bikeId);
+            bool check = transactionService.UpdateTransaction(transaction.TransactionId, rentalMoney, DateTime.Now, content);
             if (!check) return null;
-            Transaction transaction = transactionService.GetTransactionById(transactionId);
+            transaction = transactionService.GetTransactionById(transaction.TransactionId);
             return transaction;
         }
     }

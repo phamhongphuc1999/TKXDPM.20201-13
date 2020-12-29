@@ -1,4 +1,18 @@
-﻿using RentalBikeApp.Data;
+﻿// --------------------RENTAL BIKE APP-----------------
+//
+//
+// Copyright (c) Microsoft. All Rights Reserved.
+// License under the Apache License, Version 2.0.
+//
+//   Su Huu Vu Quang
+//   Pham Hong Phuc
+//   Tran Minh Quang
+//   Ngo Minh Quang
+//
+//
+// ------------------------------------------------------
+
+using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
@@ -11,35 +25,24 @@ namespace RentalBikeApp.Bussiness
     /// </summary>
     public class ViewBikeController
     {
-        private StationService stationService;
-        private BikeService bikeService;
-        private TandemService tandemService;
-        private ElectricBikeService electricBikeService;
+        private BaseBikeService bikeService;
 
         /// <summary>
         /// Contructor of ViewBikeController
         /// </summary>
         public ViewBikeController()
         {
-            stationService = new StationService(SQLConnecter.GetInstance());
-            bikeService = new BikeService(SQLConnecter.GetInstance());
-            tandemService = new TandemService(SQLConnecter.GetInstance());
-            electricBikeService = new ElectricBikeService(SQLConnecter.GetInstance());
+            bikeService = new BaseBikeService(SQLConnecter.GetInstance());
         }
 
         /// <summary>
         /// Get bike information
         /// </summary>
         /// <param name="bikeId">The bike id you want to get information</param>
-        /// <param name="category">The bike type</param>
         /// <returns>The BaseBike representing the bike you want to get</returns>
-        public BaseBike ViewBikeDetail(int bikeId, BikeCategory category)
+        public BaseBike ViewBikeDetail(int bikeId)
         {
-            BaseBike bike = null;
-            if (category == BikeCategory.BIKE) bike = bikeService.GetBikeById(bikeId);
-            else if (category == BikeCategory.ELECTRIC) bike = electricBikeService.GetBikeById(bikeId);
-            else if (category == BikeCategory.TANDEM) bike = tandemService.GetBikeById(bikeId);
-            if (bike == null) return null;
+            BaseBike bike = bikeService.GetBikeById(bikeId);
             return bike;
         }
 
@@ -47,43 +50,12 @@ namespace RentalBikeApp.Bussiness
         /// Get list bike in specified station
         /// </summary>
         /// <param name="stationId">The station id you want to get list bike</param>
+        /// <param name="category"></param>
         /// <returns>The list bike</returns>
-        public List<Bike> ViewListBikeInStation(int stationId)
+        public List<BaseBike> ViewListBikeInStation(int stationId, BikeCategory category)
         {
-            List<Bike> bikes = bikeService.GetListBikesInStation(stationId);
+            List<BaseBike> bikes = bikeService.GetListBikesInStation(stationId, category);
             return bikes;
-        }
-
-        /// <summary>
-        /// Get list electric bike in specified station
-        /// </summary>
-        /// <param name="stationId">The station id you want to get list bike</param>
-        /// <returns>The list electric bike</returns>
-        public List<ElectricBike> ViewListElectricBikeInStation(int stationId)
-        {
-            List<ElectricBike> electricBikes = electricBikeService.GetListBikesInStation(stationId);
-            return electricBikes;
-        }
-
-        /// <summary>
-        /// Get tandem in specified station
-        /// </summary>
-        /// <param name="stationId">The station id you want to get list bike</param>
-        /// <returns>The list tandem</returns>
-        public List<Tandem> ViewListTandemInStation(int stationId)
-        {
-            List<Tandem> tandems = tandemService.GetListBikesInStation(stationId);
-            return tandems;
-        }
-
-        /// <summary>
-        /// Get detail information os station
-        /// </summary>
-        /// <param name="stationId">The station id</param>
-        /// <returns>The station information</returns>
-        public Station GetDetailStationContainbike(int stationId)
-        {
-            return stationService.GetStationById(stationId);
         }
     }
 }

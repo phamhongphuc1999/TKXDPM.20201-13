@@ -32,7 +32,6 @@ namespace RentalBikeApp.Presentation
         private int deposit;
         private int rentalMoney;
         private int stationId;
-        private int transactionId;
         private BaseBike bike;
         private Card card;
         private TRANSACTION_STATUS status;
@@ -103,15 +102,14 @@ namespace RentalBikeApp.Presentation
             string error = result.errorCode;
             if (error == "00")
             {
-                Transaction transaction = rentBikeController.CreateDepositTransaction(1, bike.QRCode, this.deposit);
+                Transaction transaction = rentBikeController.CreateDepositTransaction(1, bike.BikeId, this.deposit);
                 if (transaction == null)
                 {
                     MessageBox.Show("Hệ thống không thể lưu thông tin giao dịch", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                this.transactionId = transaction.TransactionId;
                 rentBikeForm.FillRentingBikeForm();
-                rentBikeController.BeginRentingBike(bike.BikeId, this.category);
+                rentBikeController.BeginRentingBike(bike.BikeId);
                 rentBikeForm.Show(this, null);
             }
             else if (error == "01" || error == "02" || error == "05")
@@ -137,8 +135,8 @@ namespace RentalBikeApp.Presentation
             ProcessTransactionResponse response = null;
             if(this.deposit == this.rentalMoney)
             {
-                Transaction transaction = returnBikeController.UpdatePaymentTransaction(transactionId, this.rentalMoney);
-                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId, this.category);
+                Transaction transaction = returnBikeController.UpdatePaymentTransaction(bike.BikeId, this.rentalMoney);
+                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId);
                 MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 homePageForm.Show(this);
                 this.Hide();
@@ -153,8 +151,8 @@ namespace RentalBikeApp.Presentation
             string error = response.errorCode;
             if (error == "00")
             {
-                Transaction transaction = returnBikeController.UpdatePaymentTransaction(transactionId, this.rentalMoney);
-                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId, this.category);
+                Transaction transaction = returnBikeController.UpdatePaymentTransaction(bike.BikeId, this.rentalMoney);
+                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId);
                 MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 homePageForm.Show(this);
             }

@@ -17,7 +17,6 @@ using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Constant.SQL;
 
 namespace RentalBikeApp.Bussiness
 {
@@ -26,9 +25,7 @@ namespace RentalBikeApp.Bussiness
     /// </summary>
     public class RentBikeController
     {
-        private BikeService bikeService;
-        private TandemService tandemService;
-        private ElectricBikeService electricBikeService;
+        private BaseBikeService bikeService;
         private StationService stationService;
         private CardService cardService;
         private TransactionService transactionService;
@@ -38,9 +35,7 @@ namespace RentalBikeApp.Bussiness
         /// </summary>
         public RentBikeController()
         {
-            bikeService = new BikeService(SQLConnecter.GetInstance());
-            tandemService = new TandemService(SQLConnecter.GetInstance());
-            electricBikeService = new ElectricBikeService(SQLConnecter.GetInstance());
+            bikeService = new BaseBikeService(SQLConnecter.GetInstance());
             stationService = new StationService(SQLConnecter.GetInstance());
             cardService = new CardService(SQLConnecter.GetInstance());
             transactionService = new TransactionService(SQLConnecter.GetInstance());
@@ -55,10 +50,7 @@ namespace RentalBikeApp.Bussiness
         /// <returns>The BaseBike representing the bike has qr code</returns>
         public BaseBike SubmitQrCode(string qrCode, ref string stationName, ref string stationAddress)
         {
-            BaseBike bike = null;
-            if (qrCode[0] == '0') bike = bikeService.GetBikeByQRCode(qrCode);
-            else if (qrCode[0] == '1') bike = tandemService.GetBikeByQRCode(qrCode);
-            else if (qrCode[0] == '2') bike = electricBikeService.GetBikeByQRCode(qrCode);
+            BaseBike bike = bikeService.GetBikeByQRCode(qrCode);
             if (bike == null) return null;
             Station station = stationService.GetStationById(bike.StationId);
             stationName = station.NameStation;
@@ -81,12 +73,12 @@ namespace RentalBikeApp.Bussiness
         /// Create new transaction to save deposit transaction
         /// </summary>
         /// <param name="userId">The id of user</param>
-        /// <param name="qrcode">The qr code of rental bike</param>
+        /// <param name="bikeId">The id of rental bike</param>
         /// <param name="deposit">The deposit of rental bike</param>
         /// <returns>The new transaction</returns>
-        public Transaction CreateDepositTransaction(int userId, string qrcode, int deposit)
+        public Transaction CreateDepositTransaction(int userId, int bikeId, int deposit)
         {
-            Transaction transaction = transactionService.InsertNewTransaction(userId, qrcode, deposit);
+            Transaction transaction = transactionService.InsertNewTransaction(userId, bikeId, deposit);
             return transaction;
         }
 
@@ -94,13 +86,10 @@ namespace RentalBikeApp.Bussiness
         /// Start renting bike
         /// </summary>
         /// <param name="bikeId">bike id</param>
-        /// <param name="category">the bike category</param>
-        public void BeginRentingBike(int bikeId, BikeCategory category)
+        public void BeginRentingBike(int bikeId)
         {
             rentBikeForm.StartTimer();
-            if (category == BikeCategory.BIKE) bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
-            else if (category == BikeCategory.ELECTRIC) electricBikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
-            else tandemService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
+            bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
         }
     }
 }

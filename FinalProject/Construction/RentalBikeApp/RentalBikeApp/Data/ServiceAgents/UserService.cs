@@ -25,7 +25,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <summary>
         /// contructor of UserService
         /// </summary>
-        /// <param name="connecter">The connecter</param>
+        /// <param name="connecter">The instance representing connection to database</param>
         public UserService(SQLConnecter connecter): base(connecter) { }
 
         /// <summary>

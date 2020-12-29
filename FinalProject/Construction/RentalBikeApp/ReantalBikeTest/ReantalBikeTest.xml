@@ -4,31 +4,6 @@
         <name>ReantalBikeTest</name>
     </assembly>
     <members>
-        <member name="M:ReantalBikeTest.ServiceAgents.BikeServiceTest.GetBikeByQRCodeTest">
-            <summary>
-            Test for case get bike with correct QR Code
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.BikeServiceTest.GetBikeWithNotExistQRCodeTest">
-            <summary>
-            Test for case get bike with not exist QR Code
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.BikeServiceTest.GetBikeByIdTest">
-            <summary>
-            Test for case get bike by id
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.BikeServiceTest.GetListAllBikesInStationTest">
-            <summary>
-            Test for case get all bike in the station
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.BikeServiceTest.UpdateBikeTest">
-            <summary>
-            Test for case update bike
-            </summary>
-        </member>
         <member name="M:ReantalBikeTest.ServiceAgents.CardServiceTest.GetCardByExistOwnerTest">
             <summary>
             Test for case get card by exist card holder
@@ -49,31 +24,6 @@
             Test for case get card by error user
             </summary>
         </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.ElectricBikeServiceTest.GetBikeByQRCodeTest">
-            <summary>
-            Test for get bike by QR Code
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.ElectricBikeServiceTest.GetBikeByNotExistQRcodeTest">
-            <summary>
-            Test for get bike by not exist QR Code
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.ElectricBikeServiceTest.GetBikeByIdTest">
-            <summary>
-            Test for get bike by id
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.ElectricBikeServiceTest.GetListBikesInStationTest">
-            <summary>
-            Test for get list bike in the station
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.ElectricBikeServiceTest.UpdateBikeTest">
-            <summary>
-            Test for update bike
-            </summary>
-        </member>
         <member name="M:ReantalBikeTest.ServiceAgents.StationServiceTest.GetListStationsTest">
             <summary>
             Test for get list station
@@ -92,31 +42,6 @@
         <member name="M:ReantalBikeTest.ServiceAgents.StationServiceTest.GetStationByNotExistNameTest">
             <summary>
             Test for get station by not exist name
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.TandemServiceTest.GetBikeByQRCodeTest">
-            <summary>
-            Test for get bike by QR Code
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.TandemServiceTest.GetBikeByNotExistQRCodeTest">
-            <summary>
-            Test for get bike by not exist QR Code
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.TandemServiceTest.GetBikeByIdTest">
-            <summary>
-            Test for get bike by id
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.TandemServiceTest.GetListBikesInStationTest">
-            <summary>
-            Test for get list bike in the station
-            </summary>
-        </member>
-        <member name="M:ReantalBikeTest.ServiceAgents.TandemServiceTest.UpdateBikeTest">
-            <summary>
-            Test for update bike
             </summary>
         </member>
         <member name="M:ReantalBikeTest.ServiceAgents.TransactionServiceTests.InsertNewTransactionTest">

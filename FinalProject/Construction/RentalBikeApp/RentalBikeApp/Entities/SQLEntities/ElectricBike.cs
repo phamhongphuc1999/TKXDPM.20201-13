@@ -18,22 +18,43 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace RentalBikeApp.Entities.SQLEntities
 {
     /// <summary>
-    /// representing the electric bike table in database
+    /// reqresenting the ElectricBike table in database
     /// </summary>
     [Table("ElectricBike")]
+    public class ElectricBikeTable
+    {
+        /// <summary>
+        /// bike id
+        /// </summary>
+        [Key]
+        public int BikeId { get; private set; }
+
+        /// <summary>
+        /// remain of power
+        /// </summary>
+        public int Powers { get; private set; }
+
+        /// <summary>
+        /// the license plate
+        /// </summary>
+        public string LicensePlate { get; private set; }
+    }
+    /// <summary>
+    /// representing the electric bike table in database
+    /// </summary>
     public class ElectricBike: BaseBike
     {
         /// <summary>
         /// remain of power
         /// </summary>
         [Required]
-        public int Powers { get; set; }
+        public int Powers { get; private set; }
 
         /// <summary>
         /// the license plate of bike
         /// </summary>
         [Required]
-        public string LicensePlate { get; set; }
+        public string LicensePlate { get; private set; }
 
         /// <summary>
         /// Contructor of ElectricBike
@@ -43,16 +64,12 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <summary>
         /// Contructor of ElectricBike
         /// </summary>
-        /// <param name="stationId">The id of station contain bike</param>
-        /// <param name="value">The value of bike</param>
-        /// <param name="qrcode">The qrcode of bike</param>
-        /// <param name="manufacturer">The manufacture of bike</param>
-        /// <param name="power">The remain power of bike</param>
-        /// <param name="licensePlate">The license of bike</param>
-        public ElectricBike(int stationId, int value, string qrcode, string manufacturer, int power, string licensePlate) : base(stationId, value, qrcode, manufacturer)
+        /// <param name="bike">The base bike information</param>
+        /// <param name="electricBike">The specified electric bike information</param>
+        public ElectricBike(BaseBike bike, ElectricBikeTable electricBike): base(bike)
         {
-            this.Powers = power;
-            this.LicensePlate = licensePlate;
+            this.Powers = electricBike.Powers;
+            this.LicensePlate = electricBike.LicensePlate;
         }
     }
 }

@@ -12,14 +12,27 @@
 //
 // ------------------------------------------------------
 
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RentalBikeApp.Entities.SQLEntities
 {
     /// <summary>
-    /// reqresenting the tandem table in database
+    /// representing Tandem table in database
     /// </summary>
     [Table("Tandem")]
+    public class TandemTable
+    {
+        /// <summary>
+        /// bike id
+        /// </summary>
+        [Key]
+        public int BikeId { get; private set; }
+    }
+
+    /// <summary>
+    /// reqresenting the tandem table in database
+    /// </summary>
     public class Tandem: BaseBike
     {
         /// <summary>
@@ -30,10 +43,7 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <summary>
         /// Contructor of Tandem
         /// </summary>
-        /// <param name="stationId">The id of station contain bike</param>
-        /// <param name="value">The value of bike</param>
-        /// <param name="qrcode">The qrcode of bike</param>
-        /// <param name="manufacturer">The manufacture of bike</param>
-        public Tandem(int stationId, int value, string qrcode, string manufacturer) : base(stationId, value, qrcode, manufacturer) { }
+        /// <param name="bike">the bike information</param>
+        public Tandem(BaseBike bike): base(bike) { }
     }
 }
