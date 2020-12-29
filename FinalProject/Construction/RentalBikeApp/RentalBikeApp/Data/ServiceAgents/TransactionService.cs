@@ -56,6 +56,16 @@ namespace RentalBikeApp.Data.ServiceAgents
             return connecter.SqlData.Transactions.Find(transactionId);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="bikeId"></param>
+        /// <returns></returns>
+        public Transaction GetProcessTransaction(int bikeId)
+        {
+            return connecter.SqlData.Transactions.SingleOrDefault(x => x.BikeId == bikeId && x.Category == "process");
+        }
+
         /// <summary>Get all of transactions of the user</summary>
         /// <param name="userId">the Id of user</param>
         /// <returns>Return the specified user's transactions list</returns>

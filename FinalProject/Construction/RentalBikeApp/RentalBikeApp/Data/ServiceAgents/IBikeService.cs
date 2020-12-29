@@ -20,23 +20,22 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// <summary>
     /// The service IBikeService implements the functions to interact BaseBike in database
     /// </summary>
-    /// <typeparam name="TBike"></typeparam>
-    public interface IBikeService<TBike>
+    public interface IBikeService
     {
         /// <summary>Get bike by QR code</summary>
         /// <param name="QRCode">QR Code you want to find</param>
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
-        public TBike GetBikeByQRCode(string QRCode);
+        public BaseBike GetBikeByQRCode(string QRCode);
 
         /// <summary>Get bike by bike's id</summary>
         /// <param name="id">the bike's id you want to find</param>
         /// <returns>Return the bike with specified ID or null if not found</returns>
-        public TBike GetBikeById(int id);
+        public BaseBike GetBikeById(int id);
 
         /// <summary>Filters a list bike in the station base on bike category</summary>
         /// <param name="stationId">The station you want to filter list of bike</param>
         /// <returns>Return the list base on bike category</returns>
-        public List<TBike> GetListBikesInStation(int stationId);
+        public List<BaseBike> GetListBikesInStation(int stationId);
 
         /// <summary>
         /// Update bike information
@@ -45,6 +44,6 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <param name="update">The update information</param>
         /// <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
         /// <returns>The bike information after updated</returns>
-        public TBike UpdateBike(int bikeId, UpdateBikeInfo update, bool isUpdateDate = false);
+        public BaseBike UpdateBike(int bikeId, UpdateBikeInfo update, bool isUpdateDate = false);
     }
 }

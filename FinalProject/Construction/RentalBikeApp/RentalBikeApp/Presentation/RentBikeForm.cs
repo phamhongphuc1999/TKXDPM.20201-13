@@ -27,7 +27,6 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class RentBikeForm : BaseForm
     {
-        private BikeCategory category;
         private BaseBike bike;
 
         private ViewBikeController viewBikeController;
@@ -120,8 +119,7 @@ namespace RentalBikeApp.Presentation
             rentBikePnl.Visible = false;
             rentingBikePnl.Visible = false;
             rentBikeInfoPnl.Visible = true;
-            bike = viewBikeController.ViewBikeDetail(bikeId, category);
-            this.category = category;
+            bike = viewBikeController.ViewBikeDetail(bikeId);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
             int deposit = 40 * bike.Value / 100;
             if (category == BikeCategory.BIKE)
@@ -224,7 +222,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentBikeInfoRentThisBikeBut_Click(object sender, EventArgs e)
         {
-            this.bike = viewBikeController.ViewBikeDetail(this.bike.BikeId, this.category);
+            this.bike = viewBikeController.ViewBikeDetail(this.bike.BikeId);
             cardInformationForm.Show(this, this);
             cardInformationForm.FillCardInformation(bike);
             this.Hide();

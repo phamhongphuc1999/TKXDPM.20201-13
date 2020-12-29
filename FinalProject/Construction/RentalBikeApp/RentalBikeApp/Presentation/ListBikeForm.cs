@@ -81,7 +81,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.BIKE;
             this.stationName = stationName; this.stationAddress = stationAddress;
-            bikes = viewBikeController.ViewListBikeInStation(stationId).Select(bike =>
+            bikes = viewBikeController.ViewListBikeInStation(stationId, this.category).Select(bike =>
             {
                 return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
             }).ToList();
@@ -109,7 +109,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.TANDEM;
             this.stationName = stationName; this.stationAddress = stationAddress;
-            bikes = viewBikeController.ViewListTandemInStation(stationId).Select(bike =>
+            bikes = viewBikeController.ViewListBikeInStation(stationId, this.category).Select(bike =>
             {
                 return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
             }).ToList();
@@ -137,7 +137,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.ELECTRIC;
             this.stationName = stationName; this.stationAddress = stationAddress;
-            bikes = viewBikeController.ViewListElectricBikeInStation(stationId).Select(bike =>
+            bikes = viewBikeController.ViewListBikeInStation(stationId, this.category).Select(bike =>
             {
                 return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
             }).ToList();
@@ -163,7 +163,7 @@ namespace RentalBikeApp.Presentation
         {
             Button but = sender as Button;
             int bikeId = (int)but.Tag;
-            BaseBike bike = viewBikeController.ViewBikeDetail(bikeId, this.category);
+            BaseBike bike = viewBikeController.ViewBikeDetail(bikeId);
             if (bike == null)
             {
                 MessageBox.Show($"Không tìm được xe có id: {bikeId}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);

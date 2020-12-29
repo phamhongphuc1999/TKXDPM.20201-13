@@ -45,6 +45,12 @@ namespace RentalBikeApp.Entities.SQLEntities
         public int BikeId { get; private set; }
 
         /// <summary>
+        /// transaction category
+        /// </summary>
+        [Required(ErrorMessage = "Category is required")]
+        public string Category { get; private set; }
+
+        /// <summary>
         /// deposit
         /// </summary>
         [Required(ErrorMessage = "Deposit is required")]
@@ -86,6 +92,7 @@ namespace RentalBikeApp.Entities.SQLEntities
             this.UserId = userId;
             this.BikeId = bikeId;
             this.Deposit = deposit;
+            this.Category = "process";
             this.RentalMoney = 0;
             this.TotalTimeRent = 0;
             this.DateTransaction = DateTime.Now;
@@ -100,6 +107,7 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <returns>The transaction before updated</returns>
         public void UpdateTransaction(int rentalMoney, int totalTimeRent, string note)
         {
+            this.Category = "complete";
             this.RentalMoney = rentalMoney;
             this.TotalTimeRent = totalTimeRent;
             this.DateTransaction = DateTime.Now;

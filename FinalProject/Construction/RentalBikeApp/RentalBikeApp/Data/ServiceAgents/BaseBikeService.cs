@@ -21,7 +21,7 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// <summary>
     /// Provides functions to interact with BaseBike table in the database
     /// </summary>
-    public class BaseBikeService: BaseService, IBikeService<BaseBike>
+    public class BaseBikeService: BaseService, IBikeService
     {
         /// <summary>
         /// contructor of BaseBikeService
@@ -36,7 +36,16 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the bike with specified ID or null if not found</returns>
         public BaseBike GetBikeById(int id)
         {
-            return connecter.SqlData.BaseBikes.Find(id);
+            BaseBike baseBike = connecter.SqlData.BaseBikes.Find(id);
+            BaseBike result = null;
+            if (baseBike.Category == "bike") result = new Bike(baseBike);
+            else if (baseBike.Category == "tandem") result = new Tandem(baseBike);
+            else if(baseBike.Category == "electric")
+            {
+                ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(baseBike.BikeId);
+                result = new ElectricBike(baseBike, electricBike);
+            }
+            return result;
         }
 
         /// <summary>Get bike by QR code</summary>
@@ -44,15 +53,49 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns>Return the bike with specified QR Code or null if not found</returns>
         public BaseBike GetBikeByQRCode(string QRCode)
         {
-            return connecter.SqlData.BaseBikes.SingleOrDefault(x => x.QRCode == QRCode);
+            BaseBike baseBike = connecter.SqlData.BaseBikes.SingleOrDefault(x => x.QRCode == QRCode);
+            BaseBike result = null;
+            if (baseBike.Category == "bike") result = new Bike(baseBike);
+            else if (baseBike.Category == "tandem") result = new Tandem(baseBike);
+            else if (baseBike.Category == "electric")
+            {
+                ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(baseBike.BikeId);
+                result = new ElectricBike(baseBike, electricBike);
+            }
+            return result;
         }
 
-        /// <summary>Filters a list bike in the station base on bike category</summary>
+        /// <summary>
+        /// Filters a list bike in the station base on bike category
+        /// </summary>
+        /// <param name="stationId">The station you want to filter list of bike</param>
+        /// <param name="category"></param>
+        /// <returns>Return the list base on bike category</returns>
+        public List<BaseBike> GetListBikesInStation(int stationId, Constant.SQL.BikeCategory category)
+        {
+            IEnumerable<BaseBike> baseBikes = connecter.SqlData.BaseBikes.Where(x => x.StationId == stationId);
+            if (category == Constant.SQL.BikeCategory.BIKE)
+                baseBikes = baseBikes.Where(x => x.Category == "bike").Select(x => new Bike(x));
+            else if (category == Constant.SQL.BikeCategory.TANDEM)
+                baseBikes = baseBikes.Where(x => x.Category == "tandem").Select(x => new Tandem(x));
+            else if (category == Constant.SQL.BikeCategory.ELECTRIC)
+                baseBikes = baseBikes.Where(x => x.Category == "electric").Select(x =>
+                {
+                    ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(x.BikeId);
+                    return new ElectricBike(x, electricBike);
+                });
+            return baseBikes.ToList();
+        }
+
+        /// <summary>
+        /// Filters a list bike in the station base on bike category
+        /// </summary>
         /// <param name="stationId">The station you want to filter list of bike</param>
         /// <returns>Return the list base on bike category</returns>
         public List<BaseBike> GetListBikesInStation(int stationId)
         {
-            return connecter.SqlData.BaseBikes.Where(x => x.StationId == stationId).ToList();
+            IEnumerable<BaseBike> baseBikes = connecter.SqlData.BaseBikes.Where(x => x.StationId == stationId);
+            return baseBikes.ToList();
         }
 
         /// <summary>
