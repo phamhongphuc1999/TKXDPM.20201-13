@@ -14,6 +14,7 @@
 
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
+using static RentalBikeApp.Constant;
 using System.Linq;
 
 namespace RentalBikeApp.Data.ServiceAgents
@@ -71,14 +72,14 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <param name="stationId">The station you want to filter list of bike</param>
         /// <param name="category"></param>
         /// <returns>Return the list base on bike category</returns>
-        public List<BaseBike> GetListBikesInStation(int stationId, Constant.SQL.BikeCategory category)
+        public List<BaseBike> GetListBikesInStation(int stationId, BikeCategory category)
         {
             IEnumerable<BaseBike> baseBikes = connecter.SqlData.BaseBikes.Where(x => x.StationId == stationId);
-            if (category == Constant.SQL.BikeCategory.BIKE)
+            if (category == BikeCategory.BIKE)
                 baseBikes = baseBikes.Where(x => x.Category == "bike").Select(x => new Bike(x));
-            else if (category == Constant.SQL.BikeCategory.TANDEM)
+            else if (category == BikeCategory.TANDEM)
                 baseBikes = baseBikes.Where(x => x.Category == "tandem").Select(x => new Tandem(x));
-            else if (category == Constant.SQL.BikeCategory.ELECTRIC)
+            else if (category == BikeCategory.ELECTRIC)
                 baseBikes = baseBikes.Where(x => x.Category == "electric").Select(x =>
                 {
                     ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(x.BikeId);
@@ -103,12 +104,11 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// </summary>
         /// <param name="bikeId">The bike id</param>
         /// <param name="update">The update information</param>
-        /// <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
         /// <returns>The bike information after updated</returns>
-        public BaseBike UpdateBike(int bikeId, UpdateBikeInfo update, bool isUpdateDate = false)
+        public BaseBike UpdateBike(int bikeId, UpdateBikeInfo update)
         {
             BaseBike bike = connecter.SqlData.BaseBikes.Find(bikeId);
-            bike.UpdateBike(update, isUpdateDate);
+            bike.UpdateBike(update);
             int check = connecter.SqlData.SaveChanges();
             bike = connecter.SqlData.BaseBikes.Find(bikeId);
             if (check > 0) return bike;

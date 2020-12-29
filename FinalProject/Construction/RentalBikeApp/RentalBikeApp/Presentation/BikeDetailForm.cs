@@ -14,7 +14,7 @@
 
 using System;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Constant.SQL;
+using static RentalBikeApp.Constant;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Drawing;
 
@@ -63,14 +63,14 @@ namespace RentalBikeApp.Presentation
                 viewRentingBut.Visible = false;
                 rentThisBikeBut.Visible = true;
             }
-            if (bike is Bike)
+            if (bike.Category == "bike")
             {
                 categoryBikeTxt.Text = "Xe đạp thường";
                 powerTxt.Text = "Không có thông tin";
                 licenceTxt.Text = "Không có thông tin";
                 this.category = BikeCategory.BIKE;
             }
-            else if (bike is Tandem)
+            else if (bike.Category == "tandem")
             {
                 categoryBikeTxt.Text = "Xe đạp đôi";
                 powerTxt.Text = "Không có thông tin";

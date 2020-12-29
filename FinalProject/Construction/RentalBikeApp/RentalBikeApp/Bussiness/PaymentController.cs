@@ -18,7 +18,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using RentalBikeApp.Entities.APIEntities;
 using RentalBikeApp.Entities.SQLEntities;
-using static RentalBikeApp.Constant.API_INFO;
+using static RentalBikeApp.Constant;
 
 namespace RentalBikeApp.Bussiness
 {
@@ -33,14 +33,14 @@ namespace RentalBikeApp.Bussiness
         /// <param name="timeRent">The time that the user has rented the car</param>
         /// <param name="category">The category of rental bike</param>
         /// <returns>The rental money that use must rent</returns>
-        public int CalculateFee(string timeRent, Constant.SQL.BikeCategory category)
+        public int CalculateFee(string timeRent, BikeCategory category)
         {
             string[] times = timeRent.Split(':');
             double hour = Int64.Parse(times[0]);
             double minute = Int64.Parse(times[1]);
             double second = Int64.Parse(times[2]);
             double timeMinutes = 60 * hour + minute + Math.Abs(second / 60) - 10;
-            if (category != Constant.SQL.BikeCategory.BIKE) timeMinutes = 1.5 * timeMinutes;
+            if (category != BikeCategory.BIKE) timeMinutes = 1.5 * timeMinutes;
             if (timeMinutes <= 0) return 0;
             timeMinutes -= 30;
             if (timeMinutes <= 0) return 10000;
@@ -82,8 +82,8 @@ namespace RentalBikeApp.Bussiness
                     transaction = info
                 }))
             };
-            string result = await Utilities.SendRequest(Constant.API_INFO.BASE_URL + Constant.API_INFO.PROCESS_URL,
-                HttpMethod.Patch, JsonConvert.SerializeObject(body));
+            string result = await Utilities.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch,
+                 JsonConvert.SerializeObject(body));
             ProcessTransactionResponse response = JsonConvert.DeserializeObject<ProcessTransactionResponse>(result);
             return response;
         }
@@ -100,8 +100,8 @@ namespace RentalBikeApp.Bussiness
                 cvvCode = card.CVV,
                 dateExpired = card.DateExpired
             };
-            string result = await Utilities.SendRequest(Constant.API_INFO.BASE_URL + Constant.API_INFO.RESET_URL,
-                HttpMethod.Patch, JsonConvert.SerializeObject(body));
+            string result = await Utilities.SendRequest(BASE_URL + RESET_URL, HttpMethod.Patch,
+                 JsonConvert.SerializeObject(body));
             ResetResponse response = JsonConvert.DeserializeObject<ResetResponse>(result);
             return response;
         }

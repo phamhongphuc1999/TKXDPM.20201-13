@@ -16,7 +16,7 @@ using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
-using static RentalBikeApp.Constant.SQL;
+using static RentalBikeApp.Constant;
 
 namespace RentalBikeApp.Bussiness
 {

@@ -18,7 +18,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Constant.SQL;
+using static RentalBikeApp.Constant;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Bussiness;
 
@@ -83,7 +83,7 @@ namespace RentalBikeApp.Presentation
             this.stationName = stationName; this.stationAddress = stationAddress;
             bikes = viewBikeController.ViewListBikeInStation(stationId, this.category).Select(bike =>
             {
-                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
+                return new BaseBike(bike);
             }).ToList();
             int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp thường\nCòn lại {count} xe";
@@ -111,7 +111,7 @@ namespace RentalBikeApp.Presentation
             this.stationName = stationName; this.stationAddress = stationAddress;
             bikes = viewBikeController.ViewListBikeInStation(stationId, this.category).Select(bike =>
             {
-                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
+                return new BaseBike(bike);
             }).ToList();
             int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp đôi\nCòn lại {count} xe";
@@ -139,7 +139,7 @@ namespace RentalBikeApp.Presentation
             this.stationName = stationName; this.stationAddress = stationAddress;
             bikes = viewBikeController.ViewListBikeInStation(stationId, this.category).Select(bike =>
             {
-                return new BaseBike(bike.BikeId, bike.StationId, bike.Value, bike.QRCode, bike.Manufacturer, bike.BikeStatus);
+                return new BaseBike(bike);
             }).ToList();
             int count = bikes.Count(x => !x.BikeStatus);
             if (count > 0) descriptionRtb.Text = $"Xe đạp điện\nCòn lại {count} xe";

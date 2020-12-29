@@ -9,7 +9,7 @@
             Privider functions for process API
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.PaymentController.CalculateFee(System.String,RentalBikeApp.Constant.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Bussiness.PaymentController.CalculateFee(System.String,RentalBikeApp.Constant.BikeCategory)">
             <summary>
             Calculate rental fee for rental bike
             </summary>
@@ -17,7 +17,7 @@
             <param name="category">The category of rental bike</param>
             <returns>The rental money that use must rent</returns>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.PaymentController.ProcessTransaction(RentalBikeApp.Entities.SQLEntities.Card,RentalBikeApp.Constant.API_INFO.COMMAND,System.Int32,System.DateTime,System.String,System.String)">
+        <member name="M:RentalBikeApp.Bussiness.PaymentController.ProcessTransaction(RentalBikeApp.Entities.SQLEntities.Card,RentalBikeApp.Constant.COMMAND,System.Int32,System.DateTime,System.String,System.String)">
             <summary>
             Send transaction to server
             </summary>
@@ -75,6 +75,13 @@
             </summary>
             <param name="bikeId">bike id</param>
         </member>
+        <member name="M:RentalBikeApp.Bussiness.RentBikeController.GetBeginDate(System.Int32)">
+            <summary>
+            get begin rent bike
+            </summary>
+            <param name="bikeId">bike id</param>
+            <returns>The begin date</returns>
+        </member>
         <member name="T:RentalBikeApp.Bussiness.ReturnBikeController">
             <summary>
             Provider flow for return bike
@@ -126,7 +133,7 @@
             <param name="bikeId">The bike id you want to get information</param>
             <returns>The BaseBike representing the bike you want to get</returns>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.ViewBikeController.ViewListBikeInStation(System.Int32,RentalBikeApp.Constant.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Bussiness.ViewBikeController.ViewListBikeInStation(System.Int32,RentalBikeApp.Constant.BikeCategory)">
             <summary>
             Get list bike in specified station
             </summary>
@@ -162,89 +169,64 @@
             this class provider contants for program
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Constant.SQL">
-            <summary>
-            This static class use to config connect to sql server
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Constant.SQL.SQL_CONNECT_STRING">
+        <member name="F:RentalBikeApp.Constant.SQL_CONNECT_STRING">
             <summary>
             connect string of sql data
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Constant.SQL.BikeCategory">
+        <member name="T:RentalBikeApp.Constant.BikeCategory">
             <value>
             enum define category bike
             </value>
         </member>
-        <member name="F:RentalBikeApp.Constant.SQL.BikeCategory.ELECTRIC">
+        <member name="F:RentalBikeApp.Constant.BikeCategory.ELECTRIC">
             <summary>
             representing of electric bike
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Constant.SQL.BikeCategory.TANDEM">
+        <member name="F:RentalBikeApp.Constant.BikeCategory.TANDEM">
             <summary>
             representing of tandem
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Constant.SQL.BikeCategory.BIKE">
+        <member name="F:RentalBikeApp.Constant.BikeCategory.BIKE">
             <summary>
             representing of bike
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Constant.API_INFO">
-            <summary>
-            provide the api's information
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Constant.API_INFO.BASE_URL">
+        <member name="F:RentalBikeApp.Constant.BASE_URL">
             <value>
             get api base url
             </value>
         </member>
-        <member name="F:RentalBikeApp.Constant.API_INFO.PROCESS_URL">
+        <member name="F:RentalBikeApp.Constant.PROCESS_URL">
             <value>
             get sub api process transaction url
             </value>
         </member>
-        <member name="F:RentalBikeApp.Constant.API_INFO.RESET_URL">
+        <member name="F:RentalBikeApp.Constant.RESET_URL">
             <value>
             get sub apj reset balance url
             </value>
         </member>
-        <member name="T:RentalBikeApp.Constant.API_INFO.COMMAND">
+        <member name="T:RentalBikeApp.Constant.COMMAND">
             <value>
             enum use to define the command in request when call process transaction API
             </value>
         </member>
-        <member name="F:RentalBikeApp.Constant.API_INFO.COMMAND.PAY">
+        <member name="F:RentalBikeApp.Constant.COMMAND.PAY">
             <summary>
             use when transaction for pay money
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Constant.API_INFO.COMMAND.REFUND">
+        <member name="F:RentalBikeApp.Constant.COMMAND.REFUND">
             <summary>
             use when transaction for refund deposit
             </summary>
         </member>
-        <member name="F:RentalBikeApp.Constant.API_INFO.ERROR_CODE">
+        <member name="F:RentalBikeApp.Constant.ERROR_CODE">
             <summary>
             error code
-            </summary>
-        </member>
-        <member name="T:RentalBikeApp.Constant.TRANSACTION_STATUS">
-            <value>
-             enum use to define the transaction form status
-            </value>
-        </member>
-        <member name="F:RentalBikeApp.Constant.TRANSACTION_STATUS.RENT_BIKE">
-            <summary>
-            transaction with status ren bike
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Constant.TRANSACTION_STATUS.PAY">
-            <summary>
-            transaction with status pay
             </summary>
         </member>
         <member name="F:RentalBikeApp.Constant.QRValid">
@@ -275,7 +257,7 @@
             <param name="QRCode">QR Code you want to find</param>
             <returns>Return the bike with specified QR Code or null if not found</returns>
         </member>
-        <member name="M:RentalBikeApp.Data.ServiceAgents.BaseBikeService.GetListBikesInStation(System.Int32,RentalBikeApp.Constant.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BaseBikeService.GetListBikesInStation(System.Int32,RentalBikeApp.Constant.BikeCategory)">
             <summary>
             Filters a list bike in the station base on bike category
             </summary>
@@ -290,13 +272,12 @@
             <param name="stationId">The station you want to filter list of bike</param>
             <returns>Return the list base on bike category</returns>
         </member>
-        <member name="M:RentalBikeApp.Data.ServiceAgents.BaseBikeService.UpdateBike(System.Int32,RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo,System.Boolean)">
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BaseBikeService.UpdateBike(System.Int32,RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo)">
             <summary>
             Update bike information
             </summary>
             <param name="bikeId">The bike id</param>
             <param name="update">The update information</param>
-            <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
             <returns>The bike information after updated</returns>
         </member>
         <member name="T:RentalBikeApp.Data.ServiceAgents.BaseService">
@@ -360,13 +341,12 @@
             <param name="stationId">The station you want to filter list of bike</param>
             <returns>Return the list base on bike category</returns>
         </member>
-        <member name="M:RentalBikeApp.Data.ServiceAgents.IBikeService.UpdateBike(System.Int32,RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo,System.Boolean)">
+        <member name="M:RentalBikeApp.Data.ServiceAgents.IBikeService.UpdateBike(System.Int32,RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo)">
             <summary>
             Update bike information
             </summary>
             <param name="bikeId">The bike id</param>
             <param name="update">The update information</param>
-            <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
             <returns>The bike information after updated</returns>
         </member>
         <member name="T:RentalBikeApp.Data.ServiceAgents.StationService">
@@ -429,11 +409,10 @@
             <param name="userId">the Id of user</param>
             <returns>Return the specified user's transactions list</returns>
         </member>
-        <member name="M:RentalBikeApp.Data.ServiceAgents.TransactionService.UpdateTransaction(System.Int32,System.Int32,System.DateTime,System.String)">
+        <member name="M:RentalBikeApp.Data.ServiceAgents.TransactionService.UpdateTransaction(System.Int32,System.Int32,System.String)">
             <summary>Update the last transaction of the user after rented bike</summary>
             <param name="transactionId">the Id of transaction</param>
             <param name="rentalMoney">the rental money that user must to pay after rented bike</param>
-            <param name="dateTransaction">the date of the transaction is process</param>
             <param name="note">note if necessary</param>
             <returns>Return true if success or false if cause error</returns>
         </member>
@@ -625,11 +604,6 @@
             station id
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.DateRent">
-            <summary>
-            the date begin rent bike
-            </summary>
-        </member>
         <member name="P:RentalBikeApp.Entities.SQLEntities.BaseBike.Images">
             <summary>
             the images of bike
@@ -665,29 +639,23 @@
             Contructor of BaseBike
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor(System.Int32,System.Int32,System.Int32,System.String,System.String,System.Boolean)">
-            <summary>
-            Contructor of BaseBike
-            </summary>
-            <param name="bikeId">id of bike</param>
-            <param name="stationId">id of station</param>
-            <param name="value">value of bike</param>
-            <param name="qrcode">qrcode of bike</param>
-            <param name="manufacturer">bike namufacturer</param>
-            <param name="bikeStatus">the bike status</param>
-        </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.#ctor(RentalBikeApp.Entities.SQLEntities.BaseBike)">
             <summary>
             Contructor of BaseBike
             </summary>
             <param name="bike">bike information</param>
         </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.UpdateBike(RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo,System.Boolean)">
+        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.CalculateDeposit">
+            <summary>
+            Calculate deposit
+            </summary>
+            <returns>The deposit</returns>
+        </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.BaseBike.UpdateBike(RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo)">
             <summary>
             Update bike information
             </summary>
             <param name="update">the update bike information</param>
-            <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
             <returns>the bike before updated</returns>
         </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo">
@@ -700,11 +668,6 @@
             station id contain bike
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.DateRent">
-            <summary>
-            the date begin rent bike
-            </summary>
-        </member>
         <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.Images">
             <summary>
             Images of bike
@@ -713,11 +676,6 @@
         <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.Value">
             <summary>
             bike value
-            </summary>
-        </member>
-        <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.QRCode">
-            <summary>
-            bike qrcode
             </summary>
         </member>
         <member name="P:RentalBikeApp.Entities.SQLEntities.UpdateBikeInfo.Manufacturer">
@@ -985,11 +943,6 @@
             bike id
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.Category">
-            <summary>
-            transaction category
-            </summary>
-        </member>
         <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.Deposit">
             <summary>
             deposit
@@ -1000,14 +953,14 @@
             rental money for rent bike
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.TotalTimeRent">
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.BeginAt">
             <summary>
-            time to rent
+            the date transaction create
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.DateTransaction">
+        <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.EndAt">
             <summary>
-            date transaction
+            
             </summary>
         </member>
         <member name="P:RentalBikeApp.Entities.SQLEntities.Transaction.Note">
@@ -1023,12 +976,11 @@
             <param name="bikeId">The id of rental bike</param>
             <param name="deposit">The deposit of transaction</param>
         </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.Transaction.UpdateTransaction(System.Int32,System.Int32,System.String)">
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Transaction.UpdateTransaction(System.Int32,System.String)">
             <summary>
             Update transaction
             </summary>
             <param name="rentalMoney">The rental money of transaction</param>
-            <param name="totalTimeRent">The total time rent of transaction</param>
             <param name="note">The note of transaction</param>
             <returns>The transaction before updated</returns>
         </member>
@@ -1446,12 +1398,22 @@
             </summary>
             <returns>The string representing total time rent</returns>
         </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillBikeInformation">
+            <summary>
+            Fill bike information
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentingBikeForm">
+            <summary>
+            Fill bike information in rent bike form when rent bike status is RENTING_BIKE
+            </summary>
+        </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentingBikeForm(RentalBikeApp.Entities.SQLEntities.BaseBike)">
             <summary>
             Fill bike information in rent bike form when rent bike status is RENTING_BIKE
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentBikeInfoForm(System.Int32,RentalBikeApp.Constant.SQL.BikeCategory)">
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentBikeInfoForm(System.Int32,RentalBikeApp.Constant.BikeCategory)">
             <summary>
             Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
             </summary>

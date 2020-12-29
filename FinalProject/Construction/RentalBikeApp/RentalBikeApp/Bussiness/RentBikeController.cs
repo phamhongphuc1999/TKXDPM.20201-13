@@ -89,7 +89,18 @@ namespace RentalBikeApp.Bussiness
         public void BeginRentingBike(int bikeId)
         {
             rentBikeForm.StartTimer();
-            bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1, DateRent = DateTime.Now }, true);
+            bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1 });
+        }
+
+        /// <summary>
+        /// get begin rent bike
+        /// </summary>
+        /// <param name="bikeId">bike id</param>
+        /// <returns>The begin date</returns>
+        public DateTime GetBeginDate(int bikeId)
+        {
+            Transaction transaction = transactionService.GetProcessTransaction(bikeId);
+            return transaction.BeginAt;
         }
     }
 }

@@ -15,7 +15,7 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Constant.SQL;
+using static RentalBikeApp.Constant;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Bussiness;
 using System.Drawing;
@@ -35,7 +35,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// contructor of RentBikeForm
         /// </summary>
-        public RentBikeForm(): base()
+        public RentBikeForm() : base()
         {
             viewBikeController = new ViewBikeController();
             rentBikeController = new RentBikeController();
@@ -51,7 +51,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         public void StartTimer()
         {
-            if(!rentBikeTmr.Enabled) rentBikeTmr.Start();
+            if (!rentBikeTmr.Enabled) rentBikeTmr.Start();
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         public void StopTimer()
         {
-            if(rentBikeTmr.Enabled) rentBikeTmr.Stop();
+            if (rentBikeTmr.Enabled) rentBikeTmr.Stop();
         }
 
         /// <summary>
@@ -72,28 +72,17 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
-        /// Fill bike information in rent bike form when rent bike status is RENTING_BIKE
+        /// Fill bike information
         /// </summary>
-        public void FillRentingBikeForm(BaseBike bike = null)
+        private void FillBikeInformation()
         {
-            if (bike == null) bike = this.bike;
-            else this.bike = bike;
-            this.StartTimer();
-            rentBikePnl.Visible = false;
-            rentingBikePnl.Visible = true;
-            rentBikeInfoPnl.Visible = false;
-            if (bike.DateRent != null)
-                rentingTimedRentValueLbl.Text = Utilities.SubtractDate(DateTime.Now, (DateTime)bike.DateRent);
-            else rentingTimedRentValueLbl.Text = "0:00:00";
-            rentingQrCodeTxt.Text = bike.QRCode;
-            rentingAvatarPb.Image = Image.FromFile(bike.Images);
-            if(bike is Bike)
+            if (bike is Bike)
             {
                 rentingCategoryTxt.Text = "Xe đạp thường";
                 rentingRemainPowerValueLbl.Text = "Không có thông tin";
                 rentingLicenseTxt.Text = "Không có thông tin";
             }
-            else if(bike is ElectricBike)
+            else if (bike is ElectricBike)
             {
                 ElectricBike electricBike = bike as ElectricBike;
                 rentingCategoryTxt.Text = "Xe đạp điện";
@@ -110,18 +99,50 @@ namespace RentalBikeApp.Presentation
         }
 
         /// <summary>
+        /// Fill bike information in rent bike form when rent bike status is RENTING_BIKE
+        /// </summary>
+        public void FillRentingBikeForm()
+        {
+            this.StartTimer();
+            rentBikePnl.Visible = false;
+            rentingBikePnl.Visible = true;
+            rentBikeInfoPnl.Visible = false;
+            rentingTimedRentValueLbl.Text = "0:00:00";
+            rentingQrCodeTxt.Text = bike.QRCode;
+            rentingAvatarPb.Image = Image.FromFile(bike.Images);
+            FillBikeInformation();
+        }
+
+        /// <summary>
+        /// Fill bike information in rent bike form when rent bike status is RENTING_BIKE
+        /// </summary>
+        public void FillRentingBikeForm(BaseBike bike)
+        {
+            this.bike = bike;
+            this.StartTimer();
+            rentBikePnl.Visible = false;
+            rentingBikePnl.Visible = true;
+            rentBikeInfoPnl.Visible = false;
+            DateTime begin = rentBikeController.GetBeginDate(this.bike.BikeId);
+            rentingTimedRentValueLbl.Text = Utilities.SubtractDate(DateTime.Now, begin);
+            rentingQrCodeTxt.Text = bike.QRCode;
+            rentingAvatarPb.Image = Image.FromFile(bike.Images);
+            FillBikeInformation();
+        }
+
+        /// <summary>
         /// Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
         /// </summary>
         /// <param name="bikeId">The bike id of specified bike</param>
         /// <param name="category">the bike category</param>
-        public void FillRentBikeInfoForm(int bikeId, Constant.SQL.BikeCategory category)
+        public void FillRentBikeInfoForm(int bikeId, BikeCategory category)
         {
             rentBikePnl.Visible = false;
             rentingBikePnl.Visible = false;
             rentBikeInfoPnl.Visible = true;
             bike = viewBikeController.ViewBikeDetail(bikeId);
             rentBikeInfoQrCodeTxt.Text = bike.QRCode;
-            int deposit = 40 * bike.Value / 100;
+            int deposit = bike.CalculateDeposit();
             if (category == BikeCategory.BIKE)
             {
                 rentBikeInfoCategoryTxt.Text = "Xe đạp thường";

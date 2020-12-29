@@ -42,8 +42,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// </summary>
         /// <param name="bikeId">The bike id</param>
         /// <param name="update">The update information</param>
-        /// <param name="isUpdateDate">if isUpdateDate is true, the RentDate will be updated or not if isUpdateDate is false</param>
         /// <returns>The bike information after updated</returns>
-        public BaseBike UpdateBike(int bikeId, UpdateBikeInfo update, bool isUpdateDate = false);
+        public BaseBike UpdateBike(int bikeId, UpdateBikeInfo update);
     }
 }

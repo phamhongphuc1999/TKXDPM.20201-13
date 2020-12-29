@@ -15,7 +15,6 @@
 using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
-using System;
 using System.Linq;
 
 namespace RentalBikeApp.Bussiness
@@ -59,7 +58,7 @@ namespace RentalBikeApp.Bussiness
         /// <returns></returns>
         public void UpdateStationAfterReturnbike(int stationId, int bikeId)
         {
-            bikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 }, true);
+            bikeService.UpdateBike(bikeId, new UpdateBikeInfo { StationId = stationId, BikeStatus = -1 });
         }
 
         /// <summary>
@@ -72,7 +71,7 @@ namespace RentalBikeApp.Bussiness
         public Transaction UpdatePaymentTransaction(int bikeId, int rentalMoney, string content = "")
         {
             Transaction transaction = transactionService.GetProcessTransaction(bikeId);
-            bool check = transactionService.UpdateTransaction(transaction.TransactionId, rentalMoney, DateTime.Now, content);
+            bool check = transactionService.UpdateTransaction(transaction.TransactionId, rentalMoney, content);
             if (!check) return null;
             transaction = transactionService.GetTransactionById(transaction.TransactionId);
             return transaction;

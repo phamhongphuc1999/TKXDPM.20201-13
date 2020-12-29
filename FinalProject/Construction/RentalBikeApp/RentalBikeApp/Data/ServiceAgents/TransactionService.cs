@@ -63,7 +63,7 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <returns></returns>
         public Transaction GetProcessTransaction(int bikeId)
         {
-            return connecter.SqlData.Transactions.SingleOrDefault(x => x.BikeId == bikeId && x.Category == "process");
+            return connecter.SqlData.Transactions.SingleOrDefault(x => x.BikeId == bikeId && x.EndAt == null);
         }
 
         /// <summary>Get all of transactions of the user</summary>
@@ -77,14 +77,13 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <summary>Update the last transaction of the user after rented bike</summary>
         /// <param name="transactionId">the Id of transaction</param>
         /// <param name="rentalMoney">the rental money that user must to pay after rented bike</param>
-        /// <param name="dateTransaction">the date of the transaction is process</param>
         /// <param name="note">note if necessary</param>
         /// <returns>Return true if success or false if cause error</returns>
-        public bool UpdateTransaction(int transactionId, int rentalMoney, DateTime dateTransaction, string note = "")
+        public bool UpdateTransaction(int transactionId, int rentalMoney, string note = "")
         {
             Transaction transaction = connecter.SqlData.Transactions.Find(transactionId);
             if (transaction == null) return false;
-            transaction.UpdateTransaction(rentalMoney, 0, note);
+            transaction.UpdateTransaction(rentalMoney, note);
             int check = connecter.SqlData.SaveChanges();
             return (check > 0);
         }

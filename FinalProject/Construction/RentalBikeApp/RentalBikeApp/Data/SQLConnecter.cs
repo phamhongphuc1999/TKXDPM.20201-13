@@ -47,7 +47,7 @@ namespace RentalBikeApp.Data
         /// <returns>The instance represeting the connection</returns>
         public static SQLConnecter GetInstance()
         {
-            if(connecter == null) connecter = new SQLConnecter(Constant.SQL.SQL_CONNECT_STRING);
+            if(connecter == null) connecter = new SQLConnecter(Constant.SQL_CONNECT_STRING);
             return connecter;
         }
     }

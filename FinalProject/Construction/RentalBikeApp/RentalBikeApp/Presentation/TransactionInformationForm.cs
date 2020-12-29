@@ -16,7 +16,6 @@ using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Constant;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Constant.SQL;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Entities.APIEntities;
 using RentalBikeApp.Bussiness;
@@ -28,13 +27,13 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class TransactionInformationForm : BaseForm
     {
-        private BikeCategory category;
+        private bool isPay;
         private int deposit;
         private int rentalMoney;
         private int stationId;
         private BaseBike bike;
         private Card card;
-        private TRANSACTION_STATUS status;
+        private BikeCategory category;
         private RentBikeController rentBikeController;
         private ReturnBikeController returnBikeController;
         private PaymentController paymentController;
@@ -60,11 +59,11 @@ namespace RentalBikeApp.Presentation
         public void FillTransactionInformationWhenPay(int stationId, BaseBike bike)
         {
             this.bike = bike;
-            this.status = TRANSACTION_STATUS.PAY;
             this.stationId = stationId;
             remainMoneyTxt.Text = "1000000";
             transactionDateTxt.Text = DateTime.Now.ToString("f");
             cancelBut.Visible = false;
+            this.isPay = true;
             if (bike is Bike) category = BikeCategory.BIKE;
             else if (bike is ElectricBike) category = BikeCategory.ELECTRIC;
             else if (bike is Tandem) category = BikeCategory.TANDEM;
@@ -81,10 +80,10 @@ namespace RentalBikeApp.Presentation
         {
             this.bike = bike;
             this.card = card;
+            this.isPay = false;
             if (bike is Bike) category = BikeCategory.BIKE;
             else if (bike is ElectricBike) category = BikeCategory.ELECTRIC;
             else if (bike is Tandem) category = BikeCategory.TANDEM;
-            this.status = TRANSACTION_STATUS.RENT_BIKE;
             this.deposit = 40 * bike.Value / 100;
             depositTxt.Text = String.Format("{0:n0}", this.deposit);
             rentalMoneyTxt.Text = "Không có dữ liệu";
@@ -97,7 +96,7 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         private async void PermitButWhenRentBike()
         {
-            ProcessTransactionResponse result = await paymentController.ProcessTransaction(card, Constant.API_INFO.COMMAND.PAY, this.deposit, DateTime.Now,
+            ProcessTransactionResponse result = await paymentController.ProcessTransaction(card, COMMAND.PAY, this.deposit, DateTime.Now,
                 noteTxt.Text == "" ? "Transaction content" : noteTxt.Text);
             string error = result.errorCode;
             if (error == "00")
@@ -114,12 +113,12 @@ namespace RentalBikeApp.Presentation
             }
             else if (error == "01" || error == "02" || error == "05")
             {
-                MessageBox.Show(API_INFO.ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 cardInformationForm.Show(this);
             }
             else
             {
-                MessageBox.Show(API_INFO.ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             this.Hide();
@@ -143,10 +142,10 @@ namespace RentalBikeApp.Presentation
                 return;
             }
             if (this.deposit < this.rentalMoney)
-                response = await paymentController.ProcessTransaction(card, API_INFO.COMMAND.PAY, this.rentalMoney - this.deposit,
+                response = await paymentController.ProcessTransaction(card, COMMAND.PAY, this.rentalMoney - this.deposit,
                     DateTime.Now, "Pay Rental Money");
             else if (this.deposit > this.rentalMoney)
-                response = await paymentController.ProcessTransaction(card, API_INFO.COMMAND.REFUND, this.deposit - this.rentalMoney,
+                response = await paymentController.ProcessTransaction(card, COMMAND.REFUND, this.deposit - this.rentalMoney,
                     DateTime.Now, "Refund deposit");
             string error = response.errorCode;
             if (error == "00")
@@ -190,8 +189,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void PermitBut_Click(object sender, EventArgs e)
         {
-            if (status == TRANSACTION_STATUS.RENT_BIKE) PermitButWhenRentBike();
-            else if (status == TRANSACTION_STATUS.PAY) PermitButWhenPay();
+            if (this.isPay) PermitButWhenPay();
+            else PermitButWhenRentBike();
         }
 
         /// <summary>

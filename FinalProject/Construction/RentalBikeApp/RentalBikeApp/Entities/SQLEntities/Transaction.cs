@@ -45,12 +45,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         public int BikeId { get; private set; }
 
         /// <summary>
-        /// transaction category
-        /// </summary>
-        [Required(ErrorMessage = "Category is required")]
-        public string Category { get; private set; }
-
-        /// <summary>
         /// deposit
         /// </summary>
         [Required(ErrorMessage = "Deposit is required")]
@@ -63,17 +57,16 @@ namespace RentalBikeApp.Entities.SQLEntities
         public int RentalMoney { get; private set; }
 
         /// <summary>
-        /// time to rent
+        /// the date transaction create
         /// </summary>
-        [Required(ErrorMessage = "TotalTimeRent is required")]
-        public int TotalTimeRent { get; private set; }
+        [Required(ErrorMessage = "BeginAt is required")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
+        public DateTime BeginAt { get; private set; }
 
         /// <summary>
-        /// date transaction
+        /// 
         /// </summary>
-        [Required(ErrorMessage = "DateTransaction is required")]
-        [DisplayFormat(DataFormatString = "{0:d}")]
-        public DateTime DateTransaction { get; private set; }
+        public DateTime? EndAt { get; private set; }
 
         /// <summary>
         /// note
@@ -92,25 +85,20 @@ namespace RentalBikeApp.Entities.SQLEntities
             this.UserId = userId;
             this.BikeId = bikeId;
             this.Deposit = deposit;
-            this.Category = "process";
             this.RentalMoney = 0;
-            this.TotalTimeRent = 0;
-            this.DateTransaction = DateTime.Now;
+            this.BeginAt = DateTime.Now;
         }
 
         /// <summary>
         /// Update transaction
         /// </summary>
         /// <param name="rentalMoney">The rental money of transaction</param>
-        /// <param name="totalTimeRent">The total time rent of transaction</param>
         /// <param name="note">The note of transaction</param>
         /// <returns>The transaction before updated</returns>
-        public void UpdateTransaction(int rentalMoney, int totalTimeRent, string note)
+        public void UpdateTransaction(int rentalMoney, string note)
         {
-            this.Category = "complete";
             this.RentalMoney = rentalMoney;
-            this.TotalTimeRent = totalTimeRent;
-            this.DateTransaction = DateTime.Now;
+            this.EndAt = DateTime.Now;
             this.Note = note;
         }
     }

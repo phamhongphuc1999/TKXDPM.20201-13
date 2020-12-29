@@ -70,8 +70,7 @@ namespace ReantalBikeTest.ServiceAgents
         [Test, Order(3)]
         public void UpdateTransactionTest()
         {
-            DateTime aDateTime = new DateTime(2020, 12, 20, 00, 00, 00);
-            bool result = transactionService.UpdateTransaction(1, 10000, aDateTime, "");
+            bool result = transactionService.UpdateTransaction(1, 10000, "");
             Assert.IsTrue(result);
         }
     }
