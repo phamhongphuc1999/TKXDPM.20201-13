@@ -703,11 +703,6 @@
             representing the bikes table in database
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.Bike.#ctor">
-            <summary>
-            Contructor of Bike
-            </summary>
-        </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.Bike.#ctor(RentalBikeApp.Entities.SQLEntities.BaseBike)">
             <summary>
             Contructor of Bike
@@ -797,11 +792,6 @@
         <member name="P:RentalBikeApp.Entities.SQLEntities.ElectricBike.LicensePlate">
             <summary>
             the license plate of bike
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.ElectricBike.#ctor">
-            <summary>
-            Contructor of ElectricBike
             </summary>
         </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.ElectricBike.#ctor(RentalBikeApp.Entities.SQLEntities.BaseBike,RentalBikeApp.Entities.SQLEntities.ElectricBikeTable)">
@@ -910,11 +900,6 @@
         <member name="T:RentalBikeApp.Entities.SQLEntities.Tandem">
             <summary>
             reqresenting the tandem table in database
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.Entities.SQLEntities.Tandem.#ctor">
-            <summary>
-            Contructor of Tandem
             </summary>
         </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.Tandem.#ctor(RentalBikeApp.Entities.SQLEntities.BaseBike)">

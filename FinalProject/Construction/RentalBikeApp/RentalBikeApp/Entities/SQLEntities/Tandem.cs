@@ -38,11 +38,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <summary>
         /// Contructor of Tandem
         /// </summary>
-        public Tandem() : base() { }
-
-        /// <summary>
-        /// Contructor of Tandem
-        /// </summary>
         /// <param name="bike">the bike information</param>
         public Tandem(BaseBike bike): base(bike) { }
     }

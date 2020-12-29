@@ -34,6 +34,7 @@ namespace RentalBikeApp.Presentation
         private BaseBike bike;
         private Card card;
         private BikeCategory category;
+
         private RentBikeController rentBikeController;
         private ReturnBikeController returnBikeController;
         private PaymentController paymentController;
@@ -130,7 +131,7 @@ namespace RentalBikeApp.Presentation
         private async void PermitButWhenPay()
         {
             if (card == null) card = rentBikeController.GetCardInformation("Group 13");
-            if (this.deposit == 0) this.deposit = 40 * bike.Value / 100;
+            if (this.deposit == 0) this.deposit = bike.CalculateDeposit();
             ProcessTransactionResponse response = null;
             if(this.deposit == this.rentalMoney)
             {

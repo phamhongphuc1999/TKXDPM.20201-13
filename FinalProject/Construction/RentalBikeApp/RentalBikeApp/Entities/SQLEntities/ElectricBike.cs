@@ -59,11 +59,6 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <summary>
         /// Contructor of ElectricBike
         /// </summary>
-        public ElectricBike(): base() { }
-
-        /// <summary>
-        /// Contructor of ElectricBike
-        /// </summary>
         /// <param name="bike">The base bike information</param>
         /// <param name="electricBike">The specified electric bike information</param>
         public ElectricBike(BaseBike bike, ElectricBikeTable electricBike): base(bike)
