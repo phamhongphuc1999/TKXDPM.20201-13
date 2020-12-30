@@ -17,7 +17,7 @@ using System.Windows.Forms;
 using static RentalBikeApp.Constant;
 using static RentalBikeApp.Program;
 using RentalBikeApp.Entities.SQLEntities;
-using RentalBikeApp.Entities.APIEntities;
+using RentalBikeApp.Entities.InterbankEntities;
 using RentalBikeApp.Bussiness;
 
 namespace RentalBikeApp.Presentation
@@ -42,7 +42,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// contructor of TransactionInformationForm
         /// </summary>
-        public TransactionInformationForm(): base()
+        public TransactionInformationForm() : base()
         {
             rentBikeController = new RentBikeController();
             returnBikeController = new ReturnBikeController();
@@ -97,11 +97,9 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         private async void PermitButWhenRentBike()
         {
-            ProcessTransactionResponse result = await paymentController.ProcessTransaction(card, COMMAND.PAY, this.deposit, DateTime.Now,
-                noteTxt.Text == "" ? "Transaction content" : noteTxt.Text);
-            string error = result.errorCode;
-            if (error == "00")
+            try
             {
+                InterbankResponse result = await paymentController.Pay(card, this.deposit, DateTime.Now, noteTxt.Text == "" ? "Transaction content" : noteTxt.Text);
                 Transaction transaction = rentBikeController.CreateDepositTransaction(1, bike.BikeId, this.deposit);
                 if (transaction == null)
                 {
@@ -111,18 +109,12 @@ namespace RentalBikeApp.Presentation
                 rentBikeForm.FillRentingBikeForm();
                 rentBikeController.BeginRentingBike(bike.BikeId);
                 rentBikeForm.Show(this, null);
+                this.Hide();
             }
-            else if (error == "01" || error == "02" || error == "05")
+            catch (Exception error)
             {
-                MessageBox.Show(ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                cardInformationForm.Show(this);
+                MessageBox.Show(error.Message, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
-            {
-                MessageBox.Show(ERROR_CODE[result.errorCode], "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            this.Hide();
         }
 
         /// <summary>
@@ -130,33 +122,36 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         private async void PermitButWhenPay()
         {
-            if (card == null) card = rentBikeController.GetCardInformation("Group 13");
-            if (this.deposit == 0) this.deposit = bike.CalculateDeposit();
-            ProcessTransactionResponse response = null;
-            if(this.deposit == this.rentalMoney)
+            try
             {
-                Transaction transaction = returnBikeController.UpdatePaymentTransaction(bike.BikeId, this.rentalMoney);
+                if (card == null) card = rentBikeController.GetCardInformation("Group 13");
+                if (this.deposit == 0) this.deposit = bike.CalculateDeposit();
+                InterbankResponse response = null;
+                Transaction transaction;
+                if (this.deposit == this.rentalMoney)
+                {
+                    transaction = returnBikeController.UpdatePaymentTransaction(bike.BikeId, this.rentalMoney);
+                    returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId);
+                    MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    homePageForm.Show(this);
+                    this.Hide();
+                    return;
+                }
+                if (this.deposit < this.rentalMoney)
+                    response = await paymentController.Pay(card, this.rentalMoney - this.deposit, DateTime.Now, "Pay Rental Money");
+                else if (this.deposit > this.rentalMoney)
+                    response = await paymentController.Refund(card, this.deposit - this.rentalMoney, DateTime.Now, "Refund deposit");
+                string error = response.errorCode;
+                transaction = returnBikeController.UpdatePaymentTransaction(bike.BikeId, this.rentalMoney);
                 returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId);
                 MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 homePageForm.Show(this);
                 this.Hide();
-                return;
             }
-            if (this.deposit < this.rentalMoney)
-                response = await paymentController.ProcessTransaction(card, COMMAND.PAY, this.rentalMoney - this.deposit,
-                    DateTime.Now, "Pay Rental Money");
-            else if (this.deposit > this.rentalMoney)
-                response = await paymentController.ProcessTransaction(card, COMMAND.REFUND, this.deposit - this.rentalMoney,
-                    DateTime.Now, "Refund deposit");
-            string error = response.errorCode;
-            if (error == "00")
+            catch (Exception error)
             {
-                Transaction transaction = returnBikeController.UpdatePaymentTransaction(bike.BikeId, this.rentalMoney);
-                returnBikeController.UpdateStationAfterReturnbike(this.stationId, bike.BikeId);
-                MessageBox.Show("giao dịch thành công", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                homePageForm.Show(this);
+                MessageBox.Show(error.Message, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            this.Hide();
         }
 
         /// <summary>

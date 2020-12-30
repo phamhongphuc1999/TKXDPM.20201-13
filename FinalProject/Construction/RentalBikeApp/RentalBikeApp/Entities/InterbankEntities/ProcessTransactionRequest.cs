@@ -14,7 +14,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace RentalBikeApp.Entities.APIEntities
+namespace RentalBikeApp.Entities.InterbankEntities
 {
     /// <summary>
     /// representing the process transaction information body in request
@@ -25,24 +25,39 @@ namespace RentalBikeApp.Entities.APIEntities
         /// The version of API
         /// </summary>
         [Required]
-        public string version { get; set; }
+        public string version { get; private set; }
 
         /// <summary>
         /// The transaction information
         /// </summary>
         [Required]
-        public TransactionInfo transaction { get; set; }
+        public TransactionInfo transaction { get; private set; }
 
         /// <summary>
         /// The app code of card
         /// </summary>
         [Required]
-        public string appCode { get; set; }
+        public string appCode { get; private set; }
 
         /// <summary>
         /// hash for invalid information of request
         /// </summary>
         [Required]
-        public string hashCode { get; set; }
+        public string hashCode { get; private set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="version"></param>
+        /// <param name="transaction"></param>
+        /// <param name="appCode"></param>
+        /// <param name="hashCode"></param>
+        public ProcessTransactionRequest(string version, TransactionInfo transaction, string appCode, string hashCode)
+        {
+            this.version = version;
+            this.transaction = transaction;
+            this.appCode = appCode;
+            this.hashCode = hashCode;
+        }
     }
 }

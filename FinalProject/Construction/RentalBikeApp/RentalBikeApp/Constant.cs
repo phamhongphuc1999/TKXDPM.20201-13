@@ -93,21 +93,6 @@ namespace RentalBikeApp
             {"07", "Số tiền không hợp lệ" }
         };
 
-        /////<value>
-        ///// enum use to define the transaction form status
-        /////</value>
-        //public enum TRANSACTION_STATUS
-        //{
-        //    /// <summary>
-        //    /// transaction with status ren bike
-        //    /// </summary>
-        //    RENT_BIKE,
-        //    /// <summary>
-        //    /// transaction with status pay
-        //    /// </summary>
-        //    PAY
-        //}
-
         /// <summary>
         /// use for valid qr code
         /// </summary>

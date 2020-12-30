@@ -4,6 +4,33 @@
         <name>RentalBikeApp</name>
     </assembly>
     <members>
+        <member name="T:RentalBikeApp.Bussiness.IPayment">
+            <summary>
+            The interface IPayment implements functions to payment rental money
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.IPayment.Pay(RentalBikeApp.Entities.SQLEntities.Card,System.Int32,System.DateTime,System.String,System.String)">
+            <summary>
+            Send transaction to server
+            </summary>
+            <param name="card">The card information</param>
+            <param name="amount">The amount of transaction</param>
+            <param name="date">Date time transaction processed</param>
+            <param name="transactionContent">Note of transaction</param>
+            <param name="_version">Version of API, default 1.0.1</param>
+            <returns>The transaction response information</returns>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.IPayment.Refund(RentalBikeApp.Entities.SQLEntities.Card,System.Int32,System.DateTime,System.String,System.String)">
+            <summary>
+            Send transaction to server
+            </summary>
+            <param name="card">The card information</param>
+            <param name="amount">The amount of transaction</param>
+            <param name="date">Date time transaction processed</param>
+            <param name="transactionContent">Note of transaction</param>
+            <param name="_version">Version of API, default 1.0.1</param>
+            <returns>The transaction response information</returns>
+        </member>
         <member name="T:RentalBikeApp.Bussiness.PaymentController">
             <summary>
             Privider functions for process API
@@ -17,12 +44,22 @@
             <param name="category">The category of rental bike</param>
             <returns>The rental money that use must rent</returns>
         </member>
-        <member name="M:RentalBikeApp.Bussiness.PaymentController.ProcessTransaction(RentalBikeApp.Entities.SQLEntities.Card,RentalBikeApp.Constant.COMMAND,System.Int32,System.DateTime,System.String,System.String)">
+        <member name="M:RentalBikeApp.Bussiness.PaymentController.Pay(RentalBikeApp.Entities.SQLEntities.Card,System.Int32,System.DateTime,System.String,System.String)">
             <summary>
             Send transaction to server
             </summary>
             <param name="card">The card information</param>
-            <param name="command">The definition of the request is for payment or refund</param>
+            <param name="amount">The amount of transaction</param>
+            <param name="date">Date time transaction processed</param>
+            <param name="transactionContent">Note of transaction</param>
+            <param name="_version">Version of API, default 1.0.1</param>
+            <returns>The transaction response information</returns>
+        </member>
+        <member name="M:RentalBikeApp.Bussiness.PaymentController.Refund(RentalBikeApp.Entities.SQLEntities.Card,System.Int32,System.DateTime,System.String,System.String)">
+            <summary>
+            Send transaction to server
+            </summary>
+            <param name="card">The card information</param>
             <param name="amount">The amount of transaction</param>
             <param name="date">Date time transaction processed</param>
             <param name="transactionContent">Note of transaction</param>
@@ -232,6 +269,102 @@
         <member name="F:RentalBikeApp.Constant.QRValid">
             <summary>
             use for valid qr code
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.CustomException.InternalServerErrorException">
+            <summary>
+            Internal server error exception
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.InternalServerErrorException.#ctor">
+            <summary>
+            contructor of InternalServerErrorException
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.CustomException.InvalidCardException">
+            <summary>
+            Invalid card exception
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.InvalidCardException.#ctor">
+            <summary>
+            contructor of InvalidCardException
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.CustomException.InvalidTransactionAmountException">
+            <summary>
+            Invalid transaction amount exception
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.InvalidTransactionAmountException.#ctor">
+            <summary>
+            contructor of InvalidTransactionAmountException
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.CustomException.InvalidVersionException">
+            <summary>
+            Invalid version exception
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.InvalidVersionException.#ctor">
+            <summary>
+            contructor of InvalidVersionException
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.CustomException.NotEnoughBalanceException">
+            <summary>
+            Not enough balance exception
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.NotEnoughBalanceException.#ctor">
+            <summary>
+            contructor of NotEnoughBalanceException
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.CustomException.NotEnoughTransactionInfoException">
+            <summary>
+            Not enough transaction information exception
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.NotEnoughTransactionInfoException.#ctor">
+            <summary>
+            contructor of NotEnoughTransactionInfoException
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.CustomException.PaymentException">
+            <summary>
+            PAyment exception
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.PaymentException.#ctor">
+            <summary>
+            contructor of PaymentException
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.PaymentException.#ctor(System.String)">
+            <summary>
+            contructor of PaymentException
+            </summary>
+            <param name="message">message when exception occur</param>
+        </member>
+        <member name="T:RentalBikeApp.CustomException.SuspiciousTransactionException">
+            <summary>
+            Suspicious transaction exception
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.SuspiciousTransactionException.#ctor">
+            <summary>
+            contructor of SuspiciousTransactionException
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.CustomException.UnrecognizedException">
+            <summary>
+            Unrecognized exception
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.CustomException.UnrecognizedException.#ctor">
+            <summary>
+            contructor of UnrecognizedException
             </summary>
         </member>
         <member name="T:RentalBikeApp.Data.ServiceAgents.BaseBikeService">
@@ -469,124 +602,175 @@
             </summary>
             <returns>The instance represeting the connection</returns>
         </member>
-        <member name="T:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest">
+        <member name="T:RentalBikeApp.Entities.InterbankEntities.InterbankResponse">
+            <summary>
+            representing response from interbank
+            </summary>
+        </member>
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.InterbankResponse.errorCode">
+            <summary>
+            error code of response
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Entities.InterbankEntities.InterbankResponse.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="errorCode"></param>
+        </member>
+        <member name="T:RentalBikeApp.Entities.InterbankEntities.ProcessTransactionRequest">
             <summary>
             representing the process transaction information body in request
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest.version">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ProcessTransactionRequest.version">
             <summary>
             The version of API
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest.transaction">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ProcessTransactionRequest.transaction">
             <summary>
             The transaction information
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest.appCode">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ProcessTransactionRequest.appCode">
             <summary>
             The app code of card
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionRequest.hashCode">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ProcessTransactionRequest.hashCode">
             <summary>
             hash for invalid information of request
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Entities.APIEntities.ProcessTransactionResponse">
+        <member name="M:RentalBikeApp.Entities.InterbankEntities.ProcessTransactionRequest.#ctor(System.String,RentalBikeApp.Entities.InterbankEntities.TransactionInfo,System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="version"></param>
+            <param name="transaction"></param>
+            <param name="appCode"></param>
+            <param name="hashCode"></param>
+        </member>
+        <member name="T:RentalBikeApp.Entities.InterbankEntities.ProcessTransactionResponse">
             <summary>
             representing process transaction response
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionResponse.errorCode">
-            <summary>
-            error code of response
-            </summary>
-        </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ProcessTransactionResponse.transaction">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ProcessTransactionResponse.transaction">
             <summary>
             transaction information
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Entities.APIEntities.ResetResponse">
+        <member name="M:RentalBikeApp.Entities.InterbankEntities.ProcessTransactionResponse.#ctor(System.String,RentalBikeApp.Entities.InterbankEntities.TransactionInfo)">
+            <summary>
+            
+            </summary>
+            <param name="errorCode"></param>
+            <param name="transaction"></param>
+        </member>
+        <member name="T:RentalBikeApp.Entities.InterbankEntities.ResetResponse">
             <summary>
             representing the reset money response
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.errorCode">
-            <summary>
-            error code of response
-            </summary>
-        </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.cardCode">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ResetResponse.cardCode">
             <summary>
             card code of your card
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.owner">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ResetResponse.owner">
             <summary>
             owner of card
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.cvvCode">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ResetResponse.cvvCode">
             <summary>
             cvv of card
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.dateExpired">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ResetResponse.dateExpired">
             <summary>
             date expired of card
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.ResetResponse.balance">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.ResetResponse.balance">
             <summary>
             balance of card
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Entities.APIEntities.TransactionInfo">
+        <member name="M:RentalBikeApp.Entities.InterbankEntities.ResetResponse.#ctor(System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
-            representing the transaction information in body of transaction request
+            
+            </summary>
+            <param name="errorCode"></param>
+            <param name="cardCode"></param>
+            <param name="owner"></param>
+            <param name="cvvCode"></param>
+            <param name="dateExpired"></param>
+            <param name="balance"></param>
+        </member>
+        <member name="T:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo">
+            <summary>
+            
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.command">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo.command">
             <summary>
             transaction command
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.cardCode">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo.cardCode">
             <summary>
             card code
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.owner">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo.owner">
             <summary>
             card owner
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.cvvCode">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo.cvvCode">
             <summary>
             card cvv code
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.dateExpired">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo.dateExpired">
             <summary>
             card date expired
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.transactionContent">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo.transactionContent">
             <summary>
             transaction content(option)
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.amount">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo.amount">
             <summary>
             transaction amount money
             </summary>
         </member>
-        <member name="P:RentalBikeApp.Entities.APIEntities.TransactionInfo.createdAt">
+        <member name="P:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo.createdAt">
             <summary>
             date of transaction created
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Entities.InterbankEntities.TransactionCardInfo.#ctor(System.String,System.String,System.String,System.String,System.String,System.String,System.Int32,System.String)">
+            <summary>
+            contructor of TransactionCardInfo
+            </summary>
+            <param name="command"></param>
+            <param name="cardCode"></param>
+            <param name="owner"></param>
+            <param name="cvvCode"></param>
+            <param name="dateExpired"></param>
+            <param name="transactionContent"></param>
+            <param name="amount"></param>
+            <param name="createdAt"></param>
+        </member>
+        <member name="T:RentalBikeApp.Entities.InterbankEntities.TransactionInfo">
+            <summary>
+            representing the transaction information in body of transaction request
             </summary>
         </member>
         <member name="T:RentalBikeApp.Entities.SQLEntities.BaseBike">
