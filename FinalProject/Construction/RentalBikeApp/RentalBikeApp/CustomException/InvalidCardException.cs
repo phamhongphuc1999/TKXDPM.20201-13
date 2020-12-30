@@ -12,21 +12,16 @@
 //
 // ------------------------------------------------------
 
-namespace RentalBikeApp.Entities.APIEntities
+namespace RentalBikeApp.CustomException
 {
     /// <summary>
-    /// representing process transaction response
+    /// Invalid card exception
     /// </summary>
-    public class ProcessTransactionResponse
+    public class InvalidCardException: PaymentException
     {
         /// <summary>
-        /// error code of response
+        /// contructor of InvalidCardException
         /// </summary>
-        public string errorCode { get; set; }
-
-        /// <summary>
-        /// transaction information
-        /// </summary>
-        public TransactionInfo transaction { get; set; }
+        public InvalidCardException(): base("Thẻ không hợp lệ") { }
     }
 }

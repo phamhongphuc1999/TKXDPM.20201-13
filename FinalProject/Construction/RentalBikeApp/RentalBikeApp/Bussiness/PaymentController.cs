@@ -16,16 +16,17 @@ using System;
 using Newtonsoft.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
-using RentalBikeApp.Entities.APIEntities;
+using RentalBikeApp.Entities.InterbankEntities;
 using RentalBikeApp.Entities.SQLEntities;
 using static RentalBikeApp.Constant;
+using RentalBikeApp.CustomException;
 
 namespace RentalBikeApp.Bussiness
 {
     /// <summary>
     /// Privider functions for process API
     /// </summary>
-    public class PaymentController
+    public class PaymentController: IPayment
     {
         /// <summary>
         /// Calculate rental fee for rental bike
@@ -47,51 +48,100 @@ namespace RentalBikeApp.Bussiness
             return (int)(10000 + Math.Abs(timeMinutes / 15));
         }
 
+        private InterbankResponse MakeResponse(string result)
+        {
+            InterbankResponse response = JsonConvert.DeserializeObject<InterbankResponse>(result);
+            switch (response.errorCode)
+            {
+                case "00":
+                    return response;
+                case "01":
+                    throw new InvalidCardException();
+                case "02":
+                    throw new NotEnoughBalanceException();
+                case "03":
+                    throw new InternalServerErrorException();
+                case "04":
+                    throw new SuspiciousTransactionException();
+                case "05":
+                    throw new NotEnoughTransactionInfoException();
+                case "06":
+                    throw new InvalidVersionException();
+                case "07":
+                    throw new InvalidTransactionAmountException();
+                default:
+                    throw new UnrecognizedException();
+            }
+        }
+
         /// <summary>
         /// Send transaction to server
         /// </summary>
         /// <param name="card">The card information</param>
-        /// <param name="command">The definition of the request is for payment or refund</param>
         /// <param name="amount">The amount of transaction</param>
         /// <param name="date">Date time transaction processed</param>
         /// <param name="transactionContent">Note of transaction</param>
         /// <param name="_version">Version of API, default 1.0.1</param>
         /// <returns>The transaction response information</returns>
-        public async Task<ProcessTransactionResponse> ProcessTransaction(Card card, COMMAND command, int amount, DateTime date, 
-            string transactionContent, string _version = "1.0.1")
+        public async Task<InterbankResponse> Pay(Card card, int amount, DateTime date, string transactionContent, string _version = "1.0.1")
         {
-            TransactionInfo info = new TransactionInfo
-            {
-                command = command == COMMAND.PAY ? "pay" : "refund",
-                cardCode = card.CardCode,
-                owner = card.Owners,
-                cvvCode = card.CVV,
-                dateExpired = card.DateExpired,
-                transactionContent = transactionContent,
-                amount = amount,
-                createdAt = Utilities.ConvertDateToString(date)
-            };
-            ProcessTransactionRequest body = new ProcessTransactionRequest()
-            {
-                version = _version,
-                transaction = info,
-                appCode = card.AppCode,
-                hashCode = Utilities.MD5Hash(JsonConvert.SerializeObject(new
+            TransactionInfo info = new TransactionCardInfo
+            (
+                "pay", card.CardCode, card.Owners,
+                card.CVV, card.DateExpired,
+                transactionContent, amount,
+                Utilities.ConvertDateToString(date)
+            );
+            ProcessTransactionRequest body = new ProcessTransactionRequest
+            (
+                _version, info, card.AppCode,
+                Utilities.MD5Hash(JsonConvert.SerializeObject(new
                 {
                     secretKey = card.SecurityKey,
                     transaction = info
                 }))
-            };
+            );
             string result = await Utilities.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch,
                  JsonConvert.SerializeObject(body));
-            ProcessTransactionResponse response = JsonConvert.DeserializeObject<ProcessTransactionResponse>(result);
-            return response;
+            return MakeResponse(result);
+        }
+
+        /// <summary>
+        /// Send transaction to server
+        /// </summary>
+        /// <param name="card">The card information</param>
+        /// <param name="amount">The amount of transaction</param>
+        /// <param name="date">Date time transaction processed</param>
+        /// <param name="transactionContent">Note of transaction</param>
+        /// <param name="_version">Version of API, default 1.0.1</param>
+        /// <returns>The transaction response information</returns>
+        public async Task<InterbankResponse> Refund(Card card, int amount, DateTime date, string transactionContent, string _version = "1.0.1")
+        {
+            TransactionInfo info = new TransactionCardInfo
+            (
+                "refund", card.CardCode, card.Owners,
+                card.CVV, card.DateExpired,
+                transactionContent, amount,
+                Utilities.ConvertDateToString(date)
+            );
+            ProcessTransactionRequest body = new ProcessTransactionRequest
+            (
+                _version, info, card.AppCode,
+                Utilities.MD5Hash(JsonConvert.SerializeObject(new
+                {
+                    secretKey = card.SecurityKey,
+                    transaction = info
+                }))
+            );
+            string result = await Utilities.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch,
+                 JsonConvert.SerializeObject(body));
+            return MakeResponse(result);
         }
 
         /// <summary>This function use for test API, it reset the balance in the account</summary>
         /// <param name="card">the card information</param>
         /// <returns>The reset response information</returns>
-        public async Task<ResetResponse> ResetAccount(Card card)
+        public async Task<InterbankResponse> ResetAccount(Card card)
         {
             var body = new
             {
@@ -102,8 +152,7 @@ namespace RentalBikeApp.Bussiness
             };
             string result = await Utilities.SendRequest(BASE_URL + RESET_URL, HttpMethod.Patch,
                  JsonConvert.SerializeObject(body));
-            ResetResponse response = JsonConvert.DeserializeObject<ResetResponse>(result);
-            return response;
+            return MakeResponse(result);
         }
     }
 }

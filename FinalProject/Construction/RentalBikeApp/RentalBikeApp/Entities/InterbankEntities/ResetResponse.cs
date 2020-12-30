@@ -12,41 +12,36 @@
 //
 // ------------------------------------------------------
 
-namespace RentalBikeApp.Entities.APIEntities
+namespace RentalBikeApp.Entities.InterbankEntities
 {
     /// <summary>
     /// representing the reset money response
     /// </summary>
-    public class ResetResponse
+    public class ResetResponse: InterbankResponse
     {
-        /// <summary>
-        /// error code of response
-        /// </summary>
-        public string errorCode { get; set; }
-
         /// <summary>
         /// card code of your card
         /// </summary>
-        public string cardCode { get; set; }
+        public string cardCode { get; protected set; }
 
         /// <summary>
         /// owner of card
         /// </summary>
-        public string owner { get; set; }
+        public string owner { get; protected set; }
 
         /// <summary>
         /// cvv of card
         /// </summary>
-        public string cvvCode { get; set; }
+        public string cvvCode { get; protected set; }
 
         /// <summary>
         /// date expired of card
         /// </summary>
-        public string dateExpired { get; set; }
+        public string dateExpired { get; protected set; }
 
         /// <summary>
         /// balance of card
         /// </summary>
-        public string balance { get; set; }
+        public string balance { get; protected set; }
     }
 }
