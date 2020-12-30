@@ -9,5 +9,14 @@
         /// error code of response
         /// </summary>
         public string errorCode { get; protected set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="errorCode"></param>
+        public InterbankResponse(string errorCode)
+        {
+            this.errorCode = errorCode;
+        }
     }
 }

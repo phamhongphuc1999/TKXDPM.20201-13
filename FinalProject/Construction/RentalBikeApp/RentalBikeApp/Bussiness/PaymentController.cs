@@ -101,8 +101,7 @@ namespace RentalBikeApp.Bussiness
                     transaction = info
                 }))
             );
-            string result = await Utilities.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch,
-                 JsonConvert.SerializeObject(body));
+            string result = await Utilities.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch, JsonConvert.SerializeObject(body));
             return MakeResponse(result);
         }
 
@@ -133,8 +132,7 @@ namespace RentalBikeApp.Bussiness
                     transaction = info
                 }))
             );
-            string result = await Utilities.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch,
-                 JsonConvert.SerializeObject(body));
+            string result = await Utilities.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch, JsonConvert.SerializeObject(body));
             return MakeResponse(result);
         }
 
@@ -150,8 +148,7 @@ namespace RentalBikeApp.Bussiness
                 cvvCode = card.CVV,
                 dateExpired = card.DateExpired
             };
-            string result = await Utilities.SendRequest(BASE_URL + RESET_URL, HttpMethod.Patch,
-                 JsonConvert.SerializeObject(body));
+            string result = await Utilities.SendRequest(BASE_URL + RESET_URL, HttpMethod.Patch, JsonConvert.SerializeObject(body));
             return MakeResponse(result);
         }
     }

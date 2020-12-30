@@ -23,5 +23,15 @@ namespace RentalBikeApp.Entities.InterbankEntities
         /// transaction information
         /// </summary>
         public TransactionInfo transaction { get; protected set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="errorCode"></param>
+        /// <param name="transaction"></param>
+        public ProcessTransactionResponse(string errorCode, TransactionInfo transaction): base(errorCode)
+        {
+            this.transaction = transaction;
+        }
     }
 }
