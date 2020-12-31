@@ -14,8 +14,6 @@
 
 using System;
 using System.Text;
-using System.Net.Http;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -88,32 +86,6 @@ namespace RentalBikeApp
                 hash.Append(bytes[i].ToString("x2"));
             }
             return hash.ToString();
-        }
-
-        /// <summary>
-        /// Sent a request to the specified url
-        /// </summary>
-        /// <param name="url">The url sent to</param>
-        /// <param name="method">The http method of request</param>
-        /// <param name="requestContent">The request's body, format json</param>
-        /// <returns>The response with string format or exception message if cause error</returns>
-        /// <exception cref="System.Exception">Throw when error</exception>
-        public static async Task<string> SendRequest(string url, HttpMethod method, string requestContent = null)
-        {
-            HttpClient httpClient = new HttpClient();
-            try
-            {
-                HttpRequestMessage requestMessage = new HttpRequestMessage(method, url);
-                if (requestContent != null)
-                    requestMessage.Content = new StringContent(requestContent, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await httpClient.SendAsync(requestMessage);
-                string rcontent = await response.Content.ReadAsStringAsync();
-                return rcontent;
-            }
-            catch (Exception e)
-            {
-                return e.Message;
-            }
         }
 
         [DllImport("user32.dll")]

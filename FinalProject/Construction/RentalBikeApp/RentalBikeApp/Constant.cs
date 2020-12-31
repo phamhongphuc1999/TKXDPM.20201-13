@@ -49,21 +49,6 @@ namespace RentalBikeApp
             BIKE
         }
 
-        /// <value>
-        /// get api base url
-        /// </value>
-        public const string BASE_URL = "https://ecopark-system-api.herokuapp.com";
-
-        /// <value>
-        /// get sub api process transaction url
-        /// </value>
-        public const string PROCESS_URL = "/api/card/processTransaction";
-
-        /// <value>
-        /// get sub apj reset balance url
-        /// </value>
-        public const string RESET_URL = "/api/card/reset-balance";
-
         ///<value>
         ///enum use to define the command in request when call process transaction API
         ///</value>

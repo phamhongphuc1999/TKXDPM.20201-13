@@ -17,7 +17,7 @@ using RentalBikeApp.Entities.SQLEntities;
 using System;
 using System.Threading.Tasks;
 
-namespace RentalBikeApp.Bussiness
+namespace RentalBikeApp.InterbankSubsystem
 {
     /// <summary>
     /// The interface IPayment implements functions to payment rental money

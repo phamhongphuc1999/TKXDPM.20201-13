@@ -14,7 +14,6 @@
 
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
-using static RentalBikeApp.Constant;
 using System.Linq;
 
 namespace RentalBikeApp.Data.ServiceAgents
@@ -22,7 +21,7 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// <summary>
     /// Provides functions to interact with BaseBike table in the database
     /// </summary>
-    public class BaseBikeService: BaseService, IBikeService
+    public class BaseBikeService : BaseService, IBikeService
     {
         /// <summary>
         /// contructor of BaseBikeService
@@ -41,7 +40,7 @@ namespace RentalBikeApp.Data.ServiceAgents
             BaseBike result = null;
             if (baseBike.Category == "bike") result = new Bike(baseBike);
             else if (baseBike.Category == "tandem") result = new Tandem(baseBike);
-            else if(baseBike.Category == "electric")
+            else if (baseBike.Category == "electric")
             {
                 ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(baseBike.BikeId);
                 result = new ElectricBike(baseBike, electricBike);
@@ -70,21 +69,10 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// Filters a list bike in the station base on bike category
         /// </summary>
         /// <param name="stationId">The station you want to filter list of bike</param>
-        /// <param name="category"></param>
         /// <returns>Return the list base on bike category</returns>
-        public List<BaseBike> GetListBikesInStation(int stationId, BikeCategory category)
+        public List<BaseBike> GetListBikesInStation(int stationId)
         {
             IEnumerable<BaseBike> baseBikes = connecter.SqlData.BaseBikes.Where(x => x.StationId == stationId);
-            if (category == BikeCategory.BIKE)
-                baseBikes = baseBikes.Where(x => x.Category == "bike").Select(x => new Bike(x));
-            else if (category == BikeCategory.TANDEM)
-                baseBikes = baseBikes.Where(x => x.Category == "tandem").Select(x => new Tandem(x));
-            else if (category == BikeCategory.ELECTRIC)
-                baseBikes = baseBikes.Where(x => x.Category == "electric").Select(x =>
-                {
-                    ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(x.BikeId);
-                    return new ElectricBike(x, electricBike);
-                });
             return baseBikes.ToList();
         }
 
@@ -93,9 +81,36 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// </summary>
         /// <param name="stationId">The station you want to filter list of bike</param>
         /// <returns>Return the list base on bike category</returns>
-        public List<BaseBike> GetListBikesInStation(int stationId)
+        public List<BaseBike> GetListNormalBikesInStation(int stationId)
         {
-            IEnumerable<BaseBike> baseBikes = connecter.SqlData.BaseBikes.Where(x => x.StationId == stationId);
+            IEnumerable<BaseBike> baseBikes = connecter.SqlData.BaseBikes.Where(x => x.StationId == stationId && x.Category == "bike").Select(x => new Bike(x));
+            return baseBikes.ToList();
+        }
+
+        /// <summary>
+        /// Filters a list electric bike in the station base on bike category
+        /// </summary>
+        /// <param name="stationId">The station you want to filter list of bike</param>
+        /// <returns>Return the list base on bike category</returns>
+        public List<BaseBike> GetListElectricsInStation(int stationId)
+        {
+            IEnumerable<BaseBike> baseBikes = connecter.SqlData.BaseBikes.Where(x => x.StationId == stationId && x.Category == "electric");
+            baseBikes = baseBikes.Select(x =>
+            {
+                ElectricBikeTable electricBike = connecter.SqlData.ElectricBikes.Find(x.BikeId);
+                return new ElectricBike(x, electricBike);
+            });
+            return baseBikes.ToList();
+        }
+
+        /// <summary>
+        /// Filters a list tandem in the station base on bike category
+        /// </summary>
+        /// <param name="stationId">The station you want to filter list of bike</param>
+        /// <returns>Return the list base on bike category</returns>
+        public List<BaseBike> GetListTandemsInStation(int stationId)
+        {
+            IEnumerable<BaseBike> baseBikes = connecter.SqlData.BaseBikes.Where(x => x.StationId == stationId && x.Category == "tandem").Select(x => new Tandem(x));
             return baseBikes.ToList();
         }
 

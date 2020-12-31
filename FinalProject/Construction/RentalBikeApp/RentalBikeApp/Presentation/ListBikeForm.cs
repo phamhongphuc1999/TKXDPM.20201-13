@@ -81,7 +81,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.BIKE;
             this.stationName = stationName; this.stationAddress = stationAddress;
-            bikes = viewBikeController.ViewListBikeInStation(stationId, this.category).Select(bike =>
+            bikes = viewBikeController.ViewListBikeInStation(stationId).Select(bike =>
             {
                 return new BaseBike(bike);
             }).ToList();
@@ -109,7 +109,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.TANDEM;
             this.stationName = stationName; this.stationAddress = stationAddress;
-            bikes = viewBikeController.ViewListBikeInStation(stationId, this.category).Select(bike =>
+            bikes = viewBikeController.ViewListTandemInStation(stationId).Select(bike =>
             {
                 return new BaseBike(bike);
             }).ToList();
@@ -137,7 +137,7 @@ namespace RentalBikeApp.Presentation
             listBikePnl.Controls.Clear();
             category = BikeCategory.ELECTRIC;
             this.stationName = stationName; this.stationAddress = stationAddress;
-            bikes = viewBikeController.ViewListBikeInStation(stationId, this.category).Select(bike =>
+            bikes = viewBikeController.ViewListElectricBikeInStation(stationId).Select(bike =>
             {
                 return new BaseBike(bike);
             }).ToList();

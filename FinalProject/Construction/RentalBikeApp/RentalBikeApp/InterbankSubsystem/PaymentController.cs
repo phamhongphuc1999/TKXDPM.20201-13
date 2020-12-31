@@ -19,15 +19,26 @@ using System.Threading.Tasks;
 using RentalBikeApp.Entities.InterbankEntities;
 using RentalBikeApp.Entities.SQLEntities;
 using static RentalBikeApp.Constant;
+using static RentalBikeApp.InterbankSubsystem.InterbankConstant;
 using RentalBikeApp.CustomException;
 
-namespace RentalBikeApp.Bussiness
+namespace RentalBikeApp.InterbankSubsystem
 {
     /// <summary>
     /// Privider functions for process API
     /// </summary>
     public class PaymentController: IPayment
     {
+        private InterbankBoundary boundary;
+
+        /// <summary>
+        /// contructor of PaymentController
+        /// </summary>
+        public PaymentController()
+        {
+            boundary = new InterbankBoundary();
+        }
+
         /// <summary>
         /// Calculate rental fee for rental bike
         /// </summary>
@@ -101,7 +112,7 @@ namespace RentalBikeApp.Bussiness
                     transaction = info
                 }))
             );
-            string result = await Utilities.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch, JsonConvert.SerializeObject(body));
+            string result = await boundary.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch, JsonConvert.SerializeObject(body));
             return MakeResponse(result);
         }
 
@@ -132,7 +143,7 @@ namespace RentalBikeApp.Bussiness
                     transaction = info
                 }))
             );
-            string result = await Utilities.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch, JsonConvert.SerializeObject(body));
+            string result = await boundary.SendRequest(BASE_URL + PROCESS_URL, HttpMethod.Patch, JsonConvert.SerializeObject(body));
             return MakeResponse(result);
         }
 
@@ -148,7 +159,7 @@ namespace RentalBikeApp.Bussiness
                 cvvCode = card.CVV,
                 dateExpired = card.DateExpired
             };
-            string result = await Utilities.SendRequest(BASE_URL + RESET_URL, HttpMethod.Patch, JsonConvert.SerializeObject(body));
+            string result = await boundary.SendRequest(BASE_URL + RESET_URL, HttpMethod.Patch, JsonConvert.SerializeObject(body));
             return MakeResponse(result);
         }
     }

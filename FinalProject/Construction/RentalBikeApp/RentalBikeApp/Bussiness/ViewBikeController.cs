@@ -16,7 +16,6 @@ using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
 using System.Collections.Generic;
-using static RentalBikeApp.Constant;
 
 namespace RentalBikeApp.Bussiness
 {
@@ -50,11 +49,32 @@ namespace RentalBikeApp.Bussiness
         /// Get list bike in specified station
         /// </summary>
         /// <param name="stationId">The station id you want to get list bike</param>
-        /// <param name="category"></param>
         /// <returns>The list bike</returns>
-        public List<BaseBike> ViewListBikeInStation(int stationId, BikeCategory category)
+        public List<BaseBike> ViewListBikeInStation(int stationId)
         {
-            List<BaseBike> bikes = bikeService.GetListBikesInStation(stationId, category);
+            List<BaseBike> bikes = bikeService.GetListNormalBikesInStation(stationId);
+            return bikes;
+        }
+
+        /// <summary>
+        /// Get list electric bike in specified station
+        /// </summary>
+        /// <param name="stationId">The station id you want to get list bike</param>
+        /// <returns>The list bike</returns>
+        public List<BaseBike> ViewListElectricBikeInStation(int stationId)
+        {
+            List<BaseBike> bikes = bikeService.GetListElectricsInStation(stationId);
+            return bikes;
+        }
+
+        /// <summary>
+        /// Get list tandem in specified station
+        /// </summary>
+        /// <param name="stationId">The station id you want to get list bike</param>
+        /// <returns>The list bike</returns>
+        public List<BaseBike> ViewListTandemInStation(int stationId)
+        {
+            List<BaseBike> bikes = bikeService.GetListTandemsInStation(stationId);
             return bikes;
         }
     }
