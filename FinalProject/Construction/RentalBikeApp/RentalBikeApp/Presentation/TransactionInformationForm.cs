@@ -69,7 +69,7 @@ namespace RentalBikeApp.Presentation
             if (bike is Bike) category = BikeCategory.BIKE;
             else if (bike is ElectricBike) category = BikeCategory.ELECTRIC;
             else if (bike is Tandem) category = BikeCategory.TANDEM;
-            rentalMoney = paymentController.CalculateFee(rentBikeForm.GetTotalTimeRent(), category);
+            rentalMoney = paymentController.CalculateFee(rentingBikeForm.GetTotalTimeRent(), category);
             rentalMoneyTxt.Text = (rentalMoney == 0) ? "Miễn phí" : rentalMoney.ToString();
         }
 
@@ -107,9 +107,9 @@ namespace RentalBikeApp.Presentation
                     MessageBox.Show("Hệ thống không thể lưu thông tin giao dịch", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-                rentBikeForm.FillRentingBikeForm();
+                rentingBikeForm.FillRentingBikeForm(this.bike);
                 rentBikeController.BeginRentingBike(bike.BikeId);
-                rentBikeForm.Show(this, null);
+                rentingBikeForm.Show(this, null);
                 this.Hide();
             }
             catch (Exception error)

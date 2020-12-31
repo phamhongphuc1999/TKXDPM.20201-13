@@ -15,10 +15,8 @@
 using System;
 using System.Windows.Forms;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Constant;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Bussiness;
-using System.Drawing;
 
 namespace RentalBikeApp.Presentation
 {
@@ -27,9 +25,6 @@ namespace RentalBikeApp.Presentation
     /// </summary>
     public partial class RentBikeForm : BaseForm
     {
-        private BaseBike bike;
-
-        private ViewBikeController viewBikeController;
         private RentBikeController rentBikeController;
 
         /// <summary>
@@ -37,129 +32,10 @@ namespace RentalBikeApp.Presentation
         /// </summary>
         public RentBikeForm() : base()
         {
-            viewBikeController = new ViewBikeController();
             rentBikeController = new RentBikeController();
 
             InitializeComponent("RentBikeForm", "Rent Bike");
-            DrawRentBikeInfoForm();
-            DrawRentingBikeForm();
             DrawRentBikeForm();
-        }
-
-        /// <summary>
-        /// start timer
-        /// </summary>
-        public void StartTimer()
-        {
-            if (!rentBikeTmr.Enabled) rentBikeTmr.Start();
-        }
-
-        /// <summary>
-        /// stop timer
-        /// </summary>
-        public void StopTimer()
-        {
-            if (rentBikeTmr.Enabled) rentBikeTmr.Stop();
-        }
-
-        /// <summary>
-        /// Get total time rent
-        /// </summary>
-        /// <returns>The string representing total time rent</returns>
-        public string GetTotalTimeRent()
-        {
-            return rentingTimedRentValueLbl.Text;
-        }
-
-        /// <summary>
-        /// Fill bike information
-        /// </summary>
-        private void FillBikeInformation()
-        {
-            if (bike is Bike)
-            {
-                rentingCategoryTxt.Text = "Xe đạp thường";
-                rentingRemainPowerValueLbl.Text = "Không có thông tin";
-                rentingLicenseTxt.Text = "Không có thông tin";
-            }
-            else if (bike is ElectricBike)
-            {
-                ElectricBike electricBike = bike as ElectricBike;
-                rentingCategoryTxt.Text = "Xe đạp điện";
-                rentingRemainPowerValueLbl.Text = $"{electricBike.Powers}%";
-                rentingLicenseTxt.Text = electricBike.LicensePlate;
-            }
-            else
-            {
-                rentingCategoryTxt.Text = "Xe đạp đôi";
-                rentingRemainPowerValueLbl.Text = "Không có thông tin";
-                rentingLicenseTxt.Text = "Không có thông tin";
-            }
-            rentingManufactureTxt.Text = bike.Manufacturer;
-        }
-
-        /// <summary>
-        /// Fill bike information in rent bike form when rent bike status is RENTING_BIKE
-        /// </summary>
-        public void FillRentingBikeForm()
-        {
-            this.StartTimer();
-            rentBikePnl.Visible = false;
-            rentingBikePnl.Visible = true;
-            rentBikeInfoPnl.Visible = false;
-            rentingTimedRentValueLbl.Text = "0:00:00";
-            rentingQrCodeTxt.Text = bike.QRCode;
-            rentingAvatarPb.Image = Image.FromFile(bike.Images);
-            FillBikeInformation();
-        }
-
-        /// <summary>
-        /// Fill bike information in rent bike form when rent bike status is RENTING_BIKE
-        /// </summary>
-        public void FillRentingBikeForm(BaseBike bike)
-        {
-            this.bike = bike;
-            this.StartTimer();
-            rentBikePnl.Visible = false;
-            rentingBikePnl.Visible = true;
-            rentBikeInfoPnl.Visible = false;
-            DateTime begin = rentBikeController.GetBeginDate(this.bike.BikeId);
-            rentingTimedRentValueLbl.Text = Utilities.SubtractDate(DateTime.Now, begin);
-            rentingQrCodeTxt.Text = bike.QRCode;
-            rentingAvatarPb.Image = Image.FromFile(bike.Images);
-            FillBikeInformation();
-        }
-
-        /// <summary>
-        /// Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
-        /// </summary>
-        /// <param name="bikeId">The bike id of specified bike</param>
-        /// <param name="category">the bike category</param>
-        public void FillRentBikeInfoForm(int bikeId, BikeCategory category)
-        {
-            rentBikePnl.Visible = false;
-            rentingBikePnl.Visible = false;
-            rentBikeInfoPnl.Visible = true;
-            bike = viewBikeController.ViewBikeDetail(bikeId);
-            rentBikeInfoQrCodeTxt.Text = bike.QRCode;
-            int deposit = bike.CalculateDeposit();
-            if (category == BikeCategory.BIKE)
-            {
-                rentBikeInfoCategoryTxt.Text = "Xe đạp thường";
-                rentBikeInfoLicenseTxt.Text = "Không có thông tin";
-            }
-            else if (category == BikeCategory.ELECTRIC)
-            {
-                ElectricBike electricBike = bike as ElectricBike;
-                rentBikeInfoCategoryTxt.Text = "Xe đạp điện";
-                rentBikeInfoLicenseTxt.Text = electricBike.LicensePlate;
-            }
-            else
-            {
-                rentBikeInfoCategoryTxt.Text = "Xe đạp đôi";
-                rentBikeInfoLicenseTxt.Text = "Không có thông tin";
-            }
-            rentBikeInfoDepositTxt.Text = String.Format("{0:n0}", deposit);
         }
 
         /// <summary>
@@ -168,8 +44,6 @@ namespace RentalBikeApp.Presentation
         public void DisplayRentbikeQrcode()
         {
             rentBikePnl.Visible = true;
-            rentingBikePnl.Visible = false;
-            rentBikeInfoPnl.Visible = false;
             rentBikeQrCodeTxt.Text = "";
         }
 
@@ -195,7 +69,6 @@ namespace RentalBikeApp.Presentation
             DisplayRentbikeQrcode();
         }
 
-        #region Rent bike handle event
         /// <summary>
         /// Handle click event RentBikeRentBut, if user enter correct or code, display detail information of bike have this qr code
         /// </summary>
@@ -233,65 +106,5 @@ namespace RentalBikeApp.Presentation
             bikeDetailForm.Show(this);
             this.Hide();
         }
-        #endregion
-
-        #region Rent bike information handle event
-        /// <summary>
-        /// Handle click event RentBikeInfoRentThisBikeBut, display CardInformationForm
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void RentBikeInfoRentThisBikeBut_Click(object sender, EventArgs e)
-        {
-            this.bike = viewBikeController.ViewBikeDetail(this.bike.BikeId);
-            cardInformationForm.Show(this, this);
-            cardInformationForm.FillCardInformation(bike);
-            this.Hide();
-        }
-
-        /// <summary>
-        /// Handle click event RentBikeInfoDetailBut, display detail information of bike
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void RentBikeInfoDetailBut_Click(object sender, EventArgs e)
-        {
-            bikeDetailForm.Show(this);
-            this.Hide();
-        }
-        #endregion
-
-        #region Renting bike handle event
-        /// <summary>
-        /// Handle tick event of timer, count the rental time
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void RentBikeTmr_Tick(object sender, EventArgs e)
-        {
-            string[] times = rentingTimedRentValueLbl.Text.Split(':');
-            int second = Int32.Parse(times[2]);
-            int minute = Int32.Parse(times[1]);
-            int hour = Int32.Parse(times[0]);
-            second += 1;
-            minute += (second / 60);
-            second = second % 60;
-            hour += (minute / 60);
-            minute = minute % 60;
-            rentingTimedRentValueLbl.Text = String.Format("{0}:{1}:{2}", hour, minute.ToString("D2"), second.ToString("D2"));
-        }
-
-        /// <summary>
-        /// Handle click event RentingSelectReceiveStationBut, display ReturnBikeForm
-        /// </summary>
-        /// <param name="sender">The object send event</param>
-        /// <param name="e">An EventArgs</param>
-        private void RentingSelectReceiveStationBut_Click(object sender, EventArgs e)
-        {
-            returnBikeForm.ReadRentalBike(this.bike);
-            returnBikeForm.Show(this, this);
-            this.Hide();
-        }
-        #endregion
     }
 }

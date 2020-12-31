@@ -18,7 +18,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using static RentalBikeApp.Program;
-using static RentalBikeApp.Constant;
 using RentalBikeApp.Entities.SQLEntities;
 using RentalBikeApp.Bussiness;
 
@@ -30,7 +29,6 @@ namespace RentalBikeApp.Presentation
     public partial class ListBikeForm : BaseForm
     {
         private string stationName, stationAddress;
-        private BikeCategory category;
         private List<BaseBike> bikes;
         private ViewBikeController viewBikeController;
         private ViewStationController viewStationController;
@@ -79,7 +77,6 @@ namespace RentalBikeApp.Presentation
         public void FillListBikes(int stationId, string stationName, string stationAddress)
         {
             listBikePnl.Controls.Clear();
-            category = BikeCategory.BIKE;
             this.stationName = stationName; this.stationAddress = stationAddress;
             bikes = viewBikeController.ViewListBikeInStation(stationId).Select(bike =>
             {
@@ -107,7 +104,6 @@ namespace RentalBikeApp.Presentation
         public void FillListTandems(int stationId, string stationName, string stationAddress)
         {
             listBikePnl.Controls.Clear();
-            category = BikeCategory.TANDEM;
             this.stationName = stationName; this.stationAddress = stationAddress;
             bikes = viewBikeController.ViewListTandemInStation(stationId).Select(bike =>
             {
@@ -135,7 +131,6 @@ namespace RentalBikeApp.Presentation
         public void FillListElectric(int stationId, string stationName, string stationAddress)
         {
             listBikePnl.Controls.Clear();
-            category = BikeCategory.ELECTRIC;
             this.stationName = stationName; this.stationAddress = stationAddress;
             bikes = viewBikeController.ViewListElectricBikeInStation(stationId).Select(bike =>
             {

@@ -177,26 +177,6 @@
             representing of bike
             </summary>
         </member>
-        <member name="T:RentalBikeApp.Constant.COMMAND">
-            <value>
-            enum use to define the command in request when call process transaction API
-            </value>
-        </member>
-        <member name="F:RentalBikeApp.Constant.COMMAND.PAY">
-            <summary>
-            use when transaction for pay money
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Constant.COMMAND.REFUND">
-            <summary>
-            use when transaction for refund deposit
-            </summary>
-        </member>
-        <member name="F:RentalBikeApp.Constant.ERROR_CODE">
-            <summary>
-            error code
-            </summary>
-        </member>
         <member name="F:RentalBikeApp.Constant.QRValid">
             <summary>
             use for valid qr code
@@ -322,6 +302,13 @@
             <returns>Return the bike with specified QR Code or null if not found</returns>
         </member>
         <member name="M:RentalBikeApp.Data.ServiceAgents.BaseBikeService.GetListBikesInStation(System.Int32)">
+            <summary>
+            Filters a list bike in the station base on bike category
+            </summary>
+            <param name="stationId">The station you want to filter list of bike</param>
+            <returns>Return the list base on bike category</returns>
+        </member>
+        <member name="M:RentalBikeApp.Data.ServiceAgents.BaseBikeService.GetListNormalBikesInStation(System.Int32)">
             <summary>
             Filters a list bike in the station base on bike category
             </summary>
@@ -1145,7 +1132,7 @@
             <param name="method">The http method of request</param>
             <param name="requestContent">The request's body, format json</param>
             <returns>The response with string format or exception message if cause error</returns>
-            <exception cref="T:System.Exception">Throw when error</exception>
+            <exception cref="T:RentalBikeApp.CustomException.UnrecognizedException">Throw when error</exception>
         </member>
         <member name="F:RentalBikeApp.InterbankSubsystem.InterbankConstant.BASE_URL">
             <value>
@@ -1585,44 +1572,6 @@
             contructor of RentBikeForm
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.StartTimer">
-            <summary>
-            start timer
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.StopTimer">
-            <summary>
-            stop timer
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.GetTotalTimeRent">
-            <summary>
-            Get total time rent
-            </summary>
-            <returns>The string representing total time rent</returns>
-        </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillBikeInformation">
-            <summary>
-            Fill bike information
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentingBikeForm">
-            <summary>
-            Fill bike information in rent bike form when rent bike status is RENTING_BIKE
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentingBikeForm(RentalBikeApp.Entities.SQLEntities.BaseBike)">
-            <summary>
-            Fill bike information in rent bike form when rent bike status is RENTING_BIKE
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.FillRentBikeInfoForm(System.Int32,RentalBikeApp.Constant.BikeCategory)">
-            <summary>
-            Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
-            </summary>
-            <param name="bikeId">The bike id of specified bike</param>
-            <param name="category">the bike category</param>
-        </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeForm.DisplayRentbikeQrcode">
             <summary>
             display screen to user fill rental bike qrcode
@@ -1649,47 +1598,124 @@
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.RentBikeInfoRentThisBikeBut_Click(System.Object,System.EventArgs)">
+        <member name="M:RentalBikeApp.Presentation.RentBikeForm.DrawRentBikeForm">
+            <summary>
+            Display RentBikeForm to enter QRcode
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.Presentation.RentBikeInfoForm">
+            <summary>
+            provider to function and event to help user interact with rent bike screen
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.#ctor">
+            <summary>
+            contrructor of RentBikeInfoForm
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.FillRentBikeInfoForm(System.Int32,RentalBikeApp.Constant.BikeCategory)">
+            <summary>
+            Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
+            </summary>
+            <param name="bikeId">The bike id of specified bike</param>
+            <param name="category">the bike category</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.HomePageBut_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handle click event HomePageBut
+            </summary>
+            <param name="sender">The object send event</param>
+            <param name="e">An EventArgs</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.RentBikeBut_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handle click event RentBikeBut
+            </summary>
+            <param name="sender">The object send event</param>
+            <param name="e">An EventArgs</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.RentBikeInfoRentThisBikeBut_Click(System.Object,System.EventArgs)">
             <summary>
             Handle click event RentBikeInfoRentThisBikeBut, display CardInformationForm
             </summary>
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.RentBikeInfoDetailBut_Click(System.Object,System.EventArgs)">
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.RentBikeInfoDetailBut_Click(System.Object,System.EventArgs)">
             <summary>
             Handle click event RentBikeInfoDetailBut, display detail information of bike
             </summary>
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.RentBikeTmr_Tick(System.Object,System.EventArgs)">
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.DrawRentBikeInfoForm">
+            <summary>
+            Display RentBikeForm to display bike information
+            </summary>
+        </member>
+        <member name="T:RentalBikeApp.Presentation.RentingBikeForm">
+            <summary>
+            provider to function and event to help user interact with rent bike screen
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.#ctor">
+            <summary>
+            contructor of RentingBikeForm
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.StartTimer">
+            <summary>
+            start timer
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.StopTimer">
+            <summary>
+            stop timer
+            </summary>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.GetTotalTimeRent">
+            <summary>
+            Get total time rent
+            </summary>
+            <returns>The string representing total time rent</returns>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.FillRentingBikeForm(RentalBikeApp.Entities.SQLEntities.BaseBike)">
+            <summary>
+            Fill bike information in rent bike form when rent bike status is RENTING_BIKE
+            </summary>
+            <param name="bike">the rental bike information</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.HomePageBut_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handle click event HomePageBut
+            </summary>
+            <param name="sender">The object send event</param>
+            <param name="e">An EventArgs</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.RentBikeBut_Click(System.Object,System.EventArgs)">
+            <summary>
+            Handle click event RentBikeBut
+            </summary>
+            <param name="sender">The object send event</param>
+            <param name="e">An EventArgs</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.RentBikeTmr_Tick(System.Object,System.EventArgs)">
             <summary>
             Handle tick event of timer, count the rental time
             </summary>
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.RentingSelectReceiveStationBut_Click(System.Object,System.EventArgs)">
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.RentingSelectReceiveStationBut_Click(System.Object,System.EventArgs)">
             <summary>
             Handle click event RentingSelectReceiveStationBut, display ReturnBikeForm
             </summary>
             <param name="sender">The object send event</param>
             <param name="e">An EventArgs</param>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.DrawRentBikeForm">
-            <summary>
-            Display RentBikeForm to enter QRcode
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.DrawRentingBikeForm">
+        <member name="M:RentalBikeApp.Presentation.RentingBikeForm.DrawRentingBikeForm">
             <summary>
             Display RentBikeform when user is renting bike
-            </summary>
-        </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeForm.DrawRentBikeInfoForm">
-            <summary>
-            Display RentBikeForm to display bike information
             </summary>
         </member>
         <member name="T:RentalBikeApp.Presentation.ReturnBikeForm">

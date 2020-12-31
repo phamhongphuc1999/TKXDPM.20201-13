@@ -23,6 +23,12 @@
     <Compile Update="Presentation\RentBikeForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Presentation\RentBikeInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Presentation\RentingBikeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Presentation\ReturnBikeForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -133,7 +133,7 @@ namespace RentalBikeApp.Presentation
                     MessageBox.Show($"Bãi đỗ xe: {but.Text} đã đầy, vui lòng chọn bãi khác để trả xe", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                rentBikeForm.StopTimer();
+                rentingBikeForm.StopTimer();
                 transactionInformationForm.FillTransactionInformationWhenPay(stationId, this.rentalBike);
                 transactionInformationForm.Show(this);
                 this.Hide();

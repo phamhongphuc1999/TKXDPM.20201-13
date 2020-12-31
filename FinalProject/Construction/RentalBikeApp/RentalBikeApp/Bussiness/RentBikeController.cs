@@ -88,7 +88,7 @@ namespace RentalBikeApp.Bussiness
         /// <param name="bikeId">bike id</param>
         public void BeginRentingBike(int bikeId)
         {
-            rentBikeForm.StartTimer();
+            rentingBikeForm.StartTimer();
             bikeService.UpdateBike(bikeId, new UpdateBikeInfo { BikeStatus = 1 });
         }
 

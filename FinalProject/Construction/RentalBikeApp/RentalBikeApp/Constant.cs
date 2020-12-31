@@ -12,8 +12,6 @@
 //
 // ------------------------------------------------------
 
-using System.Collections.Generic;
-
 namespace RentalBikeApp
 {
     /// <summary>
@@ -27,8 +25,7 @@ namespace RentalBikeApp
         //private static string SQL_CONNECT_STRING = "Data Source=.\\MSSQLSERVER123;Initial Catalog=RentalBike;Integrated Security=True";
         // private static string SQL_CONNECT_STRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=RentalBike;Integrated Security=True;";
         //public const string SQL_CONNECT_STRING = "Data Source=.\\SQLEXPRESS;Initial Catalog=RentalBike;Integrated Security=True";
-        public const string SQL_CONNECT_STRING = "data source=DESKTOP-TM16V8B\\SQLEXPRESS;initial catalog=RentalBike1;user id=sa;password=phamhongphuc;MultipleActiveResultSets=True;";
-        //public const string SQL_CONNECT_STRING = "Server=tcp:ecobike.database.windows.net,1433;Initial Catalog=RentalBike;Persist Security Info=False;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        public const string SQL_CONNECT_STRING = "data source=DESKTOP-TM16V8B\\SQLEXPRESS;initial catalog=RentalBike;user id=sa;password=phamhongphuc;MultipleActiveResultSets=True;";
 
         ///<value>
         ///enum define category bike
@@ -48,35 +45,6 @@ namespace RentalBikeApp
             /// </summary>
             BIKE
         }
-
-        ///<value>
-        ///enum use to define the command in request when call process transaction API
-        ///</value>
-        public enum COMMAND
-        {
-            /// <summary>
-            /// use when transaction for pay money
-            /// </summary>
-            PAY,
-            /// <summary>
-            /// use when transaction for refund deposit
-            /// </summary>
-            REFUND
-        }
-
-        /// <summary>
-        /// error code
-        /// </summary>
-        public static Dictionary<string, string> ERROR_CODE = new Dictionary<string, string>()
-        {
-            {"01", "Thẻ không hợp lệ" },
-            {"02", "Thẻ không đủ số dư" },
-            {"03", "Internal Server Error" },
-            {"04", "Giao dịch bị nghi ngờ gian lận" },
-            {"05", "Không đủ thông tin giao dịch" },
-            {"06", "Thiếu thông tin version" },
-            {"07", "Số tiền không hợp lệ" }
-        };
 
         /// <summary>
         /// use for valid qr code

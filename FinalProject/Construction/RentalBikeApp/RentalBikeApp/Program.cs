@@ -26,6 +26,8 @@ namespace RentalBikeApp
         public static CardInformationForm cardInformationForm;
         public static ListBikeForm listBikeForm;
         public static RentBikeForm rentBikeForm;
+        public static RentBikeInfoForm rentBikeInfoForm;
+        public static RentingBikeForm rentingBikeForm;
         public static ReturnBikeForm returnBikeForm;
         public static TransactionInformationForm transactionInformationForm;
 
@@ -46,6 +48,8 @@ namespace RentalBikeApp
             cardInformationForm = new CardInformationForm();
             listBikeForm = new ListBikeForm();
             rentBikeForm = new RentBikeForm();
+            rentBikeInfoForm = new RentBikeInfoForm();
+            rentingBikeForm = new RentingBikeForm();
             returnBikeForm = new ReturnBikeForm();
             transactionInformationForm = new TransactionInformationForm();
 

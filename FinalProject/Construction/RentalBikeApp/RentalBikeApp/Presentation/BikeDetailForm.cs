@@ -119,8 +119,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentThisBikeBut_Click(object sender, EventArgs e)
         {
-            rentBikeForm.FillRentBikeInfoForm(this.bike.BikeId, this.category);
-            rentBikeForm.Show(this, this);
+            rentBikeInfoForm.FillRentBikeInfoForm(this.bike.BikeId, this.category);
+            rentBikeInfoForm.Show(this, this);
             this.Hide();
         }
 
@@ -131,8 +131,8 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void ViewRentingBut_Click(object sender, EventArgs e)
         {
-            rentBikeForm.FillRentingBikeForm(bike);
-            rentBikeForm.Show(this, this);
+            rentingBikeForm.FillRentingBikeForm(bike);
+            rentingBikeForm.Show(this, this);
             this.Hide();
         }
     }
