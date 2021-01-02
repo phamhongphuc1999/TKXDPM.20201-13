@@ -28,7 +28,7 @@ namespace RentalBikeApp.InterbankSubsystem
         /// <param name="method">The http method of request</param>
         /// <param name="requestContent">The request's body, format json</param>
         /// <returns>The response with string format or exception message if cause error</returns>
-        /// <exception cref="UnrecognizedException">Throw when error</exception>
+        /// <exception cref="UnrecognizedException"></exception>
         public async Task<string> SendRequest(string url, HttpMethod method, string requestContent = null)
         {
             try

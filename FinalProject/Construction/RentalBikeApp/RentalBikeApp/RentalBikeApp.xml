@@ -14,6 +14,14 @@
             contructor of RentBikeController
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Bussiness.RentBikeController.CalculateFee(System.String,RentalBikeApp.Constant.BikeCategory)">
+            <summary>
+            Calculate rental fee for rental bike
+            </summary>
+            <param name="timeRent">The time that the user has rented the car</param>
+            <param name="category">The category of rental bike</param>
+            <returns>The rental money that use must rent</returns>
+        </member>
         <member name="M:RentalBikeApp.Bussiness.RentBikeController.SubmitQrCode(System.String,System.String@,System.String@)">
             <summary>
             Get bike by qrcode and save name and address of station contain this bike
@@ -1132,7 +1140,7 @@
             <param name="method">The http method of request</param>
             <param name="requestContent">The request's body, format json</param>
             <returns>The response with string format or exception message if cause error</returns>
-            <exception cref="T:RentalBikeApp.CustomException.UnrecognizedException">Throw when error</exception>
+            <exception cref="T:RentalBikeApp.CustomException.UnrecognizedException"></exception>
         </member>
         <member name="F:RentalBikeApp.InterbankSubsystem.InterbankConstant.BASE_URL">
             <value>
@@ -1186,14 +1194,6 @@
             contructor of PaymentController
             </summary>
         </member>
-        <member name="M:RentalBikeApp.InterbankSubsystem.PaymentController.CalculateFee(System.String,RentalBikeApp.Constant.BikeCategory)">
-            <summary>
-            Calculate rental fee for rental bike
-            </summary>
-            <param name="timeRent">The time that the user has rented the car</param>
-            <param name="category">The category of rental bike</param>
-            <returns>The rental money that use must rent</returns>
-        </member>
         <member name="M:RentalBikeApp.InterbankSubsystem.PaymentController.Pay(RentalBikeApp.Entities.SQLEntities.Card,System.Int32,System.DateTime,System.String,System.String)">
             <summary>
             Send transaction to server
@@ -1204,6 +1204,7 @@
             <param name="transactionContent">Note of transaction</param>
             <param name="_version">Version of API, default 1.0.1</param>
             <returns>The transaction response information</returns>
+            <exception cref="T:RentalBikeApp.CustomException.PaymentException"></exception>
         </member>
         <member name="M:RentalBikeApp.InterbankSubsystem.PaymentController.Refund(RentalBikeApp.Entities.SQLEntities.Card,System.Int32,System.DateTime,System.String,System.String)">
             <summary>
@@ -1215,11 +1216,13 @@
             <param name="transactionContent">Note of transaction</param>
             <param name="_version">Version of API, default 1.0.1</param>
             <returns>The transaction response information</returns>
+            <exception cref="T:RentalBikeApp.CustomException.PaymentException"></exception>
         </member>
         <member name="M:RentalBikeApp.InterbankSubsystem.PaymentController.ResetAccount(RentalBikeApp.Entities.SQLEntities.Card)">
             <summary>This function use for test API, it reset the balance in the account</summary>
             <param name="card">the card information</param>
             <returns>The reset response information</returns>
+            <exception cref="T:RentalBikeApp.CustomException.PaymentException"></exception>
         </member>
         <member name="T:RentalBikeApp.Presentation.BaseForm">
             <summary>
@@ -1613,12 +1616,23 @@
             contrructor of RentBikeInfoForm
             </summary>
         </member>
-        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.FillRentBikeInfoForm(System.Int32,RentalBikeApp.Constant.BikeCategory)">
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.FillRentBikeInfoForm(RentalBikeApp.Entities.SQLEntities.BaseBike)">
             <summary>
-            Fill bike information in rent bike form when rent bike status is RENT_BIKE_INFO
+            Fill bike information in rent bike
             </summary>
-            <param name="bikeId">The bike id of specified bike</param>
-            <param name="category">the bike category</param>
+            <param name="bike">The bike id of specified bike</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.FillRentTandemInfoForm(RentalBikeApp.Entities.SQLEntities.BaseBike)">
+            <summary>
+            Fill bike information in rent bike
+            </summary>
+            <param name="bike">The bike id of specified bike</param>
+        </member>
+        <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.FillRentElectricInfoForm(RentalBikeApp.Entities.SQLEntities.BaseBike)">
+            <summary>
+            Fill bike information in rent bike
+            </summary>
+            <param name="bike">The bike id of specified bike</param>
         </member>
         <member name="M:RentalBikeApp.Presentation.RentBikeInfoForm.HomePageBut_Click(System.Object,System.EventArgs)">
             <summary>

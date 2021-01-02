@@ -69,7 +69,7 @@ namespace RentalBikeApp.Presentation
             if (bike is Bike) category = BikeCategory.BIKE;
             else if (bike is ElectricBike) category = BikeCategory.ELECTRIC;
             else if (bike is Tandem) category = BikeCategory.TANDEM;
-            rentalMoney = paymentController.CalculateFee(rentingBikeForm.GetTotalTimeRent(), category);
+            rentalMoney = rentBikeController.CalculateFee(rentingBikeForm.GetTotalTimeRent(), category);
             rentalMoneyTxt.Text = (rentalMoney == 0) ? "Miễn phí" : rentalMoney.ToString();
         }
 

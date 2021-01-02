@@ -119,7 +119,9 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void RentThisBikeBut_Click(object sender, EventArgs e)
         {
-            rentBikeInfoForm.FillRentBikeInfoForm(this.bike.BikeId, this.category);
+            if (this.category == BikeCategory.BIKE) rentBikeInfoForm.FillRentBikeInfoForm(this.bike);
+            else if (this.category == BikeCategory.ELECTRIC) rentBikeInfoForm.FillRentElectricInfoForm(this.bike);
+            else rentBikeInfoForm.FillRentTandemInfoForm(this.bike);
             rentBikeInfoForm.Show(this, this);
             this.Hide();
         }

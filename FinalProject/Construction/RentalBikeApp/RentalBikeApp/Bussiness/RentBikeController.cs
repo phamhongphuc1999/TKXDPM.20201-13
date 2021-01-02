@@ -12,10 +12,11 @@
 //
 // ------------------------------------------------------
 
+using System;
 using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;
 using RentalBikeApp.Entities.SQLEntities;
-using System;
+using static RentalBikeApp.Constant;
 using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Bussiness
@@ -39,6 +40,26 @@ namespace RentalBikeApp.Bussiness
             stationService = new StationService(SQLConnecter.GetInstance());
             cardService = new CardService(SQLConnecter.GetInstance());
             transactionService = new TransactionService(SQLConnecter.GetInstance());
+        }
+
+        /// <summary>
+        /// Calculate rental fee for rental bike
+        /// </summary>
+        /// <param name="timeRent">The time that the user has rented the car</param>
+        /// <param name="category">The category of rental bike</param>
+        /// <returns>The rental money that use must rent</returns>
+        public int CalculateFee(string timeRent, BikeCategory category)
+        {
+            string[] times = timeRent.Split(':');
+            double hour = Int64.Parse(times[0]);
+            double minute = Int64.Parse(times[1]);
+            double second = Int64.Parse(times[2]);
+            double timeMinutes = 60 * hour + minute + Math.Abs(second / 60) - 10;
+            if (category != BikeCategory.BIKE) timeMinutes = 1.5 * timeMinutes;
+            if (timeMinutes <= 0) return 0;
+            timeMinutes -= 30;
+            if (timeMinutes <= 0) return 10000;
+            return (int)(10000 + Math.Abs(timeMinutes / 15));
         }
 
         /// <summary>
