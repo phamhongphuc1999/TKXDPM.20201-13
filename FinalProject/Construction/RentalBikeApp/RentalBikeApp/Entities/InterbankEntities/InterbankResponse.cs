@@ -25,9 +25,9 @@ namespace RentalBikeApp.Entities.InterbankEntities
         public string errorCode { get; protected set; }
 
         /// <summary>
-        /// 
+        /// Contructor of InterbankResponse
         /// </summary>
-        /// <param name="errorCode"></param>
+        /// <param name="errorCode">The specified error code</param>
         public InterbankResponse(string errorCode)
         {
             this.errorCode = errorCode;

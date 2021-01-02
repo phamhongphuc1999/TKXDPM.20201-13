@@ -29,14 +29,18 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <param name="connecter">The instance representing connection to database</param>
         public StationService(SQLConnecter connecter): base(connecter) { }
 
-        /// <summary>get list stations</summary>
+        /// <summary>
+        /// get list stations
+        /// </summary>
         /// <returns>the list of station</returns>
         public List<Station> GetListStations()
         {
             return connecter.SqlData.Stations.ToList();
         }
 
-        /// <summary>Get station base on it's id</summary>
+        /// <summary>
+        /// Get station base on it's id
+        /// </summary>
         /// <param name="stationId">the station id you want to find</param>
         /// <returns>the specified station</returns>
         public Station GetStationById(int stationId)
@@ -44,8 +48,10 @@ namespace RentalBikeApp.Data.ServiceAgents
             return connecter.SqlData.Stations.Find(stationId);
         }
 
-        /// <summary></summary>
-        /// <param name="nameStation"></param>
+        /// <summary>
+        /// Get station by name
+        /// </summary>
+        /// <param name="nameStation">the station name you want to find</param>
         /// <returns>The station information</returns>
         public Station GetStationByName(string nameStation)
         {

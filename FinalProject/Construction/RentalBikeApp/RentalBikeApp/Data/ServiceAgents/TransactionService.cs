@@ -13,7 +13,6 @@
 // ------------------------------------------------------
 
 using RentalBikeApp.Entities.SQLEntities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,7 +29,9 @@ namespace RentalBikeApp.Data.ServiceAgents
         /// <param name="connecter">The instance representing connection to database</param>
         public TransactionService(SQLConnecter connecter): base(connecter) { }
 
-        /// <summary>Insert new transaction when user deposit money to rent the bike</summary>
+        /// <summary>
+        /// Insert new transaction when user deposit money to rent the bike
+        /// </summary>
         /// <param name="userId">the Id of user who want to rent the bike</param>
         /// <param name="bikeId">the id of rental bike</param>
         /// <param name="deposit">the desposit money to rent the bike</param>
@@ -48,7 +49,9 @@ namespace RentalBikeApp.Data.ServiceAgents
             else return null;
         }
 
-        /// <summary>Get transaction by id</summary>
+        /// <summary>
+        /// Get transaction by id
+        /// </summary>
         /// <param name="transactionId">the id of specified transaction</param>
         /// <returns>Return the specified transaction</returns>
         public Transaction GetTransactionById(int transactionId)
@@ -57,16 +60,18 @@ namespace RentalBikeApp.Data.ServiceAgents
         }
 
         /// <summary>
-        /// 
+        /// Get processing transaction
         /// </summary>
-        /// <param name="bikeId"></param>
-        /// <returns></returns>
+        /// <param name="bikeId">the rental bike</param>
+        /// <returns>Return the specified transaction</returns>
         public Transaction GetProcessTransaction(int bikeId)
         {
             return connecter.SqlData.Transactions.SingleOrDefault(x => x.BikeId == bikeId && x.EndAt == null);
         }
 
-        /// <summary>Get all of transactions of the user</summary>
+        /// <summary>
+        /// Get all of transactions of the user
+        /// </summary>
         /// <param name="userId">the Id of user</param>
         /// <returns>Return the specified user's transactions list</returns>
         public List<Transaction> GetListTransactionsByUserId(int userId)
@@ -74,7 +79,9 @@ namespace RentalBikeApp.Data.ServiceAgents
             return connecter.SqlData.Transactions.Where(x => x.UserId == userId).ToList();
         }
 
-        /// <summary>Update the last transaction of the user after rented bike</summary>
+        /// <summary>
+        /// Update the last transaction of the user after rented bike
+        /// </summary>
         /// <param name="transactionId">the Id of transaction</param>
         /// <param name="rentalMoney">the rental money that user must to pay after rented bike</param>
         /// <param name="note">note if necessary</param>

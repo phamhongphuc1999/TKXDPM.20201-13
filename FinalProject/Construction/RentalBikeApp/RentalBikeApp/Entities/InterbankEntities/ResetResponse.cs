@@ -45,14 +45,14 @@ namespace RentalBikeApp.Entities.InterbankEntities
         public string balance { get; protected set; }
         
         /// <summary>
-        /// 
+        /// contructor of ResetResponse
         /// </summary>
-        /// <param name="errorCode"></param>
-        /// <param name="cardCode"></param>
-        /// <param name="owner"></param>
-        /// <param name="cvvCode"></param>
-        /// <param name="dateExpired"></param>
-        /// <param name="balance"></param>
+        /// <param name="errorCode">the specified error code</param>
+        /// <param name="cardCode">The card code</param>
+        /// <param name="owner">The card's owner</param>
+        /// <param name="cvvCode">The cvv code</param>
+        /// <param name="dateExpired">The card's date expired</param>
+        /// <param name="balance">The balance</param>
         public ResetResponse(string errorCode, string cardCode, string owner, string cvvCode, string dateExpired, string balance) : base(errorCode)
         {
             this.cardCode = cardCode;

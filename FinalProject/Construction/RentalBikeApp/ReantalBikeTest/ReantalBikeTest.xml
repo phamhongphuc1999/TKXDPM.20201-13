@@ -4,6 +4,36 @@
         <name>ReantalBikeTest</name>
     </assembly>
     <members>
+        <member name="T:ReantalBikeTest.InterbankServiceTest">
+            <summary>
+            Test for interbank service
+            </summary>
+        </member>
+        <member name="M:ReantalBikeTest.InterbankServiceTest.Setup">
+            <summary>
+            setup before test
+            </summary>
+        </member>
+        <member name="M:ReantalBikeTest.InterbankServiceTest.ProcessTransactionErrorAmountTest">
+            <summary>
+            Test for case process transaction with zero amount
+            </summary>
+        </member>
+        <member name="M:ReantalBikeTest.InterbankServiceTest.ProcessTransactionSuccessTest">
+            <summary>
+            Test for process correct transaction
+            </summary>
+        </member>
+        <member name="M:ReantalBikeTest.InterbankServiceTest.ProcessTransactionNotEnoughMoneyTest">
+            <summary>
+            Test for case process transaction with not enough money
+            </summary>
+        </member>
+        <member name="M:ReantalBikeTest.InterbankServiceTest.ResetAccountTest">
+            <summary>
+            Test for API reset account
+            </summary>
+        </member>
         <member name="M:ReantalBikeTest.ServiceAgents.CardServiceTest.GetCardByExistOwnerTest">
             <summary>
             Test for case get card by exist card holder

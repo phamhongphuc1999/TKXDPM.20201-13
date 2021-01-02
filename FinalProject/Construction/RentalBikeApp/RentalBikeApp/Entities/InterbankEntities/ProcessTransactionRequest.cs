@@ -46,12 +46,12 @@ namespace RentalBikeApp.Entities.InterbankEntities
         public string hashCode { get; private set; }
 
         /// <summary>
-        /// 
+        /// contructor of ProcessTransactionRequest
         /// </summary>
-        /// <param name="version"></param>
-        /// <param name="transaction"></param>
-        /// <param name="appCode"></param>
-        /// <param name="hashCode"></param>
+        /// <param name="version">The specified version of transaction</param>
+        /// <param name="transaction">The transaction information</param>
+        /// <param name="appCode">The app code</param>
+        /// <param name="hashCode">The hash code</param>
         public ProcessTransactionRequest(string version, TransactionInfo transaction, string appCode, string hashCode)
         {
             this.version = version;

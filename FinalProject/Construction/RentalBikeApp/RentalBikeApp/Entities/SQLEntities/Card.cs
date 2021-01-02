@@ -84,5 +84,28 @@ namespace RentalBikeApp.Entities.SQLEntities
         [Required(ErrorMessage = "SecurityKey is required")]
         [StringLength(50)]
         public string SecurityKey { get; private set; }
+
+        /// <summary>
+        /// contructor of Card
+        /// </summary>
+        /// <param name="userId">id of user has this card</param>
+        /// <param name="bank">bank publish card</param>
+        /// <param name="cardCode">card code</param>
+        /// <param name="owner">owner of card</param>
+        /// <param name="cvv">card cvv</param>
+        /// <param name="dateExpired">date expired of card</param>
+        /// <param name="appCode">card app code</param>
+        /// <param name="securityKey">card security key</param>
+        public Card(int userId, string bank, string cardCode, string owner, string cvv, string dateExpired, string appCode, string securityKey)
+        {
+            this.UserId = userId;
+            this.Bank = bank;
+            this.CardCode = cardCode;
+            this.Owners = owner;
+            this.CVV = cvv;
+            this.DateExpired = dateExpired;
+            this.AppCode = appCode;
+            this.SecurityKey = securityKey;
+        }
     }
 }

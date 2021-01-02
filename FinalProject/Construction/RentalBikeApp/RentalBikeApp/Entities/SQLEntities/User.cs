@@ -76,7 +76,7 @@ namespace RentalBikeApp.Entities.SQLEntities
         public string Username { get; set; }
 
         /// <summary>
-        /// passworn
+        /// password
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Password is required")]
         [MinLength(6, ErrorMessage = "password is too short, at least 6 characters")]

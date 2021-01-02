@@ -64,7 +64,7 @@ namespace RentalBikeApp.Entities.SQLEntities
         public DateTime BeginAt { get; private set; }
 
         /// <summary>
-        /// 
+        /// the date transaction complete
         /// </summary>
         public DateTime? EndAt { get; private set; }
 

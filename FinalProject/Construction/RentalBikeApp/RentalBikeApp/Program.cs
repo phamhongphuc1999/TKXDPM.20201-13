@@ -41,7 +41,6 @@ namespace RentalBikeApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            //init the presentation
             homePageForm = new HomePageForm();
             stationDetailForm = new StationDetailForm();
             bikeDetailForm = new BikeDetailForm();

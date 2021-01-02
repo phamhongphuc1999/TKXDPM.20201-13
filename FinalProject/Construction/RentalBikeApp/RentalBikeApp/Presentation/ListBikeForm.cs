@@ -202,6 +202,7 @@ namespace RentalBikeApp.Presentation
         private void SearchBut_Click(object sender, EventArgs e)
         {
             string qrCode = searchTxt.Text;
+            searchTxt.Text = "";
             if(qrCode == "")
             {
                 MessageBox.Show("Nhập mã xe bạn muốn tìm kiếm", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -213,10 +214,14 @@ namespace RentalBikeApp.Presentation
                 return;
             }
             BaseBike bike = bikes.SingleOrDefault(x => x.QRCode == qrCode);
-            if(bike == null) MessageBox.Show($"Không tìm được xe có qrcode: {qrCode}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (bike == null)
+            {
+                MessageBox.Show($"Không tìm được xe có qrcode: {qrCode}", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Station station = viewStationController.ViewStationDetail(bike.StationId);
             bikeDetailForm.FillBikeInformation(bike, station.NameStation, station.AddressStation);
-            bikeDetailForm.Show(this);
+            bikeDetailForm.Show(this, this);
             this.Hide();
         }
     }

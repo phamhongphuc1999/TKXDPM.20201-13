@@ -12,7 +12,6 @@
 //
 // ------------------------------------------------------
 
-using System;
 using NUnit.Framework;
 using RentalBikeApp.Data;
 using RentalBikeApp.Data.ServiceAgents;

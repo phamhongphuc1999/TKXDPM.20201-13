@@ -16,6 +16,7 @@ using RentalBikeApp.Bussiness;
 using RentalBikeApp.Entities.SQLEntities;
 using System;
 using System.Drawing;
+using System.Windows.Forms;
 using static RentalBikeApp.Program;
 
 namespace RentalBikeApp.Presentation
@@ -120,6 +121,17 @@ namespace RentalBikeApp.Presentation
         {
             rentBikeForm.Show(this, this);
             this.Hide();
+        }
+
+        /// <summary>
+        /// Handle click event FormClosing
+        /// </summary>
+        /// <param name="sender">The object send event</param>
+        /// <param name="e">An FormClosingEventArgs</param>
+        protected override void BaseForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopTimer();
+            base.BaseForm_FormClosing(sender, e);
         }
 
         /// <summary>

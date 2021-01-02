@@ -17,7 +17,7 @@ using System.ComponentModel.DataAnnotations;
 namespace RentalBikeApp.Entities.InterbankEntities
 {
     /// <summary>
-    /// 
+    /// representing the transaction information in body of transaction request
     /// </summary>
     public class TransactionCardInfo: TransactionInfo
     {
@@ -72,14 +72,14 @@ namespace RentalBikeApp.Entities.InterbankEntities
         /// <summary>
         /// contructor of TransactionCardInfo
         /// </summary>
-        /// <param name="command"></param>
-        /// <param name="cardCode"></param>
-        /// <param name="owner"></param>
-        /// <param name="cvvCode"></param>
-        /// <param name="dateExpired"></param>
-        /// <param name="transactionContent"></param>
-        /// <param name="amount"></param>
-        /// <param name="createdAt"></param>
+        /// <param name="command">transaction command</param>
+        /// <param name="cardCode">card code</param>
+        /// <param name="owner">card's owner</param>
+        /// <param name="cvvCode">cvv code</param>
+        /// <param name="dateExpired">card's date expired</param>
+        /// <param name="transactionContent">the transaction content</param>
+        /// <param name="amount">the rental money</param>
+        /// <param name="createdAt">date create transaction</param>
         public TransactionCardInfo(string command, string cardCode, string owner, string cvvCode, string dateExpired, string transactionContent, int amount, string createdAt): base()
         {
             this.command = command;
