@@ -889,6 +889,11 @@
             card security key
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Card.#ctor">
+            <summary>
+            contructor of Card
+            </summary>
+        </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.Card.#ctor(System.Int32,System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             contructor of Card
@@ -1096,6 +1101,11 @@
             note
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.Transaction.#ctor">
+            <summary>
+            contructor of Transaction
+            </summary>
+        </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.Transaction.#ctor(System.Int32,System.Int32,System.Int32)">
             <summary>
             Contructor of transaction
@@ -1137,6 +1147,11 @@
             account status
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.User.#ctor">
+            <summary>
+            contrutor of User
+            </summary>
+        </member>
         <member name="M:RentalBikeApp.Entities.SQLEntities.User.#ctor(System.String,System.String)">
             <summary>
             contructor of User
@@ -1159,6 +1174,18 @@
             password
             </summary>
         </member>
+        <member name="M:RentalBikeApp.Entities.SQLEntities.UserInfo.#ctor(System.String,System.String)">
+            <summary>
+            contrutor of UserInfo
+            </summary>
+            <param name="username">username</param>
+            <param name="password">password</param>
+        </member>
+        <member name="T:RentalBikeApp.InterbankSubsystem.InterbankBoundary">
+            <summary>
+            interbank boundary
+            </summary>
+        </member>
         <member name="M:RentalBikeApp.InterbankSubsystem.InterbankBoundary.SendRequest(System.String,System.Net.Http.HttpMethod,System.String)">
             <summary>
             Sent a request to the specified url
@@ -1168,6 +1195,11 @@
             <param name="requestContent">The request's body, format json</param>
             <returns>The response with string format or exception message if cause error</returns>
             <exception cref="T:RentalBikeApp.CustomException.UnrecognizedException"></exception>
+        </member>
+        <member name="T:RentalBikeApp.InterbankSubsystem.InterbankConstant">
+            <summary>
+            Interbank constant
+            </summary>
         </member>
         <member name="F:RentalBikeApp.InterbankSubsystem.InterbankConstant.BASE_URL">
             <value>

@@ -19,7 +19,10 @@ using RentalBikeApp.CustomException;
 
 namespace RentalBikeApp.InterbankSubsystem
 {
-    internal class InterbankBoundary
+    /// <summary>
+    /// interbank boundary
+    /// </summary>
+    public class InterbankBoundary
     {
         /// <summary>
         /// Sent a request to the specified url
@@ -29,7 +32,7 @@ namespace RentalBikeApp.InterbankSubsystem
         /// <param name="requestContent">The request's body, format json</param>
         /// <returns>The response with string format or exception message if cause error</returns>
         /// <exception cref="UnrecognizedException"></exception>
-        public async Task<string> SendRequest(string url, HttpMethod method, string requestContent = null)
+        internal async Task<string> SendRequest(string url, HttpMethod method, string requestContent = null)
         {
             try
             {

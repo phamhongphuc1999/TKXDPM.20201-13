@@ -88,6 +88,11 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// <summary>
         /// contructor of Card
         /// </summary>
+        public Card() { }
+
+        /// <summary>
+        /// contructor of Card
+        /// </summary>
         /// <param name="userId">id of user has this card</param>
         /// <param name="bank">bank publish card</param>
         /// <param name="cardCode">card code</param>

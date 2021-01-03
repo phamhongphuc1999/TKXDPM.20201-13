@@ -113,7 +113,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         private void CancelBut_Click(object sender, EventArgs e)
         {
-            rentBikeForm.Show(this);
+            PrevForm.Show(this);
             this.Hide();
         }
     }

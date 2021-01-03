@@ -75,6 +75,11 @@ namespace RentalBikeApp.Entities.SQLEntities
         public string Note { get; private set; }
 
         /// <summary>
+        /// contructor of Transaction
+        /// </summary>
+        public Transaction() { }
+
+        /// <summary>
         /// Contructor of transaction
         /// </summary>
         /// <param name="userId">The id of user who process transaction</param>

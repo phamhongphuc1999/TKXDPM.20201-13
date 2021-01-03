@@ -37,11 +37,7 @@ namespace ReantalBikeTest.ServiceAgents
         [Test, Order(0)]
         public void InsertNewUserTest()
         {
-            UserInfo newUser = new UserInfo()
-            {
-                Password = "minhquang",
-                Username ="quang.nm173326"
-            };
+            UserInfo newUser = new UserInfo("minhquang", "quang.nm173326");
             User user = userService.InsertNewUser(newUser);
             Assert.IsNotNull(user);
         }
@@ -52,11 +48,7 @@ namespace ReantalBikeTest.ServiceAgents
         [Test, Order(1)]
         public void InsertNewUserWithExistUsernameTest()
         {
-            UserInfo newUser = new UserInfo()
-            {
-                Password = "minhquang",
-                Username = "quang.nm173326"
-            };
+            UserInfo newUser = new UserInfo("minhquang", "quang.nm173326");
             User user = userService.InsertNewUser(newUser);
             Assert.IsNull(user);
         }
@@ -77,11 +69,7 @@ namespace ReantalBikeTest.ServiceAgents
         [Test, Order(3)]
         public void LoginWithCorrectAccount()
         {
-            User user = userService.UserLogin(new UserInfo
-            {
-                Username = "user1",
-                Password = "123456789"
-            });
+            UserInfo user = new UserInfo("user1", "123456789");
             Assert.IsNotNull(user);
         }
 
@@ -91,11 +79,7 @@ namespace ReantalBikeTest.ServiceAgents
         [Test, Order(4)]
         public void LoginWithErrorAccount()
         {
-            User user = userService.UserLogin(new UserInfo
-            {
-                Username = "user2",
-                Password = "123456789"
-            });
+            UserInfo user = new UserInfo("user1", "111111111");
             Assert.IsNull(user);
         }
     }

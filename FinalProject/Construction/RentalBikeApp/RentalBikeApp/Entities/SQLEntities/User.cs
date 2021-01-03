@@ -51,6 +51,11 @@ namespace RentalBikeApp.Entities.SQLEntities
         public string AccountStatus { get; private set; }
 
         /// <summary>
+        /// contrutor of User
+        /// </summary>
+        public User() { }
+
+        /// <summary>
         /// contructor of User
         /// </summary>
         /// <param name="username">The username</param>
@@ -73,7 +78,7 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// </summary>
         [Required(AllowEmptyStrings = false, ErrorMessage = "Username is required")]
         [StringLength(100)]
-        public string Username { get; set; }
+        public string Username { get; private set; }
 
         /// <summary>
         /// password
@@ -81,6 +86,17 @@ namespace RentalBikeApp.Entities.SQLEntities
         [Required(AllowEmptyStrings = false, ErrorMessage = "Password is required")]
         [MinLength(6, ErrorMessage = "password is too short, at least 6 characters")]
         [MaxLength(100)]
-        public string Password { get; set; }
+        public string Password { get; private set; }
+
+        /// <summary>
+        /// contrutor of UserInfo
+        /// </summary>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        public UserInfo(string username, string password)
+        {
+            this.Username = username;
+            this.Password = password;
+        }
     }
 }

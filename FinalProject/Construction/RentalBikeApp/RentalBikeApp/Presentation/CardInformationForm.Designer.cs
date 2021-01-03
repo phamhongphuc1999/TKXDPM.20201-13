@@ -116,8 +116,8 @@ namespace RentalBikeApp.Presentation
             cancelBut = new Button()
             {
                 Text = "Hủy",
-                Size = new Size(200, 50),
-                Location = new Point(350, 307),
+                Size = new Size(250, 50),
+                Location = new Point(250, 300),
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")
@@ -125,8 +125,8 @@ namespace RentalBikeApp.Presentation
             submitBut = new Button
             {
                 Text = "Xác nhận",
-                Size = new Size(200, 50),
-                Location = new Point(580, 307),
+                Size = new Size(250, 50),
+                Location = new Point(530, 300),
                 FlatStyle = FlatStyle.Flat,
                 Font = new Font("Arial", 12, FontStyle.Regular),
                 BackColor = ColorTranslator.FromHtml("#d4e3fc")
