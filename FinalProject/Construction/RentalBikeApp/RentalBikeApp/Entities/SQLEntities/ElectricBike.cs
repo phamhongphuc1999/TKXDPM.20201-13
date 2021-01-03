@@ -42,7 +42,7 @@ namespace RentalBikeApp.Entities.SQLEntities
     /// <summary>
     /// representing the electric bike table in database
     /// </summary>
-    public class ElectricBike: BaseBike
+    public class ElectricBike : BaseBike
     {
         /// <summary>
         /// remain of power
@@ -61,11 +61,12 @@ namespace RentalBikeApp.Entities.SQLEntities
         /// </summary>
         /// <param name="bike">The base bike information</param>
         /// <param name="electricBike">The specified electric bike information</param>
-        public ElectricBike(BaseBike bike, ElectricBikeTable electricBike): base(bike)
+        public ElectricBike(BaseBike bike, ElectricBikeTable electricBike) : base(bike)
         {
             this.Powers = electricBike.Powers;
             this.LicensePlate = electricBike.LicensePlate;
         }
 
-        
+
+    }
 }
