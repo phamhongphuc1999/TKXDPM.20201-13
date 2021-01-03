@@ -66,5 +66,6 @@ namespace RentalBikeApp.Entities.SQLEntities
             this.Powers = electricBike.Powers;
             this.LicensePlate = electricBike.LicensePlate;
         }
-    }
+
+        
 }
