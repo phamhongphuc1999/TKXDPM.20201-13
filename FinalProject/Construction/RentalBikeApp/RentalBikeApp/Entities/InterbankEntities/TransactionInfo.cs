@@ -22,6 +22,6 @@ namespace RentalBikeApp.Entities.InterbankEntities
     [Serializable]
     public class TransactionInfo
     {
-        
+
     }
 }

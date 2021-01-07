@@ -28,7 +28,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// contructor of StationDetailForm
         /// </summary>
-        public StationDetailForm(): base()
+        public StationDetailForm() : base()
         {
             InitializeComponent("StationDetailForm", "Station Detail");
             DrawStationDetail();

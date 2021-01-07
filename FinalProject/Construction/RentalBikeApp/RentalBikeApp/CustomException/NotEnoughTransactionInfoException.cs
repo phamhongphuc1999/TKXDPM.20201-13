@@ -17,11 +17,11 @@ namespace RentalBikeApp.CustomException
     /// <summary>
     /// Not enough transaction information exception
     /// </summary>
-    public class NotEnoughTransactionInfoException: PaymentException
+    public class NotEnoughTransactionInfoException : PaymentException
     {
         /// <summary>
         /// contructor of NotEnoughTransactionInfoException
         /// </summary>
-        public NotEnoughTransactionInfoException(): base("Không đủ thông tin giao dịch") { }
+        public NotEnoughTransactionInfoException() : base("Không đủ thông tin giao dịch") { }
     }
 }

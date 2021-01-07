@@ -33,12 +33,12 @@ namespace RentalBikeApp.Entities.SQLEntities
     /// <summary>
     /// representing the bikes table in database
     /// </summary>
-    public class Bike: BaseBike
+    public class Bike : BaseBike
     {
         /// <summary>
         /// Contructor of Bike
         /// </summary>
         /// <param name="bike">the bike information</param>
-        public Bike(BaseBike bike): base(bike) { }
+        public Bike(BaseBike bike) : base(bike) { }
     }
 }

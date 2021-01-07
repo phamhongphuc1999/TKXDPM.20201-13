@@ -28,7 +28,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// contrructor of RentBikeInfoForm
         /// </summary>
-        public RentBikeInfoForm(): base()
+        public RentBikeInfoForm() : base()
         {
             InitializeComponent("RentBikeInfoForm", "Rent Bike");
             DrawRentBikeInfoForm();

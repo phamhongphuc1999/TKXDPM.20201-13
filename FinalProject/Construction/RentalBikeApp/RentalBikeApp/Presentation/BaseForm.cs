@@ -92,7 +92,7 @@ namespace RentalBikeApp.Presentation
         /// <param name="e">An EventArgs</param>
         protected virtual void PrevFormBut_Click(object sender, EventArgs e)
         {
-            if(this.PrevForm != null)
+            if (this.PrevForm != null)
             {
                 this.Hide();
                 this.PrevForm.Show(this);

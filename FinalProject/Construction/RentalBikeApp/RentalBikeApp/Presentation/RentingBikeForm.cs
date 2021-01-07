@@ -32,7 +32,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// contructor of RentingBikeForm
         /// </summary>
-        public RentingBikeForm(): base()
+        public RentingBikeForm() : base()
         {
             rentBikeController = new RentBikeController();
 

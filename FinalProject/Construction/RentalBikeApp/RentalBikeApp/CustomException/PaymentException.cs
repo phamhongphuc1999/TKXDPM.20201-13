@@ -19,7 +19,7 @@ namespace RentalBikeApp.CustomException
     /// <summary>
     /// PAyment exception
     /// </summary>
-    public class PaymentException: Exception
+    public class PaymentException : Exception
     {
         /// <summary>
         /// contructor of PaymentException

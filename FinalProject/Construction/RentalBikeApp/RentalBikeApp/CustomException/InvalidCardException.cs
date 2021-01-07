@@ -17,11 +17,11 @@ namespace RentalBikeApp.CustomException
     /// <summary>
     /// Invalid card exception
     /// </summary>
-    public class InvalidCardException: PaymentException
+    public class InvalidCardException : PaymentException
     {
         /// <summary>
         /// contructor of InvalidCardException
         /// </summary>
-        public InvalidCardException(): base("Thẻ không hợp lệ") { }
+        public InvalidCardException() : base("Thẻ không hợp lệ") { }
     }
 }

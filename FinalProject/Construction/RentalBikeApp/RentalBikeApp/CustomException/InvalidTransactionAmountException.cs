@@ -17,11 +17,11 @@ namespace RentalBikeApp.CustomException
     /// <summary>
     /// Invalid transaction amount exception
     /// </summary>
-    public class InvalidTransactionAmountException: PaymentException
+    public class InvalidTransactionAmountException : PaymentException
     {
         /// <summary>
         /// contructor of InvalidTransactionAmountException
         /// </summary>
-        public InvalidTransactionAmountException(): base("Số tiền không hợp lệ") { }
+        public InvalidTransactionAmountException() : base("Số tiền không hợp lệ") { }
     }
 }

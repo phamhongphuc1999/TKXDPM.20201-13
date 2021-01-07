@@ -17,7 +17,7 @@ namespace RentalBikeApp.Entities.InterbankEntities
     /// <summary>
     /// representing process transaction response
     /// </summary>
-    public class ProcessTransactionResponse: InterbankResponse
+    public class ProcessTransactionResponse : InterbankResponse
     {
         /// <summary>
         /// transaction information
@@ -29,7 +29,7 @@ namespace RentalBikeApp.Entities.InterbankEntities
         /// </summary>
         /// <param name="errorCode">The response error code</param>
         /// <param name="transaction">The transaction information</param>
-        public ProcessTransactionResponse(string errorCode, TransactionInfo transaction): base(errorCode)
+        public ProcessTransactionResponse(string errorCode, TransactionInfo transaction) : base(errorCode)
         {
             this.transaction = transaction;
         }

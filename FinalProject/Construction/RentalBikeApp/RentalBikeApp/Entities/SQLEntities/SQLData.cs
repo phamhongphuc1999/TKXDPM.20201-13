@@ -19,13 +19,13 @@ namespace RentalBikeApp.Entities.SQLEntities
     /// <summary>
     /// this class use to interact all of table in database
     /// </summary>
-    public class SQLData: DbContext
+    public class SQLData : DbContext
     {
         /// <summary>
         /// contructor of SQLData
         /// </summary>
         /// <param name="option">The option for configurate SQLData</param>
-        public SQLData(DbContextOptions<SQLData> option): base(option)
+        public SQLData(DbContextOptions<SQLData> option) : base(option)
         {
         }
 

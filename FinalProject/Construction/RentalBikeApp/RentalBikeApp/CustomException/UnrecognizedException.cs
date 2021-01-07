@@ -19,11 +19,11 @@ namespace RentalBikeApp.CustomException
     /// <summary>
     /// Unrecognized exception
     /// </summary>
-    public class UnrecognizedException: Exception
+    public class UnrecognizedException : Exception
     {
         /// <summary>
         /// contructor of UnrecognizedException
         /// </summary>
-        public UnrecognizedException(): base("giao dịch không thành công") { }
+        public UnrecognizedException() : base("giao dịch không thành công") { }
     }
 }

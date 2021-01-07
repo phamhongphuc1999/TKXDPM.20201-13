@@ -17,11 +17,11 @@ namespace RentalBikeApp.CustomException
     /// <summary>
     /// Internal server error exception
     /// </summary>
-    public class InternalServerErrorException: PaymentException
+    public class InternalServerErrorException : PaymentException
     {
         /// <summary>
         /// contructor of InternalServerErrorException
         /// </summary>
-        public InternalServerErrorException():base("Internal Server Error") { }
+        public InternalServerErrorException() : base("Internal Server Error") { }
     }
 }

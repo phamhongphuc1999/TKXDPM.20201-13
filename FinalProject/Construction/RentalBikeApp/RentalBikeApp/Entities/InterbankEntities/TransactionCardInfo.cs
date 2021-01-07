@@ -19,7 +19,7 @@ namespace RentalBikeApp.Entities.InterbankEntities
     /// <summary>
     /// representing the transaction information in body of transaction request
     /// </summary>
-    public class TransactionCardInfo: TransactionInfo
+    public class TransactionCardInfo : TransactionInfo
     {
         /// <summary>
         /// transaction command
@@ -80,7 +80,7 @@ namespace RentalBikeApp.Entities.InterbankEntities
         /// <param name="transactionContent">the transaction content</param>
         /// <param name="amount">the rental money</param>
         /// <param name="createdAt">date create transaction</param>
-        public TransactionCardInfo(string command, string cardCode, string owner, string cvvCode, string dateExpired, string transactionContent, int amount, string createdAt): base()
+        public TransactionCardInfo(string command, string cardCode, string owner, string cvvCode, string dateExpired, string transactionContent, int amount, string createdAt) : base()
         {
             this.command = command;
             this.cardCode = cardCode;

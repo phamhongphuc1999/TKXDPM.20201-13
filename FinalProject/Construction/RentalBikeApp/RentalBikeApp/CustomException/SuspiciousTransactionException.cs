@@ -17,11 +17,11 @@ namespace RentalBikeApp.CustomException
     /// <summary>
     /// Suspicious transaction exception
     /// </summary>
-    public class SuspiciousTransactionException: PaymentException
+    public class SuspiciousTransactionException : PaymentException
     {
         /// <summary>
         /// contructor of SuspiciousTransactionException
         /// </summary>
-        public SuspiciousTransactionException(): base("Giao dịch bị nghi ngờ gian lận") { }
+        public SuspiciousTransactionException() : base("Giao dịch bị nghi ngờ gian lận") { }
     }
 }

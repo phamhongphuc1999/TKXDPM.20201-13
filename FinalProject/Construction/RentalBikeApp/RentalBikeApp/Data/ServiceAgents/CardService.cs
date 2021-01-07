@@ -20,13 +20,13 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// <summary>
     /// Provides functions to interact with card table in the database
     /// </summary>
-    public class CardService: BaseService
+    public class CardService : BaseService
     {
         /// <summary>
         /// contructor of CardService
         /// </summary>
         /// <param name="connecter">The instance representing connection to database</param>
-        public CardService(SQLConnecter connecter): base(connecter) { }
+        public CardService(SQLConnecter connecter) : base(connecter) { }
 
         /// <summary>
         /// Get card information by owner

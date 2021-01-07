@@ -21,13 +21,13 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// <summary>
     /// Provides functions to interact with station table in the database
     /// </summary>
-    public class StationService: BaseService
+    public class StationService : BaseService
     {
         /// <summary>
         /// contructor of StationService
         /// </summary>
         /// <param name="connecter">The instance representing connection to database</param>
-        public StationService(SQLConnecter connecter): base(connecter) { }
+        public StationService(SQLConnecter connecter) : base(connecter) { }
 
         /// <summary>
         /// get list stations

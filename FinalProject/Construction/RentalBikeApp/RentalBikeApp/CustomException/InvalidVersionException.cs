@@ -17,11 +17,11 @@ namespace RentalBikeApp.CustomException
     /// <summary>
     /// Invalid version exception
     /// </summary>
-    public class InvalidVersionException: PaymentException
+    public class InvalidVersionException : PaymentException
     {
         /// <summary>
         /// contructor of InvalidVersionException
         /// </summary>
-        public InvalidVersionException(): base("Thiếu thông tin version") { }
+        public InvalidVersionException() : base("Thiếu thông tin version") { }
     }
 }

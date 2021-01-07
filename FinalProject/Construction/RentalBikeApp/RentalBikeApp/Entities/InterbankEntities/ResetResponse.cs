@@ -17,7 +17,7 @@ namespace RentalBikeApp.Entities.InterbankEntities
     /// <summary>
     /// representing the reset money response
     /// </summary>
-    public class ResetResponse: InterbankResponse
+    public class ResetResponse : InterbankResponse
     {
         /// <summary>
         /// card code of your card
@@ -43,7 +43,7 @@ namespace RentalBikeApp.Entities.InterbankEntities
         /// balance of card
         /// </summary>
         public string balance { get; protected set; }
-        
+
         /// <summary>
         /// contructor of ResetResponse
         /// </summary>

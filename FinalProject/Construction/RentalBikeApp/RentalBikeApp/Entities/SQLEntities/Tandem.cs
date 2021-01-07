@@ -33,12 +33,12 @@ namespace RentalBikeApp.Entities.SQLEntities
     /// <summary>
     /// reqresenting the tandem table in database
     /// </summary>
-    public class Tandem: BaseBike
+    public class Tandem : BaseBike
     {
         /// <summary>
         /// Contructor of Tandem
         /// </summary>
         /// <param name="bike">the bike information</param>
-        public Tandem(BaseBike bike): base(bike) { }
+        public Tandem(BaseBike bike) : base(bike) { }
     }
 }

@@ -36,7 +36,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// contructor of ListBikeForm
         /// </summary>
-        public ListBikeForm(): base()
+        public ListBikeForm() : base()
         {
             viewBikeController = new ViewBikeController();
             viewStationController = new ViewStationController();
@@ -203,7 +203,7 @@ namespace RentalBikeApp.Presentation
         {
             string qrCode = searchTxt.Text;
             searchTxt.Text = "";
-            if(qrCode == "")
+            if (qrCode == "")
             {
                 MessageBox.Show("Nhập mã xe bạn muốn tìm kiếm", "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

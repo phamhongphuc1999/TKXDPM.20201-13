@@ -32,7 +32,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// contructor of CardInformationForm
         /// </summary>
-        public CardInformationForm(): base()
+        public CardInformationForm() : base()
         {
             rentBikeController = new RentBikeController();
 
@@ -50,7 +50,7 @@ namespace RentalBikeApp.Presentation
                 return (false, "Yêu cầu nhập đầy đủ thông tin trước khi xác nhận");
             Card card = rentBikeController.GetCardInformation(owerTxt.Text);
             if (card == null) return (false, "Thông tin sai hoặc thẻ không tồn tại");
-            if(card.CardCode != cardCodeTxt.Text || card.SecurityKey != securityCodeTxt.Text)
+            if (card.CardCode != cardCodeTxt.Text || card.SecurityKey != securityCodeTxt.Text)
                 return (false, "Thông tin sai hoặc thẻ không tồn tại");
             this.card = card;
             return (true, "");

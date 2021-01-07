@@ -26,7 +26,7 @@ namespace RentalBikeApp.InterbankSubsystem
     /// <summary>
     /// Privider functions for process API
     /// </summary>
-    public class PaymentController: IPayment
+    public class PaymentController : IPayment
     {
         private InterbankBoundary boundary;
 

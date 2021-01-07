@@ -34,12 +34,12 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// contructor of HomePageForm
         /// </summary>
-        public HomePageForm(): base()
+        public HomePageForm() : base()
         {
             viewStationController = new ViewStationController();
 
             stationList = viewStationController.ViewListStation();
-            
+
             InitializeComponent("HomePageForm", "Home Page");
             DrawHomePage();
             RenderStationList();
@@ -54,7 +54,7 @@ namespace RentalBikeApp.Presentation
             this.stationPnl.Controls.Clear();
             int X = 20, Y = 5;
             int count = 0;
-            foreach(Station station in stationList)
+            foreach (Station station in stationList)
             {
                 Button but = new Button()
                 {
@@ -130,7 +130,7 @@ namespace RentalBikeApp.Presentation
                 return;
             }
             List<Station> stations = stationList.Where(x => x.NameStation.Contains(nameStation)).ToList();
-            if(stations.Count() == 0)
+            if (stations.Count() == 0)
             {
                 MessageBox.Show("Không tìm thấy bãi xe " + nameStation, "Thông Báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 searchTxt.Text = "";

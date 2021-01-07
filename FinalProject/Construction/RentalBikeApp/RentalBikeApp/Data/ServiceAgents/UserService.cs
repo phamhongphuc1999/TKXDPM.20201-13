@@ -20,13 +20,13 @@ namespace RentalBikeApp.Data.ServiceAgents
     /// <summary>
     /// Provides functions to interact with user in the database
     /// </summary>
-    public class UserService: BaseService
+    public class UserService : BaseService
     {
         /// <summary>
         /// contructor of UserService
         /// </summary>
         /// <param name="connecter">The instance representing connection to database</param>
-        public UserService(SQLConnecter connecter): base(connecter) { }
+        public UserService(SQLConnecter connecter) : base(connecter) { }
 
         /// <summary>
         /// Login user into program

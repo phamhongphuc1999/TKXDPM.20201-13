@@ -17,11 +17,11 @@ namespace RentalBikeApp.CustomException
     /// <summary>
     /// Not enough balance exception
     /// </summary>
-    public class NotEnoughBalanceException: PaymentException
+    public class NotEnoughBalanceException : PaymentException
     {
         /// <summary>
         /// contructor of NotEnoughBalanceException
         /// </summary>
-        public NotEnoughBalanceException(): base("Thẻ không đủ số dư") { }
+        public NotEnoughBalanceException() : base("Thẻ không đủ số dư") { }
     }
 }

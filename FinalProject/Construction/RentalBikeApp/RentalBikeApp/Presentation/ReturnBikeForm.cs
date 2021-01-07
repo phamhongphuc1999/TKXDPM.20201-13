@@ -36,7 +36,7 @@ namespace RentalBikeApp.Presentation
         /// <summary>
         /// contructor of RentBikeForm
         /// </summary>
-        public ReturnBikeForm(): base()
+        public ReturnBikeForm() : base()
         {
             viewStationController = new ViewStationController();
             returnBikeController = new ReturnBikeController();
@@ -126,7 +126,7 @@ namespace RentalBikeApp.Presentation
             string nameStation = but.Text;
             DialogResult result = MessageBox.Show($"Bạn có chắc muốn trả xe ở bãi xe: {nameStation}", "Thông Báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             int stationId = (int)but.Tag;
-            if(result == DialogResult.OK)
+            if (result == DialogResult.OK)
             {
                 if (!returnBikeController.CheckStation(stationId))
                 {
