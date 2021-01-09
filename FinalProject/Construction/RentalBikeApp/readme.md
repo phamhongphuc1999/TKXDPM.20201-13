@@ -35,3 +35,13 @@
 - xem thông tin bãi xe, thông tin chi tiết của xe trước khi muốn thuê xe
 - hỗ trợ thuê xe, tính toán thời gian thuê xe, phí thuê xe cho từng loại xe
 - hỗ trợ thanh toán qua thẻ ngân hàng
+### Phân công công việc
+- Phạm Hồng Phúc: Thiết kế và xây dựng chức năng "Thuê xê",Thanh toán
+- Sư Hữu Vũ Quang: Thiết kế và xây dựng chức năng "Trả xe"
+- Ngô Minh Quang: Thiết kế và xây dựng chức năng "Xem xe và thông tin của xe"
+- Trần Minh Quang: Thiết kế và xây dưng chức năng "Xe bãi xe và thông tin bãi xe"
+- Các lớp Entities, Data do cả nhóm cùng nhau làm
+### Công việc đã sửa
+- Cập nhật lại chức năng "Tìm kiếm" vào biểu đồ trình tự
+- Cập nhật phân công công việc vào file readme.md
+- Đói gói sản phẩm và triển khai trên máy khác
