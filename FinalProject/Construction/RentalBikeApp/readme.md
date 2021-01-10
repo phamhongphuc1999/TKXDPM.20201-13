@@ -44,4 +44,4 @@
 ### Công việc đã sửa
 - Cập nhật lại chức năng "Tìm kiếm" vào biểu đồ trình tự
 - Cập nhật phân công công việc vào file readme.md
-- Đói gói sản phẩm và triển khai trên máy khác
+- Đóng gói sản phẩm
